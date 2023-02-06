@@ -33,7 +33,7 @@ class Submenu extends MY_Controller {
             $row[] = $submenu->nama_menu;
             $row[] = $submenu->is_active;
             $row[] = $submenu->urutan;
-            $row[] = $submenu->id_submenu;
+            $row[] = $submenu->id_submenu1;
             $data[] = $row;
         }
 
