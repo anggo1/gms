@@ -3,12 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Submenu extends MY_Controller {
+class Pegawai extends MY_Controller {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Mod_submenu','Mod_menu'));
+        $this->load->model(array('Mod_pegawai','Mod_menu'));
         $this->load->model(array('Mod_userlevel'));
     }
 
@@ -16,31 +16,51 @@ class Submenu extends MY_Controller {
     {
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
-        $this->template->load('layoutbackend','admin/submenu_data',$data);
+        
+		$data['datapendidikan'] = $this->Mod_pegawai->select_pendidikan();
+		$data['databagian'] = $this->Mod_pegawai->select_bagian();
+		$data['dataposisi'] = $this->Mod_pegawai->select_posisi();
+        $this->template->load('layoutbackend','hrd/pegawai_data',$data);
     }
 
     public function ajax_list()
     {
-        $list = $this->Mod_submenu->get_datatables();
+        
+ 		$get_id= $this->Mod_pegawai->get_by_nama('Pegawai');		
+		$idlevel= $this->session->userdata['id_level'];
+		 $viewLevel = $this->Mod_pegawai->select_by_level($idlevel,$get_id);
+		
+		 foreach ($viewLevel as $pel1) {
+            $row1 = array();
+            $row1[] = $pel1->id_submenu;
+            $data1[] = $row1;
+			 
+        $list = $this->Mod_pegawai->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $submenu) {
             $no++;
             $row = array();
-            $row[] = $submenu->nama_submenu;
-            $row[] = $submenu->link;
-            $row[] = $submenu->icon;
-            $row[] = $submenu->nama_menu;
-            $row[] = $submenu->is_active;
-            $row[] = $submenu->urutan;
-            $row[] = $submenu->id_submenu;
+            $row[] = $no;
+            $row[] = $submenu->nip;
+            $row[] = $submenu->nama_depan;
+            $row[] = tgl_indo($submenu->tgl_lahir);
+            $row[] = $submenu->pendidikan;
+            $row[] = $submenu->jabatan;
+            $row[] = $submenu->departement;
+            $row[] = $submenu->nip;
+            $row[] = $pel1->add_level;
+            $row[] = $pel1->view_level;
+            $row[] = $pel1->edit_level;
+            $row[] = $pel1->delete_level;
+            $row[] = $pel1->id_level;
             $data[] = $row;
         }
-
+		 }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Mod_submenu->count_all(),
-            "recordsFiltered" => $this->Mod_submenu->count_filtered(),
+            "recordsTotal" => $this->Mod_pegawai->count_all(),
+            "recordsFiltered" => $this->Mod_pegawai->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -50,25 +70,19 @@ class Submenu extends MY_Controller {
 
 
 
-    public function viewsubmenu()
+    public function viewpegawai()
     {
      $id = $this->input->post('id');
-     $table = $this->input->post('table');
-     $data_field = $this->db->field_data($table);
-     $detail = $this->Mod_submenu->view_submenu($id)->result_array();
-     $data=array(
-        'table'=>$table,
-        'data_field'=>$this->db->field_data($table),
-        'data_table'=> $detail,
-    );  
-     $this->load->view('admin/view', $data);
+     $data['data_table'] = $this->Mod_pegawai->view_pegawai($id);
+    
+     $this->load->view('hrd/view', $data);
      
  }
 
- public function editsubmenu($id)
+ public function editpegawai($id)
  {
      
-    $data = $this->Mod_submenu->get_submenu($id);
+    $data = $this->Mod_pegawai->get_pegawai($id);
     echo json_encode($data);
     
 }
@@ -104,25 +118,42 @@ echo json_encode(array("status" => TRUE));
 public function update()
 {
     
-    $this->_validate();
-    $id = $this->input->post('id');
+    //$this->_validate();
+    $nip = $this->input->post('nip');
     $data  = array(
-        'nama_submenu' => $this->input->post('nama_submenu'),
-        'link'      => $this->input->post('link'),
-        'icon'      => $this->input->post('icon'),
-        'id_menu'    => $this->input->post('id_menu'),
-        'is_active' => $this->input->post('is_active'),
-    	'urutan' 	=> $this->input->post('urutan')
+        
+		'nama_depan'	=> $this->input->post('nama_depan'),
+        'nama_belakang'	=> $this->input->post('nama_belakang'),
+        'departement'	=> $this->input->post('departement'),
+        'jabatan'		=> $this->input->post('jabatan'),
+        'status_kerja'	=> $this->input->post('status_kerja'),
+        'tgl_masuk'		=> $this->input->post('tgl_masuk'),
+        'tempat_lahir'	=> $this->input->post('tempat_lahir'),
+        'tgl_lahir'		=> $this->input->post('tgl_lahir'),
+        'agama'			=> $this->input->post('agama'),
+        'status_nikah'	=> $this->input->post('status_nikah'),
+        'pendidikan'	=> $this->input->post('pendidikan'),
+        'alamat'		=> $this->input->post('alamat'),
+        'kodepos'		=> $this->input->post('kodepos'),
+        'no_hp'			=> $this->input->post('no_hp'),
+        'status_nikah'	=> $this->input->post('status_nikah'),
+        'jamsostek'		=> $this->input->post('jamsostek'),
+        'tinggi'		=> $this->input->post('tinggi'),
+        'berat'			=> $this->input->post('berat'),
+        'darah'			=> $this->input->post('darah'),
+        's_kawin'		=> $this->input->post('s_kawin'),
+        'no_ktp'		=> $this->input->post('no_ktp'),
+        'npwp'			=> $this->input->post('npwp'),
+        'catatan1'		=> $this->input->post('catatan1')
     );
-    $this->Mod_submenu->updatesubmenu($id, $data);
+    $this->Mod_pegawai->updatepegawai($nip, $data);
     echo json_encode(array("status" => TRUE));
     
 }
 public function delete()
 {
-    $id_submenu = $this->input->post('id_submenu');
-    $this->Mod_submenu->deletesubmenu($id_submenu, 'tbl_submenu');
-    $this->Mod_submenu->deleteakses($id_submenu, 'tbl_akses_submenu');
+    $nip = $this->input->post('nip');
+    $this->Mod_pegawai->deletepegawai($nip, 'tbl_pegawai');
     $data['status'] = TRUE;
     echo json_encode($data);
     

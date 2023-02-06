@@ -1,5 +1,5 @@
 <div class="card-body">
-  <table class="table table-bordered table-hover" id="vakses"> 
+  <table class="table table-bordered table-hover" id="vakses1"> 
     <thead>
       <tr class="bg-primary">
         <th>No</th>
@@ -143,7 +143,7 @@
 </div>
 
 <script type="text/javascript">
-
+$("#vakses1").DataTable();
   function checked(id, level) {
     $.ajax({
       type : 'POST',

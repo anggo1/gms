@@ -1,57 +1,44 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ListBus extends MY_Controller
+class BusMasuk extends MY_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model(array('body_repair_model/Mod_body'));
+        $this->load->model(array('Mod_busmasuk'));
 	}
 
 	public function index()
 	{
 		$this->load->helper('url');
-        $this->template->load('layoutbackend','body_repair/data_body');
-		
+        $this->template->load('layoutbackend','body_repair/bus_masuk');
 	}
 
 	 public function ajax_list()
     {
-		$idlevel= $this->session->userdata['id_level'];
-		 $viewLevel = $this->Mod_body->select_by_level($idlevel);
-		
-		 foreach ($viewLevel as $pel1) {
-            $row1 = array();
-            $row1[] = $pel1->id_submenu;
-		
         ini_set('memory_limit','512M');
         set_time_limit(3600);
-        $list = $this->Mod_body->get_datatables();
+        $list = $this->Mod_barang->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $pel) {
             $no++;
             $row = array();
-            $row[] = $pel->no_body;
-            $row[] = $pel->type;
-            $row[] = $pel->thn_rangka;
-            $row[] = $pel->thn_pembuatan;
-            $row[] = $pel->karoseri;
-            $row[] = $pel->warna;
-            $row[] = $pel->kelas;
-            $row[] = $pel->strip;
-            $row[] = $pel->keterangan.$pel1->add_level;
-            $row[] = '<button class="btn btn-sm btn-outline-primary update-datalaporan" data-id="'.$pel->no_body.'"><i class="glyphicon glyphicon-repeat"></i> Edit</button>
-				  <button class="btn btn-sm btn-outline-danger detail-datalaporan" data-id="'.$pel->no_body.'"><i class="glyphicon glyphicon-info-sign"></i> Detail</button>';
+            $row[] = $pel->no_bahan;
+            $row[] = $pel->nama;
+            $row[] = $pel->harga;
+            $row[] = $pel->satuan;
+            $row[] = $pel->stok;
+            $row[] = $pel->no_bahan;
             $data[] = $row;
         }
-}
+
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Mod_body->count_all(),
-                        "recordsFiltered" => $this->Mod_body->count_filtered(),
+                        "recordsTotal" => $this->Mod_barang->count_all(),
+                        "recordsFiltered" => $this->Mod_barang->count_filtered(),
                         "data" => $data,
                 );
         //output to json format
@@ -63,40 +50,40 @@ class ListBus extends MY_Controller
         $this->_validate();
         $kode= date('ymsi');
 		$save  = array(
-			'no_body'  	=> $kode,
+			'no_bahan'  	=> $kode,
             'nama'			=> $this->input->post('nama'),
             'harga'  		=> $this->input->post('harga'),
             'satuan'   		=> $this->input->post('satuan'),
             'stok'   		=> $this->input->post('stok')
         );
-            $this->Mod_body->insert_barang("tbl_bahan", $save);
+            $this->Mod_barang->insert_barang("tbl_bahan", $save);
             echo json_encode(array("status" => TRUE));
     }
 
     public function update()
     {
         $this->_validate();
-        $no_body      = $this->input->post('no_body');
+        $no_bahan      = $this->input->post('no_bahan');
         $save  = array(
-            'type' => $this->input->post('type'),
+            'nama' => $this->input->post('nama'),
             'harga'      => $this->input->post('harga'),
             'satuan'      => $this->input->post('satuan'),
             'stok'      => $this->input->post('stok')
         );
-        $this->Mod_body->update_barang($no_bahan, $save);
+        $this->Mod_barang->update_barang($no_bahan, $save);
         echo json_encode(array("status" => TRUE));
     }
 
-    public function edit_bus($no_body)
+    public function edit_barang($no_bahan)
     {
-            $data = $this->Mod_body->get_bus($no_body);
+            $data = $this->Mod_barang->get_brg($no_bahan);
             echo json_encode($data);
     }
 
     public function delete()
     {
-        $no_body = $this->input->post('no_body');
-        $this->Mod_body->delete_bus($no_body, 'body_detail');        
+        $no_bahan = $this->input->post('no_bahan');
+        $this->Mod_barang->delete_brg($no_bahan, 'tbl_bahan');        
         echo json_encode(array("status" => TRUE));
     }
     private function _validate()

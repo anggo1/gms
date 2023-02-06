@@ -128,9 +128,9 @@ class User extends MY_Controller {
         $nama = slug($this->input->post('username'));
         $config['upload_path']   = './assets/foto/user/';
         $config['allowed_types'] = 'gif|jpg|jpeg|png'; //mencegah upload backdor
-        $config['max_size']      = '1000';
-        $config['max_width']     = '2000';
-        $config['max_height']    = '1024';
+        $config['max_size']      = '2000';
+        $config['max_width']     = '4000';
+        $config['max_height']    = '2400';
         $config['file_name']     = $nama; 
         
             $this->upload->initialize($config);
