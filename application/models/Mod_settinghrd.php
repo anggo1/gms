@@ -9,33 +9,30 @@ class Mod_settinghrd extends CI_Model {
         $this->load->database();
     }
    function get_all_jabatan(){
-		$hsl=$this->db->query("select * from tbl_jabatan");
+		$hsl=$this->db->query("select * from tbl_hrd_jabatan");
 		return $hsl;
 	}
 	function get_jabatan_by_id($jabatan){
-		$hsl=$this->db->query("select * from tbl_jabatan where id_jabatan='$jabatan'");
+		$hsl=$this->db->query("select * from tbl_hrd_jabatan where id_jabatan='$jabatan'");
 		return $hsl;
 	}
 	public function select_jabatan() {
-		$sql = " SELECT COUNT(*) TotalCount, 
-		tbl_jabatan.id_jabatan,tbl_jabatan.jabatan 
-		FROM tbl_jabatan 
-		INNER JOIN tbl_pegawai ON tbl_pegawai.jabatan = tbl_jabatan.id_jabatan 
-		GROUP BY  tbl_jabatan.jabatan;";
+		$sql = " SELECT *
+		FROM tbl_hrd_jabatan";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
     public function select_id_jabatan($id) {
-		$sql = " SELECT * FROM tbl_jabatan WHERE id_jabatan='{$id}'";
+		$sql = " SELECT * FROM tbl_hrd_jabatan WHERE id_jabatan='{$id}'";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
     public function insertJabatan($data) {
-		$sql = "INSERT INTO tbl_jabatan VALUES
+		$sql = "INSERT INTO tbl_hrd_jabatan VALUES
 		('','".$data['jabatan']."')";
 
 		$this->db->query($sql);
@@ -43,33 +40,74 @@ class Mod_settinghrd extends CI_Model {
 		return $this->db->affected_rows();
 	}
     public function updateJabatan($data) {
-		$sql = "UPDATE tbl_jabatan SET jabatan='" .$data['jabatan'] ."'
+		$sql = "UPDATE tbl_hrd_jabatan SET jabatan='" .$data['jabatan'] ."'
         WHERE id_jabatan='" .$data['id_jabatan'] ."'";
 
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
 	}
-    public function select_pendidikan() {
-		$sql = " SELECT COUNT(*) TotalCount, 
-		tbl_pendidikan.id_pendidikan,tbl_pendidikan.pendidikan 
-		FROM tbl_pendidikan 
-		INNER JOIN tbl_pegawai ON tbl_pegawai.pendidikan = tbl_pendidikan.id_pendidikan 
-		GROUP BY tbl_pendidikan.id_pendidikan, tbl_pendidikan.pendidikan;";
+    function deleteJab($id)
+    {
+        $sql = "DELETE FROM tbl_hrd_jabatan WHERE id_jabatan='{$id}'";
+        
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+    //end jabatan//
+    
+    public function select_id_pendidikan($id) {
+		$sql = " SELECT * FROM tbl_hrd_pendidikan WHERE id_pendidikan='{$id}'";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
+    
+    public function select_pendidikan() {
+		$sql = " SELECT *
+		FROM tbl_hrd_pendidikan";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+    public function insertPendidikan($data) {
+		$sql = "INSERT INTO tbl_hrd_pendidikan VALUES
+		('','".$data['pendidikan']."')";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+    public function updatePendidikan($data) {
+		$sql = "UPDATE tbl_hrd_pendidikan SET pendidikan='" .$data['pendidikan'] ."'
+        WHERE id_pendidikan='" .$data['id_pendidikan'] ."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+    function deletePend($id)
+    {
+        $sql = "DELETE FROM tbl_hrd_pendidikan WHERE id_pendidikan='{$id}'";
+        
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+    // end Pendidikan //
+    
      public function select_id_departement($id) {
-		$sql = " SELECT * FROM tbl_departement WHERE id_departement='{$id}'";
+		$sql = " SELECT * FROM tbl_hrd_departement WHERE id_departement='{$id}'";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
      public function insertDepartement($data) {
-		$sql = "INSERT INTO tbl_departement VALUES
+		$sql = "INSERT INTO tbl_hrd_departement VALUES
 		('','".$data['departement']."')";
 
 		$this->db->query($sql);
@@ -77,14 +115,29 @@ class Mod_settinghrd extends CI_Model {
 		return $this->db->affected_rows();
 	}
     public function updateDepartement($data) {
-		$sql = "UPDATE tbl_departement SET departement='" .$data['departement'] ."'
+		$sql = "UPDATE tbl_hrd_departement SET departement='" .$data['departement'] ."'
         WHERE id_departement='" .$data['id_departement'] ."'";
 
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
 	}
-	public function select_departement() {
+    public function select_departement() {
+		$sql = " SELECT * 
+		FROM tbl_hrd_departement";
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+    function deleteDep($id)
+    {
+        $sql = "DELETE FROM tbl_hrd_departement WHERE id_departement='{$id}'";
+        
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+	public function select_total_departement() {
 		$sql = " SELECT COUNT(*) TotalCount, 
 		tbl_departement.id_departement,tbl_departement.departement 
 		FROM tbl_departement 
@@ -94,6 +147,7 @@ class Mod_settinghrd extends CI_Model {
 
 		return $data->result();
 	}
+    
 
     public function get_by_nama($link)
     {

@@ -96,12 +96,18 @@ if(!function_exists('hash_verified'))
 }
 
 /** login codeIgniter menggunakan bycrypt **/
-    function show_ok_msg($content='', $size='14px') {
-            if ($content != '') {
-                return   $content;
-            }
-        }
-    function show_err_msg($content='', $size='14px') {
+     function show_ok_msg($content='', $size='14px') {
+		if ($content != '') {
+			return   $content;
+		}
+	}
+
+    function show_del_msg($content='', $size='14px') {
+		if ($content != '') {
+			return   $content;
+		}
+	}
+	function show_err_msg($content='', $size='14px') {
 		if ($content != '') {
 			return   '<p class="box-msg">
 				      <div class="alert alert-danger alert-dismissible">
@@ -115,6 +121,7 @@ if(!function_exists('hash_verified'))
 				    </p>';
 		}
 	}
+	
 	// MODAL
 	function show_my_print($content='', $id='', $data='', $size='') {
 		$_ci = &get_instance();
@@ -171,4 +178,3 @@ if(!function_exists('hash_verified'))
 					</div>';
 		}
 	}
-

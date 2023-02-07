@@ -123,7 +123,7 @@
     <script>
     $("#login").on('click', function() {
         $.ajax({
-            url: '<?php echo base_url('login/login') ?>',
+            url: '<?php echo base_url('Login/login') ?>',
             type: 'POST',
             data: $('#quickForm').serialize(),
             dataType: 'JSON',

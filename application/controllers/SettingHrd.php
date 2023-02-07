@@ -16,6 +16,7 @@ class SettingHrd extends MY_Controller {
     {
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();        
+		echo show_my_modal('hrd/modals/modal_tambah_pend', 'tambah-pendidikan', $data);
 		echo show_my_modal('hrd/modals/modal_tambah_jab', 'tambah-jabatan', $data);
 		echo show_my_modal('hrd/modals/modal_tambah_dept', 'tambah-departement', $data);
         $this->template->load('layoutbackend','hrd/setting_panel',$data);
@@ -34,6 +35,72 @@ class SettingHrd extends MY_Controller {
 		$data['datajab'] = $this->Mod_settinghrd->select_jabatan();
 		$this->load->view('hrd/jab_data', $data);
 	}
+    /*Pendidikan*/
+	public function prosesTpendidikan() {
+		$this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required');
+
+		$data 	= $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_settinghrd->insertPendidikan($data);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_ok_msg('Success', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_err_msg('Filed !', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
+	}
+	public function updatePendidikan() {
+		$id 				= trim($_POST['id']);
+		$data['dataPendidikan'] = $this->Mod_settinghrd->select_id_pendidikan($id);
+
+		echo show_my_modal('hrd/modals/modal_tambah_pend', 'update-pendidikan', $data);
+	}
+
+	public function prosesUpendidikan() {
+		
+		$this->form_validation->set_rules('pendidikan', 'Nama Pendidikan', 'trim|required');
+
+		$data 	= $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_settinghrd->updatePendidikan($data);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_ok_msg('Success', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Filed!', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
+	}
+	public function deletePendidikan() {
+		$id = $_POST['id'];
+		$result = $this->Mod_settinghrd->deletePend($id);
+		if ($result > 0) {
+			//$out['datakode']=$kodeBaru;
+            $out['status'] = '';
+			$out['msg'] = show_del_msg('Deleted', '20px');
+			} else {
+			$out['status'] = '';
+			$out['msg'] = show_err_msg('Filed !', '20px');
+			}
+		echo json_encode($out);
+	}
+
+	/*end Pendidikan*/
     /*Jabatan*/
 	public function prosesTjabatan() {
 		$this->form_validation->set_rules('jabatan', 'Nama Jabatan', 'trim|required');
@@ -95,7 +162,18 @@ class SettingHrd extends MY_Controller {
 			echo show_err_msg('Failed!', '20px');
 		}
 	}
-
+    public function deleteJabatan() {
+		$id = $_POST['id'];
+		$result = $this->Mod_settinghrd->deleteJab($id);
+		if ($result > 0) {
+            $out['status'] = '';
+			$out['msg'] = show_del_msg('Deleted', '20px');
+			} else {
+			$out['status'] = '';
+			$out['msg'] = show_err_msg('Filed !', '20px');
+			}
+		echo json_encode($out);
+	}
 	/*endJabatan*/
      /*Department*/
 	public function prosesTdepartement() {
@@ -158,7 +236,18 @@ class SettingHrd extends MY_Controller {
 			echo show_err_msg('Failed!', '20px');
 		}
 	}
-
+    public function deleteDepartement() {
+		$id = $_POST['id'];
+		$result = $this->Mod_settinghrd->deleteDep($id);
+		if ($result > 0) {
+            $out['status'] = '';
+			$out['msg'] = show_del_msg('Deleted', '20px');
+			} else {
+			$out['status'] = '';
+			$out['msg'] = show_err_msg('Filed !', '20px');
+			}
+		echo json_encode($out);
+	}
 	/*endJabatan*/
     
     public function ajax_list()
