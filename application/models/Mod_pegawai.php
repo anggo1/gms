@@ -18,9 +18,9 @@ class Mod_pegawai extends CI_Model {
         
         $this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
         $this->db->from('tbl_pegawai as a');
-        $this->db->join('tbl_pendidikan as b','a.pendidikan=b.id_pendidikan');
-        $this->db->join('tbl_jabatan as c','a.jabatan=c.id_jabatan');
-        $this->db->join('tbl_departement as d','a.departement=d.id_departement');
+        $this->db->join('tbl_hrd_pendidikan as b','a.pendidikan=b.id_pendidikan');
+        $this->db->join('tbl_hrd_jabatan as c','a.jabatan=c.id_jabatan');
+        $this->db->join('tbl_hrd_departement as d','a.departement=d.id_departement');
         $i = 0;
     
         foreach ($this->column_search as $item) // loop column 
@@ -107,21 +107,21 @@ class Mod_pegawai extends CI_Model {
 		return $data->result();
 	}
     public function select_pendidikan() {
-		$sql = " SELECT * FROM tbl_pendidikan";
+		$sql = " SELECT * FROM tbl_hrd_pendidikan";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
 	public function select_bagian() {
-		$sql = " SELECT * FROM tbl_departement";
+		$sql = " SELECT * FROM tbl_hrd_departement";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
 	}
     public function select_posisi() {
-		$sql = " SELECT * FROM tbl_jabatan";
+		$sql = " SELECT * FROM tbl_hrd_jabatan";
 
 		$data = $this->db->query($sql);
 
@@ -131,9 +131,9 @@ class Mod_pegawai extends CI_Model {
     {	
     	$this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
         $this->db->from('tbl_pegawai as a');
-        $this->db->join('tbl_pendidikan as b','a.pendidikan=b.id_pendidikan');
-        $this->db->join('tbl_jabatan as c','a.jabatan=c.id_jabatan');
-        $this->db->join('tbl_departement as d','a.departement=d.id_departement');
+        $this->db->join('tbl_hrd_pendidikan as b','a.pendidikan=b.id_pendidikan');
+        $this->db->join('tbl_hrd_jabatan as c','a.jabatan=c.id_jabatan');
+        $this->db->join('tbl_hrd_departement as d','a.departement=d.id_departement');
         $this->db->where('a.nip=',$id);
 
 		$data = $this->db->get();

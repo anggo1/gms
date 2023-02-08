@@ -121,7 +121,7 @@
 <?php show_my_confirm('hapusDepartement', 'hapus-departement', 'Hapus Data Departement Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
 <script type="text/javascript">
 window.onload = function() {
-    showPend();
+    // showPend();
     showDep();
     showJab();
 }
@@ -145,9 +145,19 @@ function effect_msg() {
         $('.msg').fadeOut(500);
     }, 1000);
 }
-
-var MyTable = $('#list-pendidikan').dataTable({
-    "pageLength": 5
+MyTable = $("#list-pendidikan").DataTable({
+    "responsive": true,
+    "autoWidth": false,
+    "pageLength": 5,
+    "language": {
+        "sEmptyTable": "Data pegawai Belum Ada"
+    },
+    "processing": true,
+    "serverSide": true,
+    "ajax": {
+        "url": "<?php echo site_url('SettingHrd/ajax_pendidikan')?>",
+        "type": "POST"
+    },
 });
 var MyTable1 = $('#list-departement').dataTable({
     "pageLength": 5

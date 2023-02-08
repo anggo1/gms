@@ -250,44 +250,32 @@ class SettingHrd extends MY_Controller {
 	}
 	/*endJabatan*/
     
-    public function ajax_list()
+    public function ajax_pendidikan()
     {
         
- 		$get_id= $this->Mod_pegawai->get_by_nama('Pegawai');		
+ 		$get_id= $this->Mod_settinghrd->get_by_nama('pendidikan');		
 		$idlevel= $this->session->userdata['id_level'];
-		 $viewLevel = $this->Mod_pegawai->select_by_level($idlevel,$get_id);
+		 $viewLevel = $this->Mod_settinghrd->select_by_level($idlevel,$get_id);
 		
 		 foreach ($viewLevel as $pel1) {
             $row1 = array();
             $row1[] = $pel1->id_submenu;
             $data1[] = $row1;
 			 
-        $list = $this->Mod_pegawai->get_datatables();
+        $list = $this->Mod_settinghrd->get_pendidikan();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $submenu) {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $submenu->nip;
-            $row[] = $submenu->nama_depan;
-            $row[] = tgl_indo($submenu->tgl_lahir);
             $row[] = $submenu->pendidikan;
-            $row[] = $submenu->jabatan;
-            $row[] = $submenu->departement;
-            $row[] = $submenu->nip;
-            $row[] = $pel1->add_level;
-            $row[] = $pel1->view_level;
-            $row[] = $pel1->edit_level;
-            $row[] = $pel1->delete_level;
-            $row[] = $pel1->id_level;
-            $data[] = $row;
         }
 		 }
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Mod_pegawai->count_all(),
-            "recordsFiltered" => $this->Mod_pegawai->count_filtered(),
+            "recordsTotal" => $this->Mod_settinghrd->count_all_pendidikan(),
+            "recordsFiltered" => $this->Mod_settinghrd->count_filtered_pendidikan(),
             "data" => $data,
         );
         //output to json format

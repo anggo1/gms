@@ -56,7 +56,56 @@ class Mod_settinghrd extends CI_Model {
 		return $this->db->affected_rows();
     }
     //end jabatan//
-    
+    var $table = 'tbl_hrd_pendidikan';
+    var $column_search = array('pendidikan');
+    var $column_order = array('pendidikan');
+    var $order = array('id_pendidikan' => 'desc'); // default order 
+
+    private function _get_datatables_query($term='')
+    {        
+        $this->db->select('*');
+        $this->db->from('tbl_hrd_pendidikan');
+        $i = 0;    
+        foreach ($this->column_search as $item)
+        {
+            if($_POST['search']['value']) 
+            {
+                
+                if($i===0)
+                {
+                    $this->db->group_start(); 
+                    $this->db->like($item, $_POST['search']['value']);
+                }
+                else
+                {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+
+                if(count($this->column_search) - 1 == $i) 
+                    $this->db->group_end(); 
+            }
+            $i++;
+        }
+        
+        if(isset($_POST['order'])) 
+        {
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } 
+        else if(isset($this->order))
+        {
+            $order = $this->order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+    function get_pendidikan()
+    {
+        $term = $_REQUEST['search']['value'];  
+        $this->_get_datatables_query($term);
+        if($_POST['length'] != -1)
+        $this->db->limit($_POST['length'], $_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function select_id_pendidikan($id) {
 		$sql = " SELECT * FROM tbl_hrd_pendidikan WHERE id_pendidikan='{$id}'";
 
@@ -64,6 +113,21 @@ class Mod_settinghrd extends CI_Model {
 
 		return $data->result();
 	}
+    function count_filtered_pendidikan()
+    {
+        $term = $_REQUEST['search']['value'];  
+        $this->_get_datatables_query($term);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all_pendidikan()
+    {
+        
+        $this->db->from('tbl_hrd_pendidikan');
+        //$this->db->join('tbl_menu as b','a.id_menu=b.id_menu');
+        return $this->db->count_all_results();
+    }
     
     public function select_pendidikan() {
 		$sql = " SELECT *
@@ -159,9 +223,9 @@ class Mod_settinghrd extends CI_Model {
     }
     function getAll()
     {
-        $this->db->select('tbl_pegawai');
+        $this->db->select('tbl_hrd_pendidikan');
         //$this->db->join('tbl_menu b','a.id_menu=b.id_menu');
-       return $this->db->get('tbl_pegawai a');
+       return $this->db->get('tbl_hrd_pendidikan');
     }
 	function select_by_level($idlevel,$get_id) {
 		$this->db->select('*');
