@@ -68,7 +68,7 @@ class Pegawai extends MY_Controller {
     }
 
 
-
+//
 
     public function viewpegawai()
     {

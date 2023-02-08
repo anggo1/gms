@@ -252,16 +252,6 @@ class SettingHrd extends MY_Controller {
     
     public function ajax_pendidikan()
     {
-        
- 		$get_id= $this->Mod_settinghrd->get_by_nama('pendidikan');		
-		$idlevel= $this->session->userdata['id_level'];
-		 $viewLevel = $this->Mod_settinghrd->select_by_level($idlevel,$get_id);
-		
-		 foreach ($viewLevel as $pel1) {
-            $row1 = array();
-            $row1[] = $pel1->id_submenu;
-            $data1[] = $row1;
-			 
         $list = $this->Mod_settinghrd->get_pendidikan();
         $data = array();
         $no = $_POST['start'];
@@ -271,7 +261,6 @@ class SettingHrd extends MY_Controller {
             $row[] = $no;
             $row[] = $submenu->pendidikan;
         }
-		 }
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->Mod_settinghrd->count_all_pendidikan(),
@@ -281,11 +270,7 @@ class SettingHrd extends MY_Controller {
         //output to json format
         echo json_encode($output);
     }
-
-
-
-
-    public function viewpegawai()
+   public function viewpegawai()
     {
      $id = $this->input->post('id');
      $data['data_table'] = $this->Mod_pegawai->view_pegawai($id);

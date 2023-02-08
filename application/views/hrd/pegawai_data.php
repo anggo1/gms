@@ -177,7 +177,7 @@ const Toast = Swal.mixin({
 });
 
 
-//view
+//view//
 // $(".v_pegawai").click(function(){
 function vpegawai(id) {
     $('.modal-title').text('View pegawai');

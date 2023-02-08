@@ -190,7 +190,7 @@ function showJab() {
         refresh();
     });
 }
-
+//
 $('#form-tambah-jabatan').submit(function(e) {
     var data = $(this).serialize();
 

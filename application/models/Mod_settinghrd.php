@@ -201,17 +201,7 @@ class Mod_settinghrd extends CI_Model {
 
 		return $this->db->affected_rows();
     }
-	public function select_total_departement() {
-		$sql = " SELECT COUNT(*) TotalCount, 
-		tbl_departement.id_departement,tbl_departement.departement 
-		FROM tbl_departement 
-		INNER JOIN tbl_pegawai ON tbl_pegawai.departement = tbl_departement.id_departement 
-		GROUP BY tbl_departement.id_departement, tbl_departement.departement;";
-		$data = $this->db->query($sql);
 
-		return $data->result();
-	}
-    
 
     public function get_by_nama($link)
     {
@@ -238,27 +228,6 @@ class Mod_settinghrd extends CI_Model {
 
 		return $data->result();
 	}
-    
-    function view_pegawai($id)
-    {	
-    	$this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
-        $this->db->from('tbl_pegawai as a');
-        $this->db->join('tbl_pendidikan as b','a.pendidikan=b.id_pendidikan');
-        $this->db->join('tbl_jabatan as c','a.jabatan=c.id_jabatan');
-        $this->db->join('tbl_departement as d','a.departement=d.id_departement');
-        $this->db->where('a.nip=',$id);
-
-		$data = $this->db->get();
-
-		return $data->result();
-    }
-
-    function get_pegawai($id)
-    {   
-        $this->db->where('nip',$id);
-        return $this->db->get('tbl_pegawai')->row();
-    }
-
     function edit_submenu($id)
     {	
     	$this->db->where('nip',$id);

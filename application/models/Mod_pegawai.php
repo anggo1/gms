@@ -54,7 +54,7 @@ class Mod_pegawai extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-
+//
     function get_datatables()
     {
         $term = $_REQUEST['search']['value'];  
