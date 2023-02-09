@@ -89,7 +89,6 @@
 $(function() {
     $('input[name="tgl_masuk"],input[name="tgl_lahir"]').daterangepicker({
         opens: 'left',
-
         autoUpdateInput: true,
         locale: {
             format: 'DD-MM-YYYY',
@@ -117,7 +116,7 @@ $(document).ready(function() {
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "<?php echo site_url('Pegawai/ajax_list')?>",
+            "url": "<?php echo site_url('Pegawai/ajax_list') ?>",
             "type": "POST"
         },
         //Set column definition initialisation properties.
@@ -209,7 +208,7 @@ function delpegawai(id) {
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: "<?php echo site_url('Pegawai/delete');?>",
+                url: "<?php echo site_url('Pegawai/delete'); ?>",
                 type: "POST",
                 data: "nip=" + id,
                 cache: false,
@@ -259,7 +258,7 @@ function edit_pegawai(nip) {
 
     //Ajax Load data from ajax
     $.ajax({
-        url: "<?php echo site_url('Pegawai/editpegawai')?>/" + nip,
+        url: "<?php echo site_url('Pegawai/editpegawai') ?>/" + nip,
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -310,9 +309,9 @@ function save() {
     var url;
 
     if (save_method == 'add') {
-        url = "<?php echo site_url('pegawai/insert')?>";
+        url = "<?php echo site_url('pegawai/insert') ?>";
     } else {
-        url = "<?php echo site_url('pegawai/update')?>";
+        url = "<?php echo site_url('pegawai/update') ?>";
     }
 
     // ajax adding data to database
@@ -387,9 +386,9 @@ function batal() {
                                 <section class="content">
                                     <div class="container-fluid">
                                         <?php if (!empty($dataPegawai)) {
-                        foreach ($dataPegawai as $dataPegawai) {
-                        }
-                    } ?>
+                                            foreach ($dataPegawai as $dataPegawai) {
+                                            }
+                                        } ?>
                                         <div class="row">
                                             <div class="col-12 ">
                                                 <div class="row">
@@ -403,11 +402,12 @@ function batal() {
                                                                     <label class="control-label">NIP <span
                                                                             class="required"> *</span></label>
                                                                     <input type="text" required <?php if (!empty($dataPegawai->nip)) {
-                                                                                    echo 'readonly';
-                                                                                } ?> name="nip"
+                                                                                                    echo 'readonly';
+                                                                                                } ?> name="nip"
                                                                         value="<?php
-                                                                if (!empty($dataPegawai->nip)) { echo $dataPegawai->nip;}?>"
-                                                                        class="form-control">
+                                                                                                                        if (!empty($dataPegawai->nip)) {
+                                                                                                                            echo $dataPegawai->nip;
+                                                                                                                        } ?>" class="form-control">
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-sm-6">
@@ -434,28 +434,29 @@ function batal() {
                                                                         class="form-control">
                                                                         <option value="">Pilih Departement.....</option>
                                                                         <?php
-                                                        if (empty($dataPegawai->departement)) {
-                                                            foreach ($databagian as $dep) {
-                                                        ?>
+                                                                        if (empty($dataPegawai->departement)) {
+                                                                            foreach ($databagian as $dep) {
+                                                                        ?>
                                                                         <option
                                                                             <?php echo $dep == $dep->id_departement ? 'selected="selected"' : '' ?>
                                                                             value="<?php echo $dep->id_departement ?>">
                                                                             <?php echo $dep->departement ?></option>
                                                                         <?php
-                                                            }
-                                                            ?>
+                                                                            }
+                                                                            ?>
                                                                         <?php
-                                                        } else {
-                                                            foreach ($databagian as $de) {          ?>
+                                                                        } else {
+                                                                            foreach ($databagian as $de) {          ?>
                                                                         <option
                                                                             value="<?php echo $de->id_departement; ?>"
                                                                             <?php if ($de->id_departement == $dataPegawai->departement) {
-                                                                                                                        echo "selected='selected'";
-                                                                                                                    } ?>><?php echo $de->departement; ?></option>
+                                                                                                                                        echo "selected='selected'";
+                                                                                                                                    } ?>>
+                                                                            <?php echo $de->departement; ?></option>
                                                                         <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                                            }
+                                                                        }
+                                                                        ?>
                                                                     </select>
                                                                 </div>
                                                                 <div class="">
@@ -466,27 +467,28 @@ function batal() {
                                                                         <option value="">Pilih posisi/jabatan.....
                                                                         </option>
                                                                         <?php
-                                                        if (empty($dataPegawai->jabatan)) {
-                                                            foreach ($dataposisi as $pos) {
-                                                        ?>
+                                                                        if (empty($dataPegawai->jabatan)) {
+                                                                            foreach ($dataposisi as $pos) {
+                                                                        ?>
                                                                         <option
                                                                             <?php echo $pos == $pos->id_jabatan ? 'selected="selected"' : '' ?>
                                                                             value="<?php echo $pos->id_jabatan ?>">
                                                                             <?php echo $pos->jabatan  ?><?php } ?>
                                                                         </option>
                                                                         <?php
-                                                            } else {
-                                                                foreach ($dataposisi as $posisi) {          ?>
+                                                                            } else {
+                                                                                foreach ($dataposisi as $posisi) {          ?>
                                                                         <option
                                                                             value="<?php echo $posisi->id_jabatan; ?>"
                                                                             <?php if ($posisi->id_jabatan == $dataPegawai->jabatan) {
-                                                                                                                            echo "selected='selected'";
-                                                                                                                        } ?>><?php echo $posisi->jabatan; ?>
+                                                                                                                                            echo "selected='selected'";
+                                                                                                                                        } ?>>
+                                                                            <?php echo $posisi->jabatan; ?>
                                                                         </option>
                                                                         <?php
-                                                                }
-                                                            }
-                                                            ?>
+                                                                                }
+                                                                            }
+                                                                            ?>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
@@ -512,10 +514,10 @@ function batal() {
                                                                         <label class="control-label">Keterangan</label>
                                                                         <input type="text" name="catatan1" required
                                                                             value="<?php
-                                                                                                            if (!empty($dataPegawai->catatan1)) {
-                                                                                                                echo $dataPegawai->catatan1;
-                                                                                                            }
-                                                                                                            ?>"
+                                                                                                                            if (!empty($dataPegawai->catatan1)) {
+                                                                                                                                echo $dataPegawai->catatan1;
+                                                                                                                            }
+                                                                                                                            ?>"
                                                                             class="form-control">
                                                                     </div>
                                                                 </div>
@@ -533,10 +535,10 @@ function batal() {
                                                                 <div class="">
                                                                     <label class="control-label">Tempat Lahir </label>
                                                                     <input type="text" name="tempat_lahir" value="<?php
-                                                                                                    if (!empty($dataPegawai->tempat_lahir)) {
-                                                                                                        echo $dataPegawai->tempat_lahir;
-                                                                                                    }
-                                                                                                    ?>"
+                                                                                                                    if (!empty($dataPegawai->tempat_lahir)) {
+                                                                                                                        echo $dataPegawai->tempat_lahir;
+                                                                                                                    }
+                                                                                                                    ?>"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="">
@@ -547,13 +549,13 @@ function batal() {
                                                                         <input type="text" name="tgl_lahir" id="tgl2"
                                                                             required
                                                                             value="<?php
-                                                                                                                        if (!empty($dataPegawai->tgl_lahir)) {
-                                                                                                                            $tgl_lahir = $dataPegawai->tgl_lahir;
-                                                                                                                            $tgl1 = explode('-', $tgl_lahir);
-                                                                                                                            $tgl_lahirnya = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
-                                                                                                                            echo $tgl_lahirnya;
-                                                                                                                        }
-                                                                                                                        ?>"
+                                                                                                                                        if (!empty($dataPegawai->tgl_lahir)) {
+                                                                                                                                            $tgl_lahir = $dataPegawai->tgl_lahir;
+                                                                                                                                            $tgl1 = explode('-', $tgl_lahir);
+                                                                                                                                            $tgl_lahirnya = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
+                                                                                                                                            echo $tgl_lahirnya;
+                                                                                                                                        }
+                                                                                                                                        ?>"
                                                                             class="form-control tgl2 datetimepicker">
                                                                     </div>
                                                                 </div>
@@ -562,15 +564,15 @@ function batal() {
                                                                     <select name="kelamin" class="form-control">
                                                                         <option value="">Pilih Jenis ...</option>
                                                                         <option value="Pria" <?php
-                                                                                if (!empty($dataPegawai->kelamin)) {
-                                                                                    echo $dataPegawai->kelamin == 'Pria' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>Pria</option>
+                                                                                                if (!empty($dataPegawai->kelamin)) {
+                                                                                                    echo $dataPegawai->kelamin == 'Pria' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>Pria</option>
                                                                         <option value="Wanita" <?php
-                                                                                if (!empty($dataPegawai->kelamin)) {
-                                                                                    echo $dataPegawai->kelamin == 'Wanita' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>Wanita</option>
+                                                                                                if (!empty($dataPegawai->kelamin)) {
+                                                                                                    echo $dataPegawai->kelamin == 'Wanita' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>Wanita</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="row">
@@ -603,35 +605,36 @@ function batal() {
                                                                     <select name="agama" class="form-control">
                                                                         <option value="">Pilih Agama ...</option>
                                                                         <option value="ISLAM" <?php
-                                                                                if (!empty($dataPegawai->agama)) {
-                                                                                    echo $dataPegawai->agama == 'ISLAM' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>ISLAM</option>
+                                                                                                if (!empty($dataPegawai->agama)) {
+                                                                                                    echo $dataPegawai->agama == 'ISLAM' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>ISLAM</option>
                                                                         <option value="KRISTEN" <?php
-                                                                                if (!empty($dataPegawai->agama)) {
-                                                                                    echo $dataPegawai->agama == 'KRISTEN' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>KRISTEN</option>
+                                                                                                if (!empty($dataPegawai->agama)) {
+                                                                                                    echo $dataPegawai->agama == 'KRISTEN' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>KRISTEN</option>
                                                                         <option value="KATOLIK" <?php
-                                                                                if (!empty($dataPegawai->agama)) {
-                                                                                    echo $dataPegawai->agama == 'KATOLIK' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>KATOLIK</option>
+                                                                                                if (!empty($dataPegawai->agama)) {
+                                                                                                    echo $dataPegawai->agama == 'KATOLIK' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>KATOLIK</option>
                                                                         <option value="BUDHA" <?php
-                                                                                if (!empty($dataPegawai->agama)) {
-                                                                                    echo $dataPegawai->agama == 'BUDHA' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>BUDHA</option>
+                                                                                                if (!empty($dataPegawai->agama)) {
+                                                                                                    echo $dataPegawai->agama == 'BUDHA' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>BUDHA</option>
                                                                         <option value="HINDU" <?php
-                                                                                if (!empty($dataPegawai->agama)) {
-                                                                                    echo $dataPegawai->agama == 'HINDU' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>HINDU</option>
+                                                                                                if (!empty($dataPegawai->agama)) {
+                                                                                                    echo $dataPegawai->agama == 'HINDU' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>HINDU</option>
                                                                         <option value="KONGHUCU" <?php
-                                                                                    if (!empty($dataPegawai->agama)) {
-                                                                                        echo $dataPegawai->agama == 'KONGHUCU' ? 'selected' : '';
-                                                                                    }
-                                                                                    ?>>KONGHUCU</option>
+                                                                                                    if (!empty($dataPegawai->agama)) {
+                                                                                                        echo $dataPegawai->agama == 'KONGHUCU' ? 'selected' : '';
+                                                                                                    }
+                                                                                                    ?>>KONGHUCU
+                                                                        </option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="">
@@ -640,25 +643,25 @@ function batal() {
                                                                     <select name="status_nikah" class="form-control">
                                                                         <option value="">Pilih Status ...</option>
                                                                         <option value="Nikah" <?php
-                                                                                if (!empty($dataPegawai->status_nikah)) {
-                                                                                    echo $dataPegawai->status_nikah == 'Nikah' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>Nikah</option>
+                                                                                                if (!empty($dataPegawai->status_nikah)) {
+                                                                                                    echo $dataPegawai->status_nikah == 'Nikah' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>Nikah</option>
                                                                         <option value="Lajang" <?php
-                                                                                if (!empty($dataPegawai->status_nikah)) {
-                                                                                    echo $dataPegawai->status_nikah == 'Lajang' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>Lajang</option>
+                                                                                                if (!empty($dataPegawai->status_nikah)) {
+                                                                                                    echo $dataPegawai->status_nikah == 'Lajang' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>Lajang</option>
                                                                         <option value="Duda" <?php
-                                                                                if (!empty($dataPegawai->status_nikah)) {
-                                                                                    echo $dataPegawai->status_nikah == 'Duda' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>Duda</option>
+                                                                                                if (!empty($dataPegawai->status_nikah)) {
+                                                                                                    echo $dataPegawai->status_nikah == 'Duda' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>Duda</option>
                                                                         <option value="Janda" <?php
-                                                                                if (!empty($dataPegawai->status_nikah)) {
-                                                                                    echo $dataPegawai->status_nikah == 'Janda' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>Janda</option>
+                                                                                                if (!empty($dataPegawai->status_nikah)) {
+                                                                                                    echo $dataPegawai->status_nikah == 'Janda' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>Janda</option>
                                                                     </select>
                                                                 </div>
 
@@ -667,26 +670,27 @@ function batal() {
                                                                     <select name="pendidikan" class="form-control">
                                                                         <option value="">Pilih Pendidikan...</option>
                                                                         <?php
-                                                        if (empty($dataPegawai->pendidikan)) {
-                                                            foreach ($datapendidikan as $pend) {
-                                                        ?>
+                                                                        if (empty($dataPegawai->pendidikan)) {
+                                                                            foreach ($datapendidikan as $pend) {
+                                                                        ?>
                                                                         <option
                                                                             <?php echo $pend == $pend->id_pendidikan ? 'selected="selected"' : '' ?>
                                                                             value="<?php echo $pend->id_pendidikan ?>">
                                                                             <?php echo $pend->pendidikan ?></option>
                                                                         <?php
-                                                            }
-                                                        } else {
-                                                            foreach ($datapendidikan as $pe) {          ?>
+                                                                            }
+                                                                        } else {
+                                                                            foreach ($datapendidikan as $pe) {          ?>
                                                                         <option
                                                                             value="<?php echo $pe->id_pendidikan; ?>"
                                                                             <?php if ($pe->id_pendidikan == $dataPegawai->pendidikan) {
-                                                                                                                        echo "selected='selected'";
-                                                                                                                    } ?>><?php echo $pe->pendidikan; ?></option>
+                                                                                                                                        echo "selected='selected'";
+                                                                                                                                    } ?>>
+                                                                            <?php echo $pe->pendidikan; ?></option>
                                                                         <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                                            }
+                                                                        }
+                                                                        ?>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -702,10 +706,10 @@ function batal() {
                                                                     <label class="control-label">Alamat</label>
                                                                     <textarea id="present" name="alamat"
                                                                         class="form-control"><?php
-                                                                                                                if (!empty($dataPegawai->alamat)) {
-                                                                                                                    echo $dataPegawai->alamat;
-                                                                                                                }
-                                                                                                                ?></textarea>
+                                                                                                                                if (!empty($dataPegawai->alamat)) {
+                                                                                                                                    echo $dataPegawai->alamat;
+                                                                                                                                }
+                                                                                                                                ?></textarea>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-sm-6">
@@ -713,11 +717,12 @@ function batal() {
                                                                         <div class="form-group">
                                                                             <label>Kode Pos</label>
                                                                             <input type="text" class="form-control"
-                                                                                name="kodepos" value="<?php
-                                                                                                if (!empty($dataPegawai->kodepos)) {
-                                                                                                    echo $dataPegawai->kodepos;
-                                                                                                }
-                                                                                                ?>"
+                                                                                name="kodepos"
+                                                                                value="<?php
+                                                                                                                                            if (!empty($dataPegawai->kodepos)) {
+                                                                                                                                                echo $dataPegawai->kodepos;
+                                                                                                                                            }
+                                                                                                                                            ?>"
                                                                                 placeholder="Kodepos ...">
                                                                         </div>
                                                                     </div>
@@ -725,11 +730,12 @@ function batal() {
                                                                         <div class="form-group">
                                                                             <label>No Telp</label>
                                                                             <input type="text" class="form-control"
-                                                                                name="no_hp" value="<?php
-                                                                                            if (!empty($dataPegawai->no_hp)) {
-                                                                                                echo $dataPegawai->no_hp;
-                                                                                            }
-                                                                                            ?>"
+                                                                                name="no_hp"
+                                                                                value="<?php
+                                                                                                                                        if (!empty($dataPegawai->no_hp)) {
+                                                                                                                                            echo $dataPegawai->no_hp;
+                                                                                                                                        }
+                                                                                                                                        ?>"
                                                                                 placeholder="No Telp ...">
                                                                         </div>
                                                                     </div>
@@ -737,26 +743,28 @@ function batal() {
                                                                 <div class="">
                                                                     <label class="control-label">No KTP </label>
                                                                     <input type="text" name="no_ktp" value="<?php
-                                                                                            if (!empty($dataPegawai->no_ktp)) {
-                                                                                                echo $dataPegawai->no_ktp;
-                                                                                            }
-                                                                                            ?>" class="form-control">
+                                                                                                            if (!empty($dataPegawai->no_ktp)) {
+                                                                                                                echo $dataPegawai->no_ktp;
+                                                                                                            }
+                                                                                                            ?>"
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="">
                                                                     <label class="control-label">NPWP</label>
                                                                     <input type="text" name="npwp" value="<?php
-                                                                                            if (!empty($dataPegawai->npwp)) {
-                                                                                                echo $dataPegawai->npwp;
-                                                                                            }
-                                                                                            ?>" class="form-control">
+                                                                                                            if (!empty($dataPegawai->npwp)) {
+                                                                                                                echo $dataPegawai->npwp;
+                                                                                                            }
+                                                                                                            ?>"
+                                                                        class="form-control">
                                                                 </div>
                                                                 <div class="">
                                                                     <label class="control-label">BPJS</label>
                                                                     <input type="text" name="jamsostek" value="<?php
-                                                                                                if (!empty($dataPegawai->jamsostek)) {
-                                                                                                    echo $dataPegawai->jamsostek;
-                                                                                                }
-                                                                                                ?>"
+                                                                                                                if (!empty($dataPegawai->jamsostek)) {
+                                                                                                                    echo $dataPegawai->jamsostek;
+                                                                                                                }
+                                                                                                                ?>"
                                                                         class="form-control">
                                                                 </div>
                                                                 <div class="">
@@ -764,30 +772,30 @@ function batal() {
                                                                     <select name="s_kawin" class="form-control">
                                                                         <option value="">Pilih Status ...</option>
                                                                         <option value="TK/0" <?php
-                                                                                if (!empty($dataPegawai->s_kawin)) {
-                                                                                    echo $dataPegawai->s_kawin == 'TK/0' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>TK/0</option>
+                                                                                                if (!empty($dataPegawai->s_kawin)) {
+                                                                                                    echo $dataPegawai->s_kawin == 'TK/0' ? 'selected' : '';
+                                                                                                }
+                                                                                                ?>>TK/0</option>
                                                                         <option value="K/0" <?php
-                                                                                if (!empty($dataPegawai->s_kawin)) {
-                                                                                    echo $dataPegawai->s_kawin == 'K/0' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>K/0</option>
+                                                                                            if (!empty($dataPegawai->s_kawin)) {
+                                                                                                echo $dataPegawai->s_kawin == 'K/0' ? 'selected' : '';
+                                                                                            }
+                                                                                            ?>>K/0</option>
                                                                         <option value="K/1" <?php
-                                                                                if (!empty($dataPegawai->s_kawin)) {
-                                                                                    echo $dataPegawai->s_kawin == 'K/1' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>K/1</option>
+                                                                                            if (!empty($dataPegawai->s_kawin)) {
+                                                                                                echo $dataPegawai->s_kawin == 'K/1' ? 'selected' : '';
+                                                                                            }
+                                                                                            ?>>K/1</option>
                                                                         <option value="K/2" <?php
-                                                                                if (!empty($dataPegawai->s_kawin)) {
-                                                                                    echo $dataPegawai->s_kawin == 'K/2' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>K/2</option>
+                                                                                            if (!empty($dataPegawai->s_kawin)) {
+                                                                                                echo $dataPegawai->s_kawin == 'K/2' ? 'selected' : '';
+                                                                                            }
+                                                                                            ?>>K/2</option>
                                                                         <option value="K/3" <?php
-                                                                                if (!empty($dataPegawai->s_kawin)) {
-                                                                                    echo $dataPegawai->s_kawin == 'K/3' ? 'selected' : '';
-                                                                                }
-                                                                                ?>>K/3</option>
+                                                                                            if (!empty($dataPegawai->s_kawin)) {
+                                                                                                echo $dataPegawai->s_kawin == 'K/3' ? 'selected' : '';
+                                                                                            }
+                                                                                            ?>>K/3</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
