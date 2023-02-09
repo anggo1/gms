@@ -19,6 +19,7 @@ class SettingHrd extends MY_Controller {
 		echo show_my_modal('hrd/modals/modal_tambah_pend', 'tambah-pendidikan', $data);
 		echo show_my_modal('hrd/modals/modal_tambah_jab', 'tambah-jabatan', $data);
 		echo show_my_modal('hrd/modals/modal_tambah_dept', 'tambah-departement', $data);
+		echo show_my_modal('hrd/modals/modal_tambah_kdcuti', 'tambah-kdcuti', $data);
         $this->template->load('layoutbackend','hrd/setting_panel',$data);
     }
 
@@ -34,6 +35,10 @@ class SettingHrd extends MY_Controller {
     public function showJab() {
 		$data['datajab'] = $this->Mod_settinghrd->select_jabatan();
 		$this->load->view('hrd/jab_data', $data);
+	}
+	public function showCt() {
+		$data['dataKdcuti'] = $this->Mod_settinghrd->select_kdcuti();
+		$this->load->view('hrd/kdcuti_data', $data);
 	}
     /*Pendidikan*/
 	public function prosesTpendidikan() {
@@ -248,116 +253,73 @@ class SettingHrd extends MY_Controller {
 			}
 		echo json_encode($out);
 	}
-	/*endJabatan*/
-    
-    public function ajax_pendidikan()
-    {
-        $list = $this->Mod_settinghrd->get_pendidikan();
-        $data = array();
-        $no = $_POST['start'];
-        foreach ($list as $submenu) {
-            $no++;
-            $row = array();
-            $row[] = $no;
-            $row[] = $submenu->pendidikan;
-        }
-        $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Mod_settinghrd->count_all_pendidikan(),
-            "recordsFiltered" => $this->Mod_settinghrd->count_filtered_pendidikan(),
-            "data" => $data,
-        );
-        //output to json format
-        echo json_encode($output);
-    }
-   public function viewpegawai()
-    {
-     $id = $this->input->post('id');
-     $data['data_table'] = $this->Mod_pegawai->view_pegawai($id);
-    
-     $this->load->view('hrd/view', $data);
-     
- }
-
- public function editpegawai($id)
- {
-     
-    $data = $this->Mod_pegawai->get_pegawai($id);
-    echo json_encode($data);
-    
-}
-
-public function insert()
-{
- $this->_validate();
- $save  = array(
-    'nama_submenu'	=> $this->input->post('nama_submenu'),
-    'link'  	=> $this->input->post('link'),
-    'icon'   	=> $this->input->post('icon'),
-    'id_menu'  	=> $this->input->post('id_menu'),
-    'is_active' => $this->input->post('is_active'),
-    'urutan' 	=> $this->input->post('urutan')
-);
- $this->Mod_submenu->insertsubmenu("tbl_submenu", $save);
- $insert_id = $this->db->insert_id();
- /*$nama_submenu = $this->input->post('nama_submenu');
- $get_id= $this->Mod_submenu->get_by_nama($nama_submenu);*/
- $id_level = $this->session->userdata['id_level'];
- $levels = $this->Mod_userlevel->getAll()->result();
- foreach ($levels as $row) {
-    $data = array(
-        'id_submenu' => $insert_id,
-        'id_level'   => $row->id_level,
-    );
-    $this->Mod_submenu->insert_akses_submenu("tbl_akses_submenu",$data);
-}
-echo json_encode(array("status" => TRUE));
-
-}
-
-public function update()
-{
-    
-    //$this->_validate();
-    $nip = $this->input->post('nip');
-    $data  = array(
-        
-		'nama_depan'	=> $this->input->post('nama_depan'),
-        'nama_belakang'	=> $this->input->post('nama_belakang'),
-        'departement'	=> $this->input->post('departement'),
-        'jabatan'		=> $this->input->post('jabatan'),
-        'status_kerja'	=> $this->input->post('status_kerja'),
-        'tgl_masuk'		=> $this->input->post('tgl_masuk'),
-        'tempat_lahir'	=> $this->input->post('tempat_lahir'),
-        'tgl_lahir'		=> $this->input->post('tgl_lahir'),
-        'agama'			=> $this->input->post('agama'),
-        'status_nikah'	=> $this->input->post('status_nikah'),
-        'pendidikan'	=> $this->input->post('pendidikan'),
-        'alamat'		=> $this->input->post('alamat'),
-        'kodepos'		=> $this->input->post('kodepos'),
-        'no_hp'			=> $this->input->post('no_hp'),
-        'status_nikah'	=> $this->input->post('status_nikah'),
-        'jamsostek'		=> $this->input->post('jamsostek'),
-        'tinggi'		=> $this->input->post('tinggi'),
-        'berat'			=> $this->input->post('berat'),
-        'darah'			=> $this->input->post('darah'),
-        's_kawin'		=> $this->input->post('s_kawin'),
-        'no_ktp'		=> $this->input->post('no_ktp'),
-        'npwp'			=> $this->input->post('npwp'),
-        'catatan1'		=> $this->input->post('catatan1')
-    );
-    $this->Mod_pegawai->updatepegawai($nip, $data);
-    echo json_encode(array("status" => TRUE));
-    
-}
-public function delete()
-{
-    $nip = $this->input->post('nip');
-    $this->Mod_pegawai->deletepegawai($nip, 'tbl_pegawai');
-    $data['status'] = TRUE;
-    echo json_encode($data);
-    
-}
+	/*endDepartement*/
+	     /*KodeCuti*/
+		 public function prosesTkdcuti() {
+			$this->form_validation->set_rules('kode', 'Kode cuti', 'trim|required');
+	
+			$data 	= $this->input->post();
+			if ($this->form_validation->run() == TRUE) {
+				$result = $this->Mod_settinghrd->insertkdcuti($data);
+	
+				if ($result > 0) {
+					$out['status'] = '';
+					$out['msg'] = show_ok_msg('Success', '20px');
+				} else {
+					$out['status'] = '';
+					$out['msg'] = show_err_msg('Filed !', '20px');
+				}
+			} else {
+				$out['status'] = 'form';
+				$out['msg'] = show_err_msg(validation_errors());
+			}
+	
+			echo json_encode($out);
+		}
+		public function updateKdcuti() {
+			$id 				= trim($_POST['id']);
+			$data['dataKdcuti'] = $this->Mod_settinghrd->select_id_kdcuti($id);
+	
+			echo show_my_modal('hrd/modals/modal_tambah_kdcuti', 'update-kdcuti', $data);
+		}
+	
+		public function prosesUkdcuti() {
+			
+			$this->form_validation->set_rules('kode', 'Kode Cuti', 'trim|required');
+	
+			$data 	= $this->input->post();
+			if ($this->form_validation->run() == TRUE) {
+				$result = $this->Mod_settinghrd->updateKodecuti($data);
+	
+				if ($result > 0) {
+					$out['status'] = '';
+					$out['msg'] = show_ok_msg('Success', '20px');
+				} else {
+					$out['status'] = '';
+					$out['msg'] = show_succ_msg('Filed!', '20px');
+				}
+			} else {
+				$out['status'] = 'form';
+				$out['msg'] = show_err_msg(validation_errors());
+			}
+	
+			echo json_encode($out);
+		}
+		public function deleteKdcuti() {
+			$id = $_POST['id'];
+			$result = $this->Mod_settinghrd->deleteKdcuti($id);			
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_del_msg('Deleted', '20px');
+				} else {
+				$out['status'] = '';
+				$out['msg'] = show_err_msg('Filed !', '20px');
+				}
+			echo json_encode($out);
+		}
+		
+		/*endCuti*/
+   
 
 public function download()
 {

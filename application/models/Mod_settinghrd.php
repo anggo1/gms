@@ -113,21 +113,6 @@ class Mod_settinghrd extends CI_Model {
 
 		return $data->result();
 	}
-    function count_filtered_pendidikan()
-    {
-        $term = $_REQUEST['search']['value'];  
-        $this->_get_datatables_query($term);
-        $query = $this->db->get();
-        return $query->num_rows();
-    }
-
-    public function count_all_pendidikan()
-    {
-        
-        $this->db->from('tbl_hrd_pendidikan');
-        //$this->db->join('tbl_menu as b','a.id_menu=b.id_menu');
-        return $this->db->count_all_results();
-    }
     
     public function select_pendidikan() {
 		$sql = " SELECT *
@@ -201,8 +186,48 @@ class Mod_settinghrd extends CI_Model {
 
 		return $this->db->affected_rows();
     }
+    
+    //* endDepartement */
 
+    public function select_id_kdcuti($id) {
+		$sql = " SELECT * FROM tbl_hrd_kodecuti WHERE id_kodecuti='{$id}'";
 
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+     public function insertKdcuti($data) {
+		$sql = "INSERT INTO tbl_hrd_kodecuti VALUES
+		('','".$data['kode']."','".$data['nama_cuti']."')";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+    public function updateKodecuti($data) {
+		$sql = "UPDATE tbl_hrd_kodecuti SET kode='" .$data['kode'] ."',nama_cuti='" .$data['nama_cuti'] ."'
+        WHERE id_kodecuti='" .$data['id_kodecuti'] ."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+    public function select_kdcuti() {
+		$sql = " SELECT * 
+		FROM tbl_hrd_kodecuti";
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+    function deleteKdcuti($id)
+    {
+        $sql = "DELETE FROM tbl_hrd_kodecuti WHERE id_kodecuti='{$id}'";
+        
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+    //** End Kode cuti */
     public function get_by_nama($link)
     {
 		$this->db->select('id_submenu');
