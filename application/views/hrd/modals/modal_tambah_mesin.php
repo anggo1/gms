@@ -21,10 +21,10 @@ if (!empty($dataMesin)){
             </div>
             <div class="input-group form-group">
                 <input type="text" class="form-control" placeholder="IP Mesin" value="<?php
-                        if (!empty($dataMesin->pin)) {
-                            echo $dataMesin->pin;
+                        if (!empty($dataMesin->ip)) {
+                            echo $dataMesin->ip;
                         }
-                        ?>" name="pin" aria-describedby="sizing-addon2">
+                        ?>" name="ip" aria-describedby="sizing-addon2">
 
             </div>
             <div class="input-group form-group">
@@ -33,6 +33,14 @@ if (!empty($dataMesin)){
                             echo $dataMesin->nama_mesin;
                         }
                         ?>" name="nama_mesin" aria-describedby="sizing-addon2">
+
+            </div>
+            <div class="input-group form-group">
+                <input type="text" class="form-control" placeholder="Com Key" value="<?php
+                        if (!empty($dataMesin->nama_mesin)) {
+                            echo $dataMesin->pass;
+                        }
+                        ?>" name="pass" aria-describedby="sizing-addon2" value="0">
 
             </div>
 

@@ -3,7 +3,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
@@ -15,7 +15,7 @@
                                             Mesin</button>
                                     </div>
                                 </div>
-                                <div class="col-12 ">
+                                <div class="col-12">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table
@@ -25,7 +25,9 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>IP</th>
+                                                        <th>Key</th>
                                                         <th>Nama Mesin</th>
+                                                        <th>Status</th>
                                                         <th>Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -37,6 +39,57 @@
                                     </div>
                                 </div>
                                 <div id="modal-mesin"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card ">
+                            <div class="modal-content">
+                                <div class="card-header card-blue card-outline">
+                                    <h3 class="card-title"><i class="fa fa-cog text-blue"></i> &nbsp; Upload Nama</h3>
+                                    <div class="text-right">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                <div class="col-12">
+                                <form id="form-uploadNama" name="form-uploadNama" method="POST">
+			    								<div class="form-group row">
+			    									<label for="Nama Konsumen" class="col-sm-2 col-form-label">IP Mesin</label>
+			    									<div class="col-sm-10">
+			    										<div class="input-group date" id="reservationdate" data-target-input="nearest">
+			    											<input type="text" name="ip" id="ip" value="" class="form-control" placeholder="IP Mesin Absen">
+			    										</div>
+			    									</div>
+			    								</div>
+			    								<div class="form-group row">
+			    									<label class="col-sm-2 col-form-label">Key</label>
+			    									<div class="col-sm-10">
+			    										<input type="text" name="pass" id="pass" value="" class="form-control" placeholder="Key">
+			    									</div>
+			    								</div>                                                
+			    								<div class="form-group row">
+			    									<label class="col-sm-2 col-form-label">NIP</label>
+			    									<div class="col-sm-10">
+			    										<input type="text" name="nip" id="nip" value="" class="form-control" placeholder="NIP Pegawai">
+			    									</div>
+			    								</div>
+                                                
+			    								<div class="form-group row">
+			    									<label class="col-sm-2 col-form-label">Nama</label>
+			    									<div class="col-sm-10">
+			    										<input type="text" name="nama" id="nama" value="" class="form-control" placeholder="Nama yang dirubah">
+			    									</div>
+			    								</div>
+			    								<div class="modal-footer justify-content-between">
+			    									<button class="btn btn-primary " type="submit"><span class="fa fa-save"></span> Simpan</button>
+			    								</div>
+
+			    							</form>
+			    						</div>
+			    					</div>
+			    				</div>
+			    			</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,6 +138,13 @@ function showDev() {
         refresh();
     });
 }
+function showAbsen() {
+    $.get('<?php echo base_url('Mesin_absen/showDev'); ?>', function(data) {
+        MyTable.fnDestroy();
+        $('#data-mesin').html(data);
+        refresh();
+    });
+}
 
 
 $('#form-tambah-mesin').submit(function(e) {
@@ -118,7 +178,58 @@ $('#form-tambah-mesin').submit(function(e) {
 
     e.preventDefault();
 });
+$('#form-uploadNama').submit(function(e) {
+    var data = $(this).serialize();
 
+    $.ajax({
+            method: 'POST',
+            url: '<?php echo base_url('Mesin_absen/prosesUnama'); ?>',
+            data: data
+        })
+        .done(function(data) {
+            var out = jQuery.parseJSON(data);
+
+            //showDev();
+            if (out.status == 'form') {
+                $('.form-msg').html(out.msg);
+                effect_msg_form();
+            } else {
+                document.getElementById("form-uploadNama").reset();
+                $('.msg').html(out.msg);
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sukses',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+
+    e.preventDefault();
+});
+
+$(document).on("click", ".download-dataMesin", function() {
+    var ip = $(this).attr("data-ip");
+    var pass = $(this).attr("data-pass");
+
+    $.ajax({
+            method: "POST",
+            url: "<?php echo base_url('Mesin_absen/downloadMesin'); ?>",
+            data: "ip=" + ip+ "&pass=" + pass
+        })
+        .done(function(data) {
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Data Telah di dowload',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+           // $('#modal-mesin').html(data);
+           // $('#update-mesin').modal('show');
+        })
+})
 $(document).on("click", ".update-dataMesin", function() {
     var id = $(this).attr("data-id");
 
@@ -132,6 +243,7 @@ $(document).on("click", ".update-dataMesin", function() {
             $('#update-mesin').modal('show');
         })
 })
+
 $(document).on('submit', '#form-update-mesin', function(e) {
     var data = $(this).serialize();
 
