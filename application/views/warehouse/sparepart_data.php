@@ -94,10 +94,13 @@
             "responsive": true,
             "autoWidth": false,
             "language": {
-                "sEmptyTable": "Data pegawai Belum Ada"
+                "sEmptyTable": "Data Sparepart Belum Ada"
             },
             "processing": true, //Feature control the processing indicator.
-            "serverSide": true, //Feature control DataTables' server-side processing mode.
+            "serverSide": true,
+            "language": {
+                processing: '<i class="fa fa-spinner fa-spin fa-3x"></i>'
+            }, //Feature control DataTables' server-side processing mode.
             "order": [], //Initial no order.
 
             // Load data for the table's content from an Ajax source
@@ -164,13 +167,13 @@
 
     //view
     // $(".v_pegawai").click(function(){
-    function vpegawai(id) {
-        $('.modal-title').text('View pegawai');
+    function vpart(id) {
+        $('.modal-title').text('View part');
         $("#modal-default").modal();
         $.ajax({
-            url: '<?php echo base_url('Pegawai/viewpegawai'); ?>',
+            url: '<?php echo base_url('Sparepart/viewpart'); ?>',
             type: 'post',
-            data: 'table=tbl_pegawai&id=' + id,
+            data: 'table=tbl_wh_sparepart&id=' + id,
             success: function(respon) {
 
                 $("#md_def").html(respon);
@@ -343,13 +346,10 @@
     }
 </script>
 
-</script>
-
-
 
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_form" role="dialog">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -376,86 +376,172 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">No
+                                                            <label class="col-sm-2 col-form-label">No
                                                                 Part</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="no_part" id="no_part" class="form-control">
                                                             </div>
-
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Nama
+                                                            <label class="col-sm-2 col-form-label">Nama
                                                                 Part</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group row">
-
-                                                            <label class="col-sm-3 col-form-label">Harga</label>
                                                             <div class="col-sm-4">
-                                                                <input type="text" name="no_telp" id="no_telp" class="form-control" required>
+                                                                <input type="text" name="nama_part" id="nama_part" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Harga
-                                                                1</label>
-                                                            <div class="col-sm-3">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
-                                                            </div>
-                                                            <label class="col-sm-2 col-form-label">Harga
-                                                                2</label>
+                                                            <label class="col-sm-2 col-form-label">Satuan</label>
                                                             <div class="col-sm-4">
-                                                                <input type="text" name="no_telp" id="no_telp" class="form-control" required>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Lokasi</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Kategori</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Kelompok</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Keterangan</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" name="alamat" id="alamat" class="form-control">
+                                                                <select name="satuan" class="form-control">
+                                                                    <option value="">Pilih Satuan
+                                                                    </option>
+                                                                    <?php
+                                                                    if (empty($dataSatuan->satuan)) {
+                                                                        foreach ($dataSatuan as $sat) {
+                                                                    ?>
+                                                                            <option <?php echo $sat == $sat->id_satuan ? 'selected="selected"' : '' ?> value="<?php echo $sat->id_satuan ?>">
+                                                                                <?php echo $sat->satuan  ?><?php } ?>
+                                                                            </option>
+                                                                            <?php
+                                                                        } else {
+                                                                            foreach ($dataSatuan as $st) {          ?>
+                                                                                <option value="<?php echo $st->id_satuan; ?>" <?php if ($st->id_satuan == $dataPart->satuan) {
+                                                                                                                                    echo "selected='selected'";
+                                                                                                                                } ?>>
+                                                                                    <?php echo $st->satuan; ?>
+                                                                                </option>
+                                                                        <?php
+                                                                            }
+                                                                        }
+                                                                        ?>
+                                                                </select>
                                                             </div>
 
+                                                            <label class="col-sm-2 col-form-label">Type</label>
+                                                            <div class="col-sm-4">
+                                                                <select name="type" class="form-control">
+                                                                    <option value="">Pilih Type
+                                                                    </option>
+                                                                    <?php
+                                                                    if (empty($dataType->type)) {
+                                                                        foreach ($dataType as $ty) {
+                                                                    ?>
+                                                                            <option <?php echo $ty == $ty->id_type ? 'selected="selected"' : '' ?> value="<?php echo $ty->id_type ?>">
+                                                                                <?php echo $ty->type_mesin  ?><?php } ?>
+                                                                            </option>
+                                                                            <?php
+                                                                        } else {
+                                                                            foreach ($dataType as $tp) {          ?>
+                                                                                <option value="<?php echo $tp->id_type; ?>" <?php if ($tp->id_type == $dataPart->type_mesin) {
+                                                                                                                                echo "selected='selected'";
+                                                                                                                            } ?>>
+                                                                                    <?php echo $tp->type_mesin; ?>
+                                                                                </option>
+                                                                        <?php
+                                                                            }
+                                                                        }
+                                                                        ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Kategori</label>
+                                                    <div class="col-sm-4">
+                                                        <select name="kategori" class="form-control">
+                                                            <option value="">Pilih kategori.
+                                                            </option>
+                                                            <?php
+                                                            if (empty($dataKategori->kategori)) {
+                                                                foreach ($dataKategori as $kt) {
+                                                            ?>
+                                                                    <option <?php echo $kt == $kt->id_kategori ? 'selected="selected"' : '' ?> value="<?php echo $kt->id_kategori ?>">
+                                                                        <?php echo $kt->kategori  ?><?php } ?>
+                                                                    </option>
+                                                                    <?php
+                                                                } else {
+                                                                    foreach ($dataKategori as $kat) {          ?>
+                                                                        <option value="<?php echo $kat->id_kategori; ?>" <?php if ($kat->id_kategori == $dataPart->kategori) {
+                                                                                                                                echo "selected='selected'";
+                                                                                                                            } ?>>
+                                                                            <?php echo $kat->kategori; ?>
+                                                                        </option>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                        </select>
+                                                    </div>
+                                                    <label class="col-sm-2 col-form-label">Kelompok</label>
+                                                    <div class="col-sm-4">
+                                                        <select name="kelompok" class="form-control">
+                                                            <option value="">Pengelompokan.....
+                                                            </option>
+                                                            <?php
+                                                            if (empty($dataKelompok->kelompok)) {
+                                                                foreach ($dataKelompok as $kp) {
+                                                            ?>
+                                                                    <option <?php echo $kp == $kp->id_kelompok ? 'selected="selected"' : '' ?> value="<?php echo $kp->id_kelompok ?>">
+                                                                        <?php echo $kp->kelompok  ?><?php } ?>
+                                                                    </option>
+                                                                    <?php
+                                                                } else {
+                                                                    foreach ($dataKelompok as $kel) {          ?>
+                                                                        <option value="<?php echo $kel->id_kelompok; ?>" <?php if ($kel->id_kelompok == $dataPart->kelompok) {
+                                                                                                                                echo "selected='selected'";
+                                                                                                                            } ?>>
+                                                                            <?php echo $kel->kelompok; ?>
+                                                                        </option>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="modal-footer justify-content-between">
-                                            <button class="btn btn-danger" data-dismiss="modal" onclick="batal()" aria-hidden="true">Tutup</button>
-                                            <button class="btn btn-primary" id="btnSave" onclick="save()"><span class="fa fa-save"></span>
-                                                Simpan</button>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Harga</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" name="no_telp" id="no_telp" class="form-control">
+                                            </div>
+                                            <label class="col-sm-2 col-form-label">Harga
+                                                1</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" name="harga1" id="harga1" class="form-control">
+                                            </div>
                                         </div>
-                </form>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Harga
+                                                2</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" name="harga2" id="harga2" class="form-control">
+                                            </div>
+                                            <label class="col-sm-2 col-form-label">Lokasi</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" name="lokasi" id="lokasi" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Keterangan</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="keterangan" id="keterangan" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
+
+            <div class="modal-footer justify-content-between">
+                <button class="btn btn-danger" data-dismiss="modal" onclick="batal()" aria-hidden="true">Tutup</button>
+                <button class="btn btn-primary" id="btnSave" onclick="save()"><span class="fa fa-save"></span>
+                    Simpan</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
 </div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <!-- End Bootstrap modal -->
