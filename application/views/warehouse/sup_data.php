@@ -1,19 +1,32 @@
        <?php
-  $no = 1;
-  foreach ($datajab as $s) {
-    ?>
-    <tr>
-    
-    <td><?php echo $no; ?></td>
-    <td><?php echo $s->kode_sup; ?></td>
-    <td><?php echo $s->nama_sup; ?></td>
+        $no = 1;
+        foreach ($dataSup as $s) {
+        ?>
+         <tr>
 
-      <td class="text-center">
-        <button class="btn btn-sm btn-outline-success update-dataSupplier" data-id="<?php echo $s->id_jabatan; ?>"><i class="glyphicon glyphicon-repeat"></i> Edit</button>
-		  <button class="btn btn-sm btn-outline-danger delete-supplier" data-toggle="modal" data-target="#konfirmasiHapus" data-id="<?php echo $s->id_jabatan; ?>"><i class="fa fa-delete"></i> Hapus</button>
-      </td>
-    </tr>
-    <?php
-	 $no++;
-  }
-?> 
+           <td><?php echo $no; ?></td>
+           <td><?php echo $s->kode_sup; ?></td>
+           <td><?php echo $s->nama_sup; ?></td>
+
+           <td class="text-center">
+             <button class="btn btn-sm btn-outline-success update-dataSupplier ion-edit" data-id="<?php echo $s->id_supplier; ?>"></button>
+             <button class="btn btn-sm btn-outline-danger delete-supplier ion-android-delete" data-toggle="modal" data-target="#hapusSupplier" data-id="<?php echo $s->id_supplier; ?>"></button>
+           </td>
+         </tr>
+       <?php
+          $no++;
+        }
+        ?>
+
+       <script type="text/javascript">
+         var tableSupplier = $('#list-supplier').DataTable({
+           "responsive": false,
+           "paging": true,
+           "lengthChange": false,
+           "searching": false,
+           "ordering": true,
+           "info": false,
+           "autoWidth": true,
+           "pageLength": 5
+         });
+       </script>
