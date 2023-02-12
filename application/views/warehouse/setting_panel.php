@@ -13,11 +13,11 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
-                                    <h3 class="card-title"><i class="fa fa-user-graduate text-blue"></i> &nbsp; Satuan</h3>
+                                    <h3 class="card-title"><i class="ion-ios-cog ion-lg text-blue"></i> &nbsp; Satuan</h3>
                                     <div class="text-right">
                                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-satuan" title="Add Data"><i class="fas fa-plus"></i>
                                             Add</button>
@@ -44,11 +44,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
-                                    <h3 class="card-title"><i class="fa fa-user-shield text-blue"></i> &nbsp; Kategori</h3>
+                                    <h3 class="card-title"><i class="ion-ios-cog-outline ion-lg text-blue"></i> &nbsp; Kategori</h3>
                                     <div class="text-right">
                                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-kategori" title="Add Data"><i class="fas fa-plus"></i>
                                             Add</button>
@@ -74,11 +74,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
-                                    <h3 class="card-title"><i class="fa fa-user-tie text-blue"></i> &nbsp; Type
+                                    <h3 class="card-title"><i class="ion-gear-b ion-lg text-blue"></i> &nbsp; Type
                                     </h3>
                                     <div class="text-right">
                                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-type" title="Add Data"><i class="fas fa-plus"></i> Add
@@ -105,11 +105,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
-                                    <h3 class="card-title"><i class="fa fa-user-tie text-blue"></i> &nbsp; Supplier</h3>
+                                    <h3 class="card-title"><i class="ion-gear-a ion-lg text-blue"></i> &nbsp; Kelompok</h3>
+                                    <div class="text-right">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-kelompok" title="Add Data"><i class="fas fa-plus"></i>
+                                            Add</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 ">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover nowrap" id="list-kelompok">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Kelompok</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-kelompok">
+                                            </tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="modal-kelompok"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card ">
+                            <div class="modal-content">
+                                <div class="card-header card-blue card-outline">
+                                    <h3 class="card-title"><i class="ion-outlet ion-lg text-blue"></i> &nbsp; Supplier</h3>
                                     <div class="text-right">
                                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-supplier" title="Add Data"><i class="fas fa-plus"></i>
                                             Add</button>
@@ -147,6 +177,7 @@ show_my_confirm('hapusSatuan', 'hapus-satuan', 'Hapus Data Ini?', 'Ya, Hapus Dat
 show_my_confirm('hapusKategori', 'hapus-kategori', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 show_my_confirm('hapusType', 'hapus-type', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 show_my_confirm('hapusSupplier', 'hapus-supplier', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
+show_my_confirm('hapusKelompok', 'hapus-kelompok', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 ?>
 <script type="text/javascript">
     window.onload = function() {
@@ -154,6 +185,7 @@ show_my_confirm('hapusSupplier', 'hapus-supplier', 'Hapus Data Ini?', 'Ya, Hapus
         showKat();
         showType();
         showSup();
+        showKp();
     }
 
     function refresh() {
@@ -180,6 +212,7 @@ show_my_confirm('hapusSupplier', 'hapus-supplier', 'Hapus Data Ini?', 'Ya, Hapus
     var tableKategori = $('#list-kategori').DataTable();
     var tableType = $('#list-type').DataTable();
     var tableSupplier = $('#list-supplier').DataTable();
+    var tableKelompok = $('#list-kelompok').DataTable();
 
     //ajax Jabatan
     function showSat() {
@@ -210,6 +243,14 @@ show_my_confirm('hapusSupplier', 'hapus-supplier', 'Hapus Data Ini?', 'Ya, Hapus
         $.get('<?php echo base_url('Settingwh/showSup'); ?>', function(data) {
             tableSupplier.destroy();
             $('#data-supplier').html(data);
+            refresh();
+        });
+    }
+
+    function showKp() {
+        $.get('<?php echo base_url('Settingwh/showKp'); ?>', function(data) {
+            tableKelompok.destroy();
+            $('#data-kelompok').html(data);
             refresh();
         });
     }
@@ -671,4 +712,118 @@ show_my_confirm('hapusSupplier', 'hapus-supplier', 'Hapus Data Ini?', 'Ya, Hapus
                 }
             })
     })
+    //** end Supplier */
+    $('#form-tambah-kelompok').submit(function(e) {
+        var data = $(this).serialize();
+
+        $.ajax({
+                method: 'POST',
+                url: '<?php echo base_url('Settingwh/prosesTkelompok'); ?>',
+                data: data
+            })
+            .done(function(data) {
+                var out = jQuery.parseJSON(data);
+
+                showKp();
+                if (out.status == 'form') {
+                    $('.form-msg').html(out.msg);
+                    effect_msg_form();
+                } else {
+                    document.getElementById("form-tambah-kelompok").reset();
+                    $('#tambah-kelompok').modal('hide');
+                    $('.msg').html(out.msg);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: out.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+
+        e.preventDefault();
+    });
+
+    $(document).on("click", ".update-dataKelompok", function() {
+        var id = $(this).attr("data-id");
+
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('Settingwh/updateKelompok'); ?>",
+                data: "id=" + id
+            })
+            .done(function(data) {
+                $('#modal-kelompok').html(data);
+                $('#update-kelompok').modal('show');
+            })
+    })
+    $(document).on('submit', '#form-update-kelompok', function(e) {
+        var data = $(this).serialize();
+
+        $.ajax({
+                method: 'POST',
+                url: '<?php echo base_url('Settingwh/prosesUkelompok'); ?>',
+                data: data
+            })
+            .done(function(data) {
+                var out = jQuery.parseJSON(data);
+
+                showKp();
+                if (out.status == 'form') {
+                    $('.form-msg').html(out.msg);
+                    effect_msg_form();
+                } else {
+                    document.getElementById("form-update-kelompok").reset();
+                    $('#update-kelompok').modal('hide');
+                    $('.msg').html(out.msg);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: out.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+
+        e.preventDefault();
+    });
+
+    $('#tambah-kelompok').on('hidden.bs.modal', function() {
+        $('.form-msg').html('');
+    })
+
+    $('#update-kelompok').on('hidden.bs.modal', function() {
+        $('.form-msg').html('');
+    })
+    $(document).on("click", ".delete-kelompok", function() {
+        id_kat = $(this).attr("data-id");
+    })
+    $(document).on("click", ".hapus-kelompok", function() {
+        var id = id_kat;
+
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('SettingWh/deleteKelompok'); ?>",
+                data: "id=" + id
+            })
+
+            .done(function(data) {
+                var out = jQuery.parseJSON(data);
+                showKp();
+                $('.msg').html(out.msg);
+                $('#hapusKelompok').modal('hide');
+                if (out.status != 'form') {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: out.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    })
+    //** End Kelompok */
 </script>

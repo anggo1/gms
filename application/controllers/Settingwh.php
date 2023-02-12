@@ -22,6 +22,7 @@ class Settingwh extends MY_Controller
         echo show_my_modal('warehouse/modals/modal_tambah_kat', 'tambah-kategori', $data);
         echo show_my_modal('warehouse/modals/modal_tambah_type', 'tambah-type', $data);
         echo show_my_modal('warehouse/modals/modal_tambah_sup', 'tambah-supplier', $data);
+        echo show_my_modal('warehouse/modals/modal_tambah_kp', 'tambah-kelompok', $data);
         $this->template->load('layoutbackend', 'warehouse/setting_panel', $data);
     }
 
@@ -45,6 +46,11 @@ class Settingwh extends MY_Controller
     {
         $data['dataSup'] = $this->Mod_settingwh->select_supplier();
         $this->load->view('warehouse/sup_data', $data);
+    }
+    public function showKp()
+    {
+        $data['dataKel'] = $this->Mod_settingwh->select_kelompok();
+        $this->load->view('warehouse/kp_data', $data);
     }
     /*Satuan*/
     public function prosesTsatuan()
@@ -326,4 +332,73 @@ class Settingwh extends MY_Controller
         echo json_encode($out);
     }
     /*endSupplier*/
+    /*Kelompok*/
+    public function prosesTkelompok()
+    {
+        $this->form_validation->set_rules('kelompok', 'Nama Kelompok', 'trim|required');
+
+        $data     = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->Mod_settingwh->insertKelompok($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
+    public function updateKelompok()
+    {
+        $id                 = trim($_POST['id']);
+        $data['dataKelompok'] = $this->Mod_settingwh->select_id_kelompok($id);
+
+        echo show_my_modal('warehouse/modals/modal_tambah_kp', 'update-kelompok', $data);
+    }
+
+    public function prosesUkelompok()
+    {
+
+        $this->form_validation->set_rules('kelompok', 'Nama Kelompok', 'trim|required');
+
+        $data     = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->Mod_settingwh->updateKelompok($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Filed!', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
+    public function deleteKelompok()
+    {
+        $id = $_POST['id'];
+        $result = $this->Mod_settingwh->deleteKel($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_del_msg('Deleted', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
+    /*endKelompok*/
 }

@@ -187,7 +187,49 @@ class Mod_settingwh extends CI_Model
 
 		return $this->db->affected_rows();
 	}
-	//e
-}
 
-/* End of file Mod_pegawai.php */
+	//** end Supplier **//
+	public function select_kelompok()
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_wh_kelompok');
+		$data = $this->db->get();
+		return $data->result();
+	}
+	public function select_id_kelompok($id)
+	{
+		$sql = " SELECT * FROM tbl_wh_kelompok WHERE id_kelompok='{$id}'";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+	public function insertKelompok($data)
+	{
+		$sql = "INSERT INTO tbl_wh_kelompok VALUES
+		('','" . $data['kelompok'] . "')";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+	public function updateKelompok($data)
+	{
+		$sql = "UPDATE tbl_wh_kelompok SET kelompok='" . $data['kelompok'] . "'
+        WHERE id_kelompok='" . $data['id_kelompok'] . "'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+	function deleteKel($id)
+	{
+		$sql = "DELETE FROM tbl_wh_kelompok WHERE id_kelompok='{$id}'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+
+	// End Kelompok //
+}
