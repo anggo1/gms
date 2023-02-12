@@ -23,9 +23,10 @@ class Mesin_absen extends MY_Controller {
 		$data['dataDev'] = $this->Mod_mesinabsen->select_mesin();
 		$this->load->view('hrd/dev_data', $data);
 	}
+	
     /*Pendidikan*/
 	public function prosesTmesin() {
-		$this->form_validation->set_rules('pin', 'IP Address Mesin', 'trim|required');
+		$this->form_validation->set_rules('ip', 'IP Address Mesin', 'trim|required');
 		$this->form_validation->set_rules('nama_mesin', 'Nama Mesin', 'trim|required');
 
 		$data 	= $this->input->post();
@@ -46,6 +47,47 @@ class Mesin_absen extends MY_Controller {
 
 		echo json_encode($out);
 	}
+	public function prosesUnama() {
+		
+       // $this->load->helper('parse');
+		$IP = trim($_POST['ip']);
+        $Key = trim($_POST['pass']);
+        if($IP!=""){
+        $connect = fsockopen($IP, "80", $errno, $errstr, 1);
+		if($connect) {
+			$id = trim($_POST['nip']);
+			$nama = trim($_POST['nama']);
+			$soap_request = "<SetUserInfo><ArgComKey Xsi:type=\"xsd:integer\">" . $Key . "</ArgComKey><Arg><PIN>" . $id . "</PIN><Name>" . $nama . "</Name></Arg></SetUserInfo>";
+			$newLine = "\r\n";
+			fputs($connect, "POST /iWsService HTTP/1.0" . $newLine);
+			fputs($connect, "Content-Type: text/xml" . $newLine);
+			fputs($connect, "Content-Length: " . strlen($soap_request) . $newLine . $newLine);
+			fputs($connect, $soap_request . $newLine);
+			$buffer = "";
+				$out['status'] = '';
+				$out['msg'] = show_ok_msg('Success', '20px');
+
+			while($Response = fgets($connect, 1024)) {
+				$buffer = $buffer . $Response;
+			}
+		} else {
+			$out['status'] = '';
+			$out['msg'] = show_err_msg('Filed !', '20px');
+		}
+		//include("parse.php");
+		$buffer = Parse_Data($buffer, "<Information>", "</Information>");
+	}
+
+		echo json_encode($buffer);
+	}
+	public function downloadMesin() {
+		$IP 				= trim($_POST['ip']);
+		$key 				= trim($_POST['pass']);
+		$data['dataMesin'] = $this->Mod_mesinabsen->get_data_absen($IP,$key);
+		$data['dataAbsen'] = $this->Mod_mesinabsen->get_list_absen();
+
+		//echo show_my_modal('hrd/modals/modal_tambah_mesin', 'update-mesin', $data);
+	}
 	public function updateMesin() {
 		$id 				= trim($_POST['id']);
 		$data['dataMesin'] = $this->Mod_mesinabsen->select_id_mesin($id);
@@ -55,7 +97,7 @@ class Mesin_absen extends MY_Controller {
 
 	public function prosesUmesin() {
 		
-		$this->form_validation->set_rules('pin', 'IP Address Mesin', 'trim|required');
+		$this->form_validation->set_rules('ip', 'IP Address Mesin', 'trim|required');
 		$this->form_validation->set_rules('nama_mesin', 'Nama Mesin', 'trim|required');
 
 		$data 	= $this->input->post();
