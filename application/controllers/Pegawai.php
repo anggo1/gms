@@ -10,6 +10,7 @@ class Pegawai extends MY_Controller {
         parent::__construct();
         $this->load->model(array('Mod_pegawai','Mod_menu'));
         $this->load->model(array('Mod_userlevel'));
+        $this->load->helper('myfunction_helper');
     }
 
     public function index()

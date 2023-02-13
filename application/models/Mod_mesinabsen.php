@@ -89,6 +89,13 @@ class Mod_mesinabsen extends CI_Model {
                     if (!$this->if_exist_check($PIN, $DateTime) && $PIN && $DateTime) {
                     	$this->db->insert('tbl_hrd_data_absen', $ins);
                     }
+					$dataAbsen= $data;
+					echo ' <tr>
+					<td>'.$PIN.'</td>
+					<td>'.$DateTime.'</td>
+					<td>'.$Verified.'</td>
+					<td>'.$Status.'</td>
+				</tr>';
                 }
                 if($buffer){
                 	return '<div class="alert alert-success alert-dismissable">

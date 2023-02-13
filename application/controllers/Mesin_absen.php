@@ -23,6 +23,10 @@ class Mesin_absen extends MY_Controller {
 		$data['dataDev'] = $this->Mod_mesinabsen->select_mesin();
 		$this->load->view('hrd/dev_data', $data);
 	}
+	public function showAbsen() {
+		$data['dataDev'] = $this->Mod_mesinabsen->select_mesin();
+		$this->load->view('hrd/absen_data', $data);
+	}
 	
     /*Pendidikan*/
 	public function prosesTmesin() {
@@ -84,7 +88,11 @@ class Mesin_absen extends MY_Controller {
 		$IP 				= trim($_POST['ip']);
 		$key 				= trim($_POST['pass']);
 		$data['dataMesin'] = $this->Mod_mesinabsen->get_data_absen($IP,$key);
-		$data['dataAbsen'] = $this->Mod_mesinabsen->get_list_absen();
+		
+		foreach($ins as $result) {
+			echo $result['PIN'], '<br>';
+		}
+		$this->load->view('hrd/absen_data', $ins);
 
 		//echo show_my_modal('hrd/modals/modal_tambah_mesin', 'update-mesin', $data);
 	}

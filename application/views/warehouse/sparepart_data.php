@@ -8,7 +8,7 @@
                         <h3 class="card-title"><i class="fa fa-list text-blue"></i> Data Spare Part</h3>
                         <div class="text-right">
                             <button type="button" class="btn btn-sm btn-outline-primary" onclick="add_sparepart()" title="Add Data"><i class="fas fa-plus"></i> Add</button>
-                            <a href="<?php echo base_url('Sparepart/download'); ?>" type="button" class="btn btn-sm btn-outline-info" id="dwn_pegawai" title="Download"><i class="fas fa-download"></i> Download</a>
+                            <a href="<?php echo base_url('Sparepart/download'); ?>" type="button" class="btn btn-sm btn-outline-info" id="dwn_sparepart" title="Download"><i class="fas fa-download"></i> Download</a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -54,7 +54,7 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" name="idhapus" id="idhapus">
-                <p>Apakah anda yakin ingin menghapus pegawai <strong class="text-konfirmasi"> </strong> ?</p>
+                <p>Apakah anda yakin ingin menghapus Sparepart <strong class="text-konfirmasi"> </strong> ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success btn-xs" data-dismiss="modal">Batal</button>
@@ -67,7 +67,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title ">View pegawai</h4>
+                <h4 class="modal-title ">Detail Sparepart</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -115,17 +115,12 @@
 
 
                     if (row[10] && row[11] == "Y") {
-                        return "<a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" title=\"View\" onclick=\"vpegawai(" +
+                        return "<a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" title=\"View\" onclick=\"vsparepart("+row[12]+")\"><i class=\"fas fa-eye\"></i></a> <a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_sparepart(" +
+                            row[12]+")\"><i class=\"fas fa-edit\"></i></a> <a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama="+row[12]+"  onclick=\"delsparepart("+row[12]+")\"><i class=\"fas fa-trash\"></i></a>"
+                        } else {
+                        return "<a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" title=\"View\" onclick=\"vsparepart(" +
                             row[7] +
-                            ")\"><i class=\"fas fa-eye\"></i></a> <a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_pegawai(" +
-                            row[7] +
-                            ")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama=" +
-                            row[0] + "  onclick=\"delpegawai(" + row[7] +
-                            ")\"><i class=\"fas fa-trash\"></i></a>"
-                    } else {
-                        return "<a class=\"btn btn-xs btn-outline-info\" href=\"javascript:void(0)\" title=\"View\" onclick=\"vpegawai(" +
-                            row[7] +
-                            ")\"><i class=\"fas fa-eye\"></i></a> <a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_pegawai(" +
+                            ")\"><i class=\"fas fa-eye\"></i></a> <a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_sparepart(" +
                             row[7] + ")\"><i class=\"fas fa-edit\"></i></a>";
                     }
 
@@ -166,8 +161,8 @@
 
 
     //view
-    // $(".v_pegawai").click(function(){
-    function vpart(id) {
+    //$(".v_sparepart").click(function(){
+    function vsparepart(id) {
         $('.modal-title').text('View part');
         $("#modal-default").modal();
         $.ajax({
@@ -184,11 +179,11 @@
     }
 
 
-    function delpegawai(id) {
+    function delsparepart(id) {
 
         Swal.fire({
             title: 'Anda Yakin?',
-            text: "Anda Akan Menghapus seluruh data pegawai tersebut!",
+            text: "Anda Akan Menghapus data tersebut!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -197,9 +192,9 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "<?php echo site_url('Pegawai/delete'); ?>",
+                    url: "<?php echo site_url('Sparepart/delete'); ?>",
                     type: "POST",
-                    data: "nip=" + id,
+                    data: "id_barang=" + id,
                     cache: false,
                     dataType: 'json',
                     success: function(respone) {
@@ -239,7 +234,7 @@
         $('.modal-title').text('Penambahan Data Sparepart'); // Set Title to Bootstrap modal title
     }
 
-    function edit_pegawai(nip) {
+    function edit_sparepart(id_barang) {
         save_method = 'update';
         $('#form')[0].reset(); // reset form on modals
         $('.form-group').removeClass('has-error'); // clear error class
@@ -247,37 +242,25 @@
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('Pegawai/editpegawai') ?>/" + nip,
+            url: "<?php echo site_url('Sparepart/editsparepart') ?>/" + id_barang,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
 
-                $('[name="nip"]').val(data.nip);
-                $('[name="nama_depan"]').val(data.nama_depan);
-                $('[name="nama_belakang"]').val(data.nama_belakang);
-                $('[name="departement"]').val(data.departement);
-                $('[name="jabatan"]').val(data.jabatan);
-                $('[name="status_kerja"]').val(data.status_kerja);
-                $('[name="tgl_masuk"]').val(data.tgl_masuk);
-                $('[name="tempat_lahir"]').val(data.tempat_lahir);
-                $('[name="tgl_lahir"]').val(data.tgl_lahir);
-                $('[name="agama"]').val(data.agama);
-                $('[name="status_nikah"]').val(data.status_nikah);
-                $('[name="pendidikan"]').val(data.pendidikan);
-                $('[name="alamat"]').val(data.alamat);
-                $('[name="kodepos"]').val(data.kodepos);
-                $('[name="no_hp"]').val(data.no_hp);
-                $('[name="status_nikah"]').val(data.status_nikah);
-                $('[name="jamsostek"]').val(data.jamsostek);
-                $('[name="tinggi"]').val(data.tinggi);
-                $('[name="berat"]').val(data.berat);
-                $('[name="darah"]').val(data.darah);
-                $('[name="s_kawin"]').val(data.s_kawin);
-                $('[name="no_ktp"]').val(data.no_ktp);
-                $('[name="npwp"]').val(data.npwp);
-                $('[name="catatan1"]').val(data.catatan1);
+                $('[name="id_barang"]').val(data.id_barang);
+                $('[name="no_part"]').val(data.no_part);
+                $('[name="nama_part"]').val(data.nama_part);
+                $('[name="hrg_awal"]').val(data.hrg_awal);
+                $('[name="hrg_1"]').val(data.hrg_1);
+                $('[name="hrg_2"]').val(data.hrg_2);
+                $('[name="satuan"]').val(data.satuan);
+                $('[name="kelompok"]').val(data.kelompok);
+                $('[name="type"]').val(data.type);
+                $('[name="lokasi"]').val(data.lokasi);
+                $('[name="kategori"]').val(data.kategori);
+                $('[name="ket"]').val(data.ket);
                 $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-                $('.modal-title').text('Edit pegawai'); // Set title to Bootstrap modal title
+                $('.modal-title').text('Edit Sparepart'); // Set title to Bootstrap modal title
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -292,9 +275,9 @@
         var url;
 
         if (save_method == 'add') {
-            url = "<?php echo site_url('pegawai/insert') ?>";
+            url = "<?php echo site_url('Sparepart/insert') ?>";
         } else {
-            url = "<?php echo site_url('pegawai/update') ?>";
+            url = "<?php echo site_url('Sparepart/update') ?>";
         }
 
         // ajax adding data to database
@@ -333,16 +316,10 @@
             }
         });
     }
-    var loadFile = function(event) {
-        var image = document.getElementById('v_image');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
 
     function batal() {
         $('#form')[0].reset();
         reload_table();
-        var image = document.getElementById('v_image');
-        image.src = "";
     }
 </script>
 
@@ -361,16 +338,12 @@
             </div>
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal">
-                    <input type="hidden" value="" name="nip" />
+                    <input type="hidden" value="" name="id_barang" />
                     <div class="row">
                         <div class="col-sm-12" data-spy="scroll" data-offset="0">
                             <div class="panel panel-default">
                                 <section class="content">
-                                    <div class="container-fluid">
-                                        <?php if (!empty($dataPegawai)) {
-                                            foreach ($dataPegawai as $dataPegawai) {
-                                            }
-                                        } ?>
+                                    <div class="container-fluid">                                       
                                         <div class="row">
                                             <div class="col-12 ">
                                                 <div class="row">
@@ -503,19 +476,19 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Harga</label>
                                             <div class="col-sm-4">
-                                                <input type="text" name="no_telp" id="no_telp" class="form-control">
+                                                <input type="text" name="hrg_awal" id="hrg_awal" class="form-control">
                                             </div>
                                             <label class="col-sm-2 col-form-label">Harga
                                                 1</label>
                                             <div class="col-sm-4">
-                                                <input type="text" name="harga1" id="harga1" class="form-control">
+                                                <input type="text" name="hrg_1" id="hrg_1" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Harga
                                                 2</label>
                                             <div class="col-sm-4">
-                                                <input type="text" name="harga2" id="harga2" class="form-control">
+                                                <input type="text" name="hrg_2" id="hrg_2" class="form-control">
                                             </div>
                                             <label class="col-sm-2 col-form-label">Lokasi</label>
                                             <div class="col-sm-4">
@@ -525,7 +498,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="keterangan" id="keterangan" class="form-control">
+                                                <input type="text" name="ket" id="ket" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -542,6 +515,5 @@
             </form>
         </div>
     </div>
-</div>
 </div>
 <!-- End Bootstrap modal -->

@@ -22,7 +22,7 @@ class Mod_sparepart extends CI_Model
         $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori');
         //$this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan');
         //$this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type');
-        //$this->db->join('tbl_wh_kelompok as e','a.kelompok=d.id_kelompok');
+        //$this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok');
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column 
@@ -137,7 +137,7 @@ class Mod_sparepart extends CI_Model
 
         return $data->result();
     }
-    function view_pegawai($id)
+    function view_sparepart($id)
     {
         $this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
         $this->db->from('tbl_pegawai as a');
@@ -151,10 +151,10 @@ class Mod_sparepart extends CI_Model
         return $data->result();
     }
 
-    function get_pegawai($id)
+    function get_sparepart($id)
     {
-        $this->db->where('nip', $id);
-        return $this->db->get('tbl_pegawai')->row();
+        $this->db->where('id_barang', $id);
+        return $this->db->get('tbl_wh_barang')->row();
     }
 
     function edit_submenu($id)
@@ -175,21 +175,15 @@ class Mod_sparepart extends CI_Model
         return $insert;
     }
 
-    function updatepegawai($nip, $data)
+    function updatesparepart($id, $data)
     {
-        $this->db->where('nip', $nip);
-        $this->db->update('tbl_pegawai', $data);
+        $this->db->where('id_barang', $id);
+        $this->db->update('tbl_wh_barang', $data);
     }
-    function getImage($nip)
+
+    function deletesparepart($id, $table)
     {
-        $this->db->select('image');
-        $this->db->from('tbl_pegawai');
-        $this->db->where('nip', $nip);
-        return $this->db->get();
-    }
-    function deletepegawai($id, $table)
-    {
-        $this->db->where('nip', $id);
+        $this->db->where('id_barang', $id);
         $this->db->delete($table);
     }
 }

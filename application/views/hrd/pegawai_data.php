@@ -16,7 +16,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="tabel1" class="table table-bordered table-striped table-hover">
+                        <table id="tabel-pegawai" class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr class="bg-info">
                                     <th>No</th>
@@ -104,7 +104,7 @@ var table;
 $(document).ready(function() {
 
     //datatables
-    table = $("#tabel1").DataTable({
+    table = $("#tabel-pegawai").DataTable({
         "responsive": true,
         "autoWidth": false,
         "language": {

@@ -57,7 +57,7 @@ class Sparepart extends MY_Controller
                 $row[] = $pel1->view_level;
                 $row[] = $pel1->edit_level;
                 $row[] = $pel1->delete_level;
-                $row[] = $pel1->id_level;
+                $row[] = $submenu->id_barang;
                 $data[] = $row;
             }
         }
@@ -74,18 +74,18 @@ class Sparepart extends MY_Controller
 
 
 
-    public function viewpegawai()
+    public function viewsparepart()
     {
-        $id = $this->input->post('id');
-        $data['data_table'] = $this->Mod_pegawai->view_pegawai($id);
+        $id = $this->input->post('id_barang');
+        $data['data_table'] = $this->Mod_sparepeart->view_sparepart($id);
 
-        $this->load->view('hrd/view', $data);
+        $this->load->view('warehouse/view', $data);
     }
 
-    public function editpegawai($id)
+    public function editsparepart($id)
     {
 
-        $data = $this->Mod_pegawai->get_pegawai($id);
+        $data = $this->Mod_sparepart->get_sparepart($id);
         echo json_encode($data);
     }
 
@@ -120,40 +120,27 @@ class Sparepart extends MY_Controller
     {
 
         //$this->_validate();
-        $nip = $this->input->post('nip');
+        $id = $this->input->post('id_barang');
         $data  = array(
-
-            'nama_depan'    => $this->input->post('nama_depan'),
-            'nama_belakang'    => $this->input->post('nama_belakang'),
-            'departement'    => $this->input->post('departement'),
-            'jabatan'        => $this->input->post('jabatan'),
-            'status_kerja'    => $this->input->post('status_kerja'),
-            'tgl_masuk'        => $this->input->post('tgl_masuk'),
-            'tempat_lahir'    => $this->input->post('tempat_lahir'),
-            'tgl_lahir'        => $this->input->post('tgl_lahir'),
-            'agama'            => $this->input->post('agama'),
-            'status_nikah'    => $this->input->post('status_nikah'),
-            'pendidikan'    => $this->input->post('pendidikan'),
-            'alamat'        => $this->input->post('alamat'),
-            'kodepos'        => $this->input->post('kodepos'),
-            'no_hp'            => $this->input->post('no_hp'),
-            'status_nikah'    => $this->input->post('status_nikah'),
-            'jamsostek'        => $this->input->post('jamsostek'),
-            'tinggi'        => $this->input->post('tinggi'),
-            'berat'            => $this->input->post('berat'),
-            'darah'            => $this->input->post('darah'),
-            's_kawin'        => $this->input->post('s_kawin'),
-            'no_ktp'        => $this->input->post('no_ktp'),
-            'npwp'            => $this->input->post('npwp'),
-            'catatan1'        => $this->input->post('catatan1')
+            'no_part'   => $this->input->post('no_part'),
+            'nama_part' => $this->input->post('nama_part'),
+            'hrg_awal'  => $this->input->post('hrg_awal'),
+            'hrg_1'     => $this->input->post('hrg_1'),
+            'hrg_2'     => $this->input->post('hrg_2'),
+            'satuan'    => $this->input->post('satuan'),
+            'kelompok'  => $this->input->post('kelompok'),
+            'type'      => $this->input->post('type'),
+            'lokasi'    => $this->input->post('lokasi'),
+            'kategori'  => $this->input->post('kategori'),
+            'ket'       => $this->input->post('ket')
         );
-        $this->Mod_pegawai->updatepegawai($nip, $data);
+        $this->Mod_sparepart->updatesparepart($id, $data);
         echo json_encode(array("status" => TRUE));
     }
     public function delete()
     {
-        $nip = $this->input->post('nip');
-        $this->Mod_pegawai->deletepegawai($nip, 'tbl_pegawai');
+        $id = $this->input->post('id_barang');
+        $this->Mod_sparepart->deletesparepart($id, 'tbl_wh_barang');
         $data['status'] = TRUE;
         echo json_encode($data);
     }
