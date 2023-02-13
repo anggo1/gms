@@ -12,7 +12,6 @@ class Sparepart extends MY_Controller
         parent::__construct();
         $this->load->model(array('Mod_sparepart', 'Mod_menu'));
         $this->load->model(array('Mod_userlevel'));
-        $this->load->model(array('Mod_pegawai'));
     }
 
     public function index()
@@ -24,15 +23,22 @@ class Sparepart extends MY_Controller
         $data['dataType'] = $this->Mod_sparepart->select_type();
         $data['dataKategori'] = $this->Mod_sparepart->select_kategori();
         $data['dataKelompok'] = $this->Mod_sparepart->select_kelompok();
+		echo show_my_modal('warehouse/modals/modal_tambah_part', 'tambah-sparepart', $data, ' modal-lg');
         $this->template->load('layoutbackend', 'warehouse/sparepart_data', $data);
     }
 
     public function ajax_list()
     {
 
-        $get_id = $this->Mod_pegawai->get_by_nama('Pegawai');
+        $link=$this->uri->segment(1);
         $idlevel = $this->session->userdata['id_level'];
-        $viewLevel = $this->Mod_pegawai->select_by_level($idlevel, $get_id);
+        $get_id = $this->Mod_sparepart->get_by_nama($link);
+        foreach ($get_id as $idnye){
+            $row1 = array();
+            $row1[] = $idnye->id_submenu;
+            $id_sub=$idnye->id_submenu;
+        }
+        $viewLevel = $this->Mod_sparepart->select_by_level($idlevel, $id_sub);
 
         foreach ($viewLevel as $pel1) {
             $row1 = array();
@@ -42,22 +48,34 @@ class Sparepart extends MY_Controller
             $list = $this->Mod_sparepart->get_datatables();
             $data = array();
             $no = $_POST['start'];
-            foreach ($list as $submenu) {
+            foreach ($list as $p) {
                 $no++;
                 $row = array();
                 $row[] = $no;
-                $row[] = $submenu->no_part;
-                $row[] = $submenu->nama_part;
-                $row[] = $submenu->stok;
-                $row[] = $submenu->hrg_awal;
-                $row[] = $submenu->hrg_1;
-                $row[] = $submenu->lokasi;
-                $row[] = $submenu->kategori;
-                $row[] = $pel1->add_level;
-                $row[] = $pel1->view_level;
-                $row[] = $pel1->edit_level;
-                $row[] = $pel1->delete_level;
-                $row[] = $submenu->id_barang;
+                $row[] = $p->no_part;
+                $row[] = $p->nama_part;
+                $row[] = $p->stok;
+                $row[] = $p->hrg_awal;
+                $row[] = $p->lokasi;
+                $row[] = $p->kategori;
+                if($pel1->edit_level=="Y" && $pel1->delete_level=="Y"){
+                    $row[]='<button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-part ion-android-close ion-lg" title="Delete" data-toggle="modal" data-target="#hapusPart" data-id="'.$p->id_barang.'">
+                    </button>';
+                }
+                if($pel1->edit_level=="Y" && $pel1->delete_level=="N"){
+                    $row[]='<button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
+                    </button>';
+                }else{
+                    $row[]='
+                    <button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
+                    </button>';
+                }
                 $data[] = $row;
             }
         }
@@ -82,67 +100,77 @@ class Sparepart extends MY_Controller
         $this->load->view('warehouse/view', $data);
     }
 
-    public function editsparepart($id)
+    public function prosesTsparepart()
     {
+        $this->form_validation->set_rules('no_part', 'No Part', 'trim|required');
+        $this->form_validation->set_rules('nama_part', 'Nama Barang', 'trim|required');
 
-        $data = $this->Mod_sparepart->get_sparepart($id);
-        echo json_encode($data);
-    }
+        $data     = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->Mod_sparepart->insertSparepart($data);
 
-    public function insert()
-    {
-        $this->_validate();
-        $save  = array(
-            'nama_submenu'    => $this->input->post('nama_submenu'),
-            'link'      => $this->input->post('link'),
-            'icon'       => $this->input->post('icon'),
-            'id_menu'      => $this->input->post('id_menu'),
-            'is_active' => $this->input->post('is_active'),
-            'urutan'     => $this->input->post('urutan')
-        );
-        $this->Mod_submenu->insertsubmenu("tbl_submenu", $save);
-        $insert_id = $this->db->insert_id();
-        /*$nama_submenu = $this->input->post('nama_submenu');
- $get_id= $this->Mod_submenu->get_by_nama($nama_submenu);*/
-        $id_level = $this->session->userdata['id_level'];
-        $levels = $this->Mod_userlevel->getAll()->result();
-        foreach ($levels as $row) {
-            $data = array(
-                'id_submenu' => $insert_id,
-                'id_level'   => $row->id_level,
-            );
-            $this->Mod_submenu->insert_akses_submenu("tbl_akses_submenu", $data);
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
         }
-        echo json_encode(array("status" => TRUE));
-    }
 
-    public function update()
-    {
-
-        //$this->_validate();
-        $id = $this->input->post('id_barang');
-        $data  = array(
-            'no_part'   => $this->input->post('no_part'),
-            'nama_part' => $this->input->post('nama_part'),
-            'hrg_awal'  => $this->input->post('hrg_awal'),
-            'hrg_1'     => $this->input->post('hrg_1'),
-            'hrg_2'     => $this->input->post('hrg_2'),
-            'satuan'    => $this->input->post('satuan'),
-            'kelompok'  => $this->input->post('kelompok'),
-            'type'      => $this->input->post('type'),
-            'lokasi'    => $this->input->post('lokasi'),
-            'kategori'  => $this->input->post('kategori'),
-            'ket'       => $this->input->post('ket')
-        );
-        $this->Mod_sparepart->updatesparepart($id, $data);
-        echo json_encode(array("status" => TRUE));
+        echo json_encode($out);
     }
-    public function delete()
+    public function updateSparepart() {
+		$id 				= trim($_POST['id']);
+        $data['dataSatuan'] = $this->Mod_sparepart->select_satuan();
+        $data['dataType'] = $this->Mod_sparepart->select_type();
+        $data['dataKategori'] = $this->Mod_sparepart->select_kategori();
+        $data['dataKelompok'] = $this->Mod_sparepart->select_kelompok();
+		$data['dataPart'] = $this->Mod_sparepart->select_by_id_part($id);
+
+		echo show_my_modal('warehouse/modals/modal_tambah_part', 'update-sparepart', $data, ' modal-lg');
+	}
+
+	public function prosesUsparepart() {
+		
+		$this->form_validation->set_rules('no_part', 'no Part', 'trim|required');
+		$this->form_validation->set_rules('nama_part', 'Nama Barang', 'trim|required');
+
+		$data 	= $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_sparepart->updateSparepart($data);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_ok_msg('Data Berhasil diupdate', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_err_msg('Data Gagal diupdate', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
+	}
+
+    public function deleteSparepart()
     {
-        $id = $this->input->post('id_barang');
-        $this->Mod_sparepart->deletesparepart($id, 'tbl_wh_barang');
-        $data['status'] = TRUE;
-        echo json_encode($data);
+        $id = $_POST['id'];
+        $result = $this->Mod_sparepart->deletePart($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_del_msg('Deleted', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
     }
 
     public function download()

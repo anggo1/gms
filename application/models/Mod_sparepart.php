@@ -5,8 +5,8 @@ class Mod_sparepart extends CI_Model
 {
 
     var $table = 'tbl_wh_barang';
-    var $column_search = array('a.no_part');
-    var $column_order = array('null', 'a.no_part');
+    var $column_search = array('a.no_part','a.nama_part');
+    var $column_order = array('null', 'a.no_part','nama_part');
     var $order = array('id_barang' => 'desc'); // default order 
 
     public function __construct()
@@ -85,7 +85,7 @@ class Mod_sparepart extends CI_Model
         $this->db->from('tbl_submenu');
         $this->db->where('link', $link);
         $query = $this->db->get();
-        return $query->row();
+        return $query->result();
     }
     function getAll()
     {
@@ -93,16 +93,22 @@ class Mod_sparepart extends CI_Model
         //$this->db->join('tbl_menu b','a.id_menu=b.id_menu');
         return $this->db->get('tbl_wh_barang a');
     }
-    function select_by_level($idlevel, $get_id)
+    function select_by_id_part($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_wh_barang');
+        $this->db->where('tbl_wh_barang.id_barang=',$id);
+        $data = $this->db->get();
+        return $data->result();
+    }
+    function select_by_level($idlevel, $id_sub)
     {
         $this->db->select('*');
         $this->db->from('tbl_akses_submenu');
         //$this->db->join('tbl_akses_submenu','tbl_akses_submenu.id_submenu=tbl_akses_menu.id_menu','inner');
-        $this->db->where('tbl_akses_submenu.id_level=1');
-        $this->db->where('tbl_akses_submenu.id_submenu=42');
-
+        $this->db->where('tbl_akses_submenu.id_level=',$idlevel);
+        $this->db->where('tbl_akses_submenu.id_submenu=',$id_sub);
         $data = $this->db->get();
-
         return $data->result();
     }
     public function select_satuan()
@@ -150,6 +156,40 @@ class Mod_sparepart extends CI_Model
 
         return $data->result();
     }
+    function insertSparepart($data)
+    {
+        $sql = "INSERT INTO tbl_wh_barang SET
+        id_barang   ='',
+        no_part     ='".$data['no_part']."',
+        nama_part   ='".$data['nama_part']."',
+        satuan      ='".$data['satuan']."',
+        kelompok    ='".$data['kelompok']."',
+        type        ='".$data['type']."',
+        lokasi      ='".$data['lokasi']."',
+        kategori    ='".$data['kategori']."',
+        ket         ='".$data['ket']."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+    function updateSparepart( $data)
+    {
+        $sql = "UPDATE tbl_wh_barang SET
+        no_part     ='".$data['no_part']."',
+        nama_part   ='".$data['nama_part']."',
+        satuan      ='".$data['satuan']."',
+        type        ='".$data['type']."',
+        kelompok    ='".$data['kelompok']."',
+        lokasi      ='".$data['lokasi']."',
+        kategori    ='".$data['kategori']."',
+        ket         ='".$data['ket']."'
+        WHERE id_barang='".$data['id_barang']."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
 
     function get_sparepart($id)
     {
@@ -175,16 +215,13 @@ class Mod_sparepart extends CI_Model
         return $insert;
     }
 
-    function updatesparepart($id, $data)
+    function deletePart($id)
     {
-        $this->db->where('id_barang', $id);
-        $this->db->update('tbl_wh_barang', $data);
-    }
+        $sql = "DELETE FROM tbl_wh_barang WHERE id_barang='{$id}'";
 
-    function deletesparepart($id, $table)
-    {
-        $this->db->where('id_barang', $id);
-        $this->db->delete($table);
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
     }
 }
 
