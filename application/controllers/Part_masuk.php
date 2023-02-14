@@ -27,9 +27,10 @@ class Part_masuk extends MY_Controller
 		foreach ($list as $pel) {
 			$no++;
 			$row = array();
-			$row[] = "<button type='button' class='btn btn-sm btn-outline-success' onClick=selectPart('$pel->id_barang','$pel->no_part')><i class='fa fa-check'></i></button>";
+			$row[] = "<button type='button' class='btn btn-sm btn-outline-success' onClick=selectPart('$pel->id_barang')><i class='fa fa-check'></i></button>";
 			$row[] = $pel->no_part;
 			$row[] = $pel->nama_part;
+			$row[] = $pel->id_barang;
 			$data[] = $row; 
 
 		}
@@ -43,17 +44,22 @@ class Part_masuk extends MY_Controller
 		//output to json format
 		echo json_encode($output);
 	}
-
-	public function prosesCutiPegawai()
+	public function cariKode($id)
 	{
-		$this->form_validation->set_rules('nip', 'NIP', 'trim|required');
+	$data = $this->Mod_part_masuk->get_part($id);
+	echo json_encode($data);
+	}
+
+	public function prosesPartmasuk()
+	{
+		$this->form_validation->set_rules('date1', 'Tanggal Masuk', 'trim|required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->Mod_cuti->insert_cutiPegawai($data);
+			$result = $this->Mod_part_masuk->insert_part($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_ok_msg('Data Cuti Telah ditambahkan!', '20px');
+				$out['msg'] = show_ok_msg('Data  ditambahkan!', '20px');
 			} else {
 				$out['status'] = '';
 				$out['msg'] = show_ok_msg('Filed !', '20px');

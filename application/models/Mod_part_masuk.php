@@ -77,6 +77,11 @@ class Mod_part_masuk extends CI_Model
         //$this->db->join('tbl_menu as b','a.id_menu=b.id_menu');
         return $this->db->count_all_results();
     }
+    function get_part($id)
+    {
+        $this->db->where('id_barang',$id);
+        return $this->db->get('tbl_wh_barang')->row();
+    }
     public function select_kode_cuti()
     {
         $sql    = "SELECT * FROM tbl_hrd_kodecuti";
@@ -107,21 +112,48 @@ class Mod_part_masuk extends CI_Model
 
         return $this->db->affected_rows();
     }
-    public function insert_cutiPegawai($data)
+    public function insert_part($data)
     {
         $id = md5(DATE('ymdhms') . rand());
 
         $date = $data['date1'];
         $tgl1 = explode('-', $date);
-        $tgl_cuti = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
-
-        $sql = "INSERT INTO tbl_hrd_cuti_pegawai (id_cuti,nip,tgl_cuti,status_cuti,alasan) 
-		VALUES('',
-		'" . $data['nip'] . "',
-		'$tgl_cuti',
-		'" . $data['kode'] . "',
-		'" . $data['alasan'] . "'
-		)";
+        $tgl_masuk = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
+        $jml_part=$data['jumlah'];
+        $stok_awal=$data['stok_awal'];
+        $jml_a=$data['stok_a'];
+        $jml_p=$data['stok_p'];
+        
+        $status_barang = $data['status_part'];
+        if($status_barang=="AKTIF"){
+            $stok   =$stok_awal + $jml_part;
+            $stok_a =$jml_a + $jml_part;
+            $sql_stok = "UPDATE tbl_wh_barang SET
+            stok      ='$stok',
+            stok_a    ='$stok_a'
+            WHERE id_barang='".$data['id_barang']."'";
+            $this->db->query($sql_stok);
+        }
+        if($status_barang=="PASIF"){
+            $stok   =$stok_awal + $jml_part;
+            $stok_p =$jml_p + $jml_part;
+            $sql_stok = "UPDATE tbl_wh_barang SET
+            stok      ='$stok',
+            stok_p    ='$stok_p'
+            WHERE id_barang='".$data['id_barang']."'";
+        $this->db->query($sql_stok);
+        }
+        
+        $sql = "INSERT INTO tbl_wh_part_masuk SET
+        id_masuk    ='',
+        id_barang   ='".$data['id_barang']."',
+        no_part     ='".$data['no_part']."',
+        status_po   ='".$data['status_po']."',
+        no_po       ='".$data['no_po']."',
+        tgl_masuk   ='$tgl_masuk',
+        jumlah      ='".$data['jumlah']."',
+        status_part ='".$data['status_part']."',
+        user        ='".$data['user']."'";
 
 
         $this->db->query($sql);
