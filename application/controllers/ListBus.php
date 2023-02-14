@@ -7,47 +7,80 @@ class ListBus extends MY_Controller
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model(array('body_repair_model/Mod_body'));
+        $this->load->model(array('body_repair_model/Mod_body', 'Mod_menu'));
 	}
 
 	public function index()
 	{
 		$this->load->helper('url');
-        $this->template->load('layoutbackend','body_repair/data_body');
+        $data['menu'] = $this->Mod_menu->getAll()->result();
+
+        $link=$this->uri->segment(1);
+        $idlevel = $this->session->userdata['id_level'];
+        $get_id = $this->Mod_body->get_by_nama($link);
+        foreach ($get_id as $idnye){
+            $row1 = array();
+            $row1[] = $idnye->id_submenu;
+            $id_sub=$idnye->id_submenu;
+        }
+        $data['viewLevel']  = $this->Mod_body->select_by_level($idlevel, $id_sub);
+        
+		echo show_my_modal('warehouse/modals/modal_tambah_body', 'tambah-body', $data, ' modal-lg');
+        $this->template->load('layoutbackend','warehouse/data_body', $data);
 		
 	}
 
 	 public function ajax_list()
     {
-		$idlevel= $this->session->userdata['id_level'];
-		 $viewLevel = $this->Mod_body->select_by_level($idlevel);
-		
-		 foreach ($viewLevel as $pel1) {
+		$link=$this->uri->segment(1);
+        $idlevel = $this->session->userdata['id_level'];
+        $get_id = $this->Mod_body->get_by_nama($link);
+        foreach ($get_id as $idnye){
             $row1 = array();
-            $row1[] = $pel1->id_submenu;
+            $row1[] = $idnye->id_submenu;
+            $id_sub=$idnye->id_submenu;
+        }
+        $viewLevel = $this->Mod_body->select_by_level($idlevel, $id_sub);
+
+		 foreach ($viewLevel as $b) {
+            $row1 = array();
+            $row1[] = $b->id_submenu;
 		
         ini_set('memory_limit','512M');
         set_time_limit(3600);
         $list = $this->Mod_body->get_datatables();
         $data = array();
         $no = $_POST['start'];
-        foreach ($list as $pel) {
+        foreach ($list as $bd) {
             $no++;
             $row = array();
-            $row[] = $pel->no_body;
-            $row[] = $pel->type;
-            $row[] = $pel->thn_rangka;
-            $row[] = $pel->thn_pembuatan;
-            $row[] = $pel->karoseri;
-            $row[] = $pel->warna;
-            $row[] = $pel->kelas;
-            $row[] = $pel->strip;
-            $row[] = $pel->keterangan.$pel1->add_level;
-            $row[] = '<button class="btn btn-sm btn-outline-primary update-datalaporan" data-id="'.$pel->no_body.'"><i class="glyphicon glyphicon-repeat"></i> Edit</button>
-				  <button class="btn btn-sm btn-outline-danger detail-datalaporan" data-id="'.$pel->no_body.'"><i class="glyphicon glyphicon-info-sign"></i> Detail</button>';
+            $row[] = $no;
+            $row[] = $bd->no_body;
+            $row[] = $bd->type;
+            $row[] = $bd->thn_rangka;
+            $row[] = $bd->thn_pembuatan;
+            $row[] = $bd->karoseri;
+            $row[] = $bd->warna;
+            $row[] = $bd->kelas;
+            $row[] = $bd->strip;
+            $row[] = $bd->keterangan;
+            if($b->edit_level=="Y" && $b->delete_level=="Y"){
+                $row[]='
+                <button class="btn btn-sm btn-outline-success update-body ion-compose ion-lg" title="Edit" data-id="'.$bd->no_body.'">
+                </button>
+                <button class="btn btn-sm btn-outline-danger delete-body ion-android-close ion-lg" title="Delete" data-toggle="modal" data-target="#hapusBody" data-id="'.$bd->no_body.'">
+                </button>';
+            }
+            if($b->edit_level=="Y" && $b->delete_level=="N"){
+                $row[]='
+                <button class="btn btn-sm btn-outline-success update-body ion-compose ion-lg" title="Edit" data-id="'.$bd->no_body.'">
+                </button>';
+            }else{
+                $row[]='';
+            }
             $data[] = $row;
         }
-}
+    }
         $output = array(
                         "draw" => $_POST['draw'],
                         "recordsTotal" => $this->Mod_body->count_all(),
@@ -58,79 +91,85 @@ class ListBus extends MY_Controller
         echo json_encode($output);
     }
 
-    public function insert()
+    public function viewbody()
     {
-        $this->_validate();
-        $kode= date('ymsi');
-		$save  = array(
-			'no_body'  	=> $kode,
-            'nama'			=> $this->input->post('nama'),
-            'harga'  		=> $this->input->post('harga'),
-            'satuan'   		=> $this->input->post('satuan'),
-            'stok'   		=> $this->input->post('stok')
-        );
-            $this->Mod_body->insert_barang("tbl_bahan", $save);
-            echo json_encode(array("status" => TRUE));
+        $id = $this->input->post('id_barang');
+        $data['data_table'] = $this->Mod_body->view_body($id);
+
+        $this->load->view('warehouse/view', $data);
     }
 
-    public function update()
+    public function prosesTbody()
     {
-        $this->_validate();
-        $no_body      = $this->input->post('no_body');
-        $save  = array(
-            'type' => $this->input->post('type'),
-            'harga'      => $this->input->post('harga'),
-            'satuan'      => $this->input->post('satuan'),
-            'stok'      => $this->input->post('stok')
-        );
-        $this->Mod_body->update_barang($no_bahan, $save);
-        echo json_encode(array("status" => TRUE));
-    }
+        $this->form_validation->set_rules('no_body', 'No Body', 'trim|required');
 
-    public function edit_bus($no_body)
-    {
-            $data = $this->Mod_body->get_bus($no_body);
-            echo json_encode($data);
-    }
+        $data     = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->Mod_body->insertBody($data);
 
-    public function delete()
-    {
-        $no_body = $this->input->post('no_body');
-        $this->Mod_body->delete_bus($no_body, 'body_detail');        
-        echo json_encode(array("status" => TRUE));
-    }
-    private function _validate()
-    {
-        $data = array();
-        $data['error_string'] = array();
-        $data['inputerror'] = array();
-        $data['status'] = TRUE;
-
-        if($this->input->post('nama') == '')
-        {
-            $data['inputerror'][] = 'nama';
-            $data['error_string'][] = 'Nama Barang Tidak Boleh Kosong';
-            $data['status'] = FALSE;
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
         }
 
-        if($this->input->post('harga') == '')
-        {
-            $data['inputerror'][] = 'harga';
-            $data['error_string'][] = 'Harga Tidak Boleh Kosong';
-            $data['status'] = FALSE;
-        }
-
-        if($this->input->post('satuan') == '')
-        {
-            $data['inputerror'][] = 'satuan';
-            $data['error_string'][] = 'Satuan Tidak Boleh Kosong';
-            $data['status'] = FALSE;
-        }
-
-        if($data['status'] === FALSE)
-        {
-            echo json_encode($data);
-            exit();
-        }
+        echo json_encode($out);
     }
+    public function updateBody() {
+		$id 				= trim($_POST['id']);
+		$data['dataBody'] = $this->Mod_body->select_by_id_body($id);
+
+		echo show_my_modal('warehouse/modals/modal_tambah_body', 'update-body', $data, ' modal-lg');
+	}
+
+	public function prosesUbody() {
+		
+		$this->form_validation->set_rules('no_body', 'No Body', 'trim|required');
+
+		$data 	= $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_body->updateBody($data);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_ok_msg('Data Berhasil diupdate', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_err_msg('Data Gagal diupdate', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
+	}
+
+    public function deleteBody()
+    {
+        $id = $_POST['id'];
+        $result = $this->Mod_body->deleteBody($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_del_msg('Deleted', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
+    public function cariKodeBody() {	
+        $kode	= $_GET['a'];
+            $cari	= $this->Mod_body->select_kodeBody($kode)->result();
+            echo json_encode($cari);
+           
+        }
+
 }

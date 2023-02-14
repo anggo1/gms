@@ -5,8 +5,8 @@ class Mod_sparepart extends CI_Model
 {
 
     var $table = 'tbl_wh_barang';
-    var $column_search = array('a.no_part','a.nama_part');
-    var $column_order = array('null', 'a.no_part','nama_part');
+    var $column_search = array('a.no_part','a.nama_part','a.stok','a.lokasi','a.satuan','a.type','a.kategori','a.kelompok');
+    var $column_order = array('null', 'a.no_part','a.nama_part','a.stok','a.lokasi','a.satuan','a.type','a.kategori','a.kelompok');
     var $order = array('id_barang' => 'desc'); // default order 
 
     public function __construct()
@@ -17,12 +17,12 @@ class Mod_sparepart extends CI_Model
     private function _get_datatables_query($term = '')
     {
 
-        $this->db->select('a.*,b.kategori');
+        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok');
         $this->db->from('tbl_wh_barang as a');
-        $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori');
-        //$this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan');
-        //$this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type');
-        //$this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok');
+        $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori', 'left');
+        $this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan', 'left');
+        $this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type','left');
+        $this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok','left');
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column 

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mod_body extends CI_Model
 {
-	var $table = 'body_detail';
+	var $table = 'tbl_wh_body';
 	var $column_search = array('no_body','type','thn_rangka','thn_pembuatan','karoseri','warna','kelas','strip','keterangan'); 
 	var $column_order = array('no_body','type','thn_rangka','thn_pembuatan','karoseri','warna','kelas','strip','keterangan');
 	var $order = array('no_body' => 'desc'); 
@@ -16,7 +16,7 @@ class Mod_body extends CI_Model
 		private function _get_datatables_query()
 	{
 		
-		$this->db->from('body_detail');
+		$this->db->from('tbl_wh_body');
 		$i = 0;
 
 	foreach ($this->column_search as $item) // loop column 
@@ -33,7 +33,7 @@ class Mod_body extends CI_Model
 	{
 		$this->db->or_like($item, $_POST['search']['value']);
 		$this->db->or_like($item, $_POST['search']['value']);
-	}
+	} 
 
 		if(count($this->column_search) - 1 == $i) //last loop
 		$this->db->group_end(); //close bracket
@@ -70,40 +70,88 @@ class Mod_body extends CI_Model
 
 	function count_all()
 	{
-		$this->db->from('body_detail');
+		$this->db->from('tbl_wh_body');
 		return $this->db->count_all_results();
 	}
-	function select_by_level($idlevel) {
-		$this->db->select('tbl_akses_submenu.*', FALSE);
-		$this->db->from('tbl_akses_submenu');
-        $this->db->where('tbl_akses_submenu.id_level=',$idlevel);
-
-		$data = $this->db->get();
-
-		return $data->result();
-	}
-	function insert_bus($table, $data)
+	
+	public function get_by_nama($link)
     {
-        $insert = $this->db->insert($table, $data);
-        return $insert;
+        $this->db->select('id_submenu');
+        $this->db->from('tbl_submenu');
+        $this->db->where('link', $link);
+        $query = $this->db->get();
+        return $query->result();
     }
-
-        function update_bus($no_body, $data)
+    function select_by_level($idlevel, $id_sub)
     {
-        $this->db->where('no_body', $no_body);
-        $this->db->update('body_detail', $data);
+        $this->db->select('*');
+        $this->db->from('tbl_akses_submenu');
+        //$this->db->join('tbl_akses_submenu','tbl_akses_submenu.id_submenu=tbl_akses_menu.id_menu','inner');
+        $this->db->where('tbl_akses_submenu.id_level=',$idlevel);
+        $this->db->where('tbl_akses_submenu.id_submenu=',$id_sub);
+        $data = $this->db->get();
+        return $data->result();
+    }
+	function select_by_id_body($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_wh_body');
+        $this->db->where('tbl_wh_body.no_body=',$id);
+        $data = $this->db->get();
+        return $data->result();
+    }
+	function insertBody($data)
+    {
+        $sql = "INSERT INTO tbl_wh_body SET
+        no_body		='".$data['no_body']."',
+        type 		='".$data['type']."',
+        thn_rangka  ='".$data['thn_rangka']."',
+        thn_pembuatn='".$data['thn_pembuatan']."',
+        karoseri    ='".$data['karoseri']."',
+        warna		='".$data['warna']."',
+        kelas	    ='".$data['kelas']."',
+        strip       ='".$data['strip']."',
+        keterangan  ='".$data['keterangan']."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+    function updateBody( $data)
+    {
+        $sql = "UPDATE tbl_wh_body SET
+        type 		='".$data['type']."',
+        thn_rangka  ='".$data['thn_rangka']."',
+        thn_pembuatan='".$data['thn_pembuatan']."',
+        karoseri    ='".$data['karoseri']."',
+        warna		='".$data['warna']."',
+        kelas	    ='".$data['kelas']."',
+        strip       ='".$data['strip']."',
+        keterangan  ='".$data['keterangan']."'
+        WHERE no_body='".$data['no_body']."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
     }
 
         function get_bus($no_body)
     {   
         $this->db->where('no_body',$no_body);
-        return $this->db->get('body_detail')->row();
+        return $this->db->get('tbl_wh_body')->row();
     }
 
-        function delete_bus($no_body, $table)
+	function deleteBody($id)
     {
-        $this->db->where('no_body', $no_body);
-        $this->db->delete($table);
+        $sql = "DELETE FROM tbl_wh_body WHERE no_body='{$id}'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
     }
+	public function select_kodeBody($kode) {
+        $query= $this->db->get_where('tbl_wh_body',array('no_body'=>$kode));
+        return $query;
+	}
 
 }

@@ -23,13 +23,23 @@ class Sparepart extends MY_Controller
         $data['dataType'] = $this->Mod_sparepart->select_type();
         $data['dataKategori'] = $this->Mod_sparepart->select_kategori();
         $data['dataKelompok'] = $this->Mod_sparepart->select_kelompok();
+
+        $link=$this->uri->segment(1);
+        $idlevel = $this->session->userdata['id_level'];
+        $get_id = $this->Mod_sparepart->get_by_nama($link);
+        foreach ($get_id as $idnye){
+            $row1 = array();
+            $row1[] = $idnye->id_submenu;
+            $id_sub=$idnye->id_submenu;
+        }
+        $data['viewLevel']  = $this->Mod_sparepart->select_by_level($idlevel, $id_sub);
+        
 		echo show_my_modal('warehouse/modals/modal_tambah_part', 'tambah-sparepart', $data, ' modal-lg');
         $this->template->load('layoutbackend', 'warehouse/sparepart_data', $data);
     }
 
     public function ajax_list()
     {
-
         $link=$this->uri->segment(1);
         $idlevel = $this->session->userdata['id_level'];
         $get_id = $this->Mod_sparepart->get_by_nama($link);
@@ -55,13 +65,14 @@ class Sparepart extends MY_Controller
                 $row[] = $p->no_part;
                 $row[] = $p->nama_part;
                 $row[] = $p->stok;
-                $row[] = $p->hrg_awal;
                 $row[] = $p->lokasi;
+                $row[] = $p->satuan;
+                $row[] = $p->type_mesin;
                 $row[] = $p->kategori;
+                $row[] = $p->kelompok;
                 if($pel1->edit_level=="Y" && $pel1->delete_level=="Y"){
-                    $row[]='<button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
-                    </button>
-                    <button class="btn btn-sm btn-outline-primary update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
+                    $row[]='
+                    <button class="btn btn-sm btn-outline-success update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
                     </button>
                     <button class="btn btn-sm btn-outline-danger delete-part ion-android-close ion-lg" title="Delete" data-toggle="modal" data-target="#hapusPart" data-id="'.$p->id_barang.'">
                     </button>';
@@ -69,12 +80,10 @@ class Sparepart extends MY_Controller
                 if($pel1->edit_level=="Y" && $pel1->delete_level=="N"){
                     $row[]='<button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
                     </button>
-                    <button class="btn btn-sm btn-outline-primary update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
+                    <button class="btn btn-sm btn-outline-succeess update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
                     </button>';
                 }else{
-                    $row[]='
-                    <button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
-                    </button>';
+                    $row[]='';
                 }
                 $data[] = $row;
             }

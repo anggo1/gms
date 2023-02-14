@@ -5,7 +5,7 @@
     }
 
     table.dataTable td {
-        padding: 5px;
+        padding-bottom: 5px;
     }
 </style>
 <section class="content">
@@ -14,10 +14,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header bg-light">
-                        <h3 class="card-title"><i class="fa fa-list text-blue"></i> Data Spare Part</h3>
+                        <h3 class="card-title"><i class="fa fa-list text-blue"></i> Data Spare Part </h3>
                         <div class="text-right">
-                            <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-sparepart" title="Add Data"><i class="fas fa-plus"></i> Add</button>
-                            <a href="<?php echo base_url('Sparepart/download'); ?>" type="button" class="btn btn-sm btn-outline-info" id="dwn_sparepart" title="Download"><i class="fas fa-download"></i> Download</a>
+                        <?php foreach ($viewLevel as $l) {
+                            if ($l->add_level=='Y'){
+                            echo '<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-sparepart" title="Add Data"><i class="fas fa-plus"></i> Add</button>
+                            <a href="'.base_url('Sparepart/download').'" type="button" class="btn btn-sm btn-outline-info" id="dwn_sparepart" title="Download"><i class="fas fa-download"></i> Download</a>';
+                            }}
+                            ?>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -29,9 +33,11 @@
                                     <th>No Part</th>
                                     <th>Nama Part</th>
                                     <th>Stok</th>
-                                    <th>Harga</th>
                                     <th>Lokasi</th>
+                                    <th>Satuan</th>
+                                    <th>Type</th>
                                     <th>Kategori</th>
+                                    <th>Kelompok</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -39,7 +45,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div><div id="tempat-modal"></div>
+                <div id="tempat-modal"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -48,24 +55,7 @@
 show_my_confirm('hapusPart', 'hapus-part', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 ?>
 
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title ">Detail Sparepart</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-center" id="md_def">
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-</div>
-<!-- /.modal -->
+ 
 
 
 <script type="text/javascript">
