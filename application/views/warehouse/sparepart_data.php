@@ -205,13 +205,15 @@ $(document).on("click", ".update-sparepart", function() {
 
     $(document).on("click", ".cetak-label", function() {
 		var id = $(this).attr("data-id");
+		var idc = $(this).attr("data-cetak");
 		
 		$.ajax({
 			method: "POST",
 			url: "<?php echo base_url('Sparepart/viewsparepart'); ?>",
-			data: "id=" +id
+			data: "id=" +id+"&idc=" +idc
 		})
 		.done(function(data) {
+            table.ajax.reload();
 			$('#tempat-modal').html(data);
 			$('#cetak-label').modal('show');
 		})

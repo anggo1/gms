@@ -1,43 +1,5 @@
 <?php
-date_default_timezone_set('Asia/Jakarta');
 
-function tgl_indonesia($date)
-{
-	/* array hari dan bulan */
-	$nama_hari  = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
-
-	$nama_bulan = array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober",
-	                    "November","Desember");
-
-	/*  Memisahkan format tanggal, bulan, tahun dengan substring */
-	$tahun   = substr($date, 0, 4);
-	$bulan   = substr($date, 5, 2);
-	$tanggal = substr($date, 8, 2);
-	$waktu   = substr($date, 11, 5);
-
-	//w Urutan hari dalam seminggu
-	$hari    = date("w", strtotime($date));
-
-	$result  = $nama_hari[$hari] . ", " .$tanggal. " " .$nama_bulan[(int)$bulan-1]. " " .$tahun. " " .$waktu. " WIB";
-	//keterangan (int)$bulan-1 karena array dimulai dari index ke 0 maka bulan-1
-	return $result;
-}
-function tgl_indo($date)
-{
-	/* array hari dan bulan */
-
-	$nama_bulan = array("Jan","Feb","Mar","Apr","Mei","Juni","Juli","Agus","Sept","Okt",
-	                    "Nov","Des");
-
-	/*  Memisahkan format tanggal, bulan, tahun dengan substring */
-	$tahun   = substr($date, 0, 4);
-	$bulan   = substr($date, 5, 2);
-	$tanggal = substr($date, 8, 2);
-
-	$result  = $tanggal. " " .$nama_bulan[(int)$bulan-1]. " " .$tahun;
-	//keterangan (int)$bulan-1 karena array dimulai dari index ke 0 maka bulan-1
-	return $result;
-}
 if (! function_exists('hitung_umur')) {
     function hitung_umur($tgl)
     {
@@ -174,7 +136,6 @@ if(!function_exists('hash_verified'))
 						      </div>
 						    </div>
 					    </div>
-					  </div>
 					</div>';
 		}
 	}

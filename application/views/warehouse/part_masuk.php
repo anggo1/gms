@@ -11,7 +11,7 @@
 				<section class="content">
 			    	<div class="container-fluid">
 			    		<div class="row">
-			    			<div class="col-md-8">
+			    			<div class="col-md-7">
 			    				<div class="card card-default">
 			    					<!-- /.card-header -->
 			    					<div class="modal-content">
@@ -104,7 +104,7 @@
 			    				</div>
 			    			</div>
 
-							<div class="col-md-4" id="detailPart" hidden="">
+							<div class="col-md-5" id="detailPart" hidden="">
             <div class="card card-default">
              <div class="modal-content text-blue">
 			    <div class="modal-header text-blue">	

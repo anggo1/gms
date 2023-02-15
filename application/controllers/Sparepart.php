@@ -73,18 +73,18 @@ class Sparepart extends MY_Controller
                 $row[] = $p->kelompok;
                 if($pel1->edit_level=="Y" && $pel1->delete_level=="Y"){
                     $row[]='
-                    <button class="btn btn-sm btn-outline-primary cetak-label" title="Cetak" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
+                    <button class="btn btn-sm btn-outline-primary cetak-label" title="Cetak" data-cetak="'.$p->no_part.'" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-success update-sparepart" title="Edit" data-id="'.$p->id_barang.'"><i class="ion-compose ion-lg"></i>
+                    <button class="btn btn-sm btn-outline-success update-sparepart" title="Edit" data-id="'.$p->id_barang.'"><i class="fa fa-edit"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-danger delete-part ion-android-close ion-lg" title="Delete" data-toggle="modal" data-target="#hapusPart" data-id="'.$p->id_barang.'">
-                    </button>';
+                    <button class="btn btn-sm btn-outline-danger delete-part" title="Delete" data-toggle="modal" data-target="#hapusPart" data-id="'.$p->id_barang.'">
+                    <i class="fa fa-trash"></i></button>';
                 }
                 if($pel1->edit_level=="Y" && $pel1->delete_level=="N"){
                     $row[]='
-                    <button class="btn btn-sm btn-outline-primary cetak-label" title="View" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
+                    <button class="btn btn-sm btn-outline-primary cetak-label" title="View" data-cetak="'.$p->no_part.'" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-succeess update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
+                    <button class="btn btn-sm btn-outline-succeess update-sparepart" title="Edit" data-id="'.$p->id_barang.'"><i class="fa fa-edit"></i>
                     </button>';
                 }else{
                     $row[]='
@@ -118,16 +118,16 @@ class Sparepart extends MY_Controller
     public function viewsparepart()
     {
         $id 				= trim($_POST['id']);
+        $idc 				= trim($_POST['idc']);
 		$data['dataPart'] = $this->Mod_sparepart->view_sparepart($id);
-        foreach($data as $part){            
-        $qr['data'] = $part->no_part;
+
+        $qr['data'] = $idc;
         $qr['level'] = 'H';
         $qr['size'] = 450;
-        $qr['savename'] = FCPATH.'qr.png';
+        $qr['savename'] = './assets/img_qr/'.$idc.'.png';
         $qrnye=$this->ciqrcode->generate($qr);
-        }
 
-		echo show_my_modal('warehouse/modals/modal_cetak_label', 'cetak-label',$qrnye, $data, ' modal-xm');
+		echo show_my_modal('warehouse/modals/modal_cetak_label', 'cetak-label', $data,$qrnye, ' modal-xm');
     }
     
 

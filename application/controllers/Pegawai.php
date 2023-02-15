@@ -11,6 +11,7 @@ class Pegawai extends MY_Controller {
         $this->load->model(array('Mod_pegawai','Mod_menu'));
         $this->load->model(array('Mod_userlevel'));
         $this->load->helper('myfunction_helper');
+        $this->load->helper('tgl_indo_helper');
     }
 
     public function index()
@@ -45,7 +46,7 @@ class Pegawai extends MY_Controller {
             $row[] = $no;
             $row[] = $submenu->nip;
             $row[] = $submenu->nama_depan;
-            $row[] = tgl_indo($submenu->tgl_lahir);
+            $row[] = tglIndoPendek($submenu->tgl_lahir);
             $row[] = $submenu->pendidikan;
             $row[] = $submenu->jabatan;
             $row[] = $submenu->departement;
