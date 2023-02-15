@@ -79,7 +79,13 @@ class Mod_part_masuk extends CI_Model
     }
     function get_part($id)
     {
-        $this->db->where('id_barang',$id);
+        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok');
+        $this->db->from('tbl_wh_barang as a');
+        $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori', 'left');
+        $this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan', 'left');
+        $this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type', 'left');
+        $this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok','left');
+        $this->db->where('a.id_barang',$id);
         return $this->db->get('tbl_wh_barang')->row();
     }
     public function select_kode_cuti()

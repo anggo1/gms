@@ -145,12 +145,13 @@ class Mod_sparepart extends CI_Model
     }
     function view_sparepart($id)
     {
-        $this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
-        $this->db->from('tbl_pegawai as a');
-        $this->db->join('tbl_pendidikan as b', 'a.pendidikan=b.id_pendidikan');
-        $this->db->join('tbl_jabatan as c', 'a.jabatan=c.id_jabatan');
-        $this->db->join('tbl_departement as d', 'a.departement=d.id_departement');
-        $this->db->where('a.nip=', $id);
+        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok');
+        $this->db->from('tbl_wh_barang as a');
+        $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori', 'left');
+        $this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan', 'left');
+        $this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type', 'left');
+        $this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok','left');
+        $this->db->where('a.id_barang',$id);
 
         $data = $this->db->get();
 

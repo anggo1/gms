@@ -19,7 +19,7 @@
 						<div class="text-right">
 						<?php foreach ($viewLevel as $l) {
                             if ($l->add_level=='Y'){
-                            echo '<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-body" title="Add Data"><i class="fas fa-plus"></i> Add</button>';
+                            echo '<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-body" title="Add Data"><i class="fas fa-plus"></i> Tambah Data</button>';
                             }}
                             ?>
 						</div>

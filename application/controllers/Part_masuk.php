@@ -30,7 +30,6 @@ class Part_masuk extends MY_Controller
 			$row[] = "<button type='button' class='btn btn-sm btn-outline-success' onClick=selectPart('$pel->id_barang')><i class='fa fa-check'></i></button>";
 			$row[] = $pel->no_part;
 			$row[] = $pel->nama_part;
-			$row[] = $pel->id_barang;
 			$data[] = $row; 
 
 		}

@@ -12,6 +12,7 @@ class Sparepart extends MY_Controller
         parent::__construct();
         $this->load->model(array('Mod_sparepart', 'Mod_menu'));
         $this->load->model(array('Mod_userlevel'));
+        $this->load->library('ciqrcode');
     }
 
     public function index()
@@ -72,18 +73,23 @@ class Sparepart extends MY_Controller
                 $row[] = $p->kelompok;
                 if($pel1->edit_level=="Y" && $pel1->delete_level=="Y"){
                     $row[]='
-                    <button class="btn btn-sm btn-outline-success update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
+                    <button class="btn btn-sm btn-outline-primary cetak-label" title="Cetak" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-success update-sparepart" title="Edit" data-id="'.$p->id_barang.'"><i class="ion-compose ion-lg"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-danger delete-part ion-android-close ion-lg" title="Delete" data-toggle="modal" data-target="#hapusPart" data-id="'.$p->id_barang.'">
                     </button>';
                 }
                 if($pel1->edit_level=="Y" && $pel1->delete_level=="N"){
-                    $row[]='<button class="btn btn-sm btn-outline-success detail-sparepart ion-eye ion-lg" title="View" data-id="'.$p->id_barang.'">
+                    $row[]='
+                    <button class="btn btn-sm btn-outline-primary cetak-label" title="View" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-succeess update-sparepart ion-compose ion-lg" title="Edit" data-id="'.$p->id_barang.'">
                     </button>';
                 }else{
-                    $row[]='';
+                    $row[]='
+                    <button class="btn btn-sm btn-outline-primary cetak-label" title="View" data-id="'.$p->id_barang.'"><i class="fa fa-qrcode"></i>
+                    </button>';
                 }
                 $data[] = $row;
             }
@@ -98,16 +104,32 @@ class Sparepart extends MY_Controller
         echo json_encode($output);
     }
 
+    public function cetak_label() {
+        
+		$id 				= $_POST['id'];
+        $data['dataPart'] = $this->Mod_sparepart->cetak_label($id);
+        
+	echo json_encode($data);
+        //$data['dataqr'] = 'testah';
+        //$this->ciqrcode->generate($data);
 
-
-
+        echo show_my_print('warehouse/modals/modal_cetak_label', 'cetak-label', $data, ' modal-xm');
+	}
     public function viewsparepart()
     {
-        $id = $this->input->post('id_barang');
-        $data['data_table'] = $this->Mod_sparepeart->view_sparepart($id);
+        $id 				= trim($_POST['id']);
+		$data['dataPart'] = $this->Mod_sparepart->view_sparepart($id);
+        foreach($data as $part){            
+        $qr['data'] = $part->no_part;
+        $qr['level'] = 'H';
+        $qr['size'] = 450;
+        $qr['savename'] = FCPATH.'qr.png';
+        $qrnye=$this->ciqrcode->generate($qr);
+        }
 
-        $this->load->view('warehouse/view', $data);
+		echo show_my_modal('warehouse/modals/modal_cetak_label', 'cetak-label',$qrnye, $data, ' modal-xm');
     }
+    
 
     public function prosesTsparepart()
     {

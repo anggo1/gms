@@ -18,8 +18,7 @@
                         <div class="text-right">
                         <?php foreach ($viewLevel as $l) {
                             if ($l->add_level=='Y'){
-                            echo '<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-sparepart" title="Add Data"><i class="fas fa-plus"></i> Add</button>
-                            <a href="'.base_url('Sparepart/download').'" type="button" class="btn btn-sm btn-outline-info" id="dwn_sparepart" title="Download"><i class="fas fa-download"></i> Download</a>';
+                            echo '<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-sparepart" title="Add Data"><i class="fas fa-plus"></i> Tambah Data</button>';
                             }}
                             ?>
                         </div>
@@ -46,6 +45,7 @@
                         </table>
                     </div>
                 <div id="tempat-modal"></div>
+                <div id="modal-label"></div>
                 </div>
             </div>
         </div>
@@ -203,5 +203,18 @@ $(document).on("click", ".update-sparepart", function() {
             })
     })
 
+    $(document).on("click", ".cetak-label", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Sparepart/viewsparepart'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#cetak-label').modal('show');
+		})
+	})
 
 </script>
