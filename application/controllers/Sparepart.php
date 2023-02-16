@@ -113,7 +113,7 @@ class Sparepart extends MY_Controller
         //$data['dataqr'] = 'testah';
         //$this->ciqrcode->generate($data);
 
-        echo show_my_print('warehouse/modals/modal_cetak_label', 'cetak-label', $data, ' modal-xm');
+        echo show_my_print('warehouse/modals/modal_cetak_label', 'cetak-label', $data, ' modal-lg');
 	}
     public function viewsparepart()
     {
@@ -127,7 +127,7 @@ class Sparepart extends MY_Controller
         $qr['savename'] = './assets/img_qr/'.$idc.'.png';
         $qrnye=$this->ciqrcode->generate($qr);
 
-		echo show_my_modal('warehouse/modals/modal_cetak_label', 'cetak-label', $data,$qrnye, ' modal-xm');
+		echo show_my_modal('warehouse/modals/modal_cetak_label', 'cetak-label', $data, ' modal-lg');
     }
     
 
