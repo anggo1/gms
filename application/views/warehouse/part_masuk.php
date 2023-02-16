@@ -132,6 +132,10 @@
 							<td>Kelompok</td>
 							<td id="kategoritd"></td>
 						</tr>
+						<tr>
+							<td>Supplier</td>
+							<td id="suppliertd"></td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -229,6 +233,7 @@
 							document.getElementById('kelompoktd').innerHTML  = data.kelompok.bold();
 							document.getElementById('typetd').innerHTML      = data.type_mesin.bold();
 							document.getElementById('kategoritd').innerHTML  = data.kategori.bold();
+							document.getElementById('suppliertd').innerHTML  = data.nama_sup.bold();
 						},
 						error: function(jqXHR, textStatus, errorThrown) {
 							alert('Error get data from ajax');

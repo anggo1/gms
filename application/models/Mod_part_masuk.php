@@ -79,12 +79,13 @@ class Mod_part_masuk extends CI_Model
     }
     function get_part($id)
     {
-        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok');
+        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok,f.nama_sup');
         $this->db->from('tbl_wh_barang as a');
         $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori', 'left');
         $this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan', 'left');
         $this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type', 'left');
         $this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok','left');
+        $this->db->join('tbl_wh_supplier as f','f.id_supplier=a.supplier','left');
         $this->db->where('a.id_barang',$id);
         return $this->db->get('tbl_wh_barang')->row();
     }
@@ -95,20 +96,6 @@ class Mod_part_masuk extends CI_Model
 
 
         return $data->result();
-    }
-    public function select_all()
-    {
-        $this->db->select('pegawai.*', TRUE);
-        $this->db->select('posisi.*', FALSE);
-        $this->db->select('departement.*', FALSE);
-        $this->db->select('penempatan.*', FALSE);
-        $this->db->from('pegawai');
-        $this->db->join('posisi', 'posisi.id_posisi = pegawai.posisi', 'left');
-        $this->db->join('departement', 'departement.id_departement = pegawai.departement', 'left');
-        $this->db->join('penempatan', 'penempatan.id_penempatan = pegawai.penempatan', 'left');
-        //$this->db->where('status=','AKTIF');
-        $query_result = $this->db->get();
-        return $data = $query_result->result();
     }
     public function deleteCuti($id)
     {
@@ -165,16 +152,5 @@ class Mod_part_masuk extends CI_Model
         $this->db->query($sql);
 
         return $this->db->affected_rows();
-    }
-    public function cari_cuti($date = null, $date2 = null)
-    {
-        $this->db->select('a.*,b.nip,b.nama_depan,d.departement');
-        $this->db->from('tbl_hrd_cuti_pegawai as a');
-        $this->db->join('tbl_pegawai as b', 'a.nip=b.nip');
-        $this->db->join('tbl_hrd_departement as d', 'b.departement=d.id_departement');
-        $this->db->where('a.tgl_cuti BETWEEN "' . date($date) . '"AND"' . date($date2) . '"');
-        //$this->db->group_by('data_selesai_kirim.id_kirim');
-        $query_result = $this->db->get();
-        return $data = $query_result->result();
     }
 }

@@ -164,6 +164,32 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Supplier</label>
+                                                    <div class="col-sm-4">
+                                                        <select name="supplier" class="form-control">
+                                                            <option value="">Supplier...
+                                                            </option>
+                                                            <?php
+                                                            if (empty($part->supplier)) {
+                                                                foreach ($dataSupplier as $sp) {
+                                                            ?>
+                                                                    <option <?php echo $sp == $sp->id_supplier ? 'selected="selected"' : '' ?> value="<?php echo $sp->id_supplier ?>">
+                                                                        <?php echo $sp->nama_sup  ?><?php } ?>
+                                                                    </option>
+                                                                    <?php
+                                                                } else {
+                                                                    foreach ($dataSupplier as $sup) {          ?>
+                                                                        <option value="<?php echo $sup->id_supplier; ?>" <?php if ($sup->id_supplier == $part->supplier) {
+                                                                                                                                echo "selected='selected'";
+                                                                                                                            } ?>>
+                                                                            <?php echo $sup->nama_sup; ?>
+                                                                        </option>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                        </select>
+                                                    </div>
                                             <label class="col-sm-2 col-form-label">Lokasi</label>
                                             <div class="col-sm-4">
                                                 <input type="text" name="lokasi" id="lokasi" value="<?php if (!empty($part->lokasi)) {

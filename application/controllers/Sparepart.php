@@ -24,6 +24,7 @@ class Sparepart extends MY_Controller
         $data['dataType'] = $this->Mod_sparepart->select_type();
         $data['dataKategori'] = $this->Mod_sparepart->select_kategori();
         $data['dataKelompok'] = $this->Mod_sparepart->select_kelompok();
+        $data['dataSupplier'] = $this->Mod_sparepart->select_supplier();
 
         $link=$this->uri->segment(1);
         $idlevel = $this->session->userdata['id_level'];
@@ -160,6 +161,7 @@ class Sparepart extends MY_Controller
         $data['dataType'] = $this->Mod_sparepart->select_type();
         $data['dataKategori'] = $this->Mod_sparepart->select_kategori();
         $data['dataKelompok'] = $this->Mod_sparepart->select_kelompok();
+        $data['dataSupplier'] = $this->Mod_sparepart->select_supplier();
 		$data['dataPart'] = $this->Mod_sparepart->select_by_id_part($id);
 
 		echo show_my_modal('warehouse/modals/modal_tambah_part', 'update-sparepart', $data, ' modal-lg');

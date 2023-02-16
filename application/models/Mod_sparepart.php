@@ -143,14 +143,23 @@ class Mod_sparepart extends CI_Model
 
         return $data->result();
     }
+    public function select_supplier()
+    {
+        $sql = " SELECT * FROM tbl_wh_supplier";
+
+        $data = $this->db->query($sql);
+
+        return $data->result();
+    }
     function view_sparepart($id)
     {
-        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok');
+        $this->db->select('a.*,b.kategori,c.satuan,d.type_mesin,e.kelompok,f.kode_sup');
         $this->db->from('tbl_wh_barang as a');
         $this->db->join('tbl_wh_kategori as b', 'b.id_kategori=a.kategori', 'left');
         $this->db->join('tbl_wh_satuan as c','c.id_satuan=a.satuan', 'left');
         $this->db->join('tbl_wh_type_mesin as d','d.id_type=a.type', 'left');
         $this->db->join('tbl_wh_kelompok as e','e.id_kelompok=a.kelompok','left');
+        $this->db->join('tbl_wh_supplier as f','f.id_supplier=a.supplier','left');
         $this->db->where('a.id_barang',$id);
 
         $data = $this->db->get();
@@ -168,6 +177,7 @@ class Mod_sparepart extends CI_Model
         type        ='".$data['type']."',
         lokasi      ='".$data['lokasi']."',
         kategori    ='".$data['kategori']."',
+        supplier    ='".$data['supplier']."',
         ket         ='".$data['ket']."'";
 
 		$this->db->query($sql);
@@ -184,6 +194,7 @@ class Mod_sparepart extends CI_Model
         kelompok    ='".$data['kelompok']."',
         lokasi      ='".$data['lokasi']."',
         kategori    ='".$data['kategori']."',
+        supplier    ='".$data['supplier']."',
         ket         ='".$data['ket']."'
         WHERE id_barang='".$data['id_barang']."'";
 
