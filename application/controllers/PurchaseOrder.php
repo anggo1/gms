@@ -7,13 +7,17 @@ class PurchaseOrder extends MY_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('Mod_purchaseorder'));
+		$this->load->model(array('Mod_purchaseorder','Mod_sparepart'));
 	}
 
 	public function index()
 	{
 		$this->load->helper('url');
-		//$data['dataKode'] = $this->Mod_cuti->select_kode_cuti();
+		$data['dataSatuan'] = $this->Mod_sparepart->select_satuan();
+        $data['dataType'] = $this->Mod_sparepart->select_type();
+        $data['dataKategori'] = $this->Mod_sparepart->select_kategori();
+        $data['dataKelompok'] = $this->Mod_sparepart->select_kelompok();
+        $data['dataSupplier'] = $this->Mod_sparepart->select_supplier();
 		$this->template->load('layoutbackend', 'warehouse/purchase_order');
 	}
 

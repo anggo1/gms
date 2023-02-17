@@ -8,6 +8,10 @@
         padding-bottom: 5px;
     }
 </style>
+<?php if (!empty($dataPart)) {
+                                            foreach ($dataPart as $part) {
+                                            }
+                                        } ?>
 				<section class="content">
 			    	<div class="container-fluid">
 			    		<div class="row">
@@ -239,6 +243,8 @@
 							$('[name = "stok_awal"]').val(data.stok);
 							$('[name = "stok_a"]').val(data.stok_a);
 							$('[name = "stok_p"]').val(data.stok_p);
+							$('[name = "supplier"]').val(data.supplier);
+							document.getElementById('supplier').innerHTML   = data.supplier;
 							document.getElementById('no_parttd').innerHTML   = data.no_part.bold();
 							document.getElementById('nama_parttd').innerHTML = data.nama_part.bold();
 							document.getElementById('satuantd').innerHTML    = data.satuan.bold();

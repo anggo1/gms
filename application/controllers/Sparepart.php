@@ -61,12 +61,41 @@ class Sparepart extends MY_Controller
             $data = array();
             $no = $_POST['start'];
             foreach ($list as $p) {
+                
+                $stok1 = $p->stok_a;
+                $stok2 = $p->stok_a;
+                $min1  = $p->minstok_a;
+                $min2  = $p->minstok_p;
+                $status_a ="";
+                $status_p ="";
+                $empty_stok ="";
+                if($p->stok <= 0){
+                    $empty_stok='<button class="tombol-danger Blink-warning empty-stok"><i class="fa fa-info-circle"></i>
+                    </button>';
+                }
+                if($min1 == $stok1){
+                    $status_a='<button class="tombol-warning Blink-warning peringatan-a"><i class="fa fa-info-circle">A</i>
+                    </button>';
+                }
+                if($min1 > $stok1){
+                    $status_a='<button class="tombol-danger Blink-danger bahaya-a" title="Cetak"><i class="fa fa-angry">A</i>
+                    </button>';
+                }
+
+                if($min2 == $stok2){
+                    $status_p='<button class="tombol-warning Blink-warning peringatan-p" title="Cetak"><i class="fa fa-info-circle">P</i>
+                    </button>';
+                }
+                if($min2 > $stok2){
+                    $status_p='<button class="tombol-danger Blink-danger bahaya-p" title="Cetak"><i class="fa fa-angry">P</i>
+                    </button>';
+                }
                 $no++;
                 $row = array();
                 $row[] = $no;
                 $row[] = $p->no_part;
-                $row[] = $p->nama_part;
-                $row[] = $p->stok;
+                $row[] = $p->nama_part. '&nbsp;' .$status_a. '&nbsp;' .$status_p;                
+                $row[] = $p->stok. '&nbsp;' .$empty_stok;                
                 $row[] = $p->lokasi;
                 $row[] = $p->satuan;
                 $row[] = $p->type_mesin;

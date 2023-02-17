@@ -7,6 +7,39 @@
     table.dataTable td {
         padding-bottom: 5px;
     }
+    .Blink-warning { animation: blinker 0.5s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
+@keyframes blinker { from { opacity: 1; } to { opacity: 0; } }
+.Blink-danger { animation: blinker 0.1s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
+@keyframes blinker { from { opacity: 1; } to { opacity: 0; } }
+
+
+.tombol-danger {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.tombol-danger {border-radius: 40%;}
+
+.tombol-warning {
+  background-color: #ffc107;
+  border: none;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.tombol-warning {border-radius: 40%;}
 </style>
 <section class="content">
     <div class="container-fluid">
@@ -53,6 +86,7 @@
 </section>
 <?php
 show_my_confirm('hapusPart', 'hapus-part', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
+show_my_confirm('stokTipis', 'hapus-part', 'STOK Minimum Aktif Menipis');
 ?>
 
  
@@ -219,4 +253,69 @@ $(document).on("click", ".update-sparepart", function() {
 		})
 	})
 
+    $(document).on("click", ".peringatan-a", function() {
+		
+        Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: 'Stok Aktif Menipis',
+                        showConfirmButton: false,
+                        timer: 1200,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        }
+            });  
+	});
+    $(document).on("click", ".bahaya-a", function() {
+		
+        Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Stok Aktif Minus',
+                        showConfirmButton: false,
+                        timer: 1200,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        }
+            });  
+	});
+    $(document).on("click", ".peringatan-p", function() {
+		
+        Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Stok Pasif Menipis',
+                        showConfirmButton: false,
+                        timer: 1200,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        }
+            });  
+	});
+    $(document).on("click", ".bahaya-p", function() {
+		
+        Swal.fire({
+                        icon: 'error',
+                        title: 'Stok Pasif Minus',
+                        showConfirmButton: false,
+                        timer: 1200,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        }
+	  	
+            });  
+	});
+    $(document).on("click", ".empty-stok", function() {
+		
+        Swal.fire({
+                        icon: 'error',
+                        title: 'Stok Global Minus',
+                        showConfirmButton: false,
+                        timer: 1200,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        }
+	  	
+            });  
+	});
 </script>

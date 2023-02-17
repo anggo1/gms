@@ -198,6 +198,20 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Min Stok Aktif</label>
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="minstok_a" id="minstok_a" value="<?php if (!empty($part->minstok_a)) {
+                                                          echo $part->minstok_a;
+                                                        } ?>" class="form-control">
+                                                            </div>
+                                                            <label class="col-sm-2 col-form-label">Min Stok Pasif</label>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="minstok_p" id="minstok_p" value="<?php if (!empty($part->minstok_p)) {
+                                                          echo $part->minstok_p;
+                                                        } ?>" class="form-control">
+                                                            </div>
+                                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-10">
                                                 <input type="text" name="ket" id="ket" value="<?php if (!empty($part->ket)) {

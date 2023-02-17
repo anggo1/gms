@@ -263,7 +263,7 @@ refresh();
 });
 }
 function showAbsen() {
-$.get('<?php echo base_url(' Mesin_absen/downloadMesin'); ?>', function (data) {
+$.get('<?php echo base_url('Mesin_absen/downloadMesin'); ?>', function (data) {
 tableAbsen.fnDestroy();
 $('#data-absensi').html(data);
 refresh();
@@ -276,7 +276,7 @@ var data = $(this).serialize();
 $
 .ajax({
     method: 'POST',
-    url: '<?php echo base_url(' Mesin_absen / prosesTmesin '); ?>',
+    url: '<?php echo base_url('Mesin_absen/prosesTmesin '); ?>',
     data: data
 })
 .done(function (data) {
@@ -306,7 +306,7 @@ var data = $(this).serialize();
 $
 .ajax({
     method: 'POST',
-    url: '<?php echo base_url(' Mesin_absen / prosesUnama '); ?>',
+    url: '<?php echo base_url('Mesin_absen/prosesUnama '); ?>',
     data: data
 })
 .done(function (data) {
@@ -371,7 +371,7 @@ var data = $(this).serialize();
 $
 .ajax({
     method: 'POST',
-    url: '<?php echo base_url(' Mesin_absen / prosesUmesin '); ?>',
+    url: '<?php echo base_url('Mesin_absen/prosesUmesin '); ?>',
     data: data
 })
 .done(function (data) {
