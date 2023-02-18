@@ -89,68 +89,61 @@ class Mod_purchaseorder extends CI_Model
         $this->db->where('a.id_barang',$id);
         return $this->db->get('tbl_wh_barang')->row();
     }
-    public function select_kode_cuti()
+    public function select_supplier()
     {
-        $sql    = "SELECT * FROM tbl_hrd_kodecuti";
-        $data = $this->db->query($sql);
+        $sql = " SELECT * FROM tbl_wh_supplier";
 
+        $data = $this->db->query($sql);
 
         return $data->result();
     }
-    public function deleteCuti($id)
+    public function deleteDetail_po($id)
     {
-        $sql = "DELETE FROM tbl_hrd_cuti_pegawai WHERE id_cuti='" . $id . "'";
+        $sql = "DELETE FROM tbl_wh_detail_po WHERE id_detail='" . $id . "'";
 
         $this->db->query($sql);
 
         return $this->db->affected_rows();
     }
-    public function insert_part($data)
-    {
-        $id = md5(DATE('ymdhms') . rand());
-
-        $date = $data['date1'];
-        $tgl1 = explode('-', $date);
-        $tgl_masuk = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
-        $jml_part=$data['jumlah'];
-        $stok_awal=$data['stok_awal'];
-        $jml_a=$data['stok_a'];
-        $jml_p=$data['stok_p'];
-        
-        $status_barang = $data['status_part'];
-        if($status_barang=="AKTIF"){
-            $stok   =$stok_awal + $jml_part;
-            $stok_a =$jml_a + $jml_part;
-            $sql_stok = "UPDATE tbl_wh_barang SET
-            stok      ='$stok',
-            stok_a    ='$stok_a'
-            WHERE id_barang='".$data['id_barang']."'";
-            $this->db->query($sql_stok);
+    public function insertDetail($kodePo,$data) {
+        $kodenya="";
+            if(empty($data['id_po'])){
+                $kodenya=$kodePo;
+            }else{
+                $kodenya=$data['id_po'];
+            }
+        $total_harga=$data['total_harga'];
+        $total_harga_diskon="";
+            if(!empty($data['diskon'])){
+                $total_harga=$data['total_harga']-$data['total_diskon'];
+            }
+        $total_ppn="";
+            if(!empty($data['ppn'])){
+                $total_ppn=$total_harga+$data['ppn']/100;
+                $total_harga=$total_harga+$total_ppn;
+            }
+        $datenow= date("Y-m-d");
+            $sql = "INSERT INTO tbl_wh_detail_po SET
+            id_detail       ='',
+            no_po           ='".$kodenya."',
+            no_part         ='".$data['no_part']."',
+            nama_part       ='".$data['nama_part']."',
+            harga           ='".$data['hrg_awal']."',
+            jumlah          ='".$data['jumlah']."',
+            diskon          ='".$data['diskon']."',
+            total_diskon    ='".$data['total_diskon']."',
+            ppn             ='".$data['ppn']."',
+            total_ppn       ='$total_ppn',
+            total_harga     ='$total_harga'";
+            $this->db->query($sql);
+    
+            return $this->db->affected_rows();
         }
-        if($status_barang=="PASIF"){
-            $stok   =$stok_awal + $jml_part;
-            $stok_p =$jml_p + $jml_part;
-            $sql_stok = "UPDATE tbl_wh_barang SET
-            stok      ='$stok',
-            stok_p    ='$stok_p'
-            WHERE id_barang='".$data['id_barang']."'";
-        $this->db->query($sql_stok);
+        public function select_detail($id) {
+            $sql = "SELECT * FROM tbl_wh_detail_po WHERE no_po ='{$id}'";
+    
+            $data = $this->db->query($sql);
+            return $data->result();
+            //return $data->row();
         }
-        
-        $sql = "INSERT INTO tbl_wh_part_masuk SET
-        id_masuk    ='',
-        id_barang   ='".$data['id_barang']."',
-        no_part     ='".$data['no_part']."',
-        status_po   ='".$data['status_po']."',
-        no_po       ='".$data['no_po']."',
-        tgl_masuk   ='$tgl_masuk',
-        jumlah      ='".$data['jumlah']."',
-        status_part ='".$data['status_part']."',
-        user        ='".$data['user']."'";
-
-
-        $this->db->query($sql);
-
-        return $this->db->affected_rows();
-    }
 }
