@@ -13,8 +13,8 @@ class PurchaseOrder extends MY_Controller
 	public function index()
 	{
 		$this->load->helper('url');
-        $data['dataSupplier'] = $this->Mod_purchaseorder->select_supplier();
-		$this->template->load('layoutbackend', 'warehouse/purchase_order',$data);
+		$data['dataSupplier'] = $this->Mod_purchaseorder->select_supplier();
+		$this->template->load('layoutbackend', 'warehouse/purchase_order', $data);
 	}
 
 	public function ajax_list()
@@ -30,8 +30,7 @@ class PurchaseOrder extends MY_Controller
 			$row[] = "<button type='button' class='btn btn-sm btn-outline-success' onClick=selectPart('$pel->id_barang')><i class='fa fa-check'></i></button>";
 			$row[] = $pel->no_part;
 			$row[] = $pel->nama_part;
-			$data[] = $row; 
-
+			$data[] = $row;
 		}
 
 		$output = array(
@@ -45,59 +44,57 @@ class PurchaseOrder extends MY_Controller
 	}
 	public function cariKode($id)
 	{
-	$data = $this->Mod_purchaseorder->get_part($id);
-	echo json_encode($data);
+		$data = $this->Mod_purchaseorder->get_part($id);
+		echo json_encode($data);
 	}
 
 	public function prosesPo()
 	{
-		$date= date("Ymd");
-            $ci_kons = get_instance();
-            $query = "SELECT max(id_po) AS maxKode FROM tbl_wh_po WHERE id_po LIKE '%$date%'";
-            $hasil = $ci_kons->db->query($query)->row_array();
-            $noOrder = $hasil['maxKode'];
-            $noUrut = (int)substr($noOrder, 9, 4);
-            $noUrut++;
-            $tahun=substr($date, 0, 4);
-            $bulan=substr($date, 4, 2);
-            $tgl=substr($date, 6, 2);
-            $kode_po  = $tahun .$bulan .$tgl .sprintf("%04s", $noUrut);
+		$date = date("Ymd");
+		$ci_kons = get_instance();
+		$query = "SELECT max(id_po) AS maxKode FROM tbl_wh_po WHERE id_po LIKE '%$date%'";
+		$hasil = $ci_kons->db->query($query)->row_array();
+		$noOrder = $hasil['maxKode'];
+		$noUrut = (int)substr($noOrder, 9, 4);
+		$noUrut++;
+		$tahun = substr($date, 0, 4);
+		$bulan = substr($date, 4, 2);
+		$tgl = substr($date, 6, 2);
+		$kode_po  = $tahun . $bulan . $tgl . sprintf("%04s", $noUrut);
 
 
 		$this->form_validation->set_rules('tgl_po', 'Tanggal Masuk', 'trim|required');
-			$data 	= $this->input->post();
-			if ($this->form_validation->run() == TRUE) {   
-			$result=$this->input->post();
+		$data 	= $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->input->post();
 			$date2 = $data['tgl_po'];
-			$tgl2 = explode('-',$date2);
-			$tgl_po_fix = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
+			$tgl2 = explode('-', $date2);
+			$tgl_po_fix = $tgl2[2] . "-" . $tgl2[1] . "-" . $tgl2[0] . "";
 			$sekarang = date('Y/m/d');
 
 			$data = array(
-				'id_po'  	=>$kode_po,
-				'tgl_po'  	=>$tgl_po_fix,
-				'kode_pesan'=>$data['kode_pesan'],
-				'top'      	=>$data['top'],
-				'ppn'  		=>$data['ppn'],
-				'diskon'  	=>$data['diskon'],
-				'supplier'	=>$data['supplier'],
-				'pengesah'  =>$data['pengesah'],
-				'keterangan'=>$data['keterangan'],
-				'user'   	=>$data['user']
-				);
-				if(empty($_POST['id_po'])){
-					$data['dataPo'] = $this->db->insert('tbl_wh_po',$data);
-					$data 	= $this->input->post();
-					//$kode_po=$data['id_po'];
-					$this->Mod_purchaseorder->insertDetail($kode_po,$data);
-					}
-					else{
-					$data 	= $this->input->post();
-					$kode_po=$data['id_po'];
-						$data['dataPo'] = $this->Mod_purchaseorder->insertDetail($kode_po,$data);
-					}
-					if ($result > 0) {
-				$out['dataPo']=$kode_po;
+				'id_po'  	=> $kode_po,
+				'tgl_po'  	=> $tgl_po_fix,
+				'kode_pesan' => $data['kode_pesan'],
+				'top'      	=> $data['top'],
+				'ppn'  		=> $data['ppn'],
+				'supplier'	=> $data['supplier'],
+				'pengesah'  => $data['pengesah'],
+				'keterangan' => $data['keterangan'],
+				'user'   	=> $data['user']
+			);
+			if (empty($_POST['id_po'])) {
+				$data['dataPo'] = $this->db->insert('tbl_wh_po', $data);
+				$data 	= $this->input->post();
+				//$kode_po=$data['id_po'];
+				$this->Mod_purchaseorder->insertDetail($kode_po, $data);
+			} else {
+				$data 	= $this->input->post();
+				$kode_po = $data['id_po'];
+				$data['dataPo'] = $this->Mod_purchaseorder->insertDetail($kode_po, $data);
+			}
+			if ($result > 0) {
+				$out['dataPo'] = $kode_po;
 				$out['status'] = '';
 				$out['msg'] = show_ok_msg('Data  ditambahkan!', '20px');
 			} else {
@@ -110,7 +107,8 @@ class PurchaseOrder extends MY_Controller
 		}
 		echo json_encode($out);
 	}
-	public function tampilDetail() {
+	public function tampilDetail()
+	{
 		$id 				= $_GET['id_po'];
 		$data['dataDetail'] = $this->Mod_purchaseorder->select_detail($id);
 		$this->load->view('warehouse/detail_po', $data);
@@ -128,5 +126,13 @@ class PurchaseOrder extends MY_Controller
 			$out['msg'] = show_err_msg('Filed !', '10px');
 		}
 		echo json_encode($out);
+	}
+	public function cetak()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPo'] = $this->Mod_purchaseorder->select_by_id($id);
+		$data['detailPo'] = $this->Mod_purchaseorder->select_detail($id);
+
+		echo show_my_print('warehouse/modals/modal_cetak_po', 'cetak-po', $data, ' modal-xl');
 	}
 }
