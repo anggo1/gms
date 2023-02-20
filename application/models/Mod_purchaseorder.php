@@ -117,11 +117,6 @@ class Mod_purchaseorder extends CI_Model
         if (!empty($data['diskon'])) {
             $total_harga = $data['total_harga'] - $data['total_diskon'];
         }
-        $total_ppn = "";
-        if (!empty($data['ppn'])) {
-            $total_ppn = $total_harga * $data['ppn'] / 100;
-            $total_harga = $total_harga + $total_ppn;
-        }
         $datenow = date("Y-m-d");
         $sql = "INSERT INTO tbl_wh_detail_po SET
             id_detail       ='',
@@ -132,8 +127,6 @@ class Mod_purchaseorder extends CI_Model
             jumlah          ='" . $data['jumlah'] . "',
             diskon          ='" . $data['diskon'] . "',
             total_diskon    ='" . $data['total_diskon'] . "',
-            ppn             ='" . $data['ppn'] . "',
-            total_ppn       ='$total_ppn',
             total_harga     ='$total_harga'";
         $this->db->query($sql);
 
@@ -150,10 +143,39 @@ class Mod_purchaseorder extends CI_Model
     }
     public function select_detail($id)
     {
+        $ci = get_instance();
+        $query = "SELECT sum(total_harga) as total,b.ppn FROM tbl_wh_detail_po as a 
+                    LEFT JOIN tbl_wh_po as b ON b.id_po=a.id_po
+                    WHERE a.id_po='{$id}'";
+        $d_data = $ci->db->query($query)->row_array();
+        $total       = $d_data['total'];
+        $ppn       = $d_data['ppn'];
+        $total_ppn = $total * $ppn / 100;
+        $grand_total = $total + $total_ppn;
+        $sql_update = "UPDATE tbl_wh_po SET
+        t_ppn       ='$total_ppn',
+        sub_total   ='$total',
+        grand_total ='$grand_total'
+        WHERE id_po ='{$id}'";
+
+        $this->db->query($sql_update);
+
         $sql = "SELECT * FROM tbl_wh_detail_po WHERE id_po ='{$id}'";
 
         $data = $this->db->query($sql);
         return $data->result();
         //return $data->row();
+    }
+    function updatePo($a, $b, $c, $d)
+    {
+        $sql = "UPDATE tbl_wh_po SET
+        t_ppn       ='$a',
+        sub_total   ='$b',
+        grand_total ='$c'
+        WHERE id_po ='" . $data['id_po'] . "'";
+
+        $this->db->query($sql);
+
+        return $this->db->affected_rows();
     }
 }

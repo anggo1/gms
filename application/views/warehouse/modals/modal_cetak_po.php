@@ -214,44 +214,45 @@
           <th width="20%">Nama Barang</th>
           <th width="10%">Harga</th>
           <th width="12%">Diskon</th>
-          <th width="17%">Sub Total</th>
-          <th width="10%">JML</th>
+          <th width="12%">Sub Total</th>
+          <th width="15%">JML</th>
           <th width="9%">Total</th>
         </tr>
-        <?php $no = 0;
-        foreach ($detailPo as $d) : $no++; ?>
+        <?php
+        $no = 0;
+        $grand_total = 0;
+        foreach ($detailPo as $d) : $no++;
+          $grand_total += $d->total_harga;
+          $ppn = $grand_total * $k->ppn / 100;
+        ?>
           <tr>
             <th><?php echo $no ?></th>
             <th><?php echo $d->no_part ?></th>
             <th><?php echo $d->nama_part ?></th>
-            <th align="right"><?php echo $d->harga ?></th>
+            <th align="right"><?php echo number_format($d->harga) ?></th>
             <th align="right"><?php echo $d->diskon ?></th>
-            <th align="right"><?php echo $no ?></th>
-            <th><?php echo $no ?></th>
-            <th><?php echo $no ?></th>
+            <th align="right"><?php echo number_format($d->total_harga + $d->total_diskon) ?></th>
+            <th><?php echo number_format($d->jumlah) ?></th>
+            <th><?php echo number_format($d->total_harga) ?></th>
           </tr>
         <?php $no + 1;
         endforeach ?>
         <tr>
           <th colspan="5" rowspan="3">&nbsp;</th>
-          <th align="right">Sub Total</th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
+          <th colspan="2" align="right">Sub Total</th>
+          <th id="sub_total"><?php echo number_format($grand_total) ?></th>
         </tr>
         <tr>
-          <th align="right">PPN <?php echo $no ?></th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
+          <th colspan="2" align="right">PPN <?php echo $k->ppn ?> %</th>
+          <th id="t_ppn"><?php echo number_format($ppn) ?></th>
         </tr>
         <tr>
 
-          <th align="right">Grand Total</th>
-          <th>
-            <font size="+1"><?php echo number_format($s->total_ToDoor + $s->total_biayanya + $total_asuransi) ?></font>
+          <th colspan="2" align="right">Grand Total</th>
+          <th id="grand_total">
+            <font size="+1"><?php echo number_format($grand_total + $ppn) ?></font>
           </th>
-          <th>&nbsp;</th>
         </tr>
-        <?php ?>
       </thead>
 
     </table>
@@ -264,10 +265,10 @@
           </tr>
           <tr>
             <th height="60" style="text-align: center; align-content: center;">
-              <p><?php echo $no ?></p>
+              <p><?php echo $k->pengesah ?></p>
             </th>
             <th>
-              <p><?php echo $no ?></p>
+              <p><?php echo $k->user ?></p>
             </th>
           </tr>
         </thead>

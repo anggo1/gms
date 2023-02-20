@@ -70,10 +70,12 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Jumlah</label>
-									<div class="col-sm-4">
-										<input type="text" name="jumlah" id="jumlah" value="" onkeyup="startHitung()" onblur="stopHitung()" required class="form-control" placeholder="Jumlah Barang" required>
+									<label class="col-sm-2 col-form-label">PPN</label>
+									<div class="col-sm-3">
+										<input type="text" name="ppn" id="ppn" value="" class="form-control" placeholder="Pajak Pertambahan Nilai">
 									</div>
+									<label for="Nama Konsumen" class="col-sm-1 col-form-label">%</label>
+
 									<label class="col-sm-2 col-form-label">Supplier</label>
 									<div class="col-sm-4">
 										<select name="supplier" class="form-control">
@@ -98,11 +100,11 @@
 										<input type="text" name="diskon" id="diskon" value="" onkeyup="startDiskon()" onblur="stopDiskon()" class="form-control" placeholder="Diskon">
 									</div>
 									<label for="Nama Konsumen" class="col-sm-1 col-form-label">%</label>
-									<label class="col-sm-2 col-form-label">PPN</label>
-									<div class="col-sm-3">
-										<input type="text" name="ppn" id="ppn" value="" class="form-control" placeholder="Pajak Pertambahan Nilai">
+									<label class="col-sm-2 col-form-label">Jumlah</label>
+									<div class="col-sm-4">
+										<input type="text" name="jumlah" id="jumlah" value="" onkeyup="startHitung()" onblur="stopHitung()" required class="form-control" placeholder="Jumlah Barang" required>
 									</div>
-									<label for="Nama Konsumen" class="col-sm-1 col-form-label">%</label>
+
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan</label>
@@ -340,6 +342,8 @@
 	});
 
 	function cetakPo(datakode) {}
+
+
 	$(document).on("click", ".cetak-po", function() {
 		var id = $(this).attr("data-id");
 		//var id = document.getElementById('next_proses').value=datakode;
@@ -349,7 +353,7 @@
 				data: "id=" + id
 			})
 			.done(function(data) {
-				$('#modal-cetak').html(data);
+				$('#modal-po').html(data);
 				$('#cetak-po').modal('show');
 			})
 	})
