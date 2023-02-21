@@ -1,27 +1,27 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Part_masuk extends MY_Controller
+class Part_keluar extends MY_Controller
 {
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('Mod_part_masuk'));
+		$this->load->model(array('Mod_part_keluar'));
 	}
 
 	public function index()
 	{
 		$this->load->helper('url');
-		//$data['dataKode'] = $this->Mod_cuti->select_kode_cuti();
-		$this->template->load('layoutbackend', 'warehouse/part_masuk');
+		$data['dataSupplier'] = $this->Mod_part_keluar->select_supplier();
+		$this->template->load('layoutbackend', 'warehouse/part_keluar', $data);
 	}
 
 	public function ajax_list()
 	{
 		ini_set('memory_limit', '512M');
 		set_time_limit(3600);
-		$list = $this->Mod_part_masuk->get_datatables();
+		$list = $this->Mod_part_keluar->get_datatables();
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $pel) {
@@ -30,14 +30,13 @@ class Part_masuk extends MY_Controller
 			$row[] = "<button type='button' class='btn btn-sm btn-outline-success' onClick=selectPart('$pel->id_barang')><i class='fa fa-check'></i></button>";
 			$row[] = $pel->no_part;
 			$row[] = $pel->nama_part;
-			$data[] = $row; 
-
+			$data[] = $row;
 		}
 
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->Mod_part_masuk->count_all(),
-			"recordsFiltered" => $this->Mod_part_masuk->count_filtered(),
+			"recordsTotal" => $this->Mod_part_keluar->count_all(),
+			"recordsFiltered" => $this->Mod_part_keluar->count_filtered(),
 			"data" => $data,
 		);
 		//output to json format
@@ -45,23 +44,62 @@ class Part_masuk extends MY_Controller
 	}
 	public function cariKode($id)
 	{
-	$data = $this->Mod_part_masuk->get_part($id);
-	echo json_encode($data);
+		$data = $this->Mod_part_keluar->get_part($id);
+		echo json_encode($data);
 	}
 
-	public function prosesPartmasuk()
+	public function prosesPo()
 	{
-		$this->form_validation->set_rules('date1', 'Tanggal Masuk', 'trim|required');
+		$date = date("Ymd");
+		$ci_kons = get_instance();
+		$query = "SELECT max(id_po) AS maxKode FROM tbl_wh_po WHERE id_po LIKE '%$date%'";
+		$hasil = $ci_kons->db->query($query)->row_array();
+		$noOrder = $hasil['maxKode'];
+		$noUrut = (int)substr($noOrder, 9, 4);
+		$noUrut++;
+		$tahun = substr($date, 0, 4);
+		$bulan = substr($date, 4, 2);
+		$tgl = substr($date, 6, 2);
+		$kode_po  = $tahun . $bulan . $tgl . sprintf("%04s", $noUrut);
+
+
+		$this->form_validation->set_rules('tgl_po', 'Tanggal Masuk', 'trim|required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->Mod_part_masuk->insert_part($data);
+			$result = $this->input->post();
+			$date2 = $data['tgl_po'];
+			$tgl2 = explode('-', $date2);
+			$tgl_po_fix = $tgl2[2] . "-" . $tgl2[1] . "-" . $tgl2[0] . "";
+			$sekarang = date('Y/m/d');
 
+			$data = array(
+				'id_po'  	=> $kode_po,
+				'tgl_po'  	=> $tgl_po_fix,
+				'kode_pesan' => $data['kode_pesan'],
+				'top'      	=> $data['top'],
+				'ppn'  		=> $data['ppn'],
+				'supplier'	=> $data['supplier'],
+				'pengesah'  => $data['pengesah'],
+				'keterangan' => $data['keterangan'],
+				'user'   	=> $data['user']
+			);
+			if (empty($_POST['id_po'])) {
+				$data['dataPo'] = $this->db->insert('tbl_wh_po', $data);
+				$data 	= $this->input->post();
+				//$kode_po=$data['id_po'];
+				$this->Mod_part_keluar->insertDetail($kode_po, $data);
+			} else {
+				$data 	= $this->input->post();
+				$kode_po = $data['id_po'];
+				$data['dataPo'] = $this->Mod_part_keluar->insertDetail($kode_po, $data);
+			}
 			if ($result > 0) {
+				$out['dataPo'] = $kode_po;
 				$out['status'] = '';
 				$out['msg'] = show_ok_msg('Data  ditambahkan!', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_ok_msg('Filed !', '20px');
+				$out['msg'] = show_del_msg('Filed !', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -69,22 +107,16 @@ class Part_masuk extends MY_Controller
 		}
 		echo json_encode($out);
 	}
-	public function list_cuti()
+	public function tampilDetail()
 	{
-		$date1 				= $_GET['date1'];
-		$date2 				= $_GET['date2'];
-		$tgl1 = explode('-', $date1);
-		$ttmp1 = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
-
-		$tgl2 = explode('-', $date2);
-		$ttmp2 = $tgl2[2] . "-" . $tgl2[1] . "-" . $tgl2[0] . "";
-		$data['dataCuti'] = $this->Mod_cuti->cari_cuti($ttmp1, $ttmp2);
-		$this->load->view('hrd/list_cuti', $data);
+		$id 				= $_GET['id_po'];
+		$data['dataDetail'] = $this->Mod_part_keluar->select_detail($id);
+		$this->load->view('warehouse/detail_po', $data);
 	}
-	public function deleteCuti()
+	public function deleteDetail()
 	{
 		$id = $_POST['id'];
-		$result = $this->Mod_cuti->deleteCuti($id);
+		$result = $this->Mod_part_keluar->deleteDetail_po($id);
 		if ($result > 0) {
 			//$out['datakode']=$kodeBaru;
 			$out['status'] = '';
@@ -94,5 +126,13 @@ class Part_masuk extends MY_Controller
 			$out['msg'] = show_err_msg('Filed !', '10px');
 		}
 		echo json_encode($out);
+	}
+	public function cetak()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPo'] = $this->Mod_part_keluar->select_by_id($id);
+		$data['detailPo'] = $this->Mod_part_keluar->select_detail($id);
+
+		echo show_my_print('warehouse/modals/modal_cetak_part', 'cetak-po', $data, ' modal-xl');
 	}
 }
