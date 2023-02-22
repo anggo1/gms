@@ -114,65 +114,52 @@
       font-family: Georgia, "Times New Roman", Times, serif;
     }
 </style>
+<?php 
+
+$apl = $this->db->get("aplikasi")->row();
+?>
 <div id="printThis">
-  <?php foreach ($dataPo as $k) {
+  <?php foreach ($dataPart as $k) {
   } ?>
 
   <table width="100%" border="0" cellpadding="5" cellspacing="0" class="datatable2">
     <thead>
       <tr>
         <th colspan="2">
-          <p>PT.MPU</p>
-          <p>ALAMAT</p>
-          <p>&nbsp;</p>
+        <!--<img src="<?php echo base_url();?>assets/foto/logo/<?php echo $apl->logo; ?>" alt="<?php echo $apl->title; ?>" class="brand-image" weight="10%"
+           style="opacity:.8">-->
+      
+          <font size="10px"><?php echo  $apl->nama_owner; ?></font><br>
+          <?php echo  $apl->alamat; ?>
         </th>
       </tr>
       <tr>
-        <th colspan="2">PURCHASE ORDER</th>
+        <th colspan="2">SURAT JALAN</th>
       </tr>
     </thead>
 
   </table>
-  <table width="100%" border="1" cellpadding="5" cellspacing="0" class="datatable2">
+  <table width="60%" border="1" cellpadding="5" cellspacing="0" class="datatable2">
     <thead>
       <tr>
-        <th width="70">
-          <div align="left">Kepada</div>
+        <th width="150" height="71">
+          <div align="left">Tujuan</div>
         </th>
-        <th width="362">
-          <div align="left"><?php echo $k->nama_sup; ?></div>
-        </th>
-      </tr>
-      <tr>
-        <th>&nbsp;</th>
-        <th>
-          <div align="left"><?php echo $k->alamat ?></div>
-        </th>
-      </tr>
-      <tr>
-        <th height="32">&nbsp;</th>
-        <th>
-          <div align="left"><?php echo $k->no_tlp ?></div>
+        <th width="680">
+          <div align="left"><?php echo $k->tujuan; ?></div>
         </th>
       </tr>
     </thead>
 
   </table>
-  <table width="100%" border="0" cellpadding="5" cellspacing="0" class="datatable2">
+  <table width="60%" border="0" cellpadding="5" cellspacing="0" class="datatable2">
     <thead>
       <tr>
         <th width="70">
-          <div align="left">No PO</div>
+          <div align="left">No Surat</div>
         </th>
         <th width="362">
-          <div align="left"><?php echo $k->id_po; ?></div>
-        </th>
-        <th width="70">
-          <div align="left">TOP</div>
-        </th>
-        <th width="325">
-          <div align="left"><?php echo $k->top ?></div>
-          <div align="left"></div>
+          <div align="left"><?php echo $k->id_keluar; ?></div>
         </th>
       </tr>
       <tr>
@@ -180,14 +167,7 @@
           <div align="left">Tgl PO</div>
         </th>
         <th>
-          <div align="left"><?php echo $k->tgl_po ?></div>
-        </th>
-        <th>
-          <div align="left">Kode Pesan</div>
-        </th>
-        <th>
-          <div align="left"><?php echo $k->kode_pesan ?></div>
-          <div align="left"></div>
+          <div align="left"><?php echo $k->tgl_keluar ?></div>
         </th>
       </tr>
       <tr>
@@ -197,8 +177,6 @@
         <th>
           <div align="left"><?php echo $k->keterangan ?></div>
         </th>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
       </tr>
     </thead>
 
@@ -212,47 +190,22 @@
           <th width="6%">No</th>
           <th width="16%">No Barang</th>
           <th width="20%">Nama Barang</th>
-          <th width="10%">Harga</th>
-          <th width="12%">Diskon</th>
-          <th width="12%">Sub Total</th>
           <th width="15%">JML</th>
-          <th width="9%">Total</th>
+          <th width="9%">Keterangan</th>
         </tr>
         <?php
         $no = 0;
-        $grand_total = 0;
-        foreach ($detailPo as $d) : $no++;
-          $grand_total += $d->total_harga;
-          $ppn = $grand_total * $k->ppn / 100;
+        foreach ($detailPart as $d) : $no++;
         ?>
           <tr>
             <th><?php echo $no ?></th>
             <th><?php echo $d->no_part ?></th>
             <th><?php echo $d->nama_part ?></th>
-            <th align="right"><?php echo number_format($d->harga) ?></th>
-            <th align="right"><?php echo $d->diskon ?></th>
-            <th align="right"><?php echo number_format($d->total_harga + $d->total_diskon) ?></th>
-            <th><?php echo number_format($d->jumlah) ?></th>
-            <th><?php echo number_format($d->total_harga) ?></th>
+            <th><?php echo $d->jumlah ?></th>
+            <th><?php echo $d->ket_part ?></th>
           </tr>
         <?php $no + 1;
         endforeach ?>
-        <tr>
-          <th colspan="5" rowspan="3">&nbsp;</th>
-          <th colspan="2" align="right">Sub Total</th>
-          <th id="sub_total"><?php echo number_format($grand_total) ?></th>
-        </tr>
-        <tr>
-          <th colspan="2" align="right">PPN <?php echo $k->ppn ?> %</th>
-          <th id="t_ppn"><?php echo number_format($ppn) ?></th>
-        </tr>
-        <tr>
-
-          <th colspan="2" align="right">Grand Total</th>
-          <th id="grand_total">
-            <font size="+1"><?php echo number_format($grand_total + $ppn) ?></font>
-          </th>
-        </tr>
       </thead>
 
     </table>
@@ -260,12 +213,12 @@
       <table width="100%" border="0" cellpadding="5" cellspacing="0" class="datatable2">
         <thead>
           <tr>
-            <th width="43%" style="text-align: center; align-content: center;">Disetujui Oleh</th>
+            <th width="43%" style="text-align: center; align-content: center;">&nbsp;</th>
             <th width="57%">Hormat Kami</th>
           </tr>
           <tr>
             <th height="60" style="text-align: center; align-content: center;">
-              <p><?php echo $k->pengesah ?></p>
+              <p>&nbsp;</p>
             </th>
             <th>
               <p><?php echo $k->user ?></p>

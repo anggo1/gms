@@ -400,7 +400,7 @@
 	}
 
 	function stopHitung() {
-		clearInterval(startDiskon);
+		clearInterval(startHitung);
 	}
 
 	function startDiskon() {
@@ -416,7 +416,7 @@
 	}
 
 	function stopDiskon() {
-		clearInterval(startHitung);
+		clearInterval(startDiskon);
 	}
 
 	function startPpn() {

@@ -97,45 +97,79 @@ class Mod_part_keluar extends CI_Model
 
         return $data->result();
     }
-    public function deleteDetail_po($id)
+    public function deleteDetail_keluar($id,$stok,$status,$kodePart)
     {
-        $sql = "DELETE FROM tbl_wh_detail_po WHERE id_detail='" . $id . "'";
+        $ci = get_instance();
+        $query = "SELECT stok,stok_a,stok_p FROM tbl_wh_barang WHERE no_part='{$kodePart}'";
+        $d_data = $ci->db->query($query)->row_array();
+        $stok_awal       = $d_data['stok'];
+        $stok_a1       = $d_data['stok_a'];
+        $stok_p1       = $d_data['stok_p'];
+        $stok_update = $stok+$stok_awal;
+        $statusnye = "";
+        if($status=='AKTIF'){
+            $statusnye = $stok+$stok_a1;
+            $sql_update = "UPDATE tbl_wh_barang SET stok ='$stok_update', stok_a ='$statusnye' WHERE no_part ='{$kodePart}'"; $this->db->query($sql_update);
+        }
+        if($status=='PASIF'){
+            $statusnye = $stok+$stok_p1;
+            $sql_update = "UPDATE tbl_wh_barang SET stok ='$stok_update', stok_p ='$statusnye' WHERE no_part ='{$kodePart}'"; $this->db->query($sql_update);
+        }
+
+        $sql = "DELETE FROM tbl_wh_detail_part_keluar WHERE id_detail='" . $id . "'";
 
         $this->db->query($sql);
 
         return $this->db->affected_rows();
     }
-    public function insertDetail($kodePo, $data)
+    public function insertDetail($kodeKeluar, $data)
     {
         $kodenya = "";
-        if (empty($data['id_po'])) {
-            $kodenya = $kodePo;
+        if (empty($data['id_keluar'])) {
+            $kodenya = $kodeKeluar;
         } else {
-            $kodenya = $data['id_po'];
+            $kodenya = $data['id_keluar'];
         }
-        $total_harga = $data['total_harga'];
-        if (!empty($data['diskon'])) {
-            $total_harga = $data['total_harga'] - $data['total_diskon'];
+        $total_harga = $data['hrg_awal'] * $data['jumlah'];
+
+        $ci = get_instance();
+        $kodePart   = $data['no_part'];
+        $query = "SELECT stok,stok_a,stok_p FROM tbl_wh_barang WHERE no_part='{$kodePart}'";
+        $d_data = $ci->db->query($query)->row_array();
+        $stok       = $d_data['stok'];
+        $stok_a       = $d_data['stok_a'];
+        $stok_p       = $d_data['stok_p'];
+        $stok_update = $stok - $data['jumlah'];
+        $statusnye = "";
+        if($data['status_part']=='AKTIF'){
+            $statusnye = $stok_a-$data['jumlah'];
+            $sql_update = "UPDATE tbl_wh_barang SET stok ='$stok_update', stok_a ='$statusnye ' WHERE no_part ='{$kodePart}'"; $this->db->query($sql_update);
         }
-        $datenow = date("Y-m-d");
-        $sql = "INSERT INTO tbl_wh_detail_po SET
+        if($data['status_part']=='PASIF'){
+            $statusnye = $stok_p-$data['jumlah'];
+            $sql_update = "UPDATE tbl_wh_barang SET stok ='$stok_update', stok_p ='$statusnye ' WHERE no_part ='{$kodePart}'"; $this->db->query($sql_update);
+        }
+        
+
+
+        $sql = "INSERT INTO tbl_wh_detail_part_keluar SET
             id_detail       ='',
-            id_po           ='" . $kodenya . "',
+            id_keluar           ='" . $kodenya . "',
             no_part         ='" . $data['no_part'] . "',
             nama_part       ='" . $data['nama_part'] . "',
+            supplier        ='" . $data['nama_part'] . "',
+            status_part     ='" . $data['status_part'] . "',
             harga           ='" . $data['hrg_awal'] . "',
             jumlah          ='" . $data['jumlah'] . "',
-            diskon          ='" . $data['diskon'] . "',
-            total_diskon    ='" . $data['total_diskon'] . "',
-            total_harga     ='$total_harga'";
+            total_harga     ='$total_harga',
+            ket_part     ='$data['keterangan']'";
         $this->db->query($sql);
 
         return $this->db->affected_rows();
     }
     public function select_by_id($id)
     {
-        $sql = "SELECT * FROM tbl_wh_po LEFT JOIN tbl_wh_supplier ON tbl_wh_supplier.id_supplier=tbl_wh_po.supplier
-        WHERE id_po ='{$id}'";
+        $sql = "SELECT * FROM tbl_wh_part_keluar WHERE id_keluar ='{$id}'";
 
         $data = $this->db->query($sql);
         return $data->result();
@@ -143,39 +177,10 @@ class Mod_part_keluar extends CI_Model
     }
     public function select_detail($id)
     {
-        $ci = get_instance();
-        $query = "SELECT sum(total_harga) as total,b.ppn FROM tbl_wh_detail_po as a 
-                    LEFT JOIN tbl_wh_po as b ON b.id_po=a.id_po
-                    WHERE a.id_po='{$id}'";
-        $d_data = $ci->db->query($query)->row_array();
-        $total       = $d_data['total'];
-        $ppn       = $d_data['ppn'];
-        $total_ppn = $total * $ppn / 100;
-        $grand_total = $total + $total_ppn;
-        $sql_update = "UPDATE tbl_wh_po SET
-        t_ppn       ='$total_ppn',
-        sub_total   ='$total',
-        grand_total ='$grand_total'
-        WHERE id_po ='{$id}'";
-
-        $this->db->query($sql_update);
-
-        $sql = "SELECT * FROM tbl_wh_detail_po WHERE id_po ='{$id}'";
+        $sql = "SELECT * FROM tbl_wh_detail_part_keluar WHERE id_keluar ='{$id}'";
 
         $data = $this->db->query($sql);
         return $data->result();
         //return $data->row();
-    }
-    function updatePo($a, $b, $c, $d)
-    {
-        $sql = "UPDATE tbl_wh_po SET
-        t_ppn       ='$a',
-        sub_total   ='$b',
-        grand_total ='$c'
-        WHERE id_po ='" . $data['id_po'] . "'";
-
-        $this->db->query($sql);
-
-        return $this->db->affected_rows();
     }
 }
