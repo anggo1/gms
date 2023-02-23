@@ -105,13 +105,17 @@ class Mod_body extends CI_Model
         $sql = "INSERT INTO tbl_wh_body SET
         no_body		='".$data['no_body']."',
         type 		='".$data['type']."',
+        no_pol 		='".$data['no_pol']."',
+        merk 		='".$data['merk']."',
         thn_rangka  ='".$data['thn_rangka']."',
         thn_pembuatn='".$data['thn_pembuatan']."',
         karoseri    ='".$data['karoseri']."',
         warna		='".$data['warna']."',
         kelas	    ='".$data['kelas']."',
         strip       ='".$data['strip']."',
-        keterangan  ='".$data['keterangan']."'";
+        keterangan  ='".$data['keterangan']."',
+        kondisi  	='".$data['kondisi']."',
+        status  	='".$data['status']."'";
 
 		$this->db->query($sql);
 
@@ -121,13 +125,17 @@ class Mod_body extends CI_Model
     {
         $sql = "UPDATE tbl_wh_body SET
         type 		='".$data['type']."',
+        no_pol 		='".$data['no_pol']."',
+        merk 		='".$data['merk']."',
         thn_rangka  ='".$data['thn_rangka']."',
         thn_pembuatan='".$data['thn_pembuatan']."',
         karoseri    ='".$data['karoseri']."',
         warna		='".$data['warna']."',
         kelas	    ='".$data['kelas']."',
         strip       ='".$data['strip']."',
-        keterangan  ='".$data['keterangan']."'
+        keterangan  ='".$data['keterangan']."',
+        kondisi  	='".$data['kondisi']."',
+        status  	='".$data['status']."'
         WHERE no_body='".$data['no_body']."'";
 
 		$this->db->query($sql);
