@@ -7,6 +7,52 @@
 	table.dataTable td {
 		padding-bottom: 5px;
 	}
+	input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
 </style>
 <?php if (!empty($dataPart)) {
 	foreach ($dataPart as $part) {
@@ -39,10 +85,6 @@
 											</div>
 										</div>
 									</div>
-									<label class="col-sm-2 col-form-label">Kode Pesan</label>
-									<div class="col-sm-4">
-										<input type="text" name="kode_pesan" id="kode_pesan" class="form-control" placeholder="Kode Pemesanan">
-									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">No Body</label>
@@ -71,8 +113,33 @@
 										<input type="text" name="keterangan" id="keterangan" value="" class="form-control" placeholder="Keterangan">
 									</div>
 								</div>
-								
-								<div class="form-group row">
+						</div>
+						<input type="hidden" name="id_po" id="id_po" class="form-control">
+						<input type="hidden" name="hrg_awal" id="hrg_awal" class="form-control">
+						<input type="hidden" name="total_diskon" id="total_diskon" class="form-control">
+						<input type="hidden" name="total_harga" id="total_harga" class="form-control">
+						<input type="hidden" name="user" id="user" value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
+						<div class="modal-footer center-content-between">
+							<button class="btn btn-primary " type="submit"><span class="fa fa-save"></span> Simpan</button>
+						</div>
+
+						</form>
+					</div>
+				</div>
+				<div id="modal-po"></div>
+			</div>
+
+			<div class="col-md-6" id="detailPart">
+				<div class="card card-default">
+					<div class="modal-content">
+						<div class="modal-header text-blue">
+							<h5 style="display:block; text-align:center;"><span class="ion-android-alert ion-lg text-blue"></span>&nbsp; Detail Berita Acara Serah Terima (BAST)</h5>
+							<div class="text-right">
+								<button type="button" class="btn btn-sm btn-outline-success cetak-po" id="cetak" data-id="" title="Add Data"><i class="fas fa-print"></i> Cetak</button>
+							</div>
+						</div>
+						<div class="modal-body">
+						<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Kaca Depan</label>
 									<div class="col-sm-4">
 										<input type="text" name="top" id="top" value="" class="form-control" placeholder="Term of Payment" required>
@@ -92,33 +159,6 @@
 										<input type="text" name="pengesah" id="pengesah" value="" class="form-control" placeholder="Pengesah PO Oleh.. ?" required>
 									</div>
 								</div>
-								
-						</div>
-						<input type="hidden" name="id_po" id="id_po" class="form-control">
-						<input type="hidden" name="hrg_awal" id="hrg_awal" class="form-control">
-						<input type="hidden" name="total_diskon" id="total_diskon" class="form-control">
-						<input type="hidden" name="total_harga" id="total_harga" class="form-control">
-						<input type="hidden" name="user" id="user" value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
-						<div class="modal-footer center-content-between">
-							<button class="btn btn-primary " type="submit"><span class="fa fa-save"></span> Simpan</button>
-						</div>
-
-						</form>
-					</div>
-				</div>
-				<div id="modal-po"></div>
-			</div>
-
-			<div class="col-md-6" id="detailPart">
-				<div class="card card-default">
-					<div class="modal-content text-blue">
-						<div class="modal-header text-blue">
-							<h5 style="display:block; text-align:center;"><span class="ion-android-alert ion-lg text-blue"></span>&nbsp; Detail Berita Acara Serah Terima (BAST)</h5>
-							<div class="text-right">
-								<button type="button" class="btn btn-sm btn-outline-success cetak-po" id="cetak" data-id="" title="Add Data"><i class="fas fa-print"></i> Cetak</button>
-							</div>
-						</div>
-						<div class="modal-body">
 								<table class="table table-striped table-hover nowrap" id="list-po">
 									<thead>
 										<tr>
@@ -133,59 +173,59 @@
 									</thead>
 									<tbody id="data-po">
 									<td>Lampu Besar</td>
-							<td><input type="checkbox" name="lb_kn" value="1"></td>
-							<td ><input type="checkbox" name="lb_kr" value="1"></td>
+							<td><input type="checkbox" name="lb_kn" id="one" value="1" checked></td>
+							<td ><input type="checkbox" name="lb_kr" value="1" checked></td>
 							<td>Ban Stip/Serep</td>
 							<td ><label for="ban_stip">
-							  <input type="checkbox" name="ban_serep" value="1" >
+							  <input type="checkbox" name="ban_serep" value="1" checked>
 							</label></td>
 							<td>STNK</td>
-							<td><input type="checkbox" name="stnk" value="1"></td>
+							<td><input type="checkbox" name="stnk" value="1"checked></td>
 						</tr>
 						<tr>
 							<td>Lampu Sign</td>
-							<td><input type="checkbox" name="sign_kn" value="1"></td>
-							<td ><input type="checkbox" name="sign_kr" value="1"></td>
+							<td><input type="checkbox" name="sign_kn" value="1"checked></td>
+							<td ><input type="checkbox" name="sign_kr" value="1"checked></td>
 							<td>Kunci Roda</td>
-							<td ><input type="checkbox" name="kc_roda" value="1"></td>
+							<td ><input type="checkbox" name="kc_roda" value="1"checked></td>
 							<td>KPS</td>
-							<td><input type="checkbox" name="kps" value="1"></td>
+							<td><input type="checkbox" name="kps" value="1"checked></td>
 						</tr>
 						<tr>
 							<td>Lampu Rem</td>
-							<td><input type="checkbox" name="lmp_kn" value="1"></td>
-							<td ><input type="checkbox" name="lmp_kr" value="1"></td>
+							<td><input type="checkbox" name="lmp_kn" value="1" checked></td>
+							<td ><input type="checkbox" name="lmp_kr" value="1" checked></td>
 							<td>Dongkrak</td>
-							<td ><input type="checkbox" name="dongkrak" value="1"></td>
+							<td ><input type="checkbox" name="dongkrak" value="1" checked></td>
 							<td>Buku Keur</td>
-							<td><input type="checkbox" name="keur" value="1"></td>
+							<td><input type="checkbox" name="keur" value="1" checked></td>
 						</tr>
 						<tr>
 							<td>Lampu Kota</td>
-							<td><input type="checkbox" name="lmp_kota_kn" value="1"></td>
-							<td ><input type="checkbox" name="lmp_kota_kr" value="1"></td>
+							<td><input type="checkbox" name="lmp_kota_kn" value="1" checked></td>
+							<td ><input type="checkbox" name="lmp_kota_kr" value="1" checked></td>
 							<td>Video</td>
-							<td ><input type="checkbox" name="video" value="1"></td>
+							<td ><input type="checkbox" name="video" value="1" checked></td>
 							<td>Buku JR</td>
-							<td><input type="checkbox" name="buku_jr" value="1"></td>
+							<td><input type="checkbox" name="buku_jr" value="1" checked></td>
 						</tr>
 						<tr>
 							<td>Kaca Spion</td>
-							<td ><input type="checkbox" name="spion_kr" value="1"></td>
-							<td ><input type="checkbox" name="spion_kn" value="1"></td>
+							<td ><input type="checkbox" name="spion_kr" value="1" checked></td>
+							<td ><input type="checkbox" name="spion_kn" value="1" checked></td>
 							<td>TV</td>
-							<td ><input type="checkbox" name="tv" value="1"></td>
+							<td ><input type="checkbox" name="tv" value="1" checked></td>
 							<td>SIU</td>
-							<td><input type="checkbox" name="siu" value="1"></td>
+							<td><input type="checkbox" name="siu" value="1" checked></td>
 						</tr>
 						<tr>
 							<td height="22">&nbsp;</td>
 							<td>&nbsp;</td>
 							<td >&nbsp;</td>
 							<td>Tape</td>
-							<td ><input type="checkbox" name="tape" value="1"></td>
+							<td ><input type="checkbox" name="tape" value="1" checked></td>
 							<td>Kunci Kontak</td>
-							<td><input type="checkbox" name="kc_kontak" value="1"></td>
+							<td><input type="checkbox" name="kc_kontak" value="1" checked></td>
 									</tbody>
 									<tfoot></tfoot>
 								</table>

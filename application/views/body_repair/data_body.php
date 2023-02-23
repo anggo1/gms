@@ -2,7 +2,7 @@
 <style>
     .table.DataTable {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     table.dataTable td {

@@ -74,9 +74,9 @@ class Body extends MY_Controller
             $row[] = $bd->keterangan;
             if($b->edit_level=="Y" && $b->delete_level=="Y"){
                 $row[]='
-                <button class="btn btn-sm btn-outline-success update-body ion-compose ion-lg" title="Edit" data-id="'.$bd->no_body.'">
+                <button class="btn btn-sm btn-outline-success update-body ion-compose ion-sm" title="Edit" data-id="'.$bd->no_body.'">
                 </button>
-                <button class="btn btn-sm btn-outline-danger delete-body ion-android-close ion-lg" title="Delete" data-toggle="modal" data-target="#hapusBody" data-id="'.$bd->no_body.'">
+                <button class="btn btn-sm btn-outline-danger delete-body ion-android-close ion-sm" title="Delete" data-toggle="modal" data-target="#hapusBody" data-id="'.$bd->no_body.'">
                 </button>';
             }
             if($b->edit_level=="Y" && $b->delete_level=="N"){
