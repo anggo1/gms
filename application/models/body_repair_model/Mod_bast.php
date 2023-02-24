@@ -99,38 +99,80 @@ class Mod_bast extends CI_Model
     }
     public function deleteDetail_po($id)
     {
-        $sql = "DELETE FROM tbl_wh_detail_po WHERE id_detail='" . $id . "'";
+        $sql = "DELETE FROM tbl_wh_detail_po WHERE id_detail='". $id. "'";
 
         $this->db->query($sql);
 
         return $this->db->affected_rows();
     }
-    public function insertDetail($kodePo, $data)
+    public function insertBast($data)
     {
-        $kodenya = "";
-        if (empty($data['id_po'])) {
-            $kodenya = $kodePo;
-        } else {
-            $kodenya = $data['id_po'];
-        }
-        $total_harga = $data['total_harga'];
-        if (!empty($data['diskon'])) {
-            $total_harga = $data['total_harga'] - $data['total_diskon'];
-        }
-        $datenow = date("Y-m-d");
-        $sql = "INSERT INTO tbl_wh_detail_po SET
-            id_detail       ='',
-            id_po           ='" . $kodenya . "',
-            no_part         ='" . $data['no_part'] . "',
-            nama_part       ='" . $data['nama_part'] . "',
-            harga           ='" . $data['hrg_awal'] . "',
-            jumlah          ='" . $data['jumlah'] . "',
-            diskon          ='" . $data['diskon'] . "',
-            total_diskon    ='" . $data['total_diskon'] . "',
-            total_harga     ='$total_harga'";
-        $this->db->query($sql);
+        $date= date("Ymd");
+        $ci = get_instance();
+        $qdata = "SELECT max(id_bast) as maxKode FROM tbl_br_bast WHERE id_bast LIKE '%$date%'";
+        $dataQ = $ci->db->query($qdata)->row_array();
+        $noOrder = $dataQ['maxKode'];
+        $noUrut = (int) substr($noOrder, 10, 3);
+        $noUrut++;
+        $char = "BS";
+        $tahun=substr($date, 0, 4);
+        $bulan=substr($date, 4, 2);
+        $tgl=substr($date, 6, 2);
+        $kodeBaru  = $char.$tahun.$bulan.$tgl. sprintf("%03s", $noUrut);
 
-        return $this->db->affected_rows();
+        $date2 = $data['tgl_bast'];
+		$tgl2 = explode('-',$date2);
+		$tgl_bast = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
+        $lb_kanan="";
+        if (!empty($lb_kanan)){
+            $lb_kanan=$data['lb_kn'];
+        }else{
+            $lb_kanan='0';
+        }
+
+        $sql = "INSERT INTO tbl_br_bast SET
+            id_bast         ='".$kodeBaru."',
+            tgl_bast        ='".$tgl_bast."',
+            no_sj           ='".$data['no_sj']."',
+            no_body         ='".$data['no_body']."',
+            no_pol          ='".$data['no_pol']."',
+            nip_sp          ='".$data['nip_sp']."',
+            nama_sp         ='".$data['nama_sp']."',
+            kaca_depan      ='".$data['kaca_depan']."',
+            kaca_belakang   ='".$data['kaca_belakang']."',
+            spion           ='".$data['spion']."',
+            solar           ='".$data['solar']."',
+            seat            ='".$data['seat']."',
+            ac              ='".$data['ac']."',
+            lb_kn           ='$lb_kanan',
+            lb_kr           ='".$data['lb_kr']."',
+            ban_serep       ='".$data['ban_serep']."',
+            stnk            ='".$data['stnk']."',
+            sign_kn         ='".$data['sign_kn']."',
+            sign_kr         ='".$data['sign_kr']."',
+            kc_roda         ='".$data['kc_roda']."',
+            kps             ='".$data['kps']."',
+            lmp_rem_kn      ='".$data['lmp_rem_kn']."',
+            lmp_rem_kr      ='".$data['lmp_rem_kr']."',
+            dongkrak        ='".$data['dongkrak']."',
+            keur            ='".$data['keur']."',
+            lmp_kota_kn     ='".$data['lmp_kota_kn']."',
+            lmp_kota_kr      ='".$data['lmp_kota_kr']."',
+            video           ='".$data['video']."',
+            buku_jr         ='".$data['buku_jr']."',
+            spion_kn        ='".$data['spion_kn']."',
+            spion_kr        ='".$data['spion_kr']."',
+            tv              ='".$data['tv']."',
+            siu             ='".$data['siu']."',
+            tape            ='".$data['tape']."',
+            kc_kontak       ='".$data['kc_kontak']."',
+            keterangan      ='".$data['keterangan']."',
+            status_bus      ='".$data['status_bus']."',
+            user            ='".$data['user']."'";
+
+            $this->db->query($sql);
+    
+            return $this->db->affected_rows();
     }
     public function select_by_id($id)
     {
@@ -172,7 +214,7 @@ class Mod_bast extends CI_Model
         t_ppn       ='$a',
         sub_total   ='$b',
         grand_total ='$c'
-        WHERE id_po ='" . $data['id_po'] . "'";
+        WHERE id_po ='". $data['id_po']. "'";
 
         $this->db->query($sql);
 

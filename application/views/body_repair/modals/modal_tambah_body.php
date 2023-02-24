@@ -62,7 +62,7 @@
                                                           echo $body->thn_rangka;
                                                         } ?>" class="form-control">
                                                             </div>
-                                                            <label class="col-sm-2 col-form-label">Thn Pembuatan</label>
+                                                            <label class="col-sm-2 col-form-label">Thn Body</label>
                                                             <div class="col-sm-4">
                                                                 <input type="text" name="thn_pembuatan" id="thn_pembuatan" value="<?php if (!empty($body->thn_pembuatan)) {
                                                           echo $body->thn_pembuatan;

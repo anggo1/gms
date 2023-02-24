@@ -69,30 +69,4 @@ class Part_masuk extends MY_Controller
 		}
 		echo json_encode($out);
 	}
-	public function list_cuti()
-	{
-		$date1 				= $_GET['date1'];
-		$date2 				= $_GET['date2'];
-		$tgl1 = explode('-', $date1);
-		$ttmp1 = $tgl1[2] . "-" . $tgl1[1] . "-" . $tgl1[0] . "";
-
-		$tgl2 = explode('-', $date2);
-		$ttmp2 = $tgl2[2] . "-" . $tgl2[1] . "-" . $tgl2[0] . "";
-		$data['dataCuti'] = $this->Mod_cuti->cari_cuti($ttmp1, $ttmp2);
-		$this->load->view('hrd/list_cuti', $data);
-	}
-	public function deleteCuti()
-	{
-		$id = $_POST['id'];
-		$result = $this->Mod_cuti->deleteCuti($id);
-		if ($result > 0) {
-			//$out['datakode']=$kodeBaru;
-			$out['status'] = '';
-			$out['msg'] = show_del_msg('Deleted', '10px');
-		} else {
-			$out['status'] = '';
-			$out['msg'] = show_err_msg('Filed !', '10px');
-		}
-		echo json_encode($out);
-	}
 }
