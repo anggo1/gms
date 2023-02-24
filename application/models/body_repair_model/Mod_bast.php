@@ -123,12 +123,28 @@ class Mod_bast extends CI_Model
         $date2 = $data['tgl_bast'];
 		$tgl2 = explode('-',$date2);
 		$tgl_bast = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
-        $lb_kanan="";
-        if (!empty($lb_kanan)){
-            $lb_kanan=$data['lb_kn'];
-        }else{
-            $lb_kanan='0';
-        }
+        $lb_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lb_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $ban_serep=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $stnk=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $sign_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $sign_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $kc_roda=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $kps=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lmp_rem_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lmp_rem_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $dongkrak=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $keur=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lmp_kota_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lmp_kota_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $video=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $buku_jr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $spion_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $spion_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $tv=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $siu=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $tape=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $kc_kontak=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
 
         $sql = "INSERT INTO tbl_br_bast SET
             id_bast         ='".$kodeBaru."',
@@ -144,7 +160,7 @@ class Mod_bast extends CI_Model
             solar           ='".$data['solar']."',
             seat            ='".$data['seat']."',
             ac              ='".$data['ac']."',
-            lb_kn           ='$lb_kanan',
+            lb_kn           ='$lb_kn',
             lb_kr           ='".$data['lb_kr']."',
             ban_serep       ='".$data['ban_serep']."',
             stnk            ='".$data['stnk']."',
