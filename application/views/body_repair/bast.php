@@ -62,16 +62,15 @@ input[type="checkbox"]:focus {
 
 
 <section class="content">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="card card-default">
-					<!-- /.card-header -->
-					<div class="modal-content">
-						<div class="modal-header text-blue">
-
-							<h5 style="display:block; text-align:center;"><span class="ion-soup-can-outline ion-lg text-blue"></span>&nbsp; Proses Berita Acara Serah Terima (BAST)</h5>
-						</div>
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-default">
+			<div class="card-header">
+                <h3 class="card-title text-blue"><span class="ion-soup-can-outline ion-lg text-blue"></span>&nbsp; Proses Berita Acara Serah Terima (BAST)</h3>
+              </div>
 						<div class="modal-body">
 							<form id="formBast" name="formBast" method="POST">
 
@@ -134,18 +133,40 @@ input[type="checkbox"]:focus {
 							<button class="btn btn-primary" type="submit"><span class="fa fa-save"></span> Simpan</button>
 						</div>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6" id="detailPart">
-				<div class="card card-default">
-					<div class="modal-content">
-						<div class="modal-header text-blue">
-							<h5 style="display:block; text-align:center;"><span class="ion-android-alert ion-lg text-blue"></span>&nbsp; Detail Berita Acara Serah Terima (BAST)</h5>
-							<div class="text-right">
-								<button type="button" class="btn btn-sm btn-outline-success cetak-po" id="cetak" data-id="" hidden title="Add Data"><i class="fas fa-print"></i> Cetak</button>
-							</div>
 						</div>
+            <!-- /.card -->
+
+            <!-- general form elements -->
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+			  <table class="table table-striped  table-bordered table-hover nowrap responsive" id="list-po">
+									<thead>
+								<tr>
+									<th>No</th>
+									<th>Body</th>
+									<th>NoPol</th>
+									<th>Pengemudi</th>
+									<th>Keterangan</th>
+									<th>Aksi</th>
+								</tr>
+								</thead>
+									<tbody id="data-bast"></tbody>
+									<tfoot></tfoot>
+						</table>
+					</div>
+              <!-- /.card-body -->
+            </div>
+
+          </div>
+			
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card">
+            <div class="card-header">
+                <h3 class="card-title text-blue"><span class="ion-android-alert ion-lg"></span>&nbsp; Detail Berita Acara Serah Terima (BAST)</h3>
+              </div>
 						<div class="modal-body">
 						<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Kaca Depan</label>
@@ -253,8 +274,7 @@ input[type="checkbox"]:focus {
 					</div>
 				</div>
 							</form>
-		</div>
-	</div>
+							
 </section>
 <?php show_my_confirm('hapusDetail', 'hapus-detail', 'Hapus Data PO Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
 
@@ -264,7 +284,9 @@ input[type="checkbox"]:focus {
 		format: 'DD-MM-YYYY',
 		date: moment()
 	});
-
+	window.onload = function() {
+        tampilDetail();
+    }
 
 	var checkbox = document.getElementsByName("lb_kn");
             if(checkbox.checked){
@@ -277,6 +299,17 @@ input[type="checkbox"]:focus {
 	function refresh() {
 		MyTable = $('#list-po').dataTable();
 	}
+	
+	var tableBast = $('#list-bast').DataTable({
+           "responsive": false,
+           "paging": true,
+           "lengthChange": false,
+           "searching": false,
+           "ordering": true,
+           "info": false,
+           "autoWidth": true,
+           "pageLength": 5
+         });
 
 	$('#formBast').submit(function(e) {
 		var data = $(this).serialize();
@@ -293,6 +326,7 @@ input[type="checkbox"]:focus {
 					$('.form-msg').html(out.msg);
 					effect_msg_form();
 				} else {
+					tampilDetail();
 					document.getElementById("formBast").reset();
 					$('.msg').html(out.msg);
 					Swal.fire({
@@ -307,7 +341,13 @@ input[type="checkbox"]:focus {
 
 		e.preventDefault();
 	});
-
+	function tampilDetail() {
+        $.get('<?php echo base_url('Bast/tampilDetail'); ?>', function(data) {
+            tableBast.destroy();
+            $('#data-bast').html(data);
+            refresh();
+        });
+    }
 
 	$(document).on("click", ".cetak-po", function() {
 		var id = $(this).attr("data-id");

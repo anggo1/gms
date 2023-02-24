@@ -123,28 +123,28 @@ class Mod_bast extends CI_Model
         $date2 = $data['tgl_bast'];
 		$tgl2 = explode('-',$date2);
 		$tgl_bast = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
-        $lb_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $lb_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $ban_serep=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $stnk=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $sign_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $sign_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $kc_roda=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $kps=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $lmp_rem_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $lmp_rem_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $dongkrak=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $keur=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $lmp_kota_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $lmp_kota_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $video=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $buku_jr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $spion_kn=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $spion_kr=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $tv=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $siu=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $tape=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
-        $kc_kontak=""; if (!empty($lb_kanan)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lb_kn=""; if (!empty($lb_kn)){ $lb_kn=$data['lb_kn']; }else { $lb_kn='0'; }
+        $lb_kr=""; if (!empty($lb_kr)){ $lb_kr=$data['lb_kr']; }else { $lb_kr='0'; }
+        $ban_serep=""; if (!empty($ban_serep)){ $ban_serep=$data['ban_serep']; }else { $ban_serep='0'; }
+        $stnk=""; if (!empty($stnk)){ $stnk=$data['stnk']; }else { $stnk='0'; }
+        $sign_kn=""; if (!empty($sign_kn)){ $sign_kn=$data['sign_kn']; }else { $sign_kn='0'; }
+        $sign_kr=""; if (!empty($sign_kr)){ $sign_kr=$data['sign_kr']; }else { $sign_kr='0'; }
+        $kc_roda=""; if (!empty($kc_roda)){ $kc_roda=$data['kc_roda']; }else { $kc_roda='0'; }
+        $kps=""; if (!empty($kps)){ $kps=$data['kps']; }else { $kps='0'; }
+        $lmp_rem_kn=""; if (!empty($lmp_rem_kn)){ $lmp_rem_kn=$data['lmp_rem_kn']; }else { $lmp_rem_kn='0'; }
+        $lmp_rem_kr=""; if (!empty($lmp_rem_kr)){ $lmp_rem_kr=$data['lmp_rem_kr']; }else { $lmp_rem_kr='0'; }
+        $dongkrak=""; if (!empty($dongkrak)){ $dongkrak=$data['dongkrak']; }else { $dongkrak='0'; }
+        $keur=""; if (!empty($keur)){ $keur=$data['keur']; }else { $keur='0'; }
+        $lmp_kota_kn=""; if (!empty($lmp_kota_kn)){ $lmp_kota_kn=$data['lmp_kota_kn']; }else { $lmp_kota_kn='0'; }
+        $lmp_kota_kr=""; if (!empty($lmp_kota_kr)){ $lmp_kota_kr=$data['lmp_kota_kr']; }else { $lmp_kota_kr='0'; }
+        $video=""; if (!empty($video)){ $video=$data['video']; }else { $video='0'; }
+        $buku_jr=""; if (!empty($buku_jr)){ $buku_jr=$data['buku_jr']; }else { $buku_jr='0'; }
+        $spion_kn=""; if (!empty($spion_kn)){ $spion_kn=$data['spion_kn']; }else { $spion_kn='0'; }
+        $spion_kr=""; if (!empty($spion_kr)){ $spion_kr=$data['spion_kr']; }else { $spion_kr='0'; }
+        $tv=""; if (!empty($tv)){ $tv=$data['tv']; }else { $tv='0'; }
+        $siu=""; if (!empty($siu)){ $siu=$data['siu']; }else { $siu='0'; }
+        $tape=""; if (!empty($tape)){ $tape=$data['tape']; }else { $tape='0'; }
+        $kc_kontak=""; if (!empty($kc_kontak)){ $kc_kontak=$data['kc_kontak']; }else { $kc_kontak='0'; }
 
         $sql = "INSERT INTO tbl_br_bast SET
             id_bast         ='".$kodeBaru."',
@@ -161,27 +161,27 @@ class Mod_bast extends CI_Model
             seat            ='".$data['seat']."',
             ac              ='".$data['ac']."',
             lb_kn           ='$lb_kn',
-            lb_kr           ='".$data['lb_kr']."',
-            ban_serep       ='".$data['ban_serep']."',
-            stnk            ='".$data['stnk']."',
-            sign_kn         ='".$data['sign_kn']."',
-            sign_kr         ='".$data['sign_kr']."',
-            kc_roda         ='".$data['kc_roda']."',
-            kps             ='".$data['kps']."',
-            lmp_rem_kn      ='".$data['lmp_rem_kn']."',
-            lmp_rem_kr      ='".$data['lmp_rem_kr']."',
-            dongkrak        ='".$data['dongkrak']."',
-            keur            ='".$data['keur']."',
-            lmp_kota_kn     ='".$data['lmp_kota_kn']."',
-            lmp_kota_kr      ='".$data['lmp_kota_kr']."',
-            video           ='".$data['video']."',
-            buku_jr         ='".$data['buku_jr']."',
-            spion_kn        ='".$data['spion_kn']."',
-            spion_kr        ='".$data['spion_kr']."',
-            tv              ='".$data['tv']."',
-            siu             ='".$data['siu']."',
-            tape            ='".$data['tape']."',
-            kc_kontak       ='".$data['kc_kontak']."',
+            lb_kr           ='$lb_kr',
+            ban_serep       ='$ban_serep',
+            stnk            ='$stnk',
+            sign_kn         ='$sign_kn',
+            sign_kr         ='$sign_kr',
+            kc_roda         ='$kc_roda',
+            kps             ='$kps',
+            lmp_rem_kn      ='$lmp_rem_kn',
+            lmp_rem_kr      ='$lmp_rem_kr',
+            dongkrak        ='$dongkrak',
+            keur            ='$keur',
+            lmp_kota_kn     ='$lmp_kota_kn',
+            lmp_kota_kr     ='$lmp_kota_kr',
+            video           ='$video',
+            buku_jr         ='$buku_jr',
+            spion_kn        ='$spion_kn',
+            spion_kr        ='$spion_kr',
+            tv              ='$tv',
+            siu             ='$siu',
+            tape            ='$tape',
+            kc_kontak       ='$kc_kontak',
             keterangan      ='".$data['keterangan']."',
             status_bus      ='".$data['status_bus']."',
             user            ='".$data['user']."'";
@@ -199,26 +199,11 @@ class Mod_bast extends CI_Model
         return $data->result();
         //return $data->row();
     }
-    public function select_detail($id)
+    public function select_detail()
     {
-        $ci = get_instance();
-        $query = "SELECT sum(total_harga) as total,b.ppn FROM tbl_wh_detail_po as a 
-                    LEFT JOIN tbl_wh_po as b ON b.id_po=a.id_po
-                    WHERE a.id_po='{$id}'";
-        $d_data = $ci->db->query($query)->row_array();
-        $total       = $d_data['total'];
-        $ppn       = $d_data['ppn'];
-        $total_ppn = $total * $ppn / 100;
-        $grand_total = $total + $total_ppn;
-        $sql_update = "UPDATE tbl_wh_po SET
-        t_ppn       ='$total_ppn',
-        sub_total   ='$total',
-        grand_total ='$grand_total'
-        WHERE id_po ='{$id}'";
-
-        $this->db->query($sql_update);
-
-        $sql = "SELECT * FROM tbl_wh_detail_po WHERE id_po ='{$id}'";
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date("Y-m-d");
+        $sql = "SELECT * FROM tbl_br_bast WHERE tgl_bast ='$date'";
 
         $data = $this->db->query($sql);
         return $data->result();

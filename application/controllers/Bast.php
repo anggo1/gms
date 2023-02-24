@@ -37,6 +37,11 @@ class Bast extends MY_Controller
 
         echo json_encode($out);
     }
+	public function tampilDetail()
+	{
+		$data['dataDetail'] = $this->Mod_bast->select_detail();
+		$this->load->view('body_repair/detail_bast', $data);
+	}
 	public function cetak()
 	{
 		$id 				= $_POST['id'];
