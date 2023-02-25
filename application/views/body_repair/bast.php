@@ -57,7 +57,9 @@ input[type="checkbox"]:focus {
   outline-offset: max(2px, 0.15em);
   
 }
-
+input-besar, textarea{
+    text-transform: uppercase;
+}
 </style>
 
 
@@ -95,11 +97,11 @@ input[type="checkbox"]:focus {
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">No Body</label>
 									<div class="col-sm-4">
-										<input type="text" name="no_body" value="" class="form-control" placeholder="Nomor Body" required>
+										<input type="text" name="no_body" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control input-besar" placeholder="Nomor Body" required>
 									</div>
 									<label class="col-sm-2 col-form-label">No Pol</label>
 									<div class="col-sm-4">
-										<input type="text" name="no_pol" class="form-control" placeholder="Nomor Polisi ?">
+										<input type="text" name="no_pol" class="form-control" style="text-transform: uppercase;" placeholder="Nomor Polisi ?">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -140,7 +142,9 @@ input[type="checkbox"]:focus {
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-			  <table class="table table-striped  table-bordered table-hover nowrap responsive" id="list-po">
+				
+			  <div class="table-responsive">
+			  <table class="table table-striped  table-bordered table-hover nowrap" id="list-po">
 									<thead>
 								<tr>
 									<th>No</th>
@@ -155,7 +159,9 @@ input[type="checkbox"]:focus {
 									<tfoot></tfoot>
 						</table>
 					</div>
+					</div>
               <!-- /.card-body -->
+				<div id="modal-bast"></div>
             </div>
 
           </div>
@@ -213,7 +219,7 @@ input[type="checkbox"]:focus {
 									</thead>
 									<tbody id="data-po">
 									<td>Lampu Besar</td>
-							<td><input type="checkbox" name="lb_kn" id="lb_kn" checked></td>
+							<td><input type="checkbox" name="lb_kn" id="lb_kn" value="1" checked></td>
 							<td ><input type="checkbox" name="lb_kr" value="1" checked></td>
 							<td>Ban Stip/Serep</td>
 							<td ><label for="ban_stip">
@@ -305,7 +311,7 @@ input[type="checkbox"]:focus {
            "paging": true,
            "lengthChange": false,
            "searching": false,
-           "ordering": true,
+           "ordering": false,
            "info": false,
            "autoWidth": true,
            "pageLength": 5
@@ -349,17 +355,17 @@ input[type="checkbox"]:focus {
         });
     }
 
-	$(document).on("click", ".cetak-po", function() {
+	$(document).on("click", ".cetak-bast", function() {
 		var id = $(this).attr("data-id");
 		//var id = document.getElementById('next_proses').value=datakode;
 		$.ajax({
 				method: "POST",
-				url: "<?php echo base_url('PurchaseOrder/cetak'); ?>",
+				url: "<?php echo base_url('Bast/cetak'); ?>",
 				data: "id=" + id
 			})
 			.done(function(data) {
-				$('#modal-po').html(data);
-				$('#cetak-po').modal('show');
+				$('#modal-bast').html(data);
+				$('#cetak-bast').modal('show');
 			})
 	})
 </script>

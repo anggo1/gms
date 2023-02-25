@@ -8,6 +8,7 @@ class Bast extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model(array('body_repair_model/Mod_bast'));
+        $this->load->helper('tgl_indo_helper');
 	}
 
 	public function index()
@@ -45,9 +46,8 @@ class Bast extends MY_Controller
 	public function cetak()
 	{
 		$id 				= $_POST['id'];
-		$data['dataPo'] = $this->Mod_bast->select_by_id($id);
-		$data['detailPo'] = $this->Mod_bast->select_detail($id);
+		$data['dataBast'] = $this->Mod_bast->select_by_id($id);
 
-		echo show_my_print('warehouse/modals/modal_cetak_po', 'cetak-po', $data, ' modal-xl');
+		echo show_my_print('body_repair/modals/modal_cetak_bast', 'cetak-bast', $data, ' modal-xl');
 	}
 }
