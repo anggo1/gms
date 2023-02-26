@@ -12,6 +12,8 @@ class Mesin_absen extends MY_Controller {
 
     public function index()
     {
+		$data['page'] 		= "Mesin Absen";
+		$data['judul'] 		= "Mesin Absen";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();        
 		echo show_my_modal('hrd/modals/modal_tambah_mesin', 'tambah-mesin', $data);

@@ -17,7 +17,7 @@
 					<div class="modal-content">
 						<div class="modal-header text-blue">
 
-							<h5 style="display:block; text-align:center;"><span class="ion-soup-can-outline ion-lg text-blue"></span>&nbsp; Pengeluaran Barang</h5>
+							<h5 style="display:block; text-align:center;"><span class="ion-soup-can-outline ion-lg text-blue"></span>&nbsp; Penambahan Stok</h5>
 						</div>
 						<div class="modal-body">
 							<form id="form-part-masuk" name="form-part-masuk" method="POST">

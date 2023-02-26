@@ -14,8 +14,10 @@ class Menu extends MY_Controller {
 
     public function index()
     {
+		$data['page'] 		= "Daftar Menu Aplikasi";
+		$data['judul'] 		= "Menu Aplikasi";
         // $this->load->helper('url');
-        $this->template->load('layoutbackend','admin/menu_data');
+        $this->template->load('layoutbackend','admin/menu_data',$data);
     }
 
  public function ajax_list()

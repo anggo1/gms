@@ -97,9 +97,9 @@ class Mod_bast extends CI_Model
 
         return $data->result();
     }
-    public function deleteDetail_po($id)
+    public function deleteBast($id)
     {
-        $sql = "DELETE FROM tbl_wh_detail_po WHERE id_detail='". $id. "'";
+        $sql = "DELETE FROM tbl_br_bast WHERE id_bast='". $id. "'";
 
         $this->db->query($sql);
 

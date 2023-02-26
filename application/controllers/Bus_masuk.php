@@ -12,8 +12,10 @@ class Barang extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Panel Setting Body Repair";
+		$data['judul'] 		= "Panel Setting";
 		$this->load->helper('url');
-        $this->template->load('layoutbackend','barang');
+        $this->template->load('layoutbackend','barang',$data);
 	}
 
 	 public function ajax_list()

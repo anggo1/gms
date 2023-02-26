@@ -14,6 +14,8 @@ class SettingHrd extends MY_Controller {
 
     public function index()
     {
+		$data['page'] 		= "Panel Setting HRD";
+		$data['judul'] 		= "Panel Setting";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();        
 		echo show_my_modal('hrd/modals/modal_tambah_pend', 'tambah-pendidikan', $data);

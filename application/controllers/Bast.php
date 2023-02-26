@@ -13,8 +13,10 @@ class Bast extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Berita Acara Serah Terima Kendaraan";
+		$data['judul'] 		= "BAST";
 		$this->load->helper('url');
-		$this->template->load('layoutbackend', 'body_repair/bast');
+		$this->template->load('layoutbackend', 'body_repair/bast',$data);
 	}
 	public function prosesBast()
     {
@@ -50,4 +52,17 @@ class Bast extends MY_Controller
 
 		echo show_my_print('body_repair/modals/modal_cetak_bast', 'cetak-bast', $data, ' modal-xl');
 	}
+	public function deleteBast()
+ 	{       $id = $_POST['id'];
+        $result = $this->Mod_bast->deleteBast($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_del_msg('Deleted', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
 }

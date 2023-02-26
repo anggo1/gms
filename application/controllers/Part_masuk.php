@@ -12,9 +12,11 @@ class Part_masuk extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Barang Masuk";
+		$data['judul'] 		= "Input Stok";
 		$this->load->helper('url');
 		//$data['dataKode'] = $this->Mod_cuti->select_kode_cuti();
-		$this->template->load('layoutbackend', 'warehouse/part_masuk');
+		$this->template->load('layoutbackend', 'warehouse/part_masuk',$data);
 	}
 
 	public function ajax_list()

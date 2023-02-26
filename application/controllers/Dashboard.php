@@ -14,11 +14,13 @@ class Dashboard extends MY_Controller {
 
     function index()
     {
+		$data['page'] 		= "Halaman Depan";
+		$data['judul'] 		= "Dashboard";
     	$logged_in = $this->session->userdata('logged_in');
         if ($logged_in != TRUE || empty($logged_in)) {
             redirect('login');
         }else{
-        	$this->template->load('layoutbackend','dashboard/dashboard_data');
+        	$this->template->load('layoutbackend','dashboard/dashboard_data',$data);
         }
         
     }

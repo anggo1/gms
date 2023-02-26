@@ -16,6 +16,8 @@ class Settingwh extends MY_Controller
 
     public function index()
     {
+		$data['page'] 		= "Panel Setting Warehouse";
+		$data['judul'] 		= "Panel Setting";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
         echo show_my_modal('warehouse/modals/modal_tambah_sat', 'tambah-satuan', $data);

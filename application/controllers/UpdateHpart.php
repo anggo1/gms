@@ -17,6 +17,8 @@ class UpdateHpart extends MY_Controller
 
     public function index()
     {
+		$data['page'] 		= "Update Harga Barang";
+		$data['judul'] 		= "Harga Barang";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
 

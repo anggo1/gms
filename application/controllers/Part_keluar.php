@@ -12,6 +12,8 @@ class Part_keluar extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Barang Keluar";
+		$data['judul'] 		= "Barang Keluar";
 		$this->load->helper('url');
 		$data['dataSupplier'] = $this->Mod_part_keluar->select_supplier();
 		$this->template->load('layoutbackend', 'warehouse/part_keluar', $data);

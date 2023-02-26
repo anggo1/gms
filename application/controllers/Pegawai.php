@@ -16,6 +16,8 @@ class Pegawai extends MY_Controller {
 
     public function index()
     {
+		$data['page'] 		= "Daftar Pegawai";
+		$data['judul'] 		= "Data Pegawai";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
         

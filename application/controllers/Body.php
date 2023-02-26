@@ -12,6 +12,8 @@ class Body extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Daftar Bus / Kendaraan";
+		$data['judul'] 		= "Daftar Bus";
 		$this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
 

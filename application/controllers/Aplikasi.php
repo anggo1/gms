@@ -17,7 +17,9 @@ class Aplikasi extends MY_Controller
 
 	public function index()
 	{
-		$this->template->load('layoutbackend', 'admin/aplikasi');
+		$data['page'] 		= "Setting Nama Perusahan";
+		$data['judul'] 		= "Perusahaan";
+		$this->template->load('layoutbackend', 'admin/aplikasi',$data);
 	}
 
 	    public function ajax_list()

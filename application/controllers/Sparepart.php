@@ -17,6 +17,8 @@ class Sparepart extends MY_Controller
 
     public function index()
     {
+		$data['page'] 		= "Data Barang";
+		$data['judul'] 		= "Sparepart";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
 

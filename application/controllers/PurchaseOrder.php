@@ -12,6 +12,8 @@ class PurchaseOrder extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Purchase Order";
+		$data['judul'] 		= "PO";
 		$this->load->helper('url');
 		$data['dataSupplier'] = $this->Mod_purchaseorder->select_supplier();
 		$this->template->load('layoutbackend', 'warehouse/purchase_order', $data);

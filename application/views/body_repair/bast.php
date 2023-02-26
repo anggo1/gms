@@ -81,7 +81,7 @@ input-besar, textarea{
 									<div class="col-sm-4">
 										<div class="input-group date" id="reservationdate" data-target-input="nearest">
 
-											<input type="text" name="tgl_bast" id="tgl_bast" class="form-control tgl_po datetimepicker" data-toggle="datetimepicker" data-target=".tgl_po" data-format="yyy-mm-dd" required>
+											<input type="text" name="tgl_bast" id="tgl_bast" class="form-control tgl_bast datetimepicker" data-toggle="datetimepicker" data-target=".tgl_bast" data-format="yyy-mm-dd" required>
 
 											<div class="input-group-append" data-toggle="datetimepicker">
 												<div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -282,7 +282,7 @@ input-besar, textarea{
 							</form>
 							
 </section>
-<?php show_my_confirm('hapusDetail', 'hapus-detail', 'Hapus Data PO Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
+<?php show_my_confirm('hapusBast', 'hapus-bast', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
 
 </section><!-- /.modal-content -->
 <script type="text/javascript">
@@ -368,4 +368,32 @@ input-besar, textarea{
 				$('#cetak-bast').modal('show');
 			})
 	})
+	$(document).on("click", ".delete-bast", function() {
+        id_lapor = $(this).attr("data-id");
+    })
+    $(document).on("click", ".hapus-bast", function() {
+        var id = id_lapor;
+
+$.ajax({
+        method: "POST",
+        url: "<?php echo base_url('Bast/deleteBast'); ?>",
+        data: "id=" + id
+    })
+
+    .done(function(data) {
+        var out = jQuery.parseJSON(data);
+		tampilDetail();
+        $('.msg').html(out.msg);
+        $('#hapusBast').modal('hide');
+        if (out.status != 'form') {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: out.msg,
+                showConfirmButton: false,
+                timer: 1200
+            })
+        }
+    })
+})
 </script>

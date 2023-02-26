@@ -18,7 +18,8 @@ class Userlevel extends MY_Controller
 
 	public function index()
 	{
-		// 
+		$data['page'] 		= "Akses Level Pengguna";
+		$data['judul'] 		= "User Setting";
         $data['user_level'] = $this->Mod_userlevel->getAll();
         $this->template->load('layoutbackend', 'admin/user_level', $data);
 	}

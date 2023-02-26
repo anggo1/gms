@@ -12,6 +12,8 @@ class Cuti extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Input Data Cuti";
+		$data['judul'] 		= "Cuti";
 		$this->load->helper('url');
 		$data['dataKode'] = $this->Mod_cuti->select_kode_cuti();
 		$this->template->load('layoutbackend', 'hrd/cuti', $data);

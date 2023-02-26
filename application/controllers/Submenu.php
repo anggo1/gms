@@ -14,6 +14,8 @@ class Submenu extends MY_Controller {
 
     public function index()
     {
+		$data['page'] 		= "Daftar Sub Menu Aplikasi";
+		$data['judul'] 		= "Submenu";
         $this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
         $this->template->load('layoutbackend','admin/submenu_data',$data);

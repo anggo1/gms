@@ -16,6 +16,8 @@ class User extends MY_Controller {
 
     public function index()
     {
+		$data['page'] 		= "Daftar Pengguna Aplikasi";
+		$data['judul'] 		= "Daftar Pengguna";
         $this->load->helper('url');
         $data['user'] = $this->Mod_user->getAll();
         $data['user_level'] = $this->Mod_user->userlevel();

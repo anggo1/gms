@@ -12,7 +12,7 @@
 
            <td class="text-center">
            <button type="button" class="btn btn-xs btn-outline-success cetak-bast" id="cetak" data-id="<?php echo $s->id_bast; ?>"><i class="fas fa-print"></i></button>
-             <button class="btn btn-xs btn-outline-danger delete-detail" data-toggle="modal" data-target="#hapusDetail" data-id="<?php echo $s->id_bast; ?>"><i class="fas fa-trash"></i></button>
+             <button class="btn btn-xs btn-outline-danger delete-bast" data-toggle="modal" data-target="#hapusBast" data-id="<?php echo $s->id_bast; ?>"><i class="fas fa-trash"></i></button>
            </td>
          </tr>
        <?php

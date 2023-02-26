@@ -12,6 +12,8 @@ class ListBus extends MY_Controller
 
 	public function index()
 	{
+		$data['page'] 		= "Daftar Bus";
+		$data['judul'] 		= "Data Bus";
 		$this->load->helper('url');
         $data['menu'] = $this->Mod_menu->getAll()->result();
 
