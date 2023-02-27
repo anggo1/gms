@@ -1,23 +1,25 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class BusMasuk extends MY_Controller
+class Estimator extends MY_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model(array('body_repair_model/Mod_busmasuk'));
+        $this->load->model(array('body_repair_model/Mod_estimator'));
 	}
 
 	public function index()
 	{
-		$data['page'] 		= "Laporan Bus Masuk";
-		$data['judul'] 		= "Bus Masuk";
+		$data['page'] 		= "Estimasi Perbaikan Bus";
+		$data['judul'] 		= "Estimator";
 		$this->load->helper('url');
-        $data['dataLap'] = $this->Mod_busmasuk->select_laporan();
-        $data['dataKat'] = $this->Mod_busmasuk->select_kategori();
-        $this->template->load('layoutbackend','body_repair/bus_masuk',$data);
+
+        
+        $id = $_POST['id'];
+        $data['dataLap'] = $this->Mod_estimator->select_laporan();
+        $this->template->load('layoutbackend','body_repair/estimator',$data);
 	}
 
     public function ajax_list()
@@ -115,8 +117,6 @@ class BusMasuk extends MY_Controller
 		$data['page'] 		= "Estimasi Perbaikan Bus";
 		$data['judul'] 		= "Estimator";
 		$this->load->helper('url');
-        
-        $id = $_POST['id'];
         $data['dataPk'] = $this->Mod_busmasuk->select_pk();
         $this->template->load('layoutbackend','body_repair/estimator',$data);
 	}

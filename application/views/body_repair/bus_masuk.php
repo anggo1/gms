@@ -348,4 +348,17 @@ $.ajax({
         }
     })
 })
+$(document).on("click", ".estimasi", function() {
+		var id = $(this).attr("data-id");
+		var no_body = $(this).attr("no_body");
+		
+		$.ajax({
+			method: "GET",
+			url: "<?php echo site_url('Estimator'); ?>",
+			data: "id=" +id +"&no_body=" +no_body
+		})
+		.done(function(data) {
+            window.location.href = "<?php echo site_url('Estimator'); ?>";
+		})
+	})
 </script>
