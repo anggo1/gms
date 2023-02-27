@@ -48,11 +48,18 @@ class BusMasuk extends MY_Controller
             $row[] = $bd->tgl_masuk;
             $row[] = $bd->jam_masuk;
             $row[] = $bd->keterangan;
-            $row[]='
-                <button class="btn btn-xs btn-outline-success update-masuk ion-compose ion-sm" title="Edit" data-id="'.$bd->id_lapor.'"> Proses PK
-                </button>
-                <button class="btn btn-xs btn-outline-danger delete-laporan ion-android-close ion-sm" title="Delete" data-toggle="modal" data-target="#hapusLaporan" data-id="'.$bd->id_lapor.'"> Batal
+            if($bd->status='N'){
+                $row[] = 
+                '<a href="'.base_url('BusMasuk/Estimasi').'"><button class="btn btn-xs btn-outline-success update-masuk" title="Edit" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard-teacher"></i> Estimator
+                </button></a>
+                <button class="btn btn-xs btn-outline-danger delete-laporan" title="Delete" data-toggle="modal" data-target="#hapusLaporan" data-id="'.$bd->id_lapor.'"><i class="fa fa-times"></i>  Batal
                 </button>';
+            } else{
+                $row[] = 
+                '<button class="btn btn-xs btn-outline-primary update-masuk" title="Edit" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
+                </button>';
+            }
+                
             
             $data[] = $row;
         }

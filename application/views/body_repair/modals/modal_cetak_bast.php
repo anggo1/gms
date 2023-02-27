@@ -22,9 +22,7 @@
   }
 </script>
 <style>
-  @media print {
-
-
+ 
     @media screen {
       #printSection {
         display: none;
