@@ -17,6 +17,7 @@ class BusMasuk extends MY_Controller
 		$this->load->helper('url');
         $data['dataLap'] = $this->Mod_busmasuk->select_laporan();
         $data['dataKat'] = $this->Mod_busmasuk->select_kategori();
+        $data['dataPk'] = $this->Mod_busmasuk->select_pk();
         $this->template->load('layoutbackend','body_repair/bus_masuk',$data);
 	}
 
@@ -72,7 +73,11 @@ class BusMasuk extends MY_Controller
         //output to json format
         echo json_encode($output);
     }
-
+    public function cariKode($id)
+	{
+		$data = $this->Mod_busmasuk->get_part($id);
+		echo json_encode($data);
+	}
     public function prosesLaporan()
     {
         $this->form_validation->set_rules('tgl_masuk', 'Tanggal Masuk', 'trim|required');
@@ -114,8 +119,7 @@ class BusMasuk extends MY_Controller
 	{
 		$data['page'] 		= "Estimasi Perbaikan Bus";
 		$data['judul'] 		= "Estimator";
-		$this->load->helper('url');
-        
+		$this->load->helper('url');        
         $id = $_POST['id'];
         $data['dataPk'] = $this->Mod_busmasuk->select_pk();
         $this->template->load('layoutbackend','body_repair/estimator',$data);

@@ -86,7 +86,7 @@ table.dataTable td {
               </li>-->
 				<li class="nav-item">
 					<a class="nav-link" id="tab-proses-tab" data-toggle="pill" href="#tab-proses" role="tab"> <i
-							class="fas fa-luggage-cart"></i> Estimasi</a>
+							class="fas fa-luggage-cart"></i> Estimasi Perbaikan</a>
 				</li>
 
 			</ul>
@@ -209,7 +209,6 @@ table.dataTable td {
 					<?php show_my_confirm('hapusLaporan', 'hapus-laporan', 'Hapus Data Laporan Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
 
 
-					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="card card-info">
@@ -218,7 +217,7 @@ table.dataTable td {
 											<table id="tabel-masuk"
 												class="table table-bordered table-striped table-hover">
 												<thead>
-													<tr>
+													<tr class="bg-purple">
 														<th>No</th>
 														<th>No Body</th>
 														<th>No Pol</th>
@@ -244,10 +243,8 @@ table.dataTable td {
 							</div>
 						</div>
 					</div>
-				</div>
 				<div class="tab-pane show" id="tab-proses" role="tabpanel" aria-labelledby="tab-proses-tab">
-					<div class="col-md-6">
-						<div class="card card-info">
+
 							<div class="card-body">
 								<form id="form1" name="form1" method="POST">
 									<div class="form-group row">
@@ -267,6 +264,10 @@ table.dataTable td {
 												</div>
 											</div>
 										</div>
+										<label class="col-sm-2 col-form-label">No Body</label>
+										<div class="col-sm-4">
+											<input type="text" name="body_pk" id="body_pk" class="form-control" readonly required placeholder="No Body Tidak Boleh Kosong">
+										</div>
 									</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">ACC</label>
@@ -274,20 +275,16 @@ table.dataTable td {
 											<input type="text" name="acc" id="acc" class="form-control"
 												placeholder="Persetujuan">
 										</div>
-									</div>
-
-									<div class="form-group row">
-
-										<label class="col-sm-2 col-form-label">Supplier</label>
+										<label class="col-sm-2 col-form-label">Pekerjaan</label>
 										<div class="col-sm-4">
-											<select name="supplier" class="form-control">
-												<option value="">Supplier...
+											<select name="pekerjaan" id="pekerjaan" class="form-control">
+												<option value="">Jenis PK...
 												</option>
 												<?php
-											if (!empty($dataSupplier)) {
-												foreach ($dataSupplier as $sp) {   ?>
-												<option value="<?php echo $sp->id_supplier; ?>">
-													<?php echo $sp->nama_sup; ?>
+											if (!empty($dataPk)) {
+												foreach ($dataPk as $pk) {   ?>
+												<option value="<?php echo $pk->kode; ?>">
+													<?php echo $pk->kode.' => '.$pk->keterangan; ?>
 												</option>
 												<?php
 												}
@@ -296,23 +293,96 @@ table.dataTable td {
 											</select>
 										</div>
 									</div>
+								<div class="form-group row">
+									<label for="No Part" class="col-sm-2 col-form-label">No Part</label>
+									<div class="col-sm-4">
+										<div class="input-group date" id="reservationdate" data-target-input="nearest">
+											<input type="text" name="no_part" id="no_part" readonly class="form-control">
+											<span class="input-group-append">
+												<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_form"><i class="glyphicon glyphicon-plus-sign"><i class="fa fa-search"></i></button></i>
+											</span>
+										</div>
+									</div>
+									<label for="Nama Part" class="col-sm-2 col-form-label">Nama</label>
+									<div class="col-sm-4">
+										<input type="text" name="nama_part" id="nama_part" readonly class="form-control">
+									</div>
+								</div>
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Ket Barang</label>
-										<div class="col-sm-4">
+										<div class="col-sm-10">
 											<input type="text" name="keterangan" id="keterangan" value=""
 												class="form-control" placeholder="Keterangan Barang">
 										</div>
 									</div>
 							</div>
+							<input type="text" name="id_lapor" id="id_lapor" class="form-control">
+							<input type="hidden" name="hrg_awal" id="hrg_awal" class="form-control">
 							<input type="hidden" name="user" id="user"
 								value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
-							<div class="modal-footer center-content-between">
-								<button class="form-control btn bg-gradient-primary" id="btnSimpan" type="submit"
-									disabled=""><span class=" fa fa-save"></span> Simpan</button>
+								<div class="modal-footer center-content-between">
+							<button class="btn btn-primary" type="submit"><span class="fa fa-save"></span>
+								Simpan</button>
+						</div>
+					</form>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-info">
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="tabel-masuk"
+												class="table table-bordered table-striped table-hover">
+												<thead>
+													<tr class="bg-indigo">
+														<th>No</th>
+														<th>No Body</th>
+														<th>Jenis PK</th>
+														<th>No Part</th>
+														<th>nama Barang</th>
+														<th>Keterangan</th>
+														<th>AKSI</th>
+													</tr>
+												</thead>
+												<tbody id="data-pengiriman"></tbody>
+												<tfoot></tfoot>
+											</table>
+										</div>
+										<div class="card-footer">
+											<button class="btn bg-gradient-success cetak-datattb" id="cetak" data-id=""
+												hidden="">
+										</div>
+									</div>
+								</div>
 							</div>
-							</form>
+						</div>
 						</div>
 					</div>
+					<div class="modal fade" id="modal_form" role="dialog">
+				<div class="modal-dialog modal-xm">
+					<div class="modal-content">
+						<div class="modal-body form">
+							<div class="card card-first card-outline">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table no-wrap table-hover nowrap" id="table-part">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>No Part</th>
+													<th>Nama Part</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+											<tfoot></tfoot>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 					<script type="text/javascript">
 					$('#tgl_masuk,#tgl_estimasi').datetimepicker({
 						format: 'DD-MM-YYYY',
@@ -325,6 +395,56 @@ table.dataTable td {
 						pickSeconds: false,
 						pick12HourFormat: false
 					})
+					$(document).ready(function() {
+		table = $('#table-part').dataTable({
+			"responsive": false,
+			"paging": true,
+			"lengthChange": false,
+			"searching": true,
+			"ordering": false,
+			"info": false,
+			"processing": true,
+			"serverSide": true,
+			"pageLength": 5, // Defaults number of rows to display in table
+			"order": [],
+			"ajax": {
+				"url": "<?php echo site_url('PurchaseOrder/ajax_list') ?>",
+				"type": "POST"
+			},
+			"columnDefs": [{
+				"targets": [0],
+				"orderable": false,
+			}, ],
+			"dom": '<"top"f>rt<"bottom"lp><"clear">',
+			"fnDrawCallback": function() {
+				$("input[type                                = 'search']").attr("id", "searchBox");
+				$('#table-select').css('cssText', "margin-top: 0px !important;");
+				$('#searchBox').css("width", "300px").focus();
+				$('#table-select_filter').removeClass('dataTables_filter');
+			}
+		});
+	});
+	function selectPart(id_barang) {
+		$.ajax({
+			url: "<?php echo site_url('BusMasuk/cariKode') ?>/" + id_barang,
+			type: "GET",
+			dataType: "JSON",
+			success: function(data) {
+
+				$('[name = "id_barang"]').val(data.id_barang);
+				$('[name = "no_part"]').val(data.no_part);
+				$('[name = "nama_part"]').val(data.nama_part);
+				$('[name = "hrg_awal"]').val(data.hrg_awal);
+				//document.getElementById('supplier').innerHTML   = data.supplier;
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert('Error get data from ajax');
+			}
+		});
+
+		$('#modal_form').modal('hide');
+	}
+
 
 					$(document).ready(function() {
 
@@ -471,12 +591,16 @@ table.dataTable td {
 						var no_body = $(this).attr("no_body");
 
 						$.ajax({
-								method: "GET",
+								method: "POST",
 								url: "<?php echo site_url('Estimator'); ?>",
 								data: "id=" + id + "&no_body=" + no_body
 							})
 							.done(function(data) {
 								$("a[href='#tab-proses']").tab('show');
+				document.getElementById('body_pk').value=no_body; 
+				document.getElementById('id_lapor').value=id;
+				//$("#pekerjaan").attr('disabled', 'disabled');
 							})
 					})
+
 					</script>
