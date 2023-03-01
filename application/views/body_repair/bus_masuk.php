@@ -230,13 +230,12 @@ table.dataTable td {
 														<th>AKSI</th>
 													</tr>
 												</thead>
-												<tbody id="data-pengiriman"></tbody>
+												<tbody></tbody>
 												<tfoot></tfoot>
 											</table>
 										</div>
 										<div class="card-footer">
-											<button class="btn bg-gradient-success cetak-datattb" id="cetak" data-id=""
-												hidden="">
+											<!--<button class="btn bg-gradient-success cetak-datattb" id="cetak" data-id=""	hidden="">Cetak</button>-->
 										</div>
 									</div>
 								</div>
@@ -246,7 +245,7 @@ table.dataTable td {
 				<div class="tab-pane show" id="tab-proses" role="tabpanel" aria-labelledby="tab-proses-tab">
 
 							<div class="card-body">
-								<form id="form1" name="form1" method="POST">
+								<form id="form-estimasi" name="form-estimasi" method="POST">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Tanggal</label>
 										<div class="col-sm-4">
@@ -277,7 +276,7 @@ table.dataTable td {
 										</div>
 										<label class="col-sm-2 col-form-label">Pekerjaan</label>
 										<div class="col-sm-4">
-											<select name="pekerjaan" id="pekerjaan" class="form-control">
+											<select name="jns_pk" id="jns_pk" class="form-control">
 												<option value="">Jenis PK...
 												</option>
 												<?php
@@ -309,14 +308,19 @@ table.dataTable td {
 									</div>
 								</div>
 									<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Jumlah Barang</label>
+										<div class="col-sm-4">
+											<input type="text" name="jml_part" id="jml_part" value=""
+												class="form-control" placeholder="Jumlah Barang">
+										</div>
 										<label class="col-sm-2 col-form-label">Ket Barang</label>
-										<div class="col-sm-10">
-											<input type="text" name="keterangan" id="keterangan" value=""
+										<div class="col-sm-4">
+											<input type="text" name="ket_part" id="ket_part" value=""
 												class="form-control" placeholder="Keterangan Barang">
 										</div>
 									</div>
 							</div>
-							<input type="text" name="id_lapor" id="id_lapor" class="form-control">
+							<input type="hidden" name="id_lapor" id="id_lapor" class="form-control">
 							<input type="hidden" name="hrg_awal" id="hrg_awal" class="form-control">
 							<input type="hidden" name="user" id="user"
 								value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
@@ -343,13 +347,11 @@ table.dataTable td {
 														<th>AKSI</th>
 													</tr>
 												</thead>
-												<tbody id="data-pengiriman"></tbody>
+												<tbody id="data-estimasi"></tbody>
 												<tfoot></tfoot>
 											</table>
 										</div>
 										<div class="card-footer">
-											<button class="btn bg-gradient-success cetak-datattb" id="cetak" data-id=""
-												hidden="">
 										</div>
 									</div>
 								</div>
@@ -505,39 +507,55 @@ table.dataTable td {
 
 						e.preventDefault();
 					});
+					var tableEstimasi = $('#list-estimasi').DataTable({
+						"responsive": false,
+						"paging": true,
+						"lengthChange": false,
+						"searching": false,
+						"ordering": false,
+						"info": false,
+						"autoWidth": true,
+						"pageLength": 5
+						});
+						
+						function tampilEstimasi() {
+							//var out = jQuery.parseJSON(data);
+							var id_lapor = document.getElementById('id_lapor').value=id_lapor;
+							$.ajax({
+							type: 'GET',
+							url: '<?php echo base_url('BusMasuk/tampilEstimasi'); ?>?id_lapor='+id_lapor,
+							data: 'id_lapor=' +id_lapor,
+								success:function(hasil) {
+							tableEstimasi.destroy();
+								$('#data-estimasi').html(hasil);
+								refresh();
+								}
+							});
+						}
 
-					$(document).on("click", ".update-body", function() {
-						var id = $(this).attr("data-id");
-
-						$.ajax({
-								method: "POST",
-								url: "<?php echo base_url('Body/updateBody'); ?>",
-								data: "id=" + id
-							})
-							.done(function(data) {
-								$('#tempat-modal').html(data);
-								$('#update-body').modal('show');
-							})
-					})
-					$(document).on('submit', '#form-update-body', function(e) {
+					$('#form-estimasi').submit(function(e) {
 						var data = $(this).serialize();
 
 						$.ajax({
 								method: 'POST',
-								url: '<?php echo base_url('Body/prosesUbody'); ?>',
+								url: '<?php echo base_url('BusMasuk/prosesEstimasi'); ?>',
 								data: data
 							})
 							.done(function(data) {
 								var out = jQuery.parseJSON(data);
 
-								table.ajax.reload();
 								if (out.status == 'form') {
 									$('.form-msg').html(out.msg);
 									effect_msg_form();
 								} else {
-									document.getElementById("form-update-body").reset();
-									$('#update-body').modal('hide');
+									document.getElementById("form-estimasi");
+               						$('#no_part').val('');
+               						$('#nama_part').val('');
+               						$('#ket_part').val('');
+               						$('#jml_part').val('');
+									$("#acc").attr('readonly', 'readonly');
 									$('.msg').html(out.msg);
+									tampilEstimasi();
 									Swal.fire({
 										position: 'center',
 										icon: 'success',
@@ -550,14 +568,6 @@ table.dataTable td {
 
 						e.preventDefault();
 					});
-
-					$('#tambah-body').on('hidden.bs.modal', function() {
-						$('.form-msg').html('');
-					})
-
-					$('#update-body').on('hidden.bs.modal', function() {
-						$('.form-msg').html('');
-					})
 					$(document).on("click", ".delete-laporan", function() {
 						id_lapor = $(this).attr("data-id");
 					})

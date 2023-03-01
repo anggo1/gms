@@ -108,8 +108,15 @@ class Mod_busmasuk extends CI_Model
 		$data = $this->db->get();
 		return $data->result();
 	}
-	// End Kategori //
 
+	// End Kategori //
+	function select_estimasi($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_br_detail_estimasi');
+        $this->db->where('id_detail', $id);
+        return $this->db->get('tbl_wh_barang')->row();
+    }
 	public function select_pk()
 	{
 		$this->db->select('*');
@@ -151,6 +158,30 @@ class Mod_busmasuk extends CI_Model
             status_body ='".$data['status_body']."',
             user        ='".$data['user']."',
             status      ='N'";
+
+            $this->db->query($sql);
+    
+            return $this->db->affected_rows();
+    }
+	public function insertEstimasi($data)
+    {
+        $date2 = $data['tgl_estimasi'];
+		$tgl2 = explode('-',$date2);
+		$tgl_estimasi = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
+        
+       
+        $sql = "INSERT INTO tbl_br_detail_estimasi SET
+            id_detail	='',
+            id_lapor	='".$data['id_lapor']."',
+            tgl_estimasi='".$tgl_estimasi."',
+            no_body		='".$data['body_pk']."',
+            acc			='".$data['acc']."',
+            no_part     ='".$data['no_part']."',
+            nama_part   ='".$data['nama_part']."',
+            ket_part    ='".$data['ket_part']."',
+            jml_part  	='".$data['jml_part']."',
+            hrg_part  	='".$data['hrg_awal']."',
+            user        ='".$data['user']."'";
 
             $this->db->query($sql);
     

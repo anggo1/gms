@@ -115,6 +115,34 @@ class BusMasuk extends MY_Controller
         echo json_encode($out);
     }
     //Estimator//
+    public function prosesEstimasi()
+    {
+        $this->form_validation->set_rules('tgl_estimasi', 'Tanggal Estimasi', 'trim|required');
+
+        $data=$this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_busmasuk->insertEstimasi($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
+    public function tampilEstimasi()
+	{
+        $id = $_GET['id_lapor'];
+		$data['dataEstimasi'] = $this->Mod_busmasuk->select_estimasi($id);
+		$this->load->view('body_repair/detail_estimasi', $data);
+	}
     public function Estimasi()
 	{
 		$data['page'] 		= "Estimasi Perbaikan Bus";
