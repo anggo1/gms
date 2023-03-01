@@ -240,12 +240,13 @@ table.dataTable td {
 									</div>
 								</div>
 							</div>
+							<div id="modal-estimasi"></div>
 						</div>
 					</div>
 				<div class="tab-pane show" id="tab-proses" role="tabpanel" aria-labelledby="tab-proses-tab">
 
 							<div class="card-body">
-								<form id="form-estimasi" name="form-estimasi" method="POST">
+								<form id="formEstimasi" name="formEstimasi" method="POST">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Tanggal</label>
 										<div class="col-sm-4">
@@ -320,7 +321,7 @@ table.dataTable td {
 										</div>
 									</div>
 							</div>
-							<input type="hidden" name="id_lapor" id="id_lapor" class="form-control">
+							<input type="hidden" name="id_lapor" id="id_lapor" class="form-control" readonly>
 							<input type="hidden" name="hrg_awal" id="hrg_awal" class="form-control">
 							<input type="hidden" name="user" id="user"
 								value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
@@ -334,7 +335,7 @@ table.dataTable td {
 								<div class="card card-info">
 									<div class="card-body">
 										<div class="table-responsive">
-											<table id="tabel-masuk"
+											<table id="list-estimasi"
 												class="table table-bordered table-striped table-hover">
 												<thead>
 													<tr class="bg-indigo">
@@ -385,6 +386,7 @@ table.dataTable td {
 					</div>
 				</div>
 			</div>
+			<?php show_my_confirm('hapusEstimasi', 'hapus-estimasi', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
 					<script type="text/javascript">
 					$('#tgl_masuk,#tgl_estimasi').datetimepicker({
 						format: 'DD-MM-YYYY',
@@ -519,21 +521,19 @@ table.dataTable td {
 						});
 						
 						function tampilEstimasi() {
-							//var out = jQuery.parseJSON(data);
-							var id_lapor = document.getElementById('id_lapor').value=id_lapor;
+							var id_lapor=document.formEstimasi.id_lapor.value;
 							$.ajax({
 							type: 'GET',
 							url: '<?php echo base_url('BusMasuk/tampilEstimasi'); ?>?id_lapor='+id_lapor,
 							data: 'id_lapor=' +id_lapor,
 								success:function(hasil) {
-							tableEstimasi.destroy();
+									tableEstimasi.destroy();
 								$('#data-estimasi').html(hasil);
-								refresh();
 								}
 							});
 						}
 
-					$('#form-estimasi').submit(function(e) {
+					$('#formEstimasi').submit(function(e) {
 						var data = $(this).serialize();
 
 						$.ajax({
@@ -548,7 +548,7 @@ table.dataTable td {
 									$('.form-msg').html(out.msg);
 									effect_msg_form();
 								} else {
-									document.getElementById("form-estimasi");
+									document.getElementById("formEstimasi");
                						$('#no_part').val('');
                						$('#nama_part').val('');
                						$('#ket_part').val('');
@@ -596,21 +596,56 @@ table.dataTable td {
 								}
 							})
 					})
-					$(document).on("click", ".estimasi", function() {
-						var id = $(this).attr("data-id");
-						var no_body = $(this).attr("no_body");
+					$(document).on("click", ".delete-estimasi", function() {
+						id_detail = $(this).attr("data-id");
+					})
+					$(document).on("click", ".hapus-estimasi", function() {
+						var id = id_detail;
 
 						$.ajax({
 								method: "POST",
-								url: "<?php echo site_url('Estimator'); ?>",
-								data: "id=" + id + "&no_body=" + no_body
+								url: "<?php echo base_url('BusMasuk/deleteEstimasi'); ?>",
+								data: "id=" + id
 							})
+
 							.done(function(data) {
-								$("a[href='#tab-proses']").tab('show');
-				document.getElementById('body_pk').value=no_body; 
-				document.getElementById('id_lapor').value=id;
-				//$("#pekerjaan").attr('disabled', 'disabled');
+								var out = jQuery.parseJSON(data);
+								tampilEstimasi();
+								$('.msg').html(out.msg);
+								$('#hapusEstimasi').modal('hide');
+								if (out.status != 'form') {
+									Swal.fire({
+										position: 'center',
+										icon: 'error',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1200
+									})
+								}
 							})
 					})
+					$(document).on("click", ".estimasi", function() {
+						var id_lapor = $(this).attr("id_lapor");
+						var no_body = $(this).attr("no_body");
+
+							$("a[href='#tab-proses']").tab('show');
+							document.getElementById('body_pk').value=no_body; 
+							document.getElementById('id_lapor').value=id_lapor;
+				//$("#pekerjaan").attr('disabled', 'disabled');
+						
+					})
+					$(document).on("click", ".cetak-estimasi", function() {
+		var id = $(this).attr("data-id");
+		//var id = document.getElementById('next_proses').value=datakode;
+		$.ajax({
+				method: "POST",
+				url: "<?php echo base_url('BusMasuk/cetakEstimasi'); ?>",
+				data: "id=" + id
+			})
+			.done(function(data) {
+				$('#modal-estimasi').html(data);
+				$('#cetak-estimasi').modal('show');
+			})
+	})
 
 					</script>

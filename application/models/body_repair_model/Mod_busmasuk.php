@@ -111,12 +111,13 @@ class Mod_busmasuk extends CI_Model
 
 	// End Kategori //
 	function select_estimasi($id)
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_br_detail_estimasi');
-        $this->db->where('id_detail', $id);
-        return $this->db->get('tbl_wh_barang')->row();
-    }
+		{
+			$sql = "SELECT * FROM tbl_br_detail_estimasi WHERE id_lapor ='{$id}'";
+	
+			$data = $this->db->query($sql);
+			return $data->result();
+			//return $data->row();
+		}
 	public function select_pk()
 	{
 		$this->db->select('*');
@@ -168,14 +169,17 @@ class Mod_busmasuk extends CI_Model
         $date2 = $data['tgl_estimasi'];
 		$tgl2 = explode('-',$date2);
 		$tgl_estimasi = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
-        
-       
+		$idUpdate = $data['id_lapor'];
+
+		$sql_update = "UPDATE tbl_br_laporan_bus SET estimasi ='Y' WHERE id_lapor ='{$idUpdate}'"; $this->db->query($sql_update);
+
         $sql = "INSERT INTO tbl_br_detail_estimasi SET
             id_detail	='',
             id_lapor	='".$data['id_lapor']."',
             tgl_estimasi='".$tgl_estimasi."',
             no_body		='".$data['body_pk']."',
             acc			='".$data['acc']."',
+            jns_pk		='".$data['jns_pk']."',
             no_part     ='".$data['no_part']."',
             nama_part   ='".$data['nama_part']."',
             ket_part    ='".$data['ket_part']."',
@@ -195,5 +199,32 @@ class Mod_busmasuk extends CI_Model
 
 		return $this->db->affected_rows();
     }
+	function deleteEstimasi($id)
+    {
+        $sql = "DELETE FROM tbl_br_detail_estimasi WHERE id_detail='{$id}'";
 
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+    }
+	function cetak_masuk($id)
+    {
+        $this->db->select('a.*,b.*,c.kategori,d.keterangan as ket_lapor');
+        $this->db->from('tbl_br_laporan_bus as a');
+        $this->db->join('tbl_br_detail_estimasi as b', 'b.id_lapor=a.id_lapor', 'left');
+        $this->db->join('tbl_br_kategori as c', 'c.id_kategori=a.kategori', 'left');
+        $this->db->join('tbl_br_ket_lapor as d', 'd.id=a.ket_lapor', 'left');
+        $this->db->where('a.id_lapor', $id);
+        return $this->db->get('tbl_br_laporan_bus')->result();
+		//return $data->result();
+    }
+	function cetak_estimasi($id)
+    {
+		$sql = "SELECT a.*,b.keterangan as ket_pk FROM tbl_br_detail_estimasi as a
+		LEFT JOIN tbl_br_kat_pk as b ON b.kode=a.jns_pk WHERE a.id_lapor = '{$id}'";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+    }
 }

@@ -32,16 +32,9 @@ class BusMasuk extends MY_Controller
         $no = $_POST['start'];
         foreach ($list as $bd) {
             $no++;
-            if($bd->status_body == 'AKTIF'){
-                $status_bus='<button class="tombol-success Blink-warning btn-lg pull-right">A</button>';
-            }if($bd->status_body == 'PASIF'){
-                $status_bus='<button class="tombol-warning Blink-warning btn-lg pull-right">P</button>';
-            }else{
-                $status_bus='';
-            }
             $row = array();
             $row[] = $no;
-            $row[] = $bd->no_body.'&nbsp'.$status_bus;
+            $row[] = $bd->no_body;
             $row[] = $bd->no_pol;
             $row[] = $bd->nip_sp.'&nbsp'.$bd->nama_sp;
             $row[] = $bd->kode;
@@ -49,15 +42,17 @@ class BusMasuk extends MY_Controller
             $row[] = $bd->tgl_masuk;
             $row[] = $bd->jam_masuk;
             $row[] = $bd->keterangan;
-            if($bd->status='N'){
+            if($bd->estimasi=='N'){
                 $row[] = 
-                '<button class="btn btn-xs btn-outline-success estimasi" title="Edit" no_body="'.$bd->no_body.'" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard-teacher"></i> Estimator
+                '<button class="btn btn-xs btn-outline-success estimasi" title="Proses Estimasi" no_body="'.$bd->no_body.'" id_lapor="'.$bd->id_lapor.'"><i class="fa fa-chalkboard-teacher"></i> Estimator
                 </button></a>
                 <button class="btn btn-xs btn-outline-danger delete-laporan" title="Delete" data-toggle="modal" data-target="#hapusLaporan" data-id="'.$bd->id_lapor.'"><i class="fa fa-times"></i>  Batal
                 </button>';
-            } else{
+            } if($bd->estimasi=='Y'){
                 $row[] = 
-                '<button class="btn btn-xs btn-outline-primary update-masuk" title="Edit" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
+                '<button class="btn btn-xs btn-outline-primary update-masuk" title="Proses PK" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
+                </button>
+                <button class="btn btn-xs btn-outline-warning cetak-estimasi" title="Cetak Estimasi" data-id="'.$bd->id_lapor.'"><i class="fa fa-print"></i> Cetak
                 </button>';
             }
                 
@@ -143,14 +138,36 @@ class BusMasuk extends MY_Controller
 		$data['dataEstimasi'] = $this->Mod_busmasuk->select_estimasi($id);
 		$this->load->view('body_repair/detail_estimasi', $data);
 	}
+    public function deleteEstimasi()
+    {
+        $id = $_POST['id'];
+        $result = $this->Mod_busmasuk->deleteEstimasi($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_del_msg('Deleted', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
     public function Estimasi()
 	{
 		$data['page'] 		= "Estimasi Perbaikan Bus";
 		$data['judul'] 		= "Estimator";
 		$this->load->helper('url');        
-        $id = $_POST['id'];
+        $id = $_POST['id_lapor'];
         $data['dataPk'] = $this->Mod_busmasuk->select_pk();
         $this->template->load('layoutbackend','body_repair/estimator',$data);
+	}
+    public function cetakEstimasi()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPk'] = $this->Mod_busmasuk->cetak_masuk($id);
+		$data['detailPk'] = $this->Mod_busmasuk->cetak_estimasi($id);
+
+		echo show_my_print('body_repair/modals/modal_cetak_estimasi', 'cetak-estimasi', $data, ' modal-xl');
 	}
 
 }
