@@ -88,6 +88,10 @@ table.dataTable td {
 					<a class="nav-link" id="tab-proses-tab" data-toggle="pill" href="#tab-proses" role="tab"> <i
 							class="fas fa-luggage-cart"></i> Estimasi Perbaikan</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="tab-pk-tab" data-toggle="pill" href="#tab-pk" role="tab"> <i
+							class="fas fa-retweet"></i> Proses Pekerjaan</a>
+				</li>
 
 			</ul>
 			<div class="tab-content" id="custom-content-below-tabContent">
@@ -249,6 +253,128 @@ table.dataTable td {
 								<form id="formEstimasi" name="formEstimasi" method="POST">
 									<div class="form-group row">
 										<label class="col-sm-2 col-form-label">Tanggal</label>
+										<div class="col-sm-4">
+											<div class="input-group date" id="reservationdate"
+												data-target-input="nearest">
+
+												<input type="text" name="tgl_estimasi" id="tgl_estimasi" value=""
+													class="form-control tgl_estimasi datetimepicker"
+													data-toggle="datetimepicker" data-target=".tgl_estimasi"
+													data-format="yyy-mm-dd" required>
+
+												<div class="input-group-append" data-toggle="datetimepicker">
+													<div class="input-group-text"><i class="fa fa-calendar"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+										<label class="col-sm-2 col-form-label">No Body</label>
+										<div class="col-sm-4">
+											<input type="text" name="body_pk" id="body_pk" class="form-control" readonly required placeholder="No Body Tidak Boleh Kosong">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label">ACC</label>
+										<div class="col-sm-4">
+											<input type="text" name="acc" id="acc" class="form-control"
+												placeholder="Persetujuan">
+										</div>
+										<label class="col-sm-2 col-form-label">Pekerjaan</label>
+										<div class="col-sm-2">
+											<select name="jns_pk" id="jns_pk" class="form-control">
+												<option value="">Jenis PK...
+												</option>
+												<?php
+											if (!empty($dataPk)) {
+												foreach ($dataPk as $pk) {   ?>
+												<option value="<?php echo $pk->kode; ?>">
+													<?php echo $pk->kode.' => '.$pk->keterangan; ?>
+												</option>
+												<?php
+												}
+											}
+											?>
+											</select>
+										</div>
+										<label class="col-sm-1 col-form-label">Jam Kerja</label>
+										<div class="col-sm-1">
+											<input type="text" name="jam_kerja" id="jam_kerja" class="form-control"
+												placeholder="Total Jam">
+										</div>
+									</div>
+								<div class="form-group row">
+									<label for="No Part" class="col-sm-2 col-form-label">No Part</label>
+									<div class="col-sm-4">
+										<div class="input-group date" id="reservationdate" data-target-input="nearest">
+											<input type="text" name="no_part" id="no_part" readonly class="form-control">
+											<span class="input-group-append">
+												<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_form"><i class="glyphicon glyphicon-plus-sign"><i class="fa fa-search"></i></button></i>
+											</span>
+										</div>
+									</div>
+									<label for="Nama Part" class="col-sm-2 col-form-label">Nama</label>
+									<div class="col-sm-4">
+										<input type="text" name="nama_part" id="nama_part" readonly class="form-control">
+									</div>
+								</div>
+									<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Jumlah Barang</label>
+										<div class="col-sm-4">
+											<input type="text" name="jml_part" id="jml_part" value=""
+												class="form-control" placeholder="Jumlah Barang">
+										</div>
+										<label class="col-sm-2 col-form-label">Ket Barang</label>
+										<div class="col-sm-4">
+											<input type="text" name="ket_part" id="ket_part" value=""
+												class="form-control" placeholder="Keterangan Barang">
+										</div>
+									</div>
+							</div>
+							<input type="hidden" name="id_lapor" id="id_lapor" class="form-control" readonly>
+							<input type="hidden" name="hrg_awal" id="hrg_awal" class="form-control">
+							<input type="hidden" name="user" id="user"
+								value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
+								<div class="modal-footer center-content-between">
+							<button class="btn btn-primary" type="submit"><span class="fa fa-save"></span>
+								Simpan</button>
+						</div>
+					</form>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-info">
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="list-estimasi"
+												class="table table-bordered table-striped table-hover">
+												<thead>
+													<tr class="bg-indigo">
+														<th>No</th>
+														<th>No Body</th>
+														<th>Jenis PK</th>
+														<th>No Part</th>
+														<th>nama Barang</th>
+														<th>Keterangan</th>
+														<th>AKSI</th>
+													</tr>
+												</thead>
+												<tbody id="data-estimasi"></tbody>
+												<tfoot></tfoot>
+											</table>
+										</div>
+										<div class="card-footer">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+
+						<div class="tab-pane show" id="tab-pk" role="tabpanel" aria-labelledby="tab-pk-tab">
+
+							<div class="card-body">
+								<form id="formEstimasi" name="formEstimasi" method="POST">
+									<div class="form-group row">
+										<label class="col-sm-2 col-form-label">Tanggal PK</label>
 										<div class="col-sm-4">
 											<div class="input-group date" id="reservationdate"
 												data-target-input="nearest">

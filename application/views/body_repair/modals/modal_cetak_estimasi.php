@@ -142,9 +142,9 @@ font-family:Georgia, "Times New Roman", Times, serif;
        $harganye=0;
        $grand_total=0;
        foreach ($detailPk as $d){ 
-	   $no++;
-        $harganye +=$k->hrg_part;
-		$grand_total +=$d->hrg_part * $d->jml_part;
+	     $no++;
+       $harganye += $k->hrg_part;
+		   $grand_total += $d->hrg_part * $d->jml_part;
 						?>
       <tr>
           <th><?php echo $no ?></th>
@@ -160,8 +160,7 @@ font-family:Georgia, "Times New Roman", Times, serif;
      <?php  } ?>
      <tr>
 
-       <th colspan="6"> <div align="center"> TOTAL</div></th>
-       <th><strong><?php echo number_format($harganye) ?></strong></th>
+       <th colspan="7"> <div align="center"> TOTAL</div></th>
        <th colspan="2"><font size=+2><?php echo number_format($grand_total) ?></font></th>
        </tr>
    </thead>
