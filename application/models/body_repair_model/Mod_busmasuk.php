@@ -118,6 +118,23 @@ class Mod_busmasuk extends CI_Model
 			return $data->result();
 			//return $data->row();
 		}
+		function select_proses_pk($id)
+		{
+			$sql = "SELECT * FROM tbl_br_detail_estimasi WHERE id_lapor ='{$id}' GROUP BY jns_pk";
+	
+			$data = $this->db->query($sql);
+			return $data->result();
+			//return $data->row();
+		}
+		function cari_pk($id,$kode)
+		{
+			$sql = "SELECT * FROM tbl_br_detail_estimasi as a 
+			LEFT JOIN tbl_br_kat_pk as b on b.kode=a.jns_pk  WHERE id_lapor ='{$id}' AND jns_pk ='{$kode}' GROUP BY jns_pk";
+	
+			$data = $this->db->query($sql);
+			return $data->result();
+			//return $data->row();
+		}
 	public function select_pk()
 	{
 		$this->db->select('*');

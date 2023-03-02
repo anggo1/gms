@@ -50,7 +50,7 @@ class BusMasuk extends MY_Controller
                 </button>';
             } if($bd->estimasi=='Y'){
                 $row[] = 
-                '<button class="btn btn-xs btn-outline-primary update-masuk" title="Proses PK" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
+                '<button class="btn btn-xs btn-outline-primary proses-pk" title="Proses PK" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
                 </button>
                 <button class="btn btn-xs btn-outline-warning cetak-estimasi" title="Cetak Estimasi" data-id="'.$bd->id_lapor.'"><i class="fa fa-print"></i> Cetak
                 </button>';
@@ -137,6 +137,19 @@ class BusMasuk extends MY_Controller
         $id = $_GET['id_lapor'];
 		$data['dataEstimasi'] = $this->Mod_busmasuk->select_estimasi($id);
 		$this->load->view('body_repair/detail_estimasi', $data);
+	}
+    public function tampilPk()
+	{
+        $id = $_GET['id'];
+		$data['dataPk'] = $this->Mod_busmasuk->select_proses_pk($id);
+		$this->load->view('body_repair/list_pk', $data);
+	}
+    public function cariPKproses()
+	{
+        $id = $_POST['id'];
+        $kode = $_POST['kode'];
+		$data['dataPk'] = $this->Mod_busmasuk->cari_pk($id,$kode);
+		echo show_my_modal('body_repair/modals/modal_proses_pk', 'proses-pk', $data, ' modal-md');
 	}
     public function deleteEstimasi()
     {
