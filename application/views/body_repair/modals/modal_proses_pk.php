@@ -35,16 +35,28 @@
 								</div>
 							</div>
               <div class="form-group row">
+								<label class="col-sm-4 col-form-label">Pemborong</label>
+								<div class="col-sm-8">
+									<div class="input-group date" id="reservationdate" data-target-input="nearest">
+										<input type="text" name="pt_pemborong" id="pt_pemborong"
+											class="form-control">
+									</div>
+
+								</div>
+							</div>
+							<div class="form-group row">
 								<label class="col-sm-4 col-form-label">Kepala Borong</label>
 								<div class="col-sm-8">
 									<div class="input-group date" id="reservationdate" data-target-input="nearest">
-										<input type="text" name="kp_borong" id="kp_borong"
+										<input type="text" name="pj_borong" id="pj_borong"
 											class="form-control" required>
 									</div>
 
 								</div>
 							</div>
-
+							<input type="text" name="no_body" id="no_body" value="<?php echo $dataPk->no_body; ?>" class="form-control">
+							<input type="text" name="jns_pk" id="jns_pk" value="<?php echo $dataPk->jns_pk; ?>" class="form-control">
+							<input type="text" name="keterangan" id="keterangan" value="<?php echo $dataPk->keterangan; ?>" class="form-control">
       <div class="modal-footer bg-whitesmoke br">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>

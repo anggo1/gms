@@ -390,7 +390,8 @@ table.dataTable td {
 						<div class="modal-body form">
 							<div class="card card-first card-outline">
 							<div class="card-body">
-
+								
+							<input type="text" name="id_lapor_pk" id="id_lapor_pk" class="form-control">
 							<div class="table-responsive">
 										<table class="table no-wrap table-hover nowrap" id="table-proses">
 											<thead>
@@ -707,10 +708,12 @@ table.dataTable td {
 								type: 'GET',
 								url: '<?php echo base_url('BusMasuk/tampilPk'); ?>?id'+id,
 								data: 'id=' +id,
-									success:
-									function(hasil) {
+									success:function(hasil) {
+									//$('[name = "no_body_pk"]').val(hasil.id_lapor);
+               						$('#id_lapor_pk').val(id);
 									MyTable.fnDestroy();
 									$('#data-proses-pk').html(hasil);
+									//document.getElementById('no_body_pk').val(hasil.no_body);
 									$("a[href='#tab-pk']").tab('show');
 									//refresh();
 									}
@@ -775,5 +778,48 @@ table.dataTable td {
 
         e.preventDefault();
     });
+	//** proses PK */
+	function tampilPk() {
+							var id_lapor=$('#id_lapor_pk').val(id);
+							$.ajax({
+							type: 'GET',
+							url: '<?php echo base_url('BusMasuk/tampilPk'); ?>?id_lapor='+id_lapor,
+							data: 'id_lapor=' +id_lapor,
+								success:function(hasil) {
+									tablePk.destroy();
+								$('#data-pk').html(hasil);
+								}
+							});
+						}
+	$('#form-tambah-pk').submit(function(e) {
+						var data = $(this).serialize();
+
+						$.ajax({
+								method: 'POST',
+								url: '<?php echo base_url('BusMasuk/inputPk'); ?>',
+								data: data
+							})
+							.done(function(data) {
+								var out = jQuery.parseJSON(data);
+
+								if (out.status == 'form') {
+									$('.form-msg').html(out.msg);
+									//effect_msg_form();
+								} else {
+									document.getElementById("form-tambah-pk").reset();
+									$('.msg').html(out.msg);
+									tampilPk();
+									Swal.fire({
+										position: 'center',
+										icon: 'success',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1500
+									})
+								}
+							})
+
+						e.preventDefault();
+					});
 
 					</script>
