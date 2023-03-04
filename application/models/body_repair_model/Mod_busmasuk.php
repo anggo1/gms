@@ -244,4 +244,49 @@ class Mod_busmasuk extends CI_Model
 
 		return $data->result();
     }
+
+	public function insertPk($data)
+    {
+        $date= date("Ymd");
+        $ci = get_instance();
+        $qdata = "SELECT max(id_pk) as maxKode FROM tbl_br_pk_aktif WHERE id_pk LIKE '%$date%'";
+        $dataQ = $ci->db->query($qdata)->row_array();
+        $noOrder = $dataQ['maxKode'];
+        $noUrut = (int) substr($noOrder, 10, 3);
+        $noUrut++;
+        $char = "PK";
+        $tahun=substr($date, 0, 4);
+        $bulan=substr($date, 4, 2);
+        $tgl=substr($date, 6, 2);
+        $kodeBaru  = $char.$tahun.$bulan.$tgl. sprintf("%03s", $noUrut);
+
+        $date2 = $data['tgl_mulai'];
+		$tgl2 = explode('-',$date2);
+		$tgl_mulai = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
+        
+       
+        $sql = "INSERT INTO tbl_br_pk_aktif SET
+            id_pk	='".$kodeBaru."',
+            id_lapor	='".$data['id_lapor']."',
+            tgl_mulai  ='".$tgl_mulai."',
+            jam_mulai	='".$data['jam_mulai']."',
+            no_body		='".$data['no_body']."',
+            jns_pk      ='".$data['jns_pk']."',
+            ket_pk      ='".$data['ket_pk']."',
+            status     ='Y',
+            pt_pemborong   ='".$data['pt_pemborong']."',
+            pj_borong    ='".$data['pj_borong']."'";
+
+            $this->db->query($sql);
+    
+            return $this->db->affected_rows();
+    }
+	function select_pk_mulai($id)
+		{
+			$sql = "SELECT * FROM tbl_br_pk_aktif WHERE id_lapor ='{$id}'";
+	
+			$data = $this->db->query($sql);
+			return $data->result();
+			//return $data->row();
+		}
 }

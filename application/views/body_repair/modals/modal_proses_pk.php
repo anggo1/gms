@@ -14,7 +14,7 @@
     </p>
   </div>
   <div class="modal-body">
-    <form id="form-tambah-pk"method="POST">
+    <form id="formTambahPk"method="POST">
       <div class="form-group">
         <input type="hidden" name="id">
       </div>
@@ -22,9 +22,9 @@
 								<label class="col-sm-4 col-form-label">Tanggal Mulai</label>
 								<div class="col-sm-8">
 									<div class="input-group date" id="reservationdate" data-target-input="nearest">
-										<input type="text" name="tgl_pk" id="tgl_pk"
-											class="form-control tgl_masuk datetimepicker" data-toggle="datetimepicker"
-											data-target=".tgl_masuk" data-format="yyy-mm-dd" required>
+										<input type="text" name="tgl_mulai" id="tgl_mulai"
+											class="form-control tgl_mulasi datetimepicker" data-toggle="datetimepicker"
+											data-target=".tgl_mulai" data-format="yyy-mm-dd" required>
 										<div class="input-group-append" data-toggle="datetimepicker">
 											<div class="input-group-text">
 												<i class="fa fa-calendar"></i>
@@ -32,6 +32,20 @@
 										</div>
 									</div>
 
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label class="col-sm-4 col-form-label">Jam Mulai</label>
+							<div class="col-sm-8">
+									<div class="input-group date" id="timepicker" data-target-input="nearest">
+										<input type="text" name="jam_mulai" id="jam_mulai"
+											class="form-control jam datetimepicker-input" data-toggle="datetimepicker"
+											data-target=".jam" data-format="hh:mm" />
+										<div class="input-group-append" data-target="#jam" data-toggle="datetimepicker">
+											<div class="input-group-text"><i class="far fa-clock"></i></div>
+										</div>
+									</div>
 								</div>
 							</div>
               <div class="form-group row">
@@ -54,9 +68,10 @@
 
 								</div>
 							</div>
+							<input type="text" name="id_lapor" id="id_lapor" value="<?php echo $dataPk->id_lapor; ?>" class="form-control">
 							<input type="text" name="no_body" id="no_body" value="<?php echo $dataPk->no_body; ?>" class="form-control">
 							<input type="text" name="jns_pk" id="jns_pk" value="<?php echo $dataPk->jns_pk; ?>" class="form-control">
-							<input type="text" name="keterangan" id="keterangan" value="<?php echo $dataPk->keterangan; ?>" class="form-control">
+							<input type="text" name="ket_pk" id="ket_pk" value="<?php echo $dataPk->keterangan; ?>" class="form-control">
       <div class="modal-footer bg-whitesmoke br">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>
@@ -65,7 +80,47 @@
   </div>
 </div>
 <script type="text/javascript">
-					$('#tgl_pk').datetimepicker({
+					$('#tgl_mulai').datetimepicker({
 						format: 'DD-MM-YYYY',
 						date: moment()
-					});</script>
+					});
+					$('#jam_mulai').datetimepicker({
+						format: 'HH:mm',
+						pickDate: false,
+						pickSeconds: false,
+						pick12HourFormat: false
+					})
+
+					$('#formTambahPk').submit(function(e) {
+						var data = $(this).serialize();
+
+						$.ajax({
+								method: 'POST',
+								url: '<?php echo base_url('BusMasuk/inputPk'); ?>',
+								data: data
+							})
+							.done(function(data) {
+								var out = jQuery.parseJSON(data);
+
+								if (out.status == 'form') {
+									$('.form-msg').html(out.msg);
+									//effect_msg_form();
+								} else {
+									document.getElementById("formTambahPk").reset();
+									$('.msg').html(out.msg);
+                					$('.datakode').html(out.datakode);
+                					$('#proses-pk').modal('hide');
+									tampilPk(out.datakode);
+									Swal.fire({
+										position: 'center',
+										icon: 'success',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1500
+									})
+								}
+							})
+
+						e.preventDefault();
+					});
+					</script>

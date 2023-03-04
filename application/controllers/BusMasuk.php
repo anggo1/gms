@@ -144,6 +144,12 @@ class BusMasuk extends MY_Controller
 		$data['dataPk'] = $this->Mod_busmasuk->select_proses_pk($id);
 		$this->load->view('body_repair/list_pk', $data);
 	}
+    public function tampilPkMulai()
+	{
+        $id = $_GET['id_lapor'];
+		$data['dataMulai'] = $this->Mod_busmasuk->select_pk_mulai($id);
+		$this->load->view('body_repair/list_pk_mulai', $data);
+	}
     public function cariPKproses()
 	{
         $id = $_POST['id'];
@@ -182,5 +188,29 @@ class BusMasuk extends MY_Controller
 
 		echo show_my_print('body_repair/modals/modal_cetak_estimasi', 'cetak-estimasi', $data, ' modal-xl');
 	}
+    public function inputPk()
+    {
+        $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'trim|required');
+
+        $data=$this->input->post();
+        $id_lapor 				= $_POST['id_lapor'];
+        if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_busmasuk->insertPk($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['datakode']=$id_lapor;
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
 
 }

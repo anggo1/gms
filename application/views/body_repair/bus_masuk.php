@@ -71,7 +71,6 @@ table.dataTable td {
 	border-radius: 50%;
 }
 </style>
-<div class="card ">
 	<div class="card-body card-outline">
 			<div class="card card-primary card-outline card-outline-tabs">
 				<div class="card-header p-0 border-bottom-0">
@@ -208,16 +207,16 @@ table.dataTable td {
 							<button class="btn btn-primary" type="submit"><span class="fa fa-save"></span>
 								Simpan</button>
 						</div>
-					</form></div>
+					</form>
 					<?php show_my_confirm('hapusLaporan', 'hapus-laporan', 'Hapus Data Laporan Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data'); ?>
 
-						<div class="row">
+					<div class="row">
 							<div class="col-md-12">
 										<div class="table-responsive">
 											<table id="tabel-masuk"
 												class="table table-bordered table-striped table-hover">
 												<thead>
-													<tr class="bg-purple">
+													<tr class="bg-indigo">
 														<th>No</th>
 														<th>No Body</th>
 														<th>No Pol</th>
@@ -236,7 +235,7 @@ table.dataTable td {
 										</div>
 								</div>
 							<div id="modal-estimasi"></div>
-						</div>
+						</div></div>
 					</div>
 				<div class="tab-pane show" id="tab-proses" role="tabpanel" aria-labelledby="tab-proses-tab">
 
@@ -362,57 +361,17 @@ table.dataTable td {
 	<div class="container-fluid">
 		<div class="row">
 						<div class="col-md-6">
-						<div class="modal-body form">
-							<div class="card card-first card-outline">
-							<div class="card-body">
-
-							<div class="table-responsive">
-										<table class="table no-wrap table-hover nowrap" id="list-pk">
-											<thead>
-												<tr>
-													<th>No</th>
-													<th>ID Laporan</th>
-													<th>Jenis PK</th>
-													<th>Aksi</th>
-												</tr>
-											</thead>
-											<tbody id="data-proses-pk">
-											</tbody>
-											<tfoot></tfoot>
-										</table>
-									</div>
-						</div>
-						</div>
-						<div id="modal-pk"></div>
-						</div>
+						
+											<div id="data-proses-pk"></div>
+											
 						</div>
 						<div class="col-md-6">
-						<div class="modal-body form">
-							<div class="card card-first card-outline">
-							<div class="card-body">
 								
-							<input type="text" name="id_lapor_pk" id="id_lapor_pk" class="form-control">
-							<div class="table-responsive">
-										<table class="table no-wrap table-hover nowrap" id="table-proses">
-											<thead>
-												<tr>
-													<th>#</th>
-													<th>No Part</th>
-													<th>Nama Part</th>
-												</tr>
-											</thead>
-											<tbody>
-											</tbody>
-											<tfoot></tfoot>
-										</table>
-									</div>
+											<div id="data-pk-mulai"></div>
+						
 						</div>
 						</div>
 						</div>
-						</div>
-						</div>
-						</div>
-					</div>
 					</div>
 					</div>
 					</div>
@@ -692,7 +651,11 @@ table.dataTable td {
 				//$("#pekerjaan").attr('disabled', 'disabled');
 					})
 
-					var MyTable = $('#list-pk').dataTable({
+					
+	function refresh() {
+		MyTable = $('#list-pk,#list-pk-mulai').dataTable();
+	}
+					var MyTable = $('#list-pk,#list-pk-mulai').dataTable({
 								"responsive": true,
 								"paging": true,
 								"lengthChange": false,
@@ -710,7 +673,7 @@ table.dataTable td {
 								data: 'id=' +id,
 									success:function(hasil) {
 									//$('[name = "no_body_pk"]').val(hasil.id_lapor);
-               						$('#id_lapor_pk').val(id);
+               						$('#id_lapor').val(id);
 									MyTable.fnDestroy();
 									$('#data-proses-pk').html(hasil);
 									//document.getElementById('no_body_pk').val(hasil.no_body);
@@ -779,113 +742,18 @@ table.dataTable td {
         e.preventDefault();
     });
 	//** proses PK */
-	function tampilPk() {
-							var id_lapor=$('#id_lapor_pk').val(id);
+	function tampilPk(datakode) {
+		var id_lapor = document.getElementById('id_lapor').value=datakode;
 							$.ajax({
 							type: 'GET',
-							url: '<?php echo base_url('BusMasuk/tampilPk'); ?>?id_lapor='+id_lapor,
+							url: '<?php echo base_url('BusMasuk/tampilPkMulai'); ?>?id_lapor='+id_lapor,
 							data: 'id_lapor=' +id_lapor,
 								success:function(hasil) {
-									tablePk.destroy();
-								$('#data-pk').html(hasil);
+									MyTable.fnDestroy();
+								$('#data-pk-mulai').html(hasil);
 								}
 							});
 						}
-	$('#form-tambah-pk').submit(function(e) {
-						var data = $(this).serialize();
 
-						$.ajax({
-								method: 'POST',
-								url: '<?php echo base_url('BusMasuk/inputPk'); ?>',
-								data: data
-							})
-							.done(function(data) {
-								var out = jQuery.parseJSON(data);
-
-								if (out.status == 'form') {
-									$('.form-msg').html(out.msg);
-									//effect_msg_form();
-								} else {
-									document.getElementById("form-tambah-pk").reset();
-									$('.msg').html(out.msg);
-									tampilPk();
-									Swal.fire({
-										position: 'center',
-										icon: 'success',
-										title: out.msg,
-										showConfirmButton: false,
-										timer: 1500
-									})
-								}
-							})
-
-						e.preventDefault();
-					});
 
 					</script>
-
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Mar 04, 2023 at 01:12 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `db_gms`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_br_pk_aktif`
---
-
-CREATE TABLE `tbl_br_pk_aktif` (
-  `id_pk` varchar(30) NOT NULL,
-  `id_lapor` varchar(35) NOT NULL,
-  `no_body` varchar(25) NOT NULL,
-  `jns_pk` varchar(35) NOT NULL,
-  `ket_pk` text NOT NULL,
-  `tgl_mulai` date NOT NULL,
-  `jam_mulai` varchar(5) NOT NULL,
-  `status` enum('N','Y','P','S') NOT NULL,
-  `pt_pemborong` varchar(50) NOT NULL,
-  `pj_borong` varchar(50) NOT NULL,
-  `jam_pause` varchar(5) NOT NULL,
-  `jam_start` varchar(5) NOT NULL,
-  `tgl_pause` date NOT NULL,
-  `tgl_start` date NOT NULL,
-  `ket_pause` text NOT NULL,
-  `tgl_selesai` date NOT NULL,
-  `jam_selesai` varchar(5) NOT NULL,
-  `no_bay` varchar(2) NOT NULL,
-  `lokasi` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_br_pk_aktif`
---
-ALTER TABLE `tbl_br_pk_aktif`
-  ADD PRIMARY KEY (`id_pk`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
