@@ -823,3 +823,69 @@ table.dataTable td {
 					});
 
 					</script>
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 04, 2023 at 01:12 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db_gms`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_br_pk_aktif`
+--
+
+CREATE TABLE `tbl_br_pk_aktif` (
+  `id_pk` varchar(30) NOT NULL,
+  `id_lapor` varchar(35) NOT NULL,
+  `no_body` varchar(25) NOT NULL,
+  `jns_pk` varchar(35) NOT NULL,
+  `ket_pk` text NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `jam_mulai` varchar(5) NOT NULL,
+  `status` enum('N','Y','P','S') NOT NULL,
+  `pt_pemborong` varchar(50) NOT NULL,
+  `pj_borong` varchar(50) NOT NULL,
+  `jam_pause` varchar(5) NOT NULL,
+  `jam_start` varchar(5) NOT NULL,
+  `tgl_pause` date NOT NULL,
+  `tgl_start` date NOT NULL,
+  `ket_pause` text NOT NULL,
+  `tgl_selesai` date NOT NULL,
+  `jam_selesai` varchar(5) NOT NULL,
+  `no_bay` varchar(2) NOT NULL,
+  `lokasi` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_br_pk_aktif`
+--
+ALTER TABLE `tbl_br_pk_aktif`
+  ADD PRIMARY KEY (`id_pk`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
