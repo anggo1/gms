@@ -20,6 +20,12 @@ function printElement(elem) {
 }
     </script>
      <style>
+@media screen {
+  #printSection {
+      display: none;
+  }
+}
+
 @media print {
   body * {
     visibility:hidden;
@@ -29,10 +35,8 @@ function printElement(elem) {
   }
   #printSection {
     position:absolute;
-      left: auto;
-      top: auto;
-      right: auto;
-      bottom: auto
+    left:0;
+    top:0;
   }
 }
 

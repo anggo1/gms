@@ -22,84 +22,25 @@
   }
 </script>
 <style>
- 
-    @media screen {
-      #printSection {
-        display: none;
-      }
-    }
+@media screen {
+  #printSection {
+      display: none;
+  }
+}
 
-    @page {
-      margin: 0;
-    }
-
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-
-      #printSection,
-      #printSection * {
-        visibility: visible;
-      }
-
-      #printSection {
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
-    }
-
-
-    p,
-    td,
-    th {
-      font: 2 Verdana, Arial, Helvetica, sans-serif;
-
-    }
-
-    .datatable {
-      border: 2px solid #000;
-      border-collapse: collapse;
-    }
-
-    .datatable td {
-      padding: 0px;
-      font-family: Verdana, Arial, Helvetica, sans-serif;
-      font-size: 14px;
-    }
-
-    .datatable th {
-      border: 2px solid #000;
-      font: normal;
-      font-weight: normal;
-      font-family: Verdana, Arial, Helvetica, sans-serif;
-      font-size: 14px;
-    }
-/*
-    p,
-    td,
-    th {
-      font: Verdana, Arial, Helvetica, sans-serif;
-
-    }
-
-    .datatable1 {
-      border-collapse: collapse;
-    }
-
-    .datatable1 th,
-    td {
-      border: 2px dashed #000;
-      padding-top: 2px;
-      padding-left: 5px;
-      padding-right: 5px;
-      padding-bottom: 5px font-family:Verdana, Arial, Helvetica, sans-serif;
-      font-size: 10px;
-      font-weight: normal;
-      text-align: justify;
-    }
-*/
+@media print {
+  body * {
+    visibility:hidden;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
 </style>
 <div class="modal-content">
 						<div class="modal-header text-blue">

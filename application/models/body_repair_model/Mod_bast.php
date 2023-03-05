@@ -208,7 +208,7 @@ class Mod_bast extends CI_Model
     {
         date_default_timezone_set('Asia/Jakarta');
         $date = date("Y-m-d");
-        $sql = "SELECT * FROM tbl_br_bast WHERE tgl_bast ='$date'";
+        $sql = "SELECT * FROM tbl_br_bast WHERE status ='N'";
 
         $data = $this->db->query($sql);
         return $data->result();

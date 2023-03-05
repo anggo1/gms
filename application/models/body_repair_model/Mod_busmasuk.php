@@ -20,6 +20,7 @@ class Mod_busmasuk extends CI_Model
         $this->db->from('tbl_br_laporan_bus as a');
         $this->db->join('tbl_br_kategori as b', 'b.id_kategori=a.kategori', 'left');
         $this->db->join('tbl_br_ket_lapor as c','c.id=a.ket_lapor', 'left');
+		$this->db->where('a.status', 'N');
 		$i = 0;
 
 	foreach ($this->column_search as $item) // loop column 
@@ -88,6 +89,15 @@ class Mod_busmasuk extends CI_Model
         $this->db->where('a.id_barang', $id);
         return $this->db->get('tbl_wh_barang')->row();
     }
+	function get_body()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_br_bast');
+        $this->db->where('status', 'N');
+		$data = $this->db->get();
+
+		return $data->result();
+    }
 	public function select_laporan()
 	{
 		$this->db->select('*');
@@ -128,9 +138,8 @@ class Mod_busmasuk extends CI_Model
 		}
 		function cari_pk($id,$kode)
 		{
-			$sql = "SELECT * FROM tbl_br_detail_estimasi as a 
+			$sql = "SELECT * FROM tbl_br_detail_estimasi as a
 			LEFT JOIN tbl_br_kat_pk as b on b.kode=a.jns_pk  WHERE id_lapor ='{$id}' AND jns_pk ='{$kode}' GROUP BY jns_pk";
-	
 			$data = $this->db->query($sql);
 			return $data->result();
 			//return $data->row();
@@ -144,6 +153,8 @@ class Mod_busmasuk extends CI_Model
 	}
 	public function insertLaporan($data)
     {
+		
+		$sql_update = "UPDATE tbl_br_bast SET status ='Y' WHERE id_bast ='".$data['id_bast']."'"; $this->db->query($sql_update);
         $date= date("Ymd");
         $ci = get_instance();
         $qdata = "SELECT max(id_lapor) as maxKode FROM tbl_br_laporan_bus WHERE id_lapor LIKE '%$date%'";
@@ -160,11 +171,11 @@ class Mod_busmasuk extends CI_Model
         $date2 = $data['tgl_masuk'];
 		$tgl2 = explode('-',$date2);
 		$tgl_masuk = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
-        
-       
+
         $sql = "INSERT INTO tbl_br_laporan_bus SET
             id_lapor	='".$kodeBaru."',
             tgl_masuk   ='".$tgl_masuk."',
+            id_bast		='".$data['id_bast']."',
             jam_masuk	='".$data['jam_masuk']."',
             no_body		='".$data['no_body']."',
             no_pol      ='".$data['no_pol']."',
@@ -178,7 +189,7 @@ class Mod_busmasuk extends CI_Model
             status      ='N'";
 
             $this->db->query($sql);
-    
+
             return $this->db->affected_rows();
     }
 	public function insertEstimasi($data)
@@ -205,7 +216,7 @@ class Mod_busmasuk extends CI_Model
             user        ='".$data['user']."'";
 
             $this->db->query($sql);
-    
+
             return $this->db->affected_rows();
     }
 	function deleteLapor($id)
@@ -218,6 +229,7 @@ class Mod_busmasuk extends CI_Model
     }
 	function deleteEstimasi($id)
     {
+		$sql_update = "UPDATE tbl_br_laporan_bus SET estimasi ='N' WHERE id_lapor ='{$id}'"; $this->db->query($sql_update);
         $sql = "DELETE FROM tbl_br_detail_estimasi WHERE id_detail='{$id}'";
 
 		$this->db->query($sql);
@@ -247,6 +259,11 @@ class Mod_busmasuk extends CI_Model
 
 	public function insertPk($data)
     {
+		$sql_update = "UPDATE tbl_br_detail_estimasi SET status ='Y' WHERE id_lapor ='".$data['id_lapor']."' AND jns_pk='".$data['jns_pk']."'"; 
+		$this->db->query($sql_update);
+		$sql_pk = "UPDATE tbl_br_laporan_bus SET status ='Y' WHERE id_lapor ='".$data['id_lapor']."'"; 
+		$this->db->query($sql_pk);
+
         $date= date("Ymd");
         $ci = get_instance();
         $qdata = "SELECT max(id_pk) as maxKode FROM tbl_br_pk_aktif WHERE id_pk LIKE '%$date%'";
@@ -263,8 +280,7 @@ class Mod_busmasuk extends CI_Model
         $date2 = $data['tgl_mulai'];
 		$tgl2 = explode('-',$date2);
 		$tgl_mulai = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
-        
-       
+
         $sql = "INSERT INTO tbl_br_pk_aktif SET
             id_pk	='".$kodeBaru."',
             id_lapor	='".$data['id_lapor']."',

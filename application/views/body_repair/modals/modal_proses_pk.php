@@ -68,10 +68,10 @@
 
 								</div>
 							</div>
-							<input type="text" name="id_lapor" id="id_lapor" value="<?php echo $dataPk->id_lapor; ?>" class="form-control">
-							<input type="text" name="no_body" id="no_body" value="<?php echo $dataPk->no_body; ?>" class="form-control">
-							<input type="text" name="jns_pk" id="jns_pk" value="<?php echo $dataPk->jns_pk; ?>" class="form-control">
-							<input type="text" name="ket_pk" id="ket_pk" value="<?php echo $dataPk->keterangan; ?>" class="form-control">
+							<input type="hidden" name="id_lapor" id="id_lapor" value="<?php echo $dataPk->id_lapor; ?>" class="form-control">
+							<input type="hidden" name="no_body" id="no_body" value="<?php echo $dataPk->no_body; ?>" class="form-control">
+							<input type="hidden" name="jns_pk" id="jns_pk" value="<?php echo $dataPk->jns_pk; ?>" class="form-control">
+							<input type="hidden" name="ket_pk" id="ket_pk" value="<?php echo $dataPk->keterangan; ?>" class="form-control">
       <div class="modal-footer bg-whitesmoke br">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>
@@ -110,6 +110,7 @@
 									$('.msg').html(out.msg);
                 					$('.datakode').html(out.datakode);
                 					$('#proses-pk').modal('hide');
+									tampilPkawal(out.datakode);
 									tampilPk(out.datakode);
 									Swal.fire({
 										position: 'center',

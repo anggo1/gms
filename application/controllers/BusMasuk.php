@@ -3,18 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class BusMasuk extends MY_Controller
 {
-	
 	function __construct()
 	{
 		parent::__construct();
         $this->load->model(array('body_repair_model/Mod_busmasuk'));
+		$this->load->helper('tgl_indo_helper');
 	}
 
 	public function index()
 	{
-		$data['page'] 		= "Laporan Bus Masuk";
+		$data['page'] 		= "Bus Perbaikan";
 		$data['judul'] 		= "Bus Masuk";
 		$this->load->helper('url');
+        $data['dataBody'] = $this->Mod_busmasuk->get_body();
         $data['dataLap'] = $this->Mod_busmasuk->select_laporan();
         $data['dataKat'] = $this->Mod_busmasuk->select_kategori();
         $data['dataPk'] = $this->Mod_busmasuk->select_pk();
@@ -50,9 +51,9 @@ class BusMasuk extends MY_Controller
                 </button>';
             } if($bd->estimasi=='Y'){
                 $row[] = 
-                '<button class="btn btn-xs btn-outline-primary proses-pk" title="Proses PK" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
+                '</a><button class="btn btn-xs btn-outline-primary proses-pk" title="Proses PK" data-id="'.$bd->id_lapor.'"><i class="fa fa-chalkboard"></i> Proses PK
                 </button>
-                <button class="btn btn-xs btn-outline-warning cetak-estimasi" title="Cetak Estimasi" data-id="'.$bd->id_lapor.'"><i class="fa fa-print"></i> Cetak
+                <button class="btn btn-xs btn-outline-warning cetak-estimasi" title="Cetak Estimasi" data-id="'.$bd->id_lapor.'"><i class="fa fa-print"></i> Cetak Estimasi
                 </button>';
             }
                 
@@ -187,6 +188,14 @@ class BusMasuk extends MY_Controller
 		$data['detailPk'] = $this->Mod_busmasuk->cetak_estimasi($id);
 
 		echo show_my_print('body_repair/modals/modal_cetak_estimasi', 'cetak-estimasi', $data, ' modal-xl');
+	}
+    public function cetakEstimasi2()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPk'] = $this->Mod_busmasuk->cetak_masuk($id);
+		$data['detailPk'] = $this->Mod_busmasuk->cetak_estimasi($id);
+
+		echo show_my_print('body_repair/modals/modal_cetak_estimasi', 'cetak-estimasi2', $data, ' modal-xl');
 	}
     public function inputPk()
     {
