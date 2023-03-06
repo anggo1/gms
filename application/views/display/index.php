@@ -48,14 +48,12 @@ setTimeout("beginrefresh()",2000)
 window.onload=beginrefresh
     //-->
 </script>
-<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>KAROSERI SYSTEM</title>
-        <link href="css/global.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery.min.js"></script>
-        <link rel="stylesheet" href="css/style1.css" type="text/css">
-        <link href="css/global.css" rel="stylesheet" type="text/css"/>
+        <title>MPU DISPLAY</title>
+        <link href="application/views/display/css/global.css" rel="stylesheet" type="text/css"/>
+        <script src="application/views/display/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="application/views/display/css/style1.css" type="text/css">
     </head>
     <div>
         <div class="header" align="center">

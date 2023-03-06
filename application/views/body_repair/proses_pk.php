@@ -17,20 +17,20 @@
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
-                                    <h3 class="card-title"><i class="ion-ios-cog ion-lg text-blue"></i> &nbsp; Proses Yang Masih Aktif</h3>
-                                    <div class="text-right">
-                                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-laporan" title="Add Data"><i class="fas fa-plus"></i>
-                                            Add</button>
-                                    </div>
+                                    <h3 class="card-title"><i class="ion-ios-cog ion-lg text-blue"></i> &nbsp; Pekerjaan Yang Masih Aktif</h3>
                                 </div>
                                 <div class="col-12 ">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover nowrap" id="list-laporan">
+                                        <table class="table table-bordered table-hover nowrap" id="list-pk">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Kode</th>
+                                                    <th>Id PK</th>
+                                                    <th>No Body</th>
+                                                    <th>Kode PK</th>
                                                     <th>Keterangan</th>
+                                                    <th>Tgl Mulai</th>
+                                                    <th>Pemborong</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -49,12 +49,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
 <?php
-show_my_confirm('hapusLaporan', 'hapus-laporan', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
+show_my_confirm('startPk', 'start-pk', 'PK Dimulai', 'Ya, Mulai', 'Batal Mulai');
+show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', 'Batal');
 ?>
 <script type="text/javascript">
     window.onload = function() {
@@ -80,360 +78,136 @@ show_my_confirm('hapusLaporan', 'hapus-laporan', 'Hapus Data Ini?', 'Ya, Hapus D
             $('.msg').fadeOut(500);
         }, 1000);
     }
-    var tablePk = $('#list-pk').DataTable();
+    function refresh() {
+        MyTable = $('#list-pk,#list-pk-mulai').dataTable();
+    }
+    var MyTable = $('#list-pk,#list-pk-mulai,#table-body').dataTable({
+        "responsive": false,
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "pageLength": 5
+    });
 
-    //ajax Jabatan
     function showPk() {
         $.get('<?php echo base_url('ProsesPk/showPk'); ?>', function(data) {
-            tablePk.destroy();
+            MyTable.fnDestroy();
             $('#data-pk').html(data);
             refresh();
         });
     }
 
-    $('#form-tambah-laporan').submit(function(e) {
-        var data = $(this).serialize();
-
-        $.ajax({
-                method: 'POST',
-                url: '<?php echo base_url('Settingbr/prosesTlaporan'); ?>',
-                data: data
-            })
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-
-                showLap();
-                if (out.status == 'form') {
-                    $('.form-msg').html(out.msg);
-                    effect_msg_form();
-                } else {
-                    document.getElementById("form-tambah-laporan").reset();
-                    $('#tambah-laporan').modal('hide');
-                    $('.msg').html(out.msg);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-
-        e.preventDefault();
-    });
-
-    $(document).on("click", ".update-dataLaporan", function() {
+    $(document).on("click", ".cetak-pk", function () {
         var id = $(this).attr("data-id");
-
-        $.ajax({
+           $ .ajax({
                 method: "POST",
-                url: "<?php echo base_url('Settingbr/updateLaporan'); ?>",
-                data: "id=" + id
+                url: "<?php echo base_url('ProsesPk/cetakPk'); ?>",
+                data: "id="+id
             })
-            .done(function(data) {
-                $('#modal-laporan').html(data);
-                $('#update-laporan').modal('show');
-            })
-    })
-    $(document).on('submit', '#form-update-laporan', function(e) {
-        var data = $(this).serialize();
-
-        $.ajax({
-                method: 'POST',
-                url: '<?php echo base_url('Settingbr/prosesUlaporan'); ?>',
-                data: data
-            })
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-
-                showLap();
-                if (out.status == 'form') {
-                    $('.form-msg').html(out.msg);
-                    effect_msg_form();
-                } else {
-                    document.getElementById("form-update-laporan").reset();
-                    $('#update-laporan').modal('hide');
-                    $('.msg').html(out.msg);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-
-        e.preventDefault();
-    });
-
-    $('#tambah-laporan').on('hidden.bs.modal', function() {
-        $('.form-msg').html('');
-    })
-
-    $('#update-laporan').on('hidden.bs.modal', function() {
-        $('.form-msg').html('');
-    })
-    $(document).on("click", ".delete-laporan", function() {
-        id_lap = $(this).attr("data-id");
-    })
-    $(document).on("click", ".hapus-laporan", function() {
-        var id = id_lap;
-
-        $.ajax({
-                method: "POST",
-                url: "<?php echo base_url('Settingbr/deleteLaporan'); ?>",
-                data: "id=" + id
-            })
-
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-                showLap();
-                $('.msg').html(out.msg);
-                $('#hapusLaporan').modal('hide');
-                if (out.status != 'form') {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-    })
-
-
-    //*** end Keterangan Laporan **//
-
-    $('#form-tambah-kategori').submit(function(e) {
-        var data = $(this).serialize();
-
-        $.ajax({
-                method: 'POST',
-                url: '<?php echo base_url('Settingbr/prosesTkategori'); ?>',
-                data: data
-            })
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-
-                showKat();
-                if (out.status == 'form') {
-                    $('.form-msg').html(out.msg);
-                    effect_msg_form();
-                } else {
-                    document.getElementById("form-tambah-kategori").reset();
-                    $('#tambah-kategori').modal('hide');
-                    $('.msg').html(out.msg);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-
-        e.preventDefault();
-    });
-
-    $(document).on("click", ".update-dataKategori", function() {
-        var id = $(this).attr("data-id");
-
-        $.ajax({
-                method: "POST",
-                url: "<?php echo base_url('Settingbr/updateKategori'); ?>",
-                data: "id=" + id
-            })
-            .done(function(data) {
-                $('#modal-kategori').html(data);
-                $('#update-kategori').modal('show');
-            })
-    })
-    $(document).on('submit', '#form-update-kategori', function(e) {
-        var data = $(this).serialize();
-
-        $.ajax({
-                method: 'POST',
-                url: '<?php echo base_url('Settingbr/prosesUkategori'); ?>',
-                data: data
-            })
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-
-                showKat();
-                if (out.status == 'form') {
-                    $('.form-msg').html(out.msg);
-                    effect_msg_form();
-                } else {
-                    document.getElementById("form-update-kategori").reset();
-                    $('#update-kategori').modal('hide');
-                    $('.msg').html(out.msg);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-
-        e.preventDefault();
-    });
-
-    $('#tambah-kategori').on('hidden.bs.modal', function() {
-        $('.form-msg').html('');
-    })
-
-    $('#update-kategori').on('hidden.bs.modal', function() {
-        $('.form-msg').html('');
-    })
-    $(document).on("click", ".delete-kategori", function() {
-        id_kat = $(this).attr("data-id");
-    })
-    $(document).on("click", ".hapus-kategori", function() {
-        var id = id_kat;
-
-        $.ajax({
-                method: "POST",
-                url: "<?php echo base_url('Settingbr/deleteKategori'); ?>",
-                data: "id=" + id
-            })
-
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-                showKat();
-                $('.msg').html(out.msg);
-                $('#hapusKategori').modal('hide');
-                if (out.status != 'form') {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-    })
-    //*** end KAtegori **//
-
-    $('#form-tambah-pk').submit(function(e) {
-        var data = $(this).serialize();
-
-        $.ajax({
-                method: 'POST',
-                url: '<?php echo base_url('Settingbr/prosesTpk'); ?>',
-                data: data
-            })
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-
-                showPk();
-                if (out.status == 'form') {
-                    $('.form-msg').html(out.msg);
-                    effect_msg_form();
-                } else {
-                    document.getElementById("form-tambah-pk").reset();
-                    $('#tambah-pk').modal('hide');
-                    $('.msg').html(out.msg);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-
-        e.preventDefault();
-    });
-
-    $(document).on("click", ".update-dataPk", function() {
-        var id = $(this).attr("data-id");
-
-        $.ajax({
-                method: "POST",
-                url: "<?php echo base_url('Settingbr/updatePk'); ?>",
-                data: "id=" + id
-            })
-            .done(function(data) {
+            .done(function (data) {
                 $('#modal-pk').html(data);
-                $('#update-pk').modal('show');
+                $('#cetak-pk').modal('show');
             })
     })
-    $(document).on('submit', '#form-update-pk', function(e) {
-        var data = $(this).serialize();
+    $(document).on("click", ".pause-pk", function () {
+        var id = $(this).attr("data-id");
 
-        $.ajax({
-                method: 'POST',
-                url: '<?php echo base_url('Settingbr/prosesUpk'); ?>',
-                data: data
-            })
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-
-                showPk();
-                if (out.status == 'form') {
-                    $('.form-msg').html(out.msg);
-                    effect_msg_form();
-                } else {
-                    document.getElementById("form-update-pk").reset();
-                    $('#update-pk').modal('hide');
-                    $('.msg').html(out.msg);
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
-
-        e.preventDefault();
-    });
-
-    $('#tambah-pk').on('hidden.bs.modal', function() {
-        $('.form-msg').html('');
-    })
-
-    $('#update-pk').on('hidden.bs.modal', function() {
-        $('.form-msg').html('');
-    })
-    $(document).on("click", ".delete-pk", function() {
-        id_pk = $(this).attr("data-id");
-    })
-    $(document).on("click", ".hapus-pk", function() {
-        var id = id_lap;
-
-        $.ajax({
+        $
+            .ajax({
                 method: "POST",
-                url: "<?php echo base_url('Settingbr/deletePk'); ?>",
+                url: "<?php echo base_url('ProsesPk/Pause'); ?>",
                 data: "id=" + id
             })
-
-            .done(function(data) {
-                var out = jQuery.parseJSON(data);
-                showPk();
-                $('.msg').html(out.msg);
-                $('#hapusPk').modal('hide');
-                if (out.status != 'form') {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: out.msg,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+            .done(function (data) {
+                $('#modal-pk').html(data);
+                $('#pause-pk').modal('show');
             })
     })
+    $(document).on('submit', '#pausePkaktif', function (e) {
+						var data = $(this).serialize();
 
+						$.ajax({
+								method: 'POST',
+								url: '<?php echo base_url('ProsesPk/pausePk'); ?>',
+								data: data
+							})
+							.done(function(data) {
+								var out = jQuery.parseJSON(data);
+                                showPk();
+                                if (out.status == 'form') {
+                                    $('.form-msg').html(out.msg);
+                                    effect_msg_form();
+                                } else {
+                                    document.getElementById("pausePkaktif").reset();
+                                    $('#pause-pk').modal('hide');
+                                    $('.msg').html(out.msg);
+                                    Swal.fire({
+										position: 'center',
+										icon: 'success',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1000
+									})
+                                }
+							})
 
-    //** End Keterangan PK */
+						e.preventDefault();
+					});
+
+    $(document).on("click", ".start-pk-aktif", function () {
+        id_pk = $(this).attr("data-pk");
+    })
+    $(document).on("click", ".start-pk", function () {
+        var id = id_pk;
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('ProsesPk/startPk'); ?>",
+                data: "id=" + id
+            })
+            .done(function(data) {
+        var out = jQuery.parseJSON(data);
+		showPk();
+        $('.msg').html(out.msg);
+        $('#startPk').modal('hide');
+        if (out.status != 'form') {
+            Swal.fire({
+                position: 'center',
+										icon: 'success',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1000
+            })
+        }
+    })
+})
+
+$(document).on("click", ".selesai-pk-aktif", function () {
+        id_pk = $(this).attr("data-pk");
+    })
+    $(document).on("click", ".selesai-pk", function () {
+        var id = id_pk;
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('ProsesPk/tutupPk'); ?>",
+                data: "id=" + id
+            })
+            .done(function(data) {
+        var out = jQuery.parseJSON(data);
+		showPk();
+        $('.msg').html(out.msg);
+        $('#selesaiPk').modal('hide');
+        if (out.status != 'form') {
+            Swal.fire({
+                position: 'center',
+										icon: 'success',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1000
+            })
+        }
+    })
+})
+
 </script>

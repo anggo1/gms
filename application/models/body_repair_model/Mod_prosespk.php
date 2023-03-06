@@ -17,7 +17,7 @@ class Mod_prosespk extends CI_Model
 		//$this->db->join('tbl_pendidikan as b','a.pendidikan=b.id_pendidikan');
 		//$this->db->join('tbl_supplier as c','a.supplier=c.id_supplier');
 		//$this->db->join('tbl_departement as d','a.departement=d.id_departement');
-		//$this->db->where('a.nip=',$id);
+		$this->db->where('status!=','S');
 
 		$data = $this->db->get();
 
@@ -32,105 +32,68 @@ class Mod_prosespk extends CI_Model
 
 		return $this->db->affected_rows();
 	}
-	public function updateLapor($data)
+	public function pausepk($data)
 	{
-		$sql = "UPDATE tbl_br_ket_lapor SET kode='" . $data['kode'] . "',keterangan='" . $data['keterangan'] . "'
-        WHERE id='" . $data['id'] . "'";
+        $date = date("Y-m-d");
+        $jam = date("H:i:s");
+		$sql = "UPDATE tbl_br_pk_aktif SET status='P',ket_pause='" . $data['ket_pause'] . "',jam_pause='" .$jam. "',tgl_pause='" .$date. "'
+        WHERE id_pk='" . $data['id_pk'] . "'";
 
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
 	}
-	function deleteLap($id)
+	function startPk($id)
 	{
-		$sql = "DELETE FROM tbl_br_ket_lapor WHERE id='{$id}'";
+		$date = date("Y-m-d");
+        $jam = date("H:i:s");
+		$sql = "UPDATE tbl_br_pk_aktif SET status='Y',jam_start='" .$jam. "',tgl_start='" .$date. "'
+        WHERE id_pk='" . $id . "'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+	function pkSelesai($id)
+	{
+		$date = date("Y-m-d");
+        $jam = date("H:i:s");
+		$sql = "UPDATE tbl_br_pk_aktif SET status='S',jam_selesai='" .$jam. "',tgl_selesai='" .$date. "'
+        WHERE id_pk='" . $id . "'";
 
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
 	}
 	//end Satuan//
-
-	public function select_kategori()
-	{
-		$this->db->select('*');
-		$this->db->from('tbl_br_kategori');
-		$data = $this->db->get();
-		return $data->result();
-	}
-	public function select_id_kategori($id)
-	{
-		$sql = " SELECT * FROM tbl_br_kategori WHERE id_kategori='{$id}'";
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
-	}
-	public function insertKategori($data)
-	{
-		$sql = "INSERT INTO tbl_br_kategori VALUES
-		('','" . $data['kategori'] . "')";
-
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
-	public function updateKategori($data)
-	{
-		$sql = "UPDATE tbl_br_kategori SET kategori='" . $data['kategori'] . "'
-        WHERE id_kategori='" . $data['id_kategori'] . "'";
-
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
-	function deleteKat($id)
-	{
-		$sql = "DELETE FROM tbl_br_kategori WHERE id_kategori='{$id}'";
-
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
-
-	// End Kategori //
-
-
-	public function select_id_pk($id)
-	{
-		$sql = " SELECT * FROM tbl_br_kat_pk WHERE id='{$id}'";
+	function cetak_masuk($id)
+    {
+        $this->db->select('a.*,b.*,c.kategori,d.keterangan as ket_lapor');
+        $this->db->from('tbl_br_laporan_bus as a');
+        $this->db->join('tbl_br_detail_estimasi as b', 'b.id_lapor=a.id_lapor', 'left');
+        $this->db->join('tbl_br_kategori as c', 'c.id_kategori=a.kategori', 'left');
+        $this->db->join('tbl_br_ket_lapor as d', 'd.id=a.ket_lapor', 'left');
+        $this->db->where('a.id_lapor', $id);
+        return $this->db->get('tbl_br_laporan_bus')->result();
+		//return $data->result();
+    }
+	function cetak_estimasi($id)
+    {
+		$sql = "SELECT a.*,b.keterangan as ket_pk FROM tbl_br_detail_estimasi as a
+		LEFT JOIN tbl_br_kat_pk as b ON b.kode=a.jns_pk WHERE a.id_lapor = '{$id}'";
 
 		$data = $this->db->query($sql);
 
 		return $data->result();
-	}
-	public function insertPk($data)
-	{
-		$sql = "INSERT INTO tbl_br_kat_pk VALUES
-		('','" . $data['kode'] . "','" . $data['keterangan'] . "')";
+    }
+	function cetak_pk($id)
+    {
+		$sql = "SELECT * FROM tbl_br_pk_aktif AS a LEFT JOIN tbl_br_laporan_bus AS b ON b.id_lapor=a.id_lapor WHERE a.id_pk ='{$id}'";
 
-		$this->db->query($sql);
+		$data = $this->db->query($sql);
 
-		return $this->db->affected_rows();
-	}
-	public function updatePk($data)
-	{
-		$sql = "UPDATE tbl_br_kat_pk SET kode='" . $data['kode'] . "',keterangan='" . $data['keterangan'] . "'
-        WHERE id='" . $data['id'] . "'";
-
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
-	function deletePk($id)
-	{
-		$sql = "DELETE FROM tbl_br_kat_pk WHERE id='{$id}'";
-
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
-
+		return $data->result();
+    }
 	//** end Keterangan PK **//
 
 }

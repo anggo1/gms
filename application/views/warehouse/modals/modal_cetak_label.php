@@ -32,16 +32,45 @@ function printElement(elem) {
   }
   #printSection, #printSection * {
     visibility:visible;
+    width: 500px;
+    
   }
+  .datatablex {
+    border-collapse: collapse;
+    font: bold;
+}
+.datatablex td {
+    padding: 0px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:18px;
+    font: bold;
+}
+.datatablex th {
+    border: 2px solid #000;
+    font: bold;
+    font-weight: normal;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
   #printSection {
-    position:absolute;
+    position: absolute;
     left:0;
     top:0;
+    width: 100%;
   }
+}
+#A4 {background-color:#FFFFFF;
+left:1px;
+right:1px;
+height:5.51in ; /*Ukuran Panjang Kertas */
+width: 8.50in; /*Ukuran Lebar Kertas */
+margin:1px solid #FFFFFF;
+ 
+font-family:Georgia, "Times New Roman", Times, serif;
 }
 </style>  
 
-<div id="printThis">
+
 <?php
     if (!empty($dataPart)) {
       foreach ($dataPart as $part) {
@@ -49,7 +78,7 @@ function printElement(elem) {
     
    
     ?>
-    
+    <div id="printThis">
 
       <!--<?php echo '<img src="'.base_url().'qr.png" width="320"  align="center" />' ?>-->
   <?php }} ?>

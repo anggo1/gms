@@ -12,6 +12,7 @@ class ProsesPk extends MY_Controller
         parent::__construct();
         $this->load->model(array('body_repair_model/Mod_prosespk', 'Mod_menu'));
         $this->load->model(array('Mod_userlevel'));
+		$this->load->helper('tgl_indo_helper');
     }
 
     public function index()
@@ -29,7 +30,13 @@ class ProsesPk extends MY_Controller
         $data['dataPk'] = $this->Mod_prosespk->select_pk();
         $this->load->view('body_repair/lap_pk', $data);
     }
+    public function cetakPk()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPk'] = $this->Mod_prosespk->cetak_pk($id);
 
+		echo show_my_print('body_repair/modals/modal_cetak_pk_tunggal', 'cetak-pk', $data, ' modal-xl');
+	}
     /*Keterangan Laporan*/
     public function prosesTlaporan()
     {
@@ -53,29 +60,29 @@ class ProsesPk extends MY_Controller
 
         echo json_encode($out);
     }
-    public function updateLaporan()
+    public function Pause()
     {
         $id                 = trim($_POST['id']);
-        $data['dataLapor'] = $this->Mod_settingbr->select_id_lapor($id);
+		$data['dataPk'] = $this->Mod_prosespk->cetak_pk($id);
 
-        echo show_my_modal('body_repair/modals/modal_tambah_lap', 'update-laporan', $data);
+        echo show_my_modal('body_repair/modals/modal_pk_pause', 'pause-pk', $data);
     }
 
-    public function prosesUlaporan()
+    public function pausePk()
     {
 
-        $this->form_validation->set_rules('kode', 'Kode Laporan', 'trim|required');
+        $this->form_validation->set_rules('id_pk', 'ID PK', 'trim|required');
 
         $data     = $this->input->post();
         if ($this->form_validation->run() == TRUE) {
-            $result = $this->Mod_settingbr->updateLapor($data);
+            $result = $this->Mod_prosespk->pausepk($data);
 
             if ($result > 0) {
                 $out['status'] = '';
                 $out['msg'] = show_ok_msg('Success', '20px');
             } else {
                 $out['status'] = '';
-                $out['msg'] = show_succ_msg('Filed!', '20px');
+                $out['msg'] = show_del_msg('Filed!', '20px');
             }
         } else {
             $out['status'] = 'form';
@@ -84,15 +91,28 @@ class ProsesPk extends MY_Controller
 
         echo json_encode($out);
     }
-    public function deleteLaporan()
+    public function startPk()
     {
         $id = $_POST['id'];
-        $result = $this->Mod_settingbr->deleteLap($id);
+        $result = $this->Mod_prosespk->startPk($id);
 
         if ($result > 0) {
-            //$out['datakode']=$kodeBaru;
             $out['status'] = '';
-            $out['msg'] = show_del_msg('Deleted', '20px');
+            $out['msg'] = show_ok_msg('PK Telah Dimulai', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
+    public function tutupPk()
+    {
+        $id = $_POST['id'];
+        $result = $this->Mod_prosespk->pkSelesai($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_ok_msg('PK Telah Selesai', '20px');
         } else {
             $out['status'] = '';
             $out['msg'] = show_err_msg('Filed !', '20px');
@@ -101,144 +121,5 @@ class ProsesPk extends MY_Controller
     }
 
     /*endKeteranganLaporan*/
-    /*Kategori*/
-    public function prosesTkategori()
-    {
-        $this->form_validation->set_rules('kategori', 'Nama Satuan', 'trim|required');
-
-        $data     = $this->input->post();
-        if ($this->form_validation->run() == TRUE) {
-            $result = $this->Mod_settingbr->insertKategori($data);
-
-            if ($result > 0) {
-                $out['status'] = '';
-                $out['msg'] = show_ok_msg('Success', '20px');
-            } else {
-                $out['status'] = '';
-                $out['msg'] = show_err_msg('Filed !', '20px');
-            }
-        } else {
-            $out['status'] = 'form';
-            $out['msg'] = show_err_msg(validation_errors());
-        }
-
-        echo json_encode($out);
-    }
-    public function updateKategori()
-    {
-        $id                 = trim($_POST['id']);
-        $data['dataKategori'] = $this->Mod_settingbr->select_id_kategori($id);
-
-        echo show_my_modal('body_repair/modals/modal_tambah_kat', 'update-kategori', $data);
-    }
-
-    public function prosesUkategori()
-    {
-
-        $this->form_validation->set_rules('kategori', 'Nama kategori', 'trim|required');
-
-        $data     = $this->input->post();
-        if ($this->form_validation->run() == TRUE) {
-            $result = $this->Mod_settingbr->updateKategori($data);
-
-            if ($result > 0) {
-                $out['status'] = '';
-                $out['msg'] = show_ok_msg('Success', '20px');
-            } else {
-                $out['status'] = '';
-                $out['msg'] = show_succ_msg('Filed!', '20px');
-            }
-        } else {
-            $out['status'] = 'form';
-            $out['msg'] = show_err_msg(validation_errors());
-        }
-
-        echo json_encode($out);
-    }
-    public function deleteKategori()
-    {
-        $id = $_POST['id'];
-        $result = $this->Mod_settingbr->deleteKat($id);
-
-        if ($result > 0) {
-            $out['status'] = '';
-            $out['msg'] = show_del_msg('Deleted', '20px');
-        } else {
-            $out['status'] = '';
-            $out['msg'] = show_err_msg('Filed !', '20px');
-        }
-        echo json_encode($out);
-    }
-
-    /*endKategori*/
-        /*KodePK*/
-        public function prosesTpk()
-        {
-            $this->form_validation->set_rules('kode', 'Nama Pekerjaan', 'trim|required');
-    
-            $data     = $this->input->post();
-            if ($this->form_validation->run() == TRUE) {
-                $result = $this->Mod_settingbr->insertPk($data);
-    
-                if ($result > 0) {
-                    $out['status'] = '';
-                    $out['msg'] = show_ok_msg('Success', '20px');
-                } else {
-                    $out['status'] = '';
-                    $out['msg'] = show_err_msg('Filed !', '20px');
-                }
-            } else {
-                $out['status'] = 'form';
-                $out['msg'] = show_err_msg(validation_errors());
-            }
-    
-            echo json_encode($out);
-        }
-        public function updatePk()
-        {
-            $id                 = trim($_POST['id']);
-            $data['dataPk'] = $this->Mod_settingbr->select_id_pk($id);
-    
-            echo show_my_modal('body_repair/modals/modal_tambah_pk', 'update-pk', $data);
-        }
-    
-        public function prosesUpk()
-        {
-    
-            $this->form_validation->set_rules('kode', 'Nama Pekerjaan', 'trim|required');
-    
-            $data     = $this->input->post();
-            if ($this->form_validation->run() == TRUE) {
-                $result = $this->Mod_settingbr->updatePk($data);
-    
-                if ($result > 0) {
-                    $out['status'] = '';
-                    $out['msg'] = show_ok_msg('Success', '20px');
-                } else {
-                    $out['status'] = '';
-                    $out['msg'] = show_succ_msg('Filed!', '20px');
-                }
-            } else {
-                $out['status'] = 'form';
-                $out['msg'] = show_err_msg(validation_errors());
-            }
-    
-            echo json_encode($out);
-        }
-        public function deletePk()
-        {
-            $id = $_POST['id'];
-            $result = $this->Mod_settingbr->deletePk($id);
-    
-            if ($result > 0) {
-                $out['status'] = '';
-                $out['msg'] = show_del_msg('Deleted', '20px');
-            } else {
-                $out['status'] = '';
-                $out['msg'] = show_err_msg('Filed !', '20px');
-            }
-            echo json_encode($out);
-        }
-    
         /*endPk*/
 }
