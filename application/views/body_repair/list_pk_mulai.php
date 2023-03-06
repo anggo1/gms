@@ -1,4 +1,7 @@
 <div class="modal-body form">
+    
+<button class="btn btn-warning cetak-pk" id="cetakPk" title="Cetak Estimasi"><i class="fa fa-print"></i> Cetak PK
+								</button>
     <div class="card card-first card-outline">
         <div class="card-body">
             <div class="table-responsive">
@@ -6,8 +9,8 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>No Part</th>
-                            <th>Nama Part</th>
+                            <th>No PK</th>
+                            <th>Kode PK</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -18,7 +21,7 @@
                         <tr>
 
                             <td><?php echo $no; ?></td>
-                            <td><?php echo $s->id_lapor; ?></td>
+                            <td><?php echo $s->id_pk; ?></td>
                             <td><?php echo $s->jns_pk; ?></td>
 
                         </tr>

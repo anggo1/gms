@@ -680,9 +680,7 @@
                         .getElementById("form-tambah-laporan")
                         .reset();
                     $('.msg').html(out.msg);
-                    table
-                        .ajax
-                        .reload();
+                    table.ajax.reload();
                     Swal.fire(
                         {position: 'center', icon: 'success', title: out.msg, showConfirmButton: false, timer: 1500}
                     )
@@ -739,6 +737,7 @@
                     $('#jml_part').val('');
                     $("#acc").attr('readonly', 'readonly');
                     $('.msg').html(out.msg);
+                    table.ajax.reload();
                     tampilEstimasi();
                     Swal.fire(
                         {position: 'center', icon: 'success', title: out.msg, showConfirmButton: false, timer: 1500}
@@ -934,4 +933,16 @@
             }
         });
     }
+    $(document).on("click", ".cetak-pk", function () {
+		var id = document.getElementById('id_lapor').value;
+           $ .ajax({
+                method: "POST",
+                url: "<?php echo base_url('BusMasuk/cetakPk'); ?>",
+                data: "id="+id
+            })
+            .done(function (data) {
+                $('#modal-pk').html(data);
+                $('#cetak-pk').modal('show');
+            })
+    })
 </script>

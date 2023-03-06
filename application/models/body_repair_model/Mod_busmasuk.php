@@ -256,6 +256,14 @@ class Mod_busmasuk extends CI_Model
 
 		return $data->result();
     }
+	function cetak_pk($id)
+    {
+		$sql = "SELECT * FROM tbl_br_pk_aktif AS a LEFT JOIN tbl_br_laporan_bus AS b ON b.id_lapor=a.id_lapor WHERE a.id_lapor ='{$id}'";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+    }
 
 	public function insertPk($data)
     {

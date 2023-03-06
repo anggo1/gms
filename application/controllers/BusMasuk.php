@@ -189,11 +189,19 @@ class BusMasuk extends MY_Controller
 
 		echo show_my_print('body_repair/modals/modal_cetak_estimasi', 'cetak-estimasi', $data, ' modal-xl');
 	}
+    public function cetakPk()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPk'] = $this->Mod_busmasuk->cetak_pk($id);
+		$data['detailPk'] = $this->Mod_busmasuk->cetak_estimasi($id);
+
+		echo show_my_print('body_repair/modals/modal_cetak_pk', 'cetak-pk', $data, ' modal-xl');
+	}
     public function cetakEstimasi2()
 	{
 		$id 				= $_POST['id'];
-		$data['dataPk'] = $this->Mod_busmasuk->cetak_masuk($id);
-		$data['detailPk'] = $this->Mod_busmasuk->cetak_estimasi($id);
+		$data['dataPk'] = $this->Mod_busmasuk->cetak_pk($id);
+		//$data['detailPk'] = $this->Mod_busmasuk->cetak_estimasi($id);
 
 		echo show_my_print('body_repair/modals/modal_cetak_estimasi', 'cetak-estimasi2', $data, ' modal-xl');
 	}
