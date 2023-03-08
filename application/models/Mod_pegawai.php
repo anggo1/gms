@@ -81,31 +81,30 @@ class Mod_pegawai extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function get_by_nama($link)
-    {
-		$this->db->select('id_submenu');
-        $this->db->from('tbl_submenu');
-        $this->db->where('link',$link);
-        $query = $this->db->get();
-        return $query->row();
-    }
     function getAll()
     {
         $this->db->select('tbl_pegawai');
         //$this->db->join('tbl_menu b','a.id_menu=b.id_menu');
        return $this->db->get('tbl_pegawai a');
     }
-	function select_by_level($idlevel,$get_id) {
-		$this->db->select('*');
+    public function get_by_nama($link)
+    {
+        $this->db->select('id_submenu');
+        $this->db->from('tbl_submenu');
+        $this->db->where('link', $link);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function select_by_level($idlevel, $id_sub)
+    {
+        $this->db->select('*');
         $this->db->from('tbl_akses_submenu');
         //$this->db->join('tbl_akses_submenu','tbl_akses_submenu.id_submenu=tbl_akses_menu.id_menu','inner');
-        $this->db->where('tbl_akses_submenu.id_level=1');
-        $this->db->where('tbl_akses_submenu.id_submenu=42');
-
-		$data = $this->db->get();
-
-		return $data->result();
-	}
+        $this->db->where('tbl_akses_submenu.id_level=',$idlevel);
+        $this->db->where('tbl_akses_submenu.id_submenu=',$id_sub);
+        $data = $this->db->get();
+        return $data->result();
+    }
     public function select_pendidikan() {
 		$sql = " SELECT * FROM tbl_hrd_pendidikan";
 

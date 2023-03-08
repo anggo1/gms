@@ -19,26 +19,45 @@ class Pegawai extends MY_Controller {
 		$data['page'] 		= "Daftar Pegawai";
 		$data['judul'] 		= "Data Pegawai";
         $this->load->helper('url');
-        $data['menu'] = $this->Mod_menu->getAll()->result();
-        
 		$data['datapendidikan'] = $this->Mod_pegawai->select_pendidikan();
 		$data['databagian'] = $this->Mod_pegawai->select_bagian();
 		$data['dataposisi'] = $this->Mod_pegawai->select_posisi();
-        $this->template->load('layoutbackend','hrd/pegawai_data',$data);
-    }
+        $data['menu'] = $this->Mod_menu->getAll()->result();
 
+        $link=$this->uri->segment(1);
+        $idlevel = $this->session->userdata['id_level'];
+        
+        $get_id = $this->Mod_pegawai->get_by_nama($link);
+        foreach ($get_id as $idnye){
+            $row1 = array();
+            $row1[] = $idnye->id_submenu;
+            $id_sub=$idnye->id_submenu;
+        }
+        $data['viewLevel']  = $this->Mod_pegawai->select_by_level($idlevel, $id_sub);
+        
+		echo show_my_modal('hrd/modals/modal_tambah_pegawai', 'tambah-pegawai', $data, ' modal-lg');
+        $this->template->load('layoutbackend','hrd/pegawai_data', $data);
+		
+	}
     public function ajax_list()
     {
         
- 		$get_id= $this->Mod_pegawai->get_by_nama('Pegawai');		
-		$idlevel= $this->session->userdata['id_level'];
-		 $viewLevel = $this->Mod_pegawai->select_by_level($idlevel,$get_id);
-		
-		 foreach ($viewLevel as $pel1) {
+        $link=$this->uri->segment(1);
+        $idlevel = $this->session->userdata['id_level'];
+        $get_id = $this->mod_pegawai->get_by_nama($link);
+        foreach ($get_id as $idnye){
             $row1 = array();
-            $row1[] = $pel1->id_submenu;
-            $data1[] = $row1;
-			 
+            $row1[] = $idnye->id_submenu;
+            $id_sub=$idnye->id_submenu;
+        }
+        $viewLevel = $this->Mod_pegawai->select_by_level($idlevel, $id_sub);
+
+		 foreach ($viewLevel as $b) {
+            $row1 = array();
+            $row1[] = $b->id_submenu;
+		
+        ini_set('memory_limit','512M');
+        set_time_limit(3600);
         $list = $this->Mod_pegawai->get_datatables();
         $data = array();
         $no = $_POST['start'];

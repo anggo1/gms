@@ -32,18 +32,21 @@ function printElement(elem) {
   }
   #printSection, #printSection * {
     visibility:visible;
-    width: 500px;
+    width: 400px;
+    height: auto;
     
   }
   .datatablex {
-    border-collapse: collapse;
+    position: absolute;
     font: bold;
+    width: 800px;
 }
 .datatablex td {
     padding: 0px;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
-	font-size:18px;
+	font-size:35px;
     font: bold;
+    width:800px;
 }
 .datatablex th {
     border: 2px solid #000;
@@ -80,50 +83,38 @@ font-family:Georgia, "Times New Roman", Times, serif;
     ?>
     <div id="printThis">
 
-      <!--<?php echo '<img src="'.base_url().'qr.png" width="320"  align="center" />' ?>-->
+      <!--<?php echo '<img src="'.base_url().'qr.png" width="250"  align="center" />' ?>-->
   <?php }} ?>
-                                    <table width="100%" id="datatablex" class="datatablex">
+                                    <table width="100%" class="datatablex" id="datatablex">
                                         <tbody>
                                             <tr>
-                                                <td width="10%" rowspan="8"><img src="<?= base_url('./assets/img_qr/'.$part->no_part.'.png') ?>" alt="QRcode-part" width="200px"></td>
-                                                <td width="10%">&nbsp;</td>
-                                                <td width="80%" style="font-size: large;">&nbsp;</td>
+                                                <td width="20%" rowspan="8"><img src="<?= base_url('./assets/img_qr/'.$part->no_part.'.png') ?>" alt="QRcode-part" width="150px"></td>
+                                                <td width="82%">Kode :</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: large;">&nbsp;</td>
-                                                <td style="font-size: large;">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: large;">&nbsp;</td>
-                                                <td style="font-size: large;">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: large;">Kode</td>
-                                                <td style="font-size: large;">:
-                                                <?php if (!empty($part->no_part)) {
+                                                <td><?php if (!empty($part->no_part)) {
                                                           echo $part->no_part; } ?></td>
                                             </tr>
                                             <tr>
-                                              <td style="font-size: large;">Nama</td>
-                                              <td style="font-size: large;">:
-                                              <?php if (!empty($part->nama_part)) {
+                                                <td>Nama</td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php if (!empty($part->nama_part)) {
                                                           echo $part->nama_part; } ?></td>
                                             </tr>
                                             <tr>
-                                              <td style="font-size: large;">Satuan</td>
-                                              <td style="font-size: large;">:
-                                              <?php if (!empty($part->satuan)) {
+                                              <td>Satuan</td>
+                                            </tr>
+                                            <tr>
+                                              <td><?php if (!empty($part->satuan)) {
                                                           echo $part->satuan; } ?></td>
                                             </tr>
                                             <tr>
-                                              <td style="font-size: large;">Type</td>
-                                              <td style="font-size: large;">:
-                                              <?php if (!empty($part->type_mesin)) {
-                                                          echo $part->type_mesin; } ?></td>
+                                              <td>Type</td>
                                             </tr>
                                             <tr>
-                                              <td style="font-size: large;">&nbsp;</td>
-                                              <td style="font-size: large;">&nbsp;</td>
+                                              <td><?php if (!empty($part->type_mesin)) {
+                                                          echo $part->type_mesin; } ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
