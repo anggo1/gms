@@ -130,6 +130,37 @@ input-besar, textarea{
 										</select>
 									</div>
 								</div>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Kaca Depan</label>
+									<div class="col-sm-4">
+										<input type="text" name="kaca_depan" class="form-control" placeholder="Kondisi Kaca Depan">
+									</div>
+									<label class="col-sm-2 col-form-label">Kaca Belakang</label>
+									<div class="col-sm-4">
+										<input type="text" name="kaca_belakang" class="form-control" placeholder="Kondisi Kaca Belakang">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Spion</label>
+									<div class="col-sm-4">
+										<input type="text" name="spion" class="form-control" placeholder="Kondisi Spion">
+									</div>
+									<label class="col-sm-2 col-form-label">Solar</label>
+									<div class="col-sm-4">
+										<input type="text" name="solar" id="solar" value="" class="form-control" placeholder="Solar">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Seat</label>
+									<div class="col-sm-4">
+										<input type="text" name="seat" class="form-control" placeholder="Jumlah Seat">
+									</div>
+									<label class="col-sm-2 col-form-label">AC</label>
+									<div class="col-sm-4">
+										<input type="text" name="ac" id="ac" value="" class="form-control" placeholder="Air Conditioner">
+									</div>
+								</div>
 						<input type="hidden" name="user" id="user" value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
 						<div class="modal-footer center-content-between">
 							<button class="btn btn-primary" type="submit"><span class="fa fa-save"></span> Simpan</button>
@@ -174,37 +205,6 @@ input-besar, textarea{
                 <h3 class="card-title text-blue"><span class="ion-android-alert ion-lg"></span>&nbsp; Detail Berita Acara Serah Terima (BAST)</h3>
               </div>
 						<div class="modal-body">
-						<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Kaca Depan</label>
-									<div class="col-sm-4">
-										<input type="text" name="kaca_depan" class="form-control" placeholder="Kondisi Kaca Depan">
-									</div>
-									<label class="col-sm-2 col-form-label">Kaca Belakang</label>
-									<div class="col-sm-4">
-										<input type="text" name="kaca_belakang" class="form-control" placeholder="Kondisi Kaca Belakang">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Spion</label>
-									<div class="col-sm-4">
-										<input type="text" name="spion" class="form-control" placeholder="Kondisi Spion">
-									</div>
-									<label class="col-sm-2 col-form-label">Solar</label>
-									<div class="col-sm-4">
-										<input type="text" name="solar" id="solar" value="" class="form-control" placeholder="Solar">
-									</div>
-								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Seat</label>
-									<div class="col-sm-4">
-										<input type="text" name="seat" class="form-control" placeholder="Jumlah Seat">
-									</div>
-									<label class="col-sm-2 col-form-label">AC</label>
-									<div class="col-sm-4">
-										<input type="text" name="ac" id="ac" value="" class="form-control" placeholder="Air Conditioner">
-									</div>
-								</div>
 								<table class="table table-striped table-hover nowrap" id="list-po">
 									<thead>
 										<tr>
