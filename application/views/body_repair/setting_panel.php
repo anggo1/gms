@@ -13,7 +13,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
@@ -74,8 +74,39 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-6">
+                        <div class="card ">
+                            <div class="modal-content">
+                                <div class="card-header card-blue card-outline">
+                                    <h3 class="card-title"><i class="ion-ios-cog-outline ion-lg text-blue"></i> &nbsp; Kelas Pelayanan</h3>
+                                    <div class="text-right">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-kelas" title="Add Data"><i class="fas fa-plus"></i>
+                                            Add</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 ">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover nowrap" id="list-kelas">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Kelas</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="data-kelas">
+                                            </tbody>
+                                            <tfoot></tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="modal-kelas"></div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
@@ -126,10 +157,11 @@ show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 
         showLap();
         showKat();
         showPk();
+        showKl();
     }
 
     function refresh() {
-        MyTable = $('#list-laporan,#list-kategori,#list-pk').DataTable();
+        MyTable = $('#list-laporan,#list-kategori,#list-pk,#list-kelas').DataTable();
     }
 
     function effect_msg_form() {
@@ -151,6 +183,7 @@ show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 
     var tableLaporan = $('#list-laporan').DataTable();
     var tableKategori = $('#list-kategori').DataTable();
     var tablePk = $('#list-pk').DataTable();
+    var tableKelas = $('#list-kelas').DataTable();
 
     //ajax Jabatan
     function showLap() {
@@ -173,6 +206,13 @@ show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 
         $.get('<?php echo base_url('Settingbr/showPk'); ?>', function(data) {
             tablePk.destroy();
             $('#data-pk').html(data);
+            refresh();
+        });
+    }
+    function showKl() {
+        $.get('<?php echo base_url('Settingbr/showKl'); ?>', function(data) {
+            tableKl.destroy();
+            $('#data-kelas').html(data);
             refresh();
         });
     }
@@ -520,7 +560,120 @@ show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 
                 }
             })
     })
-
-
     //** End Keterangan PK */
+    $('#form-tambah-kelas').submit(function(e) {
+        var data = $(this).serialize();
+
+        $.ajax({
+                method: 'POST',
+                url: '<?php echo base_url('Settingbr/prosesTkelas'); ?>',
+                data: data
+            })
+            .done(function(data) {
+                var out = jQuery.parseJSON(data);
+
+                showKl();
+                if (out.status == 'form') {
+                    $('.form-msg').html(out.msg);
+                    effect_msg_form();
+                } else {
+                    document.getElementById("form-tambah-kelas").reset();
+                    $('#tambah-kelas').modal('hide');
+                    $('.msg').html(out.msg);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: out.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+
+        e.preventDefault();
+    });
+
+    $(document).on("click", ".update-dataKelas", function() {
+        var id = $(this).attr("data-id");
+
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('Settingbr/updateKelas'); ?>",
+                data: "id=" + id
+            })
+            .done(function(data) {
+                $('#modal-kelas').html(data);
+                $('#update-kelas').modal('show');
+            })
+    })
+    $(document).on('submit', '#form-update-kelas', function(e) {
+        var data = $(this).serialize();
+
+        $.ajax({
+                method: 'POST',
+                url: '<?php echo base_url('Settingbr/prosesUkelas'); ?>',
+                data: data
+            })
+            .done(function(data) {
+                var out = jQuery.parseJSON(data);
+
+                showPk();
+                if (out.status == 'form') {
+                    $('.form-msg').html(out.msg);
+                    effect_msg_form();
+                } else {
+                    document.getElementById("form-update-kelas").reset();
+                    $('#update-kelas').modal('hide');
+                    $('.msg').html(out.msg);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: out.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+
+        e.preventDefault();
+    });
+
+    $('#tambah-kelas').on('hidden.bs.modal', function() {
+        $('.form-msg').html('');
+    })
+
+    $('#update-kelas').on('hidden.bs.modal', function() {
+        $('.form-msg').html('');
+    })
+    $(document).on("click", ".delete-kelas", function() {
+        id_kelas = $(this).attr("data-id");
+    })
+    $(document).on("click", ".hapus-kelas", function() {
+        var id = id_kelas;
+
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('Settingbr/deleteKelas'); ?>",
+                data: "id=" + id
+            })
+
+            .done(function(data) {
+                var out = jQuery.parseJSON(data);
+                showKl();
+                $('.msg').html(out.msg);
+                $('#hapusKelas').modal('hide');
+                if (out.status != 'form') {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: out.msg,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    })
+
+
+    //** End Kelas Pelayanan */
 </script>

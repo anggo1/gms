@@ -71,13 +71,13 @@ input-besar, textarea{
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-5">
+          <div class="col-md-6">
             <!-- general form elements -->
             <div class="card card-default">
 			<div class="card-header">
                 <h3 class="card-title text-blue"><span class="ion-soup-can-outline ion-lg text-blue"></span>&nbsp; Proses Berita Acara Serah Terima (BAST)</h3>
               </div>
-						<div class="modal-body">
+						<div class="modal-body text-sm">
 							<form id="formBast" name="formBast" method="POST">
 
 								<div class="form-group row">
@@ -134,37 +134,6 @@ input-besar, textarea{
 										</select>
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Kaca Depan</label>
-									<div class="col-sm-4">
-										<input type="text" name="kaca_depan" class="form-control" placeholder="Kondisi Kaca Depan">
-									</div>
-									<label class="col-sm-2 col-form-label">Kaca Belakang</label>
-									<div class="col-sm-4">
-										<input type="text" name="kaca_belakang" class="form-control" placeholder="Kondisi Kaca Belakang">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Spion</label>
-									<div class="col-sm-4">
-										<input type="text" name="spion" class="form-control" placeholder="Kondisi Spion">
-									</div>
-									<label class="col-sm-2 col-form-label">Solar</label>
-									<div class="col-sm-4">
-										<input type="text" name="solar" id="solar" value="" class="form-control" placeholder="Solar">
-									</div>
-								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Seat</label>
-									<div class="col-sm-4">
-										<input type="text" name="seat" class="form-control" placeholder="Jumlah Seat">
-									</div>
-									<label class="col-sm-2 col-form-label">AC</label>
-									<div class="col-sm-4">
-										<input type="text" name="ac" id="ac" value="" class="form-control" placeholder="Air Conditioner">
-									</div>
-								</div>
 						<input type="hidden" name="user" id="user" value="<?php echo $this->session->userdata['full_name']; ?>" class="form-control">
 						<div class="modal-footer center-content-between">
 							<button class="btn btn-primary" type="submit"><span class="fa fa-save"></span> Simpan</button>
@@ -202,7 +171,7 @@ input-besar, textarea{
           </div>
 			
           <!-- left column -->
-          <div class="col-md-7">
+          <div class="col-md-6">
             <!-- general form elements -->
             <div class="card">
             <div class="card-header">

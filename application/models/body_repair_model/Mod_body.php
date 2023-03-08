@@ -108,14 +108,20 @@ class Mod_body extends CI_Model
         no_pol 		='".$data['no_pol']."',
         merk 		='".$data['merk']."',
         thn_rangka  ='".$data['thn_rangka']."',
-        thn_pembuatn='".$data['thn_pembuatan']."',
+        thn_pembuatan='".$data['thn_pembuatan']."',
         karoseri    ='".$data['karoseri']."',
         warna		='".$data['warna']."',
         kelas	    ='".$data['kelas']."',
         strip       ='".$data['strip']."',
         keterangan  ='".$data['keterangan']."',
         kondisi  	='".$data['kondisi']."',
-        status  	='".$data['status']."'";
+        status  	='".$data['status']."',
+        pool 	 	='".$data['pool']."',
+        no_rangka  	='".$data['no_rangka']."',
+        no_mesin  	='".$data['no_mesin']."',
+        rute_asli  	='".$data['rute_asli']."',
+        rute_aktif 	='".$data['rute_aktif']."'
+		";
 
 		$this->db->query($sql);
 
@@ -135,7 +141,12 @@ class Mod_body extends CI_Model
         strip       ='".$data['strip']."',
         keterangan  ='".$data['keterangan']."',
         kondisi  	='".$data['kondisi']."',
-        status  	='".$data['status']."'
+        status  	='".$data['status']."',
+		pool 	 	='".$data['pool']."',
+        no_rangka  	='".$data['no_rangka']."',
+        no_mesin  	='".$data['no_mesin']."',
+        rute_asli  	='".$data['rute_asli']."',
+        rute_aktif 	='".$data['rute_aktif']."'
         WHERE no_body='".$data['no_body']."'";
 
 		$this->db->query($sql);

@@ -26,7 +26,6 @@ class Pegawai extends MY_Controller {
 
         $link=$this->uri->segment(1);
         $idlevel = $this->session->userdata['id_level'];
-        
         $get_id = $this->Mod_pegawai->get_by_nama($link);
         foreach ($get_id as $idnye){
             $row1 = array();
@@ -34,17 +33,16 @@ class Pegawai extends MY_Controller {
             $id_sub=$idnye->id_submenu;
         }
         $data['viewLevel']  = $this->Mod_pegawai->select_by_level($idlevel, $id_sub);
-        
+
 		echo show_my_modal('hrd/modals/modal_tambah_pegawai', 'tambah-pegawai', $data, ' modal-lg');
         $this->template->load('layoutbackend','hrd/pegawai_data', $data);
-		
+
 	}
     public function ajax_list()
     {
-        
         $link=$this->uri->segment(1);
         $idlevel = $this->session->userdata['id_level'];
-        $get_id = $this->mod_pegawai->get_by_nama($link);
+        $get_id = $this->Mod_pegawai->get_by_nama($link);
         foreach ($get_id as $idnye){
             $row1 = array();
             $row1[] = $idnye->id_submenu;
@@ -52,34 +50,42 @@ class Pegawai extends MY_Controller {
         }
         $viewLevel = $this->Mod_pegawai->select_by_level($idlevel, $id_sub);
 
-		 foreach ($viewLevel as $b) {
+		foreach ($viewLevel as $b) {
             $row1 = array();
             $row1[] = $b->id_submenu;
-		
+
         ini_set('memory_limit','512M');
         set_time_limit(3600);
         $list = $this->Mod_pegawai->get_datatables();
         $data = array();
         $no = $_POST['start'];
-        foreach ($list as $submenu) {
+        foreach ($list as $p) {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $submenu->nip;
-            $row[] = $submenu->nama_depan;
-            $row[] = tglIndoPendek($submenu->tgl_lahir);
-            $row[] = $submenu->pendidikan;
-            $row[] = $submenu->jabatan;
-            $row[] = $submenu->departement;
-            $row[] = $submenu->nip;
-            $row[] = $pel1->add_level;
-            $row[] = $pel1->view_level;
-            $row[] = $pel1->edit_level;
-            $row[] = $pel1->delete_level;
-            $row[] = $pel1->id_level;
+            $row[] = $p->nip;
+            $row[] = $p->nama_depan;
+            $row[] = tglIndoPendek($p->tgl_lahir);
+            $row[] = $p->pendidikan;
+            $row[] = $p->jabatan;
+            $row[] = $p->departement;
+            if($b->edit_level=="Y" && $b->delete_level=="Y"){
+                $row[]='
+                <button class="btn btn-sm btn-outline-success update-body ion-compose ion-sm" title="Edit" data-id="'.$p->nip.'">
+                </button>
+                <button class="btn btn-sm btn-outline-danger delete-body ion-android-close ion-sm" title="Delete" data-toggle="modal" data-target="#hapusBody" data-id="'.$p->nip.'">
+                </button>';
+            }
+            if($b->edit_level=="Y" && $b->delete_level=="N"){
+                $row[]='
+                <button class="btn btn-sm btn-outline-success update-body ion-compose ion-lg" title="Edit" data-id="'.$p->nip.'">
+                </button>';
+            }else{
+                $row[]='';
+            }
             $data[] = $row;
         }
-		 }
+    }
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->Mod_pegawai->count_all(),

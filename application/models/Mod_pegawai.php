@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mod_pegawai extends CI_Model {
 
-    var $table = 'tbl_pegawai';
+    var $table = 'tbl_hrd_pegawai';
     var $column_search = array('a.nip','a.nama_depan','a.nama_belakang','a.tgl_lahir','b.pendidikan','c.jabatan','d.departement');
     var $column_order = array('null','a.nip','a.nama_depan','a.tgl_lahir','b.pendidikan','c.jabatan','d.departement');
     var $order = array('nip' => 'desc'); // default order 
@@ -17,7 +17,7 @@ class Mod_pegawai extends CI_Model {
     {
         
         $this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
-        $this->db->from('tbl_pegawai as a');
+        $this->db->from('tbl_hrd_pegawai as a');
         $this->db->join('tbl_hrd_pendidikan as b','a.pendidikan=b.id_pendidikan');
         $this->db->join('tbl_hrd_jabatan as c','a.jabatan=c.id_jabatan');
         $this->db->join('tbl_hrd_departement as d','a.departement=d.id_departement');
@@ -76,16 +76,16 @@ class Mod_pegawai extends CI_Model {
     public function count_all()
     {
         
-        $this->db->from('tbl_pegawai as a');
+        $this->db->from('tbl_hrd_pegawai as a');
         //$this->db->join('tbl_menu as b','a.id_menu=b.id_menu');
         return $this->db->count_all_results();
     }
 
     function getAll()
     {
-        $this->db->select('tbl_pegawai');
+        $this->db->select('tbl_hrd_pegawai');
         //$this->db->join('tbl_menu b','a.id_menu=b.id_menu');
-       return $this->db->get('tbl_pegawai a');
+       return $this->db->get('tbl_hrd_pegawai a');
     }
     public function get_by_nama($link)
     {
@@ -129,7 +129,7 @@ class Mod_pegawai extends CI_Model {
     function view_pegawai($id)
     {	
     	$this->db->select('a.*,b.pendidikan,c.jabatan,d.departement');
-        $this->db->from('tbl_pegawai as a');
+        $this->db->from('tbl_hrd_pegawai as a');
         $this->db->join('tbl_hrd_pendidikan as b','a.pendidikan=b.id_pendidikan');
         $this->db->join('tbl_hrd_jabatan as c','a.jabatan=c.id_jabatan');
         $this->db->join('tbl_hrd_departement as d','a.departement=d.id_departement');
@@ -141,15 +141,15 @@ class Mod_pegawai extends CI_Model {
     }
 
     function get_pegawai($id)
-    {   
+    {
         $this->db->where('nip',$id);
-        return $this->db->get('tbl_pegawai')->row();
+        return $this->db->get('tbl_hrd_pegawai')->row();
     }
 
     function edit_submenu($id)
-    {	
-    	$this->db->where('nip',$id);
-    	return $this->db->get('tbl_pegawai');
+    {
+    $this->db->where('nip',$id);
+    return $this->db->get('tbl_hrd_pegawai');
     }
 
     function insertsubmenu($tabel, $data)
@@ -167,12 +167,12 @@ class Mod_pegawai extends CI_Model {
     function updatepegawai($nip, $data)
     {
         $this->db->where('nip', $nip);
-        $this->db->update('tbl_pegawai', $data);
+        $this->db->update('tbl_hrd_pegawai', $data);
     }
     function getImage($nip)
     {
         $this->db->select('image');
-        $this->db->from('tbl_pegawai');
+        $this->db->from('tbl_hrd_pegawai');
         $this->db->where('nip', $nip);
         return $this->db->get();
     }

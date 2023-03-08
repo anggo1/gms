@@ -27,7 +27,7 @@ class Body extends MY_Controller
         }
         $data['viewLevel']  = $this->Mod_body->select_by_level($idlevel, $id_sub);
         
-		echo show_my_modal('body_repair/modals/modal_tambah_body', 'tambah-body', $data, ' modal-lg');
+		echo show_my_modal('body_repair/modals/modal_tambah_body', 'tambah-body', $data, ' modal-xl');
         $this->template->load('layoutbackend','body_repair/data_body', $data);
 		
 	}
@@ -135,7 +135,7 @@ class Body extends MY_Controller
 		$id 				= trim($_POST['id']);
 		$data['dataBody'] = $this->Mod_body->select_by_id_body($id);
 
-		echo show_my_modal('body_repair/modals/modal_tambah_body', 'update-body', $data, ' modal-lg');
+		echo show_my_modal('body_repair/modals/modal_tambah_body', 'update-body', $data, ' modal-xl');
 	}
 
 	public function prosesUbody() {
