@@ -61,9 +61,8 @@ window.onload=beginrefresh
         </div>
         <div class="kategoritengah">
             <div class="jarak_mobil2"></div>
-            <div class="jarak_mobil2"></div>
             <div class="judul">
-                <strong>T R I M I N G</strong>
+                <strong>B O D Y</strong>
             </div>
             <div class="jarak_mobil"></div>
             <div class="jarak_mobil"></div>
@@ -74,20 +73,35 @@ window.onload=beginrefresh
             <div class="jarak_mobil"></div>
             <div class="jarak_mobil"></div>
             <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
+            <div class="jarak_mobil"></div>
             <div class="judul">
-                <strong>ELEKTRIK</strong>
-            </div>
-            <div class="judul">
-                <strong>Q/C</strong>
-            </div>
-            <div class="judul">
-                <strong>BODY MTE</strong>
+                <strong>DEMPUL CAT</strong>
             </div>
             <div class="jarak_mobil"></div>
             <div class="jarak_mobil"></div>
         </div>
+        
+        <div class="kategoritengah">
         <div class="kategoriatas">
             <div class="jarak_kiri1"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>15</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -111,7 +125,7 @@ window.onload=beginrefresh
                     </div>
                 </div>
             </div>
-            <div class="jarak_bus"></div>
+            <div class="jarak_mobil"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -138,7 +152,7 @@ window.onload=beginrefresh
                 </div>
                 <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
+            <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -165,7 +179,7 @@ window.onload=beginrefresh
                 </div>
                 <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
+            <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -183,7 +197,6 @@ window.onload=beginrefresh
                 </div>
                 <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
             <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
@@ -221,6 +234,159 @@ window.onload=beginrefresh
                 <strong></strong>
             </div>
             <div class="jarak_mobil"></div>
+            
+        </div>
+        <div class="kategoritengah">
+            <div class="bis5">
+                <div class="jarak_mobil2"></div>
+                <div class="jarak_mobil"></div>
+                <div class="judul">
+                    <strong>T R I M I N G</strong>
+                </div>
+                <div class="jarak_mobil2"></div>
+                <div class="judul">
+                    <strong>ELEKTRIK</strong>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="judul">
+                    <strong>Q/C</strong>
+                </div>
+                <div class="jarak_mobil"></div>
+                <div class="judul">
+                    <strong>JOK</strong>
+                </div><div class="judul">
+                    <strong>P.HARIAN</strong>
+                </div>
+            </div>
+        </div>
+        
+        <div class="kategoriatas">
+            <div class="jarak_kiri1"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>16</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>17</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>18</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>19</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="jarak_mobil"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>20</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_BUS"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>21</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>22</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_mobil"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>23</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>24</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_mobil"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>25</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>26</strong>
+                    </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_mobil"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>27</strong>
+                    </div>
+                    test</div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>28</strong>
+                    </div>
+                    test</div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>29</strong>
+                    </div>
+                    test</div>
+                <strong></strong>
+            </div>
             <div class="jarak_mobil"></div>
             <div class="jarak_mobil"></div>
 
@@ -263,217 +429,8 @@ window.onload=beginrefresh
                 <div class="jarak_bus"></div>
             </div>
         </div>
-        <div class="kategoritengah">
-            <div class="bis5">
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil"></div>
-                <div class="jarak_mobil"></div>
-                <div class="jarak_mobil"></div>
-                <div class="judul">
-                    <strong>PRIMER, DEMPUL, FILLER</strong>
-                </div>
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil"></div>
-                <div class="judul">
-                    <strong>PRIMER, DEMPUL, FILLER</strong>
-                </div>
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil"></div>
-                <div class="judul">
-                    <strong>STRIPING</strong>
-                </div>
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil"></div>
-                <div class="jarak_mobil"></div>
-                <div class="judul">
-                    <strong>FINISHING</strong>
-                </div>
-            </div>
-        </div>
-        <div class="jarak_kiri"></div>
-        <div class="kategoriatas">
-            <div class="jarak_kiri1"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>16</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>17</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>18</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>19</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>20</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>21</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>22</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>23</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>24</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>25</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>26</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>27</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>28</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>29</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>30</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>31</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>32</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>33</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-        </div>
     </div>
-</div>
-</div>
 
-<div id="bawah2">
-<ul id="bawah_01" class="bawah">
-    <marquee direction="left" behavior="scroll" scrollamount="5">
-        <?php
-		 
-             //$antrian_pk=mysql_query("SELECT * FROM pk_aktif WHERE status='S' AND tgl_selesai='".date('Y-m-d')."'");
-             // while($dpk=mysql_fetch_array($antrian_pk)){
-			//	echo "<td width=0 style=text-transform:capitalize;><img src=images/centang.png width=30 height=30>$dpk[no_body]($dpk[jns_pk])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
-             // }
-            ?>
-
-    </marquee>
 </div>
 <?php
  function DateToIndo($date){
@@ -575,6 +532,42 @@ window.onload=beginrefresh
 						$sisamenit2=$sisamenit*60;
 						return "$jam[0] ";//jam $sisamenit2 menit
 						} ?>
+        </ul>
+    </div>
+    <div id="page3">
+        <ul id="ticker_04" class="ticker">
+            <div align="center">
+                <table width="100%">
+                    <td width="100%" class="keterangan_lanjutan">
+                        <strong>D A F T A R &nbsp;&nbsp; K E N D A R A A N &nbsp;&nbsp; S I A P &nbsp;&nbsp; K E L U A R</strong>
+                    </td>
+                </table>
+            </div>
+            <div align="left">
+                <table width="100%">
+                    <td width="3%" class="keterangan_judul">No.</td>
+                    <td width="7%" class="keterangan_judul">Tgl-Masuk</td>
+                    <td width="10%" class="keterangan_judul">NoBody</td>
+                    <td width="20%" class="keterangan_judul">Kategori</td>
+                    <td width="20%" class="keterangan_judul">Pelapor</td>
+                    <td width="100%" class="keterangan_judul">Keterangan</td>
+                </table>
+            </div>
+            <li>
+                <?php
+             //$antrian1=mysql_query("select * from bus_masuk where status ='N'");
+             // while($d1=mysql_fetch_array($antrian1)){
+				//  $noUrutberatbanget1++;
+				//echo "<li>
+				//<table width=100%>	
+				//<td width=3% class=isi_slider ><font> $noUrutberatbanget1</font></td>	
+				//<td width=7% class=isi_slider ><div align=center> ".DateToIndo($d1[tgl_masuk])."</div> </td>
+				//<td width=10% class=isi_slider ><div align=center> $d1[no_body]</div></td>
+				//<td width=20% class=isi_slider ><div align=center> $d1[kategori_pk]</div></td>
+				//<td width=20% class=isi_slider ><div align=center> $d1[pelapor]</div></td>
+				//<td width=30$ class=isi_slider ><font size=2>$d1[keterangan]</td></font></table></li>";
+             // }
+            ?>
         </ul>
     </div>
     <script>

@@ -127,9 +127,9 @@ p a:hover {
 	padding:0 0 0;
 	text-align:center;
 	font-size: 12px;
-	box-shadow: 1px 19px 14px -14px rgba(0,0,0,0.76);
--webkit-box-shadow: 1px 19px 14px -14px rgba(0,0,0,0.76);
--moz-box-shadow: 1px 19px 14px -14px rgba(0,0,0,0.76);
+	box-shadow: 1px 15px 10px -14px rgba(0,0,0,0.76);
+-webkit-box-shadow: 1px 15px 10px -14px rgba(0,0,0,0.76);
+-moz-box-shadow: 1px 15px 10px -14px rgba(0,0,0,0.76);
 	
 }
 .kategoriatas .bis2 .isikategori2 {
@@ -187,7 +187,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 }
 .kategoriatas .keteranganpk .isiketeranganpk {
 	float:left;
-	min-height:160px;
+	min-height:150px;
 	width:100%;background: rgb(235,233,249); /* Old browsers */
 background: -moz-linear-gradient(top, rgba(235,233,249,1) 0%, rgba(216,208,239,1) 50%, rgba(206,199,236,1) 51%, rgba(193,191,234,1) 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, rgba(235,233,249,1) 0%,rgba(216,208,239,1) 50%,rgba(206,199,236,1) 51%,rgba(193,191,234,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -402,6 +402,7 @@ h10 {
 	margin:0;
 	width:3%;
 	min-height:10px;
+	margin-bottom:3%;
 	
 }
 .nomor2{

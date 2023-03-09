@@ -8,7 +8,7 @@
            <td><?php echo $s->no_body; ?></td>
            <td><?php echo $s->no_pol; ?></td>
            <td><?php echo $s->nama_sp; ?></td>
-           <td><?php echo $s->Keterangan; ?></td>
+           <td><?php echo $s->keterangan; ?></td>
 
            <td class="text-center">
            <button type="button" class="btn btn-xs btn-outline-success cetak-bast" id="cetak" data-id="<?php echo $s->id_bast; ?>"><i class="fas fa-print"></i></button>

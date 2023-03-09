@@ -3,20 +3,32 @@ a { color: #141478; text-decoration: none; }
 a:hover { color: #0099ff; }
 
 #page1 {
-	width: 47%;
+	width: 31%;
 	float: left;
 	clear: left;
-	margin-top:auto;
+	margin-top:3%;
 	margin-left: 2%;
 	padding-left:auto;
 	margin-bottom: 5px;
 	
 }
 #page2 {
-	width: 47%;
+	width: 30%;
+	float: left;
+	clear: right;
+	margin-top:3%;
+	margin-right: 2%;
+	margin-left: 2%;
+	padding-right:auto;
+	margin-bottom: 5px;
+	
+	
+}
+#page3 {
+	width: 31%;
 	float: right;
 	clear: right;
-	margin-top:auto;
+	margin-top:3%;
 	margin-right: 2%;
 	padding-right:auto;
 	margin-bottom: 5px;
@@ -243,7 +255,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', end
 	color: #000;
 	box-shadow: 1px 1px 1px 1px #333;
 	padding: 0px;
-	font-size: small;
+	font-size: medium;
 	text-shadow: 0 1px 1px #FFF ;
 	text-align:center;
 	background-color: #9F0;
@@ -291,12 +303,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6f0a3', end
 	font-size:38px;
 	background-color:#FFF;
 }
-#ticker_05 {
-	height: 180px;
+#ticker_04 {
+	height: 210px;
 	width: 100%;
 	font-size:38px;
 	background-color:#FFF;
-	
 }
 #ticker_06 {
 	height: 180px;

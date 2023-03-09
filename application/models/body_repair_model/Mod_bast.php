@@ -114,7 +114,7 @@ class Mod_bast extends CI_Model
         $noOrder = $dataQ['maxKode'];
         $noUrut = (int) substr($noOrder, 10, 3);
         $noUrut++;
-        $char = "BS";
+        $char = "SA";
         $tahun=substr($date, 0, 4);
         $bulan=substr($date, 4, 2);
         $tgl=substr($date, 6, 2);
@@ -124,22 +124,15 @@ class Mod_bast extends CI_Model
 		$tgl2 = explode('-',$date2);
 		$tgl_bast = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
         
-        $lb_kn="";
-        if (!empty($data['lb_kn'])){
-            $lb_kn=$data['lb_kn'];
-        }else{
-            $lb_kn='0';
-        }
-
         $ket1=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket2=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket3=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket4=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket5=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket6=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket7=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket8=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
-        $ket9=""; if (!empty($data['ket1'])){ $ket1=$data['ket1']; }else { $ket1='0'; }
+        $ket2=""; if (!empty($data['ket2'])){ $ket2=$data['ket2']; }else { $ket2='0'; }
+        $ket3=""; if (!empty($data['ket3'])){ $ket3=$data['ket3']; }else { $ket3='0'; }
+        $ket4=""; if (!empty($data['ket4'])){ $ket4=$data['ket4']; }else { $ket4='0'; }
+        $ket5=""; if (!empty($data['ket5'])){ $ket5=$data['ket5']; }else { $ket5='0'; }
+        $ket6=""; if (!empty($data['ket6'])){ $ket6=$data['ket6']; }else { $ket6='0'; }
+        $ket7=""; if (!empty($data['ket7'])){ $ket7=$data['ket7']; }else { $ket7='0'; }
+        $ket8=""; if (!empty($data['ket8'])){ $ket8=$data['ket8']; }else { $ket8='0'; }
+        $ket9=""; if (!empty($data['ket9'])){ $ket9=$data['ket9']; }else { $ket9='0'; }
         $ket10=""; if (!empty($data['ket10'])){ $ket10=$data['ket10']; }else { $ket10='0'; }
         $ket11=""; if (!empty($data['ket11'])){ $ket11=$data['ket11']; }else { $ket11='0'; }
         $ket12=""; if (!empty($data['ket12'])){ $ket12=$data['ket12']; }else { $ket12='0'; }
@@ -233,7 +226,7 @@ class Mod_bast extends CI_Model
             status_bus      ='".$data['status_bus']."',
             user            ='".$data['user']."',
             kaca_depan      ='$ket1',
-            kaca _belakang  ='$ket2',
+            kaca_belakang   ='$ket2',
             kc_kanan        ='$ket3',
             kc_kiri         ='$ket4',
             sp_kanan        ='$ket5',
