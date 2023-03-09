@@ -47,65 +47,47 @@ setTimeout("beginrefresh()",2000)
 
 window.onload=beginrefresh
     //-->
-</script>
-    <head>
+</script><head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>MPU DISPLAY</title>
-        <link href="application/views/display/css/global.css" rel="stylesheet" type="text/css"/>
+       <link href="application/views/display/css/global.css" rel="stylesheet" type="text/css"/>
         <script src="application/views/display/js/jquery.min.js"></script>
         <link rel="stylesheet" href="application/views/display/css/style1.css" type="text/css">
+	<!-- <link href="css/global.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/style1.css" type="text/css">-->
     </head>
+    <div class="header" align="center"><strong>DENAH LOKASI  BODY REPAIR</strong></div>
     <div>
-        <div class="header" align="center">
-            <strong>DENAH LOKASI PERBAIKAN BODY REPAIR</strong>
-        </div>
-        <div class="kategoritengah">
-            <div class="jarak_mobil2"></div>
-            <div class="judul">
+        <strong> </strong>
+    <div class="kategoritengah">
+            <div class="jarak_mobil"></div>
+          <div class="judul">
                 <strong>B O D Y</strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-            <div class="judul">
-                <strong>DEMPUL CAT</strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-        </div>
+          </div>
+            <div class="jarak_mobil4"></div>
+            <div class="jarak_mobil4"></div>
+          <div class="judul">
+              <strong>DEMPUL CAT</strong>
+          </div>
+      </div>
         
+    <div class="denah">
         <div class="kategoritengah">
         <div class="kategoriatas">
-            <div class="jarak_kiri1"></div>
-            <div class="bis2">
-                <div class="isikategori2">
+            <div class="jarak_kiri"></div>
+          <div class="bis2">
+              <div class="isikategori2">
                     <div class="nomor">
                         <strong>15</strong>
                     </div>
-                </div>
             </div>
+          </div>
             <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
-                        <strong>15</strong>
+                        <strong>16</strong>
                     </div>
                 </div>
             </div>
@@ -233,43 +215,48 @@ window.onload=beginrefresh
                 </div>
                 <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
-            
         </div>
+        </div>
+			<div class="denah">
         <div class="kategoritengah">
             <div class="bis5">
-                <div class="jarak_mobil2"></div>
-                <div class="jarak_mobil"></div>
-                <div class="judul">
+          <div class="jarak_mobil2"></div>
+              <div class="judul">
                     <strong>T R I M I N G</strong>
-                </div>
-                <div class="jarak_mobil2"></div>
-                <div class="judul">
+              </div>
+				
+          <div class="jarak_mobil3"></div>
+          <div class="jarak_mobil"></div>
+              <div class="judulAuto">
                     <strong>ELEKTRIK</strong>
-                </div>
-                <div class="jarak_bus"></div>
-                <div class="judul">
+              </div>
+          <div class="jarak_mobil3"></div>
+                <div class="judulAuto">
                     <strong>Q/C</strong>
                 </div>
-                <div class="jarak_mobil"></div>
-                <div class="judul">
+          <div class="jarak_mobil3"></div>
+              <div class="judulAuto">
                     <strong>JOK</strong>
-                </div><div class="judul">
+              </div>				
+          <div class="jarak_mobil2"></div>
+				<div class="judul">
                     <strong>P.HARIAN</strong>
                 </div>
             </div>
         </div>
+        </div>
         
+    <div class="denah">
         <div class="kategoriatas">
-            <div class="jarak_kiri1"></div>
-            <div class="bis2">
-                <div class="isikategori2">
+          <div class="jarak_kiri2"></div>
+          <div class="bis2">
+              <div class="isikategori2">
                     <div class="nomor">
                         <strong>16</strong>
                     </div>
-                </div>
-                <strong></strong>
             </div>
+                <strong></strong>
+          </div>
             <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
@@ -387,79 +374,39 @@ window.onload=beginrefresh
                     test</div>
                 <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
-            <div class="jarak_mobil"></div>
-
-            <div class="keteranganpk">
-                <div class="isiketeranganpk">
-                    <div
-                        class="nomor1"
-                        style='background-color: #258DFA; color:#F8F8F8; text-shadow:#000000; font-style: !important;'>
-                        <strong>KETERANGAN</strong>
-                    </div>
-                    <table width="100%" border="0">
-                        <tbody>
-                            <tr>
-                                <th width="19" bgcolor="#37BF07">&nbsp;</th>
-                                <th width="76" style="font-size:12px; text-align:left;">
-                                    : Bay Kosong</th>
-                            </tr>
-                            <tr>
-                                <th bgcolor="#E6F408">&nbsp;</th>
-                                <th width="76" style="font-size:12px;text-align:left;">
-                                    : Bay Pause</th>
-                            </tr>
-                            <tr>
-                                <th bgcolor="#FFFFFF">&nbsp;</th>
-                                <th width="76" style="font-size:12px;text-align:left;">
-                                    : Bay Aktif</th>
-                            </tr>
-                            <tr>
-                                <th>BM</th>
-                                <th style="font-size:12px;text-align:left;">: Bis Masuk</th>
-                            </tr>
-                            <tr>
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </tbody>
-                    </table>
+      </div>
+            
+	  </div>
+	  </div>
+    </div>
+    <div class="bawah_01">
+                  <table width="50%" align="center" border="0">
+                      <tbody>
+                          <tr>
+                              <th width="5%" bgcolor="#37BF07">&nbsp;</th>
+                              <th width="23%" style="font-size:12px; text-align:left;">
+                                  : Bay Kosong</th>
+                              <th width="5%"  bgcolor="#E6F408" style="font-size:12px; text-align:left;">&nbsp;</th>
+                                <th width="22%" style="font-size:12px; text-align:left;"><span style="font-size:12px;text-align:left;">: Bay Pause</span></th>
+                                <th width="5%" bgcolor="#FFFFFF" style="font-size:12px; text-align:left;">&nbsp;</th>
+                                <th width="17%" style="font-size:12px; text-align:left;"><span style="font-size:12px;text-align:left;">: Bay Aktif</span></th>
+                                <th width="23%" style="font-size:12px; text-align:left;">BM<span style="font-size:12px;text-align:left;">: Bis Masuk</span></th>
+                          </tr>
+                      </tbody>
+                  </table>
 
                 </div>
-                <div class="jarak_bus"></div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<?php
- function DateToIndo($date){
-		$BulanIndo = array("01", "02", "03",
-						   "04", "05", "06",
-						   "07", "08", "09",
-						   "10", "11", "12");
-	
-		$tahun = substr($date, 0, 4);  
-        $bulan = substr($date, 5, 2);  
-        $tgl   = substr($date, 8, 2);  
-          
-        $result = $tgl . "/" . $BulanIndo[(int)$bulan-1] . "/". $tahun;       
-        return($result);  
-	}
-?>
-<div id="page1">
+    <div id="page1">
     <ul id="ticker_02" class="ticker">
         <div align="center">
             <table width="100%">
-                <td width="100%" class="keterangan_lanjutan">
-                    <strong>D A F T A R &nbsp;&nbsp; P E K E R J A A N &nbsp;&nbsp; AKTIF</strong>
-                </td>
+                  <td width="100%" class="keterangan_lanjutan"><strong>DAFTAR ANTRIAN BUS</strong></td>
             </table>
         </div>
         <div align="left">
             <table width="100%">
                 <td width="3%" class="keterangan_judul">No.</td>
-                <td width="7%" class="keterangan_judul">Tgl-Masuk</td>
+                <td width="7%" class="keterangan_judul">TglMasuk</td>
                 <td width="10%" class="keterangan_judul">NoBody</td>
                 <td width="10%" class="keterangan_judul">Status</td>
                 <td width="20%" class="keterangan_judul">Spv</td>
@@ -483,21 +430,21 @@ window.onload=beginrefresh
 				//<td width=30$ class=isi_slider ><font size=1>$d[ket_pk]</td></font></table></li>";
              // }
             ?>
-        </ul>
+      </ul>
     </div>
     <div id="page2">
         <ul id="ticker_03" class="ticker">
             <div align="center">
                 <table width="100%">
-                    <td width="100%" class="keterangan_lanjutan">
-                        <strong>D A F T A R &nbsp;&nbsp; ANTRIAN &nbsp;&nbsp; B O D Y &nbsp;&nbsp; R E P A I R</strong>
+                      <td width="100%" class="keterangan_lanjutan">
+                        <strong>DAFTAR PROSES PK</strong>
                     </td>
                 </table>
             </div>
             <div align="left">
                 <table width="100%">
                     <td width="3%" class="keterangan_judul">No.</td>
-                    <td width="7%" class="keterangan_judul">Tgl-Masuk</td>
+                    <td width="7%" class="keterangan_judul">TglMasuk</td>
                     <td width="10%" class="keterangan_judul">NoBody</td>
                     <td width="20%" class="keterangan_judul">Kategori</td>
                     <td width="20%" class="keterangan_judul">Pelapor</td>
@@ -538,15 +485,15 @@ window.onload=beginrefresh
         <ul id="ticker_04" class="ticker">
             <div align="center">
                 <table width="100%">
-                    <td width="100%" class="keterangan_lanjutan">
-                        <strong>D A F T A R &nbsp;&nbsp; K E N D A R A A N &nbsp;&nbsp; S I A P &nbsp;&nbsp; K E L U A R</strong>
+                      <td width="100%" class="keterangan_lanjutan">
+                        <strong>DAFTAR KENDARAAN SIAP KELUAR</strong>
                     </td>
                 </table>
             </div>
             <div align="left">
                 <table width="100%">
                     <td width="3%" class="keterangan_judul">No.</td>
-                    <td width="7%" class="keterangan_judul">Tgl-Masuk</td>
+                    <td width="7%" class="keterangan_judul">TglMasuk</td>
                     <td width="10%" class="keterangan_judul">NoBody</td>
                     <td width="20%" class="keterangan_judul">Kategori</td>
                     <td width="20%" class="keterangan_judul">Pelapor</td>
