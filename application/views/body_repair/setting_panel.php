@@ -17,7 +17,7 @@
                         <div class="card ">
                             <div class="modal-content">
                                 <div class="card-header card-blue card-outline">
-                                    <h3 class="card-title"><i class="ion-ios-cog ion-lg text-blue"></i> &nbsp; Keterangan Laporan</h3>
+                                    <h3 class="card-title"><i class="ion-ios-cog-outline ion-lg text-blue"></i> &nbsp; Keterangan Laporan</h3>
                                     <div class="text-right">
                                         <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#tambah-laporan" title="Add Data"><i class="fas fa-plus"></i>
                                             Add</button>
@@ -151,6 +151,7 @@
 show_my_confirm('hapusLaporan', 'hapus-laporan', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 show_my_confirm('hapusKategori', 'hapus-kategori', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
+show_my_confirm('hapusKelas', 'hapus-kelas', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 'Batal Hapus data');
 ?>
 <script type="text/javascript">
     window.onload = function() {
@@ -211,7 +212,7 @@ show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 
     }
     function showKl() {
         $.get('<?php echo base_url('Settingbr/showKl'); ?>', function(data) {
-            tableKl.destroy();
+            tableKelas.destroy();
             $('#data-kelas').html(data);
             refresh();
         });
@@ -617,7 +618,7 @@ show_my_confirm('hapusPk', 'hapus-pk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini', 
             .done(function(data) {
                 var out = jQuery.parseJSON(data);
 
-                showPk();
+                showKl();
                 if (out.status == 'form') {
                     $('.form-msg').html(out.msg);
                     effect_msg_form();

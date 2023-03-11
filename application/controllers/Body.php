@@ -26,6 +26,7 @@ class Body extends MY_Controller
             $id_sub=$idnye->id_submenu;
         }
         $data['viewLevel']  = $this->Mod_body->select_by_level($idlevel, $id_sub);
+        $data['dataKl'] = $this->Mod_body->select_kelas();
         
 		echo show_my_modal('body_repair/modals/modal_tambah_body', 'tambah-body', $data, ' modal-xl');
         $this->template->load('layoutbackend','body_repair/data_body', $data);
@@ -134,6 +135,7 @@ class Body extends MY_Controller
     public function updateBody() {
 		$id 				= trim($_POST['id']);
 		$data['dataBody'] = $this->Mod_body->select_by_id_body($id);
+        $data['dataKl'] = $this->Mod_body->select_kelas();
 
 		echo show_my_modal('body_repair/modals/modal_tambah_body', 'update-body', $data, ' modal-xl');
 	}

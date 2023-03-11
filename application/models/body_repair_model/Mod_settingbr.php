@@ -146,5 +146,49 @@ class Mod_settingbr extends CI_Model
 	}
 
 	//** end Keterangan PK **//
+	public function select_kelas()
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_br_kelas');
+		$data = $this->db->get();
+		return $data->result();
+	}
+	public function select_id_kelas($id)
+	{
+		$sql = " SELECT * FROM tbl_br_kelas WHERE id_kelas='{$id}'";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+	public function insertKelas($data)
+	{
+		$sql = "INSERT INTO tbl_br_kelas VALUES
+		('','" . $data['kelas'] . "')";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+	public function updateKelas($data)
+	{
+		$sql = "UPDATE tbl_br_kelas SET kelas='" . $data['kelas'] . "'
+        WHERE id_kelas='" . $data['id_kelas'] . "'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+	function deleteKel($id)
+	{
+		$sql = "DELETE FROM tbl_br_kelas WHERE id_kelas='{$id}'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
+
+	// End Kelas //
+	
 
 }

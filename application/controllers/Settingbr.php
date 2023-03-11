@@ -23,6 +23,7 @@ class Settingbr extends MY_Controller
         echo show_my_modal('body_repair/modals/modal_tambah_lap', 'tambah-laporan', $data);
         echo show_my_modal('body_repair/modals/modal_tambah_kat', 'tambah-kategori', $data);
         echo show_my_modal('body_repair/modals/modal_tambah_pk', 'tambah-pk', $data);
+        echo show_my_modal('body_repair/modals/modal_tambah_kelas', 'tambah-kelas', $data);
         $this->template->load('layoutbackend', 'body_repair/setting_panel', $data);
     }
 
@@ -41,6 +42,11 @@ class Settingbr extends MY_Controller
     {
         $data['dataPk'] = $this->Mod_settingbr->select_pk();
         $this->load->view('body_repair/pk_data', $data);
+    }
+    public function showKl()
+    {
+        $data['dataKl'] = $this->Mod_settingbr->select_kelas();
+        $this->load->view('body_repair/kelas_data', $data);
     }
     /*Keterangan Laporan*/
     public function prosesTlaporan()
@@ -253,4 +259,75 @@ class Settingbr extends MY_Controller
         }
     
         /*endPk*/
+
+         /*Kelas*/
+    public function prosesTkelas()
+    {
+        $this->form_validation->set_rules('kelas', 'Nama Satuan', 'trim|required');
+
+        $data     = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->Mod_settingbr->insertKelas($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
+    public function updateKelas()
+    {
+        $id                 = trim($_POST['id']);
+        $data['dataKelas'] = $this->Mod_settingbr->select_id_kelas($id);
+
+        echo show_my_modal('body_repair/modals/modal_tambah_kelas', 'update-kelas', $data);
+    }
+
+    public function prosesUkelas()
+    {
+
+        $this->form_validation->set_rules('kelas', 'Nama kelas', 'trim|required');
+
+        $data     = $this->input->post();
+        if ($this->form_validation->run() == TRUE) {
+            $result = $this->Mod_settingbr->updateKelas($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_succ_msg('Filed!', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
+    public function deleteKelas()
+    {
+        $id = $_POST['id'];
+        $result = $this->Mod_settingbr->deleteKel($id);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_del_msg('Deleted', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
+
+    /*endKelas*/
 }

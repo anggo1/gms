@@ -172,5 +172,12 @@ class Mod_body extends CI_Model
         $query= $this->db->get_where('tbl_wh_body',array('no_body'=>$kode));
         return $query;
 	}
+    public function select_kelas()
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_br_kelas');
+		$data = $this->db->get();
+		return $data->result();
+	}
 
 }

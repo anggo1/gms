@@ -93,11 +93,31 @@
                                                         } ?>" class="form-control">
                                                             </div>
                                                             <label class="col-sm-1 col-form-label">Kelas</label>
-                                                            <div class="col-sm-3">
-                                                                <input type="text" name="kelas" id="kelas" value="<?php if (!empty($body->kelas)) {
-                                                          echo $body->kelas;
-                                                        } ?>" class="form-control">
-                                                            </div>
+                                <div class="col-sm-3">
+                                    <select name="kelas" id="kelas" class="form-control">
+                                    <option value="">Pilih Kelas
+                                                                    </option>
+                                                                    <?php
+                                                                    if (empty($body->kelas)) {
+                                                                        foreach ($dataKl as $kl) {
+                                                                    ?>
+                                                                            <option <?php echo $kl == $kl->kelas ? 'selected="selected"' : '' ?> value="<?php echo $kl->kelas ?>">
+                                                                                <?php echo $kl->kelas  ?><?php } ?>
+                                                                            </option>
+                                                                            <?php
+                                                                        } else {
+                                                                            foreach ($dataKl as $ks) {          ?>
+                                                                                <option value="<?php echo $ks->kelas; ?>" <?php if ($ks->kelas == $body->kelas) {
+                                                                                                                                    echo "selected='selected'";
+                                                                                                                                } ?>>
+                                                                                    <?php echo $ks->kelas; ?>
+                                                                                </option>
+                                                                        <?php
+                                                                            }
+                                                                        }
+                                                                        ?>
+                                                                </select>
+                                </div>
                                                             <label class="col-sm-1 col-form-label">Strip/Ciri</label>
                                                             <div class="col-sm-3">
                                                                 <input type="text" name="strip" id="strip" value="<?php if (!empty($body->strip)) {
