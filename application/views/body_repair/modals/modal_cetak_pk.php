@@ -63,6 +63,7 @@ p, td, th {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:14px;
 }
+.under { text-decoration: underline; }
 #A4 {background-color:#FFFFFF;
 left:1px;
 right:1px;
@@ -118,6 +119,7 @@ font-family:Georgia, "Times New Roman", Times, serif;
        <th>KODE PK</th>
        <th>KETERANGAN PK</th>
        <th colspan="2">Pemborong</th>
+       <th>Biaya</th>
        </tr>
      <?php
        $no=0;
@@ -131,6 +133,7 @@ font-family:Georgia, "Times New Roman", Times, serif;
        <th><?php echo $d->ket_pk ?></th>
        <th><?php echo $d->pt_pemborong ?></th>
        <th><?php echo $d->pj_borong ?></th>
+       <th><?php echo number_format($d->biaya_borong); ?></th>
        </tr>
      <?php  } ?>
    </thead>
@@ -145,16 +148,30 @@ font-family:Georgia, "Times New Roman", Times, serif;
                       <th><?php echo date('d M Y')?></th>
                     </tr>
                     <tr>
-                      <th width="164">&nbsp;</th>
-                      <th width="193">&nbsp;</th>
-                      <th width="102">&nbsp;</th>
-                      <th width="141">&nbsp;</th>
+                      <th width="25%">&nbsp;</th>
+                      <th width="25%">&nbsp;</th>
+                      <th width="25%">&nbsp;</th>
+                      <th width="25%">&nbsp;</th>
                     </tr>
                     <tr>
-                      <th height="60"><p>&nbsp;</p>
-                      <p>&nbsp;</p></th>
-                      <th>&nbsp;</th>
-                      <th>&nbsp;</th>
+                      <th height="60">
+                        <p>&nbsp;</p><p>&nbsp;</p>
+                      <p class="under">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </p>
+                        </th>
+                      <th>
+                        <p>&nbsp;</p><p>&nbsp;</p>
+                      <p class="under">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </p>
+                        </th>
+                      <th>
+                        <p>&nbsp;</p><p>&nbsp;</p>
+                      <p class="under">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </p>
+                        </th>
                       <th><p>&nbsp;</p>                        <?php echo $d->user ?></th>
                     </tr>
       </thead>

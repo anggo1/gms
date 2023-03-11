@@ -79,7 +79,7 @@ window.onload=beginrefresh
           <div class="bis2">
               <div class="isikategori2">
                     <div class="nomor">
-                        <strong>15</strong>
+                        <strong>16</strong>
                     </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ window.onload=beginrefresh
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
-                        <strong>16</strong>
+                        <strong>15</strong>
                     </div>
                 </div>
             </div>
@@ -252,7 +252,7 @@ window.onload=beginrefresh
           <div class="bis2">
               <div class="isikategori2">
                     <div class="nomor">
-                        <strong>16</strong>
+                        <strong>18</strong>
                     </div>
             </div>
                 <strong></strong>
@@ -261,29 +261,12 @@ window.onload=beginrefresh
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
-                        <strong>17</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>18</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
                         <strong>19</strong>
                     </div>
                 </div>
+                <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
+            <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -292,17 +275,14 @@ window.onload=beginrefresh
                 </div>
                 <strong></strong>
             </div>
-            <div class="jarak_BUS"></div>
+            <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
-                        <strong>21</strong>
-                    </div>
+                        <strong>21</strong></div>
                 </div>
-                <strong></strong>
             </div>
-            <div class="jarak_bus"></div>
-
+            <div class="jarak_mobil"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -311,7 +291,7 @@ window.onload=beginrefresh
                 </div>
                 <strong></strong>
             </div>
-            <div class="jarak_mobil"></div>
+            <div class="jarak_BUS"></div>
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -321,6 +301,7 @@ window.onload=beginrefresh
                 <strong></strong>
             </div>
             <div class="jarak_bus"></div>
+
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
@@ -353,7 +334,7 @@ window.onload=beginrefresh
                     <div class="nomor">
                         <strong>27</strong>
                     </div>
-                    test</div>
+                </div>
                 <strong></strong>
             </div>
             <div class="jarak_bus"></div>
@@ -362,6 +343,15 @@ window.onload=beginrefresh
                     <div class="nomor">
                         <strong>28</strong>
                     </div>
+                </div>
+                <strong></strong>
+            </div>
+            <div class="jarak_mobil"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>29</strong>
+                    </div>
                     test</div>
                 <strong></strong>
             </div>
@@ -369,7 +359,16 @@ window.onload=beginrefresh
             <div class="bis2">
                 <div class="isikategori2">
                     <div class="nomor">
-                        <strong>29</strong>
+                        <strong>30</strong>
+                    </div>
+                    test</div>
+                <strong></strong>
+            </div>
+            <div class="jarak_bus"></div>
+            <div class="bis2">
+                <div class="isikategori2">
+                    <div class="nomor">
+                        <strong>31</strong>
                     </div>
                     test</div>
                 <strong></strong>
@@ -406,29 +405,26 @@ window.onload=beginrefresh
         <div align="left">
             <table width="100%">
                 <td width="3%" class="keterangan_judul">No.</td>
-                <td width="7%" class="keterangan_judul">TglMasuk</td>
-                <td width="10%" class="keterangan_judul">NoBody</td>
-                <td width="10%" class="keterangan_judul">Status</td>
-                <td width="20%" class="keterangan_judul">Spv</td>
-                <td width="20%" class="keterangan_judul">Leader</td>
-                <td width="100%" class="keterangan_judul">Keterangan</td>
+                <td width="25%%" class="keterangan_judul">TglMasuk</td>
+                <td width="20%%" class="keterangan_judul">NoBody</td>
+                <td width="20%" class="keterangan_judul">No Pol</td>
+                <td width="20%%" class="keterangan_judul">Keterangan</td>
             </table>
         </div>
         <li>
             <?php
-            // $antrian=mysql_query("SELECT * FROM pk_aktif WHERE status ='N' ORDER BY jam_mulai ASC LIMIT 50");
-              //while($d=mysql_fetch_array($antrian)){
-				//  $noUrutberatbanget++;
-				//echo "<li>
-				//<table width=100%>	
-				//<td width=3% class=isi_slider ><font> $noUrutberatbanget</font></td>	
-				//<td width=7% class=isi_slider ><div align=center> ".DateToIndo($d[tgl_mulai])."</div> </td>
-				//<td width=10% class=isi_slider ><div align=center> $d[no_body]</div></td>
-				//<td width=10% class=isi_slider ><div align=center> $d[jns_pk]</div></td>
-				//<td width=20% class=isi_slider ><div align=center> $d[nama_spv]</div></td>
-				//<td width=20% class=isi_slider ><div align=center> $d[nama_ld]</div></td>
-				//<td width=30$ class=isi_slider ><font size=1>$d[ket_pk]</td></font></table></li>";
-             // }
+            $noUrutberatbanget=0;
+            foreach($dataAntri as $antri){
+                
+            	$noUrutberatbanget++;
+				echo "<li>
+				<table width=100%>	
+				<td width=3% class=isi_slider ><font> $noUrutberatbanget</font></td>	
+				<td width=25%% class=isi_slider ><div align=center> ".tglIndoPendek($antri->tgl_bast)."</div> </td>
+				<td width=20% class=isi_slider ><div align=center> ".$antri->no_body."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$antri->no_pol."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$antri->keterangan."</div></td></font></table></li>";
+             }
             ?>
       </ul>
     </div>
@@ -443,28 +439,29 @@ window.onload=beginrefresh
             </div>
             <div align="left">
                 <table width="100%">
-                    <td width="3%" class="keterangan_judul">No.</td>
-                    <td width="7%" class="keterangan_judul">TglMasuk</td>
-                    <td width="10%" class="keterangan_judul">NoBody</td>
-                    <td width="20%" class="keterangan_judul">Kategori</td>
-                    <td width="20%" class="keterangan_judul">Pelapor</td>
-                    <td width="100%" class="keterangan_judul">Keterangan</td>
+                <td width="3%" class="keterangan_judul">No.</td>
+                <td width="15%%" class="keterangan_judul">TglMulai</td>
+                <td width="20%%" class="keterangan_judul">IdPK</td>
+                <td width="20%" class="keterangan_judul">No Body</td>
+                <td width="20%%" class="keterangan_judul">PK</td>
+                <td width="20%%" class="keterangan_judul">Pemborong</td>
                 </table>
             </div>
             <li>
                 <?php
-             //$antrian1=mysql_query("select * from bus_masuk where status ='N'");
-             // while($d1=mysql_fetch_array($antrian1)){
-				//  $noUrutberatbanget1++;
-				//echo "<li>
-				//<table width=100%>	
-				//<td width=3% class=isi_slider ><font> $noUrutberatbanget1</font></td>	
-				//<td width=7% class=isi_slider ><div align=center> ".DateToIndo($d1[tgl_masuk])."</div> </td>
-				//<td width=10% class=isi_slider ><div align=center> $d1[no_body]</div></td>
-				//<td width=20% class=isi_slider ><div align=center> $d1[kategori_pk]</div></td>
-				//<td width=20% class=isi_slider ><div align=center> $d1[pelapor]</div></td>
-				//<td width=30$ class=isi_slider ><font size=2>$d1[keterangan]</td></font></table></li>";
-             // }
+              $noUrutberatbanget1=0;
+            foreach($dataPk as $pk){
+                
+            	$noUrutberatbanget1++;
+				echo "<li>
+				<table width=100%>	
+				<td width=3% class=isi_slider ><font> $noUrutberatbanget1</font></td>	
+				<td width=15%% class=isi_slider ><div align=center> ".tglIndoPendek($pk->tgl_mulai)."</div> </td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->id_pk."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->no_body."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->jns_pk."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->pj_borong."</div></td></font></table></li>";
+             }
             ?>
                 <?php
 						 function selisih($jam_a,$jam_b){
@@ -492,28 +489,29 @@ window.onload=beginrefresh
             </div>
             <div align="left">
                 <table width="100%">
-                    <td width="3%" class="keterangan_judul">No.</td>
-                    <td width="7%" class="keterangan_judul">TglMasuk</td>
-                    <td width="10%" class="keterangan_judul">NoBody</td>
-                    <td width="20%" class="keterangan_judul">Kategori</td>
-                    <td width="20%" class="keterangan_judul">Pelapor</td>
-                    <td width="100%" class="keterangan_judul">Keterangan</td>
+                <td width="3%" class="keterangan_judul">No.</td>
+                <td width="15%%" class="keterangan_judul">TglMulai</td>
+                <td width="20%%" class="keterangan_judul">IdPK</td>
+                <td width="20%" class="keterangan_judul">No Body</td>
+                <td width="20%%" class="keterangan_judul">PK</td>
+                <td width="20%%" class="keterangan_judul">Pemborong</td>
                 </table>
             </div>
             <li>
                 <?php
-             //$antrian1=mysql_query("select * from bus_masuk where status ='N'");
-             // while($d1=mysql_fetch_array($antrian1)){
-				//  $noUrutberatbanget1++;
-				//echo "<li>
-				//<table width=100%>	
-				//<td width=3% class=isi_slider ><font> $noUrutberatbanget1</font></td>	
-				//<td width=7% class=isi_slider ><div align=center> ".DateToIndo($d1[tgl_masuk])."</div> </td>
-				//<td width=10% class=isi_slider ><div align=center> $d1[no_body]</div></td>
-				//<td width=20% class=isi_slider ><div align=center> $d1[kategori_pk]</div></td>
-				//<td width=20% class=isi_slider ><div align=center> $d1[pelapor]</div></td>
-				//<td width=30$ class=isi_slider ><font size=2>$d1[keterangan]</td></font></table></li>";
-             // }
+             $noUrutberatbanget2=0;
+            foreach($dataPkselesai as $pk){
+                
+            	$noUrutberatbanget2++;
+				echo "<li>
+				<table width=100%>	
+				<td width=3% class=isi_slider ><font> $noUrutberatbanget2</font></td>	
+				<td width=15%% class=isi_slider ><div align=center> ".tglIndoPendek($pk->tgl_mulai)."</div> </td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->id_pk."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->no_body."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->jns_pk."</div></td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->pj_borong."</div></td></font></table></li>";
+             }
             ?>
         </ul>
     </div>
@@ -539,7 +537,7 @@ window.onload=beginrefresh
         }
         setInterval(function () {
             tick2()
-        }, 3000);
+        }, 2900);
 
         function tick3() {
             $('#ticker_03 li:first').slideUp(function () {
@@ -559,7 +557,9 @@ window.onload=beginrefresh
                     .slideDown();
             });
         }
-
+        setInterval(function () {
+            tick4()
+        }, 2800);
         function tick5() {
             $('#ticker_05 li:first').slideUp(function () {
                 $(this)

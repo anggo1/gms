@@ -160,9 +160,9 @@ class Mod_busmasuk extends CI_Model
         $qdata = "SELECT max(id_lapor) as maxKode FROM tbl_br_laporan_bus WHERE id_lapor LIKE '%$date%'";
         $dataQ = $ci->db->query($qdata)->row_array();
         $noOrder = $dataQ['maxKode'];
-        $noUrut = (int) substr($noOrder, 10, 3);
+        $noUrut = (int) substr($noOrder, 11, 3);
         $noUrut++;
-        $char = "LP";
+        $char = "SPK";
         $tahun=substr($date, 0, 4);
         $bulan=substr($date, 4, 2);
         $tgl=substr($date, 6, 2);
@@ -206,7 +206,7 @@ class Mod_busmasuk extends CI_Model
             id_lapor	='".$data['id_lapor']."',
             tgl_estimasi='".$tgl_estimasi."',
             no_body		='".$data['body_pk']."',
-            acc			='".$data['acc']."',
+            biaya		='".$data['biaya']."',
             jns_pk		='".$data['jns_pk']."',
             no_part     ='".$data['no_part']."',
             nama_part   ='".$data['nama_part']."',
@@ -288,7 +288,8 @@ class Mod_busmasuk extends CI_Model
         $date2 = $data['tgl_mulai'];
 		$tgl2 = explode('-',$date2);
 		$tgl_mulai = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
-
+		$number_borong=$data['biaya_borong'];
+		$number =str_replace(".","", $number_borong);
         $sql = "INSERT INTO tbl_br_pk_aktif SET
             id_pk	='".$kodeBaru."',
             id_lapor	='".$data['id_lapor']."',
@@ -299,7 +300,9 @@ class Mod_busmasuk extends CI_Model
             ket_pk      ='".$data['ket_pk']."',
             status     ='Y',
             pt_pemborong   ='".$data['pt_pemborong']."',
-            pj_borong    ='".$data['pj_borong']."'";
+            pj_borong    ='".$data['pj_borong']."',
+            biaya_borong    ='$number'
+			";
 
             $this->db->query($sql);
     

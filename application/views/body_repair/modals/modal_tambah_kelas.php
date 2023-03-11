@@ -21,7 +21,7 @@ if (!empty($dataKelas)){
                         if (!empty($dataKelas->kelas)) {
                             echo $dataKelas->kelas;
                         }
-                        ?>" name="kelas" aria-describedby="sizing-addon2">	
+                        ?>" name="kelas" aria-describedby="sizing-addon2" onkeyup="this.value = this.value.toUpperCase();">	
 
     </div>
 

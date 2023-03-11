@@ -62,6 +62,7 @@ p, td, th {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:14px;
 }
+.under { text-decoration: underline; }
 #A4 {background-color:#FFFFFF;
 left:1px;
 right:1px;
@@ -138,6 +139,7 @@ font-family:Georgia, "Times New Roman", Times, serif;
        <th>NAMA PART</th>
        <th>JUMLAH</th>
        <th>HARGA</th>
+       <th>BEA PK</th>
        <th>TOTAL</th>
        <th>KETERANGAN</th>
        </tr>
@@ -148,7 +150,7 @@ font-family:Georgia, "Times New Roman", Times, serif;
        foreach ($detailPk as $d){ 
 	     $no++;
        $harganye += $k->hrg_part;
-		   $grand_total += $d->hrg_part * $d->jml_part;
+		   $grand_total += ($d->hrg_part * $d->jml_part)+$d->biaya;
 						?>
       <tr>
           <th><?php echo $no ?></th>
@@ -158,14 +160,15 @@ font-family:Georgia, "Times New Roman", Times, serif;
        <th><?php echo $d->nama_part ?></th>
        <th><?php echo $d->jml_part ?></th>
        <th><?php echo number_format($d->hrg_part) ?></th>
-       <th><?php echo number_format($d->hrg_part * $d->jml_part); ?></th>
+       <th><?php echo number_format($d->biaya) ?></th>
+       <th><?php echo number_format(($d->hrg_part * $d->jml_part)+$d->biaya) ?></th>
        <th width="49"><?php echo $d->ket_part ?></th>
        </tr>
      <?php  } ?>
      <tr>
 
        <th colspan="7"> <div align="center"> TOTAL</div></th>
-       <th colspan="2"><font size=+2><?php echo number_format($grand_total) ?></font></th>
+       <th colspan="3"><font size=+2><?php echo number_format($grand_total) ?></font></th>
        </tr>
    </thead>
    <tbody>
@@ -173,23 +176,37 @@ font-family:Georgia, "Times New Roman", Times, serif;
 <table width="100%" border="0" cellpadding="5" cellspacing="0" bordercolor="#000000" style="border-collapse: collapse; background-color:#000 border: 2px solid #000; border:double list-style-position: outside;	background-attachment: scroll;	background-repeat: repeat-x; font-family: arial; font-size: 13px;" >
   <thead>
                     <tr>
-                      <th>&nbsp;</th>
-                      <th>&nbsp;</th>
-                      <th>&nbsp;</th>
-                      <th><?php echo date('D M Y')?></th>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td><?php echo date('D M Y')?></td>
                     </tr>
                     <tr>
-                      <th width="164">Mengetahui,</th>
-                      <th width="193">&nbsp;</th>
-                      <th width="102">&nbsp;</th>
-                      <th width="141">Estimator</th>
+                      <td width="25%">&nbsp;</td>
+                      <td width="25%">&nbsp;</td>
+                      <td width="25%">&nbsp;</td>
+                      <td width="25%">Estimator</td>
                     </tr>
                     <tr>
-                      <th height="60"><p>&nbsp;</p>
-                      <p><?php echo $k->acc ?></p></th>
-                      <th>&nbsp;</th>
-                      <th>&nbsp;</th>
-                      <th><p>&nbsp;</p>                        <?php echo $d->user ?></th>
+                      <td height="60">
+                      <p>&nbsp;</p><p>&nbsp;</p>
+                      <p class="under">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </p>
+                      </td>
+                      <td>    
+                      <p>&nbsp;</p><p>&nbsp;</p>                    
+                      <p class="under">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </p>
+                      </td>
+                      <td>
+                      <p>&nbsp;</p><p>&nbsp;</p>
+                      <p class="under">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </p>
+                    </td>
+                      <td><p>&nbsp;</p> <p>&nbsp;</p>                       <?php echo $d->user ?></td>
                     </tr>
       </thead>
                 <tbody>

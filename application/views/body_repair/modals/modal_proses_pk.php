@@ -23,7 +23,7 @@
 								<div class="col-sm-8">
 									<div class="input-group date" id="reservationdate" data-target-input="nearest">
 										<input type="text" name="tgl_mulai" id="tgl_mulai"
-											class="form-control tgl_mulasi datetimepicker" data-toggle="datetimepicker"
+											class="form-control tgl_mulai datetimepicker" data-toggle="datetimepicker"
 											data-target=".tgl_mulai" data-format="yyy-mm-dd" required>
 										<div class="input-group-append" data-toggle="datetimepicker">
 											<div class="input-group-text">
@@ -63,6 +63,16 @@
 								<div class="col-sm-8">
 									<div class="input-group date" id="reservationdate" data-target-input="nearest">
 										<input type="text" name="pj_borong" id="pj_borong"
+											class="form-control" required>
+									</div>
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-4 col-form-label">Biaya</label>
+								<div class="col-sm-8">
+									<div class="input-group date" id="reservationdate" data-target-input="nearest">
+										<input type="text" name="biaya_borong" id="biaya_borong" value="0"
 											class="form-control" required>
 									</div>
 
@@ -124,4 +134,27 @@
 
 						e.preventDefault();
 					});
+					var biaya_borong = document.getElementById('biaya_borong');
+					biaya_borong.addEventListener('keyup', function(e)
+    {
+        biaya_borong.value = formatRupiah(this.value);
+    });
+    
+    /* Fungsi */
+    function formatRupiah(angka, prefix)
+    {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split    = number_string.split(','),
+            sisa     = split[0].length % 3,
+            rupiah     = split[0].substr(0, sisa),
+            ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+            
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
 					</script>

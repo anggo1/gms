@@ -333,10 +333,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">ACC</label>
-                                <div class="col-sm-4">
-                                    <input type="text" name="acc" id="acc" class="form-control" placeholder="Persetujuan">
-                                </div>
                                 <label class="col-sm-2 col-form-label">Pekerjaan</label>
                                 <div class="col-sm-2">
                                     <select name="jns_pk" id="jns_pk" class="form-control">
@@ -362,6 +358,10 @@
                                         id="jam_kerja"
                                         class="form-control"
                                         placeholder="Total Jam">
+                                </div>
+                                <label class="col-sm-2 col-form-label">Biaya</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="biaya" id="biaya" class="form-control" value="0" placeholder="Persetujuan">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -735,7 +735,7 @@
                     $('#nama_part').val('');
                     $('#ket_part').val('');
                     $('#jml_part').val('');
-                    $("#acc").attr('readonly', 'readonly');
+                    $('#biaya').val('0');
                     $('.msg').html(out.msg);
                     table.ajax.reload();
                     tampilEstimasi();
