@@ -198,6 +198,8 @@ class Mod_busmasuk extends CI_Model
 		$tgl2 = explode('-',$date2);
 		$tgl_estimasi = $tgl2[2]."-".$tgl2[1]."-".$tgl2[0]."";
 		$idUpdate = $data['id_lapor'];
+		$beaEstimasi=$data['biaya'];
+		$esBea =str_replace(".","", $beaEstimasi);
 
 		$sql_update = "UPDATE tbl_br_laporan_bus SET estimasi ='Y' WHERE id_lapor ='{$idUpdate}'"; $this->db->query($sql_update);
 
@@ -206,7 +208,7 @@ class Mod_busmasuk extends CI_Model
             id_lapor	='".$data['id_lapor']."',
             tgl_estimasi='".$tgl_estimasi."',
             no_body		='".$data['body_pk']."',
-            biaya		='".$data['biaya']."',
+            biaya		='".$esBea."',
             jns_pk		='".$data['jns_pk']."',
             no_part     ='".$data['no_part']."',
             nama_part   ='".$data['nama_part']."',
@@ -267,10 +269,17 @@ class Mod_busmasuk extends CI_Model
 
 	public function insertPk($data)
     {
-		$sql_update = "UPDATE tbl_br_detail_estimasi SET status ='Y' WHERE id_lapor ='".$data['id_lapor']."' AND jns_pk='".$data['jns_pk']."'"; 
+		$sql_update = "UPDATE tbl_br_detail_estimasi SET status ='Y' WHERE id_lapor ='".$data['id_lapor']."' AND jns_pk='".$data['jns_pk']."'";
 		$this->db->query($sql_update);
-		$sql_pk = "UPDATE tbl_br_laporan_bus SET status ='Y' WHERE id_lapor ='".$data['id_lapor']."'"; 
+		
+		$ci_pk = get_instance();
+        $pkdata = "SELECT COUNT(id_lapor) as jml_pk FROM tbl_br_detail_estimasi WHERE id_lapor = '".$data['id_lapor']."' AND status='N'";
+        $datapk = $ci_pk->db->query($pkdata)->row_array();
+		$jmlnya = $datapk['jml_pk'];
+		if($jmlnya =='0'){
+		$sql_pk = "UPDATE tbl_br_laporan_bus SET status ='Y' WHERE id_lapor ='".$data['id_lapor']."'";
 		$this->db->query($sql_pk);
+		}
 
         $date= date("Ymd");
         $ci = get_instance();
