@@ -353,21 +353,24 @@ window.onload=beginrefresh
 	$sql_pk28A = mysql_query("select * from pk_aktif WHERE no_bay = '28' AND status !='S'"); $jumlah_pk28A = mysql_num_rows($sql_pk28A);
 	$sql_pt28 = "SELECT max(estimasi) AS last FROM list_mekanik WHERE id_pk = '$id_pk28' AND status ='N'";
 	$hasil_28 = mysql_query($sql_pt28);$data_28  = mysql_fetch_array($hasil_28);}
-	
+
+
 	$sql_bay27 = "SELECT keterangan as keterangan FROM emptybay WHERE id_bay = '27'";
 	$hasil_bay27 = mysql_query($sql_bay27);$data_bay27  = mysql_fetch_array($hasil_bay27);$bay_body27=$data_bay27['keterangan'];
 	$sql_jatah = mysql_query("select no_bay, no_body,id_pk,id_detail from pk_aktif WHERE no_bay = '27' AND status !='S' GROUP BY 'no_body' ");
-							 while($hasil_jatah =mysql_fetch_array($sql_jatah)){  
-							 $bay27 = $hasil_jatah ['no_bay'];
-							 $bay_body27 = $hasil_jatah ['no_body'];
-							 $detail1 = $hasil_jatah ['id_detail'];
-							$id_pk27 = $hasil_jatah ['id_pk'];										 							
+							while($hasil_jatah =mysql_fetch_array($sql_jatah)){
+							$bay27 = $hasil_jatah ['no_bay'];
+							$bay_body27 = $hasil_jatah ['no_body'];
+							$detail1 = $hasil_jatah ['id_detail'];
+							$id_pk27 = $hasil_jatah ['id_pk'];
 	$sql_ptj27 = "SELECT jam_masuk,tgl_masuk FROM bus_masuk WHERE id_pk = '$id_pk27'";
-	$hasil_j27 = mysql_query($sql_ptj27);$data_j27  = mysql_fetch_array($hasil_j27);			 
-	$tgl27 = new DateTime($data_j27['tgl_masuk']); 									 
+	$hasil_j27 = mysql_query($sql_ptj27);$data_j27  = mysql_fetch_array($hasil_j27);
+	$tgl27 = new DateTime($data_j27['tgl_masuk']);
+
 	$sql_pk27A = mysql_query("select * from pk_aktif WHERE no_bay = '27' AND status !='S'"); $jumlah_pk27A = mysql_num_rows($sql_pk27A);
 	$sql_pt27 = "SELECT max(estimasi) AS last FROM list_mekanik WHERE id_pk = '$id_pk27' AND status ='N'";
 	$hasil_27 = mysql_query($sql_pt27);$data_27  = mysql_fetch_array($hasil_27);}
+
 	
 	$sql_bay26 = "SELECT keterangan as keterangan FROM emptybay WHERE id_bay = '26'";
 	$hasil_bay26 = mysql_query($sql_bay26);$data_bay26  = mysql_fetch_array($hasil_bay26);$bay_body26=$data_bay26['keterangan'];
@@ -775,7 +778,10 @@ window.onload=beginrefresh
   <div class="header" align="center"><strong>DENAH LOKASI PERBAIKAN BODY REPAIR</strong></div> 
   <div class="kategoriatas">
   <div class="jarak_kiri1"></div>
-  <div class="bis2"><div <?php if($jumlah_pk27A < 1){ echo'class=isikategori2';}else if($data_27['last'] < 1){echo'class=isikategori2kuning';}else {echo'class=isikategori2putih';} ?>>
+  <div class="bis2">
+	<div <?php if($jumlah_pk27A < 1){ echo'class=isikategori2';}
+	else if($data_27['last'] < 1){echo'class=isikategori2kuning';}
+	else {echo'class=isikategori2putih';} ?>>
         <div class="nomor1"style='background-color: #258DFA; border-radius:10px 10px 0 0 ; color:#F8F8F8; text-shadow:#000000; font-style: !important;'><strong>15</strong></div>
 							<?php 
  	echo "<h4>".$bay_body27."</h4>";echo "PK  : ".$jumlah_pk27A."<br>"; echo "Time : ".$data_27['last']."<br>"; if(!empty($tgl27)) {$diff = $tgl27->diff($kini); echo "BM : ".$diff->d, D;} 							 

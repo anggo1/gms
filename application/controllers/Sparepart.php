@@ -188,6 +188,7 @@ class Sparepart extends MY_Controller
     }
     public function updateSparepart() {
 		$id 				= trim($_POST['id']);
+        $data['apl'] = $this->db->get("aplikasi")->row();
         $data['dataSatuan'] = $this->Mod_sparepart->select_satuan();
         $data['dataType'] = $this->Mod_sparepart->select_type();
         $data['dataKategori'] = $this->Mod_sparepart->select_kategori();

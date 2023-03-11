@@ -105,7 +105,7 @@ input-besar, textarea{
 									</div>
 									<label class="col-sm-2 col-form-label">No Pol</label>
 									<div class="col-sm-4">
-										<input type="text" name="no_pol" class="form-control" style="text-transform: uppercase;" placeholder="Nomor Polisi ?">
+										<input type="text" name="no_pol" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nomor Polisi ?">
 									</div>
 								</div>
 								<div class="form-group row">
