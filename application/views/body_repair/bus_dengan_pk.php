@@ -12,10 +12,8 @@ foreach ($dataPk as $s) {
         <?php if (!empty($s->no_bay)){echo $s->no_bay;} else{echo'No Bay';} ?></td>
 
         <td class="text-left">
-        <?php if (empty($s->no_bay)){ ?>
-            <button class="btn btn-xs btn-outline-info cetak-pk" id="cetakPk" title="Cetak PK" data-id="<?php echo $s->id_lapor; ?>"><i class="fa fa-print"></i> Input Bay</button>
-        <?php } ?>
-            <button class="btn btn-xs btn-outline-success cetak-pk" id="cetakPk" title="Cetak PK" data-id="<?php echo $s->id_lapor; ?>"><i class="fa fa-print"></i> Cetak</button>
+        <button class="btn btn-xs btn-outline-info input-bay" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-sitemap"></i> Edit Bay</button>
+        <button class="btn btn-xs btn-outline-success cetak-pk" id="cetakPk" title="Cetak PK" data-id="<?php echo $s->id_lapor; ?>"><i class="fa fa-print"></i> Cetak</button>
         <?php if($s->status=='Y'){ ?>
         <button class="btn btn-xs btn-outline-warning pause-pk" data-id="<?php echo $s->id_lapor; ?>"><i class="fa fa-pause"></i> Pause</button> 
         <?php } 
@@ -23,6 +21,7 @@ foreach ($dataPk as $s) {
         <button class="btn btn-xs btn-outline-primary start-pk-aktif" data-toggle="modal" data-target="#startPk" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-play"></i> Start</button> 
         <?php } ?>
         <button class="btn btn-xs btn-outline-danger selesai-pk-aktif" data-toggle="modal" data-target="#selesaiPk" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-check-double"></i>Tutup</button>    
+        <a href="<?php echo base_url()?>/BusPk/revPk?data-pk=<?php echo $s->id_lapor; ?>"><button class="btn btn-xs btn-outline-primary" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-plus"></i> PK</button></a>
     </td>
     </tr>
 <?php

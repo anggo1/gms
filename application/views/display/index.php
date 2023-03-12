@@ -434,7 +434,7 @@ window.onload=beginrefresh
             <div align="center">
                 <table width="100%">
                       <td width="100%" class="keterangan_lanjutan">
-                        <strong>DAFTAR PROSES PK</strong>
+                        <strong>WIP (WORK IN PROCESS)</strong>
                     </td>
                 </table>
             </div>

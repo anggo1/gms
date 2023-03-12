@@ -119,7 +119,66 @@ class BusPk extends MY_Controller
         }
         echo json_encode($out);
     }
+    public function inputBay()
+    {
+        $id                 = trim($_POST['id']);
+		$data['dataPk'] = $this->Mod_buspk->cetak_pk($id);
+        $data['dataBay'] = $this->Mod_buspk->select_bay();
 
-    /*endKeteranganLaporan*/
-        /*endPk*/
+
+
+        echo show_my_modal('body_repair/modals/modal_masuk_bay', 'input-bay',$data,' modal-xl');
+    }
+
+    public function masukBay()
+    {
+
+        $id_lapor = $_POST['idLapor'];
+        $id_bay = $_POST['idBay'];
+        $no_body = $_POST['idBody'];
+        $result = $this->Mod_buspk->masukBay($id_lapor,$id_bay,$no_body);
+
+        if ($result > 0) {
+            $out['status'] = '';
+            $out['msg'] = show_ok_msg('Sukses', '20px');
+        } else {
+            $out['status'] = '';
+            $out['msg'] = show_err_msg('Filed !', '20px');
+        }
+        echo json_encode($out);
+    }
+    public function revPk()
+    {
+		$data['page'] 		= "Penambahan Data PK";
+		$data['judul'] 		= "Tambah";
+        $this->load->helper('url');
+        $id = $_GET['data-pk'];
+		$data['dataPk'] = $this->Mod_buspk->cetak_pk($id);
+        $data['menu'] = $this->Mod_menu->getAll()->result();
+        $this->template->load('layoutbackend', 'body_repair/tambah_pk', $data);
+    }
+    public function inputPk()
+    {
+        $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'trim|required');
+
+        $data=$this->input->post();
+        $id_lapor 				= $_POST['id_lapor'];
+        if ($this->form_validation->run() == TRUE) {
+			$result = $this->Mod_busmasuk->insertPk($data);
+
+            if ($result > 0) {
+                $out['status'] = '';
+                $out['datakode']=$id_lapor;
+                $out['msg'] = show_ok_msg('Success', '20px');
+            } else {
+                $out['status'] = '';
+                $out['msg'] = show_err_msg('Filed !', '20px');
+            }
+        } else {
+            $out['status'] = 'form';
+            $out['msg'] = show_err_msg(validation_errors());
+        }
+
+        echo json_encode($out);
+    }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2023 at 06:58 AM
+-- Generation Time: Mar 12, 2023 at 05:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -411,71 +411,6 @@ CREATE TABLE `kategori` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `list_bay`
---
-
-CREATE TABLE `list_bay` (
-  `id_bay` int(11) NOT NULL,
-  `no_bay` varchar(2) NOT NULL,
-  `posisi` varchar(15) NOT NULL,
-  `keterangan` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `list_bay`
---
-
-INSERT INTO `list_bay` (`id_bay`, `no_bay`, `posisi`, `keterangan`) VALUES
-(1, '1', 'kiri', 'TRIMING'),
-(2, '2', 'kiri', 'TRIMING'),
-(3, '3', 'kiri', 'TRIMING'),
-(4, '4', 'kiri', 'TRIMING'),
-(5, '5', 'kiri', 'BODY WELDING'),
-(6, '6', 'kiri', 'BODY WELDING'),
-(7, '7', 'kiri', 'BODY WELDING'),
-(8, '8', 'kiri', 'BODY WELDING'),
-(9, '9', 'kiri', 'DEMPUL CAT'),
-(10, '10', 'kiri', 'DEMPUL CAT'),
-(11, '11', 'kiri', 'DEMPUL CAT'),
-(12, '12', 'kiri', 'DEMPUL CAT'),
-(13, '1', 'kanan', 'CHASSIS'),
-(14, '2', 'kanan', 'CHASSIS'),
-(15, '3', 'kanan', 'CHASSIS'),
-(16, '4', 'kanan', 'CHASSIS'),
-(17, '5', 'kanan', 'CHASSIS'),
-(18, '6', 'kanan', 'BODY WELDING'),
-(19, '7', 'kanan', 'BODY WELDING'),
-(20, '8', 'kanan', 'BODY WELDING'),
-(21, '9', 'kanan', 'BODY WELDING'),
-(22, '10', 'kanan', 'BODY WELDING'),
-(23, '11', 'kanan', 'DEMPUL CAT'),
-(24, '12', 'kanan', 'DEMPUL CAT'),
-(25, '13', 'kanan', 'DEMPUL CAT'),
-(26, '14', 'kanan', 'DEMPUL CAT'),
-(27, '15', 'kanan', 'DEMPUL CAT TOTAL'),
-(28, '16', 'kanan', 'DEMPUL CAT TOTAL'),
-(29, '17', 'kanan', 'DEMPUL CAT TOTAL'),
-(30, '18', 'kanan', 'DEMPUL CAT TOTAL'),
-(31, '1', 'tengah_kiri', ''),
-(32, '2', 'tengah_kiri', ''),
-(33, '3', 'tengah_kiri', ''),
-(34, '4', 'tengah_kiri', ''),
-(35, '5', 'tengah_kiri', ''),
-(36, '1', 'tengah_kanan', ''),
-(37, '2', 'tengah_kanan', ''),
-(38, '3', 'tengah_kanan', ''),
-(39, '4', 'tengah_kanan', ''),
-(40, '5', 'tengah_kanan', ''),
-(41, '1', 'sprayboth', ''),
-(42, 'TE', 'luar', ''),
-(43, 'TE', 'luar', 'CHASSIS'),
-(44, '6', 'kanan', ''),
-(45, '6', 'tengah_kanan', ''),
-(46, '6', 'tengah_kiri', '');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `list_mekanik`
 --
 
@@ -666,9 +601,6 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (85, 1, 24, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (86, 4, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
 (87, 5, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
-(94, 1, 27, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-(95, 4, 27, 'N', 'N', 'N', 'N', 'N', 'N'),
-(96, 5, 27, 'N', 'N', 'N', 'N', 'N', 'N'),
 (97, 1, 28, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (98, 4, 28, 'N', 'N', 'N', 'N', 'N', 'N'),
 (99, 5, 28, 'N', 'N', 'N', 'N', 'N', 'N'),
@@ -702,7 +634,6 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (151, 6, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
 (152, 6, 23, 'N', 'N', 'N', 'N', 'N', 'N'),
 (153, 6, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
-(156, 6, 27, 'N', 'N', 'N', 'N', 'N', 'N'),
 (157, 6, 28, 'N', 'N', 'N', 'N', 'N', 'N'),
 (162, 6, 33, 'N', 'N', 'N', 'N', 'N', 'N'),
 (163, 6, 34, 'N', 'N', 'N', 'N', 'N', 'N'),
@@ -742,7 +673,6 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (221, 7, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
 (222, 7, 23, 'Y', 'N', 'N', 'N', 'N', 'N'),
 (223, 7, 24, 'Y', 'N', 'N', 'N', 'N', 'N'),
-(226, 7, 27, 'Y', 'N', 'N', 'N', 'N', 'N'),
 (227, 7, 28, 'Y', 'N', 'N', 'N', 'N', 'N'),
 (232, 7, 33, 'Y', 'N', 'N', 'N', 'N', 'N'),
 (233, 7, 34, 'Y', 'N', 'N', 'N', 'N', 'N'),
@@ -869,7 +799,12 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (386, 4, 80, 'N', 'N', 'N', 'N', 'N', 'N'),
 (387, 5, 80, 'N', 'N', 'N', 'N', 'N', 'N'),
 (388, 6, 80, 'N', 'N', 'N', 'N', 'N', 'N'),
-(389, 7, 80, 'N', 'N', 'N', 'N', 'N', 'N');
+(389, 7, 80, 'N', 'N', 'N', 'N', 'N', 'N'),
+(390, 1, 81, 'Y', 'Y', 'Y', 'Y', 'N', 'N'),
+(391, 4, 81, 'N', 'N', 'N', 'N', 'N', 'N'),
+(392, 5, 81, 'N', 'N', 'N', 'N', 'N', 'N'),
+(393, 6, 81, 'N', 'N', 'N', 'N', 'N', 'N'),
+(394, 7, 81, 'N', 'N', 'N', 'N', 'N', 'N');
 
 -- --------------------------------------------------------
 
@@ -985,17 +920,56 @@ CREATE TABLE `tbl_br_bast` (
 --
 
 INSERT INTO `tbl_br_bast` (`id_bast`, `tgl_bast`, `no_sj`, `no_body`, `no_pol`, `nip_sp`, `nama_sp`, `status_bus`, `status`, `keterangan`, `user`, `kaca_depan`, `kaca_belakang`, `kc_kanan`, `kc_kiri`, `sp_kanan`, `sp_kiri`, `sp_dalam`, `body_depan`, `bemper_depan`, `body_kiri`, `body_kanan`, `body_belakang`, `bemper_belakang`, `pintu_dp_lh`, `pintu_dp_rh`, `pintu_bl_lh`, `lp_dp_lh`, `lp_dp_rh`, `lp_stop_bl_lh`, `lp_stop_bl_rh`, `lp_sbl_lh`, `lp_sbl_rh`, `lp_sdp_lh`, `lp_sdp_rh`, `lp_s_samping`, `lp_plat_no`, `kursi_pp`, `kursi_png`, `sabuk_p`, `footrest`, `sarung_jok`, `gorden`, `tmp_sampah`, `smoking`, `toilet_kaca`, `plafon`, `palu_kaca`, `bagasi_atas`, `lp_dalam`, `p3k`, `segitiga`, `pewangi_ruang`, `pewangi_toilet`, `bangku_tabahan`, `pipa_pegang`, `tutup_radiator`, `unit_ac`, `kursi_kernet`, `spedometer`, `tutup_seat`, `gundu_persneling`, `tabung_air_wiper`, `accu`, `tutup_solar`, `wheel_dop`, `wiper`, `ban_stip`, `engkol_ban`, `klakson`, `knalpot`, `kompresor`, `altenator`, `alternator_ac`, `control_panel`, `kap_gembok_kunci`, `stik_oli`, `tutup_oli`, `dinamo_wiper`, `dongkrak_stang`, `kc_roda_stang`, `dashboard`, `sikring_kaca`, `radio_tape`, `video`, `kaset`, `tv`, `remote`, `inverter`, `equalizer`, `mic`, `speaker`, `power`, `subwofer`, `surat`, `stnk`, `kps`, `keur`, `bintang_mercy`, `plat_no`) VALUES
-('BS20230227001', '2023-02-27', '1234', '23 DX', 'b 9999 zyx', 'P.21', 'SAYA', 'AKTIF', 'Y', '', 'Administrator', 'Baik', 'Baik', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230305001', '2023-03-06', '12345', '55 XX', 'b 12345', '', 'saya', 'AKTIF', 'Y', '', 'Administrator', 'baik', 'baik', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230306001', '2023-03-06', '12345', '55 XX', 'b1234 gg', '1234', 'Pengemudi saya', 'AKTIF', 'Y', '', 'Administrator', 'Baik', 'Baik', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230306002', '2023-03-06', '2345', '66XX', '11234', '1234', 'saya', 'AKTIF', 'Y', '', 'Administrator', '', '', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230307001', '2023-03-07', '12345', '66XX', 'b9999gg', '1234', 'saya', 'AKTIF', 'Y', '', 'Administrator', 'Baik', 'Baik', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230307002', '2023-03-07', '12345123', 'RG100/170', 'B 21234Y', '123435', 'SAYA', 'AKTIF', 'Y', '', 'Administrator', 'Baik', 'Baik', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230308001', '2023-03-08', '123435', '1234QWER', 'b12345', '12345', 'test', 'AKTIF', 'Y', '', 'Administrator', 'Baik', 'Baik', '1', '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('BS20230309001', '2023-03-09', '1234324', 'RG100', 'b1234', '1234', '12344', 'AKTIF', 'Y', 'test', 'Administrator', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('SA20230309002', '2023-03-09', 'test', 'RG1001', 'b', '1234', 'saya', 'AKTIF', 'Y', 'test lagi', 'Administrator', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('SA20230311001', '2023-03-11', 'test', 'RG100', 'b 12345', '12345', 'saya', 'AKTIF', 'Y', 'test', 'Administrator', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('SA20230311002', '2023-03-11', '1234', 'RG321', 'B 9999 ws', '', 'SAYA', 'AKTIF', 'N', 'TEST', 'Administrator', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+('SA20230311001', '2023-03-11', '12345', 'RG100/170', 'B7654YY', '1234', 'Saya', 'AKTIF', 'Y', 'test', 'Administrator', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
+('SA20230311002', '2023-03-11', '123456', 'RG100/171', 'B7653H', '1234', 'test', 'AKTIF', 'Y', 'Test Keterangan', 'Administrator', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_br_bay`
+--
+
+CREATE TABLE `tbl_br_bay` (
+  `id_bay` int(11) NOT NULL,
+  `keterangan` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_br_bay`
+--
+
+INSERT INTO `tbl_br_bay` (`id_bay`, `keterangan`) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, 'RG100/171'),
+(5, ''),
+(6, ''),
+(7, ''),
+(8, 'RG100/170'),
+(9, ''),
+(10, ''),
+(11, ''),
+(12, ''),
+(13, ''),
+(14, ''),
+(15, ''),
+(16, ''),
+(17, ''),
+(18, ''),
+(19, ''),
+(20, ''),
+(21, ''),
+(22, ''),
+(23, ''),
+(24, ''),
+(25, ''),
+(26, ''),
+(27, ''),
+(28, ''),
+(29, ''),
+(30, ''),
+(31, '');
 
 -- --------------------------------------------------------
 
@@ -1024,28 +998,13 @@ CREATE TABLE `tbl_br_detail_estimasi` (
 --
 
 INSERT INTO `tbl_br_detail_estimasi` (`id_detail`, `id_lapor`, `tgl_estimasi`, `no_body`, `biaya`, `jns_pk`, `no_part`, `nama_part`, `ket_part`, `jml_part`, `hrg_part`, `user`, `status`) VALUES
-(1, 'LP20230305001', '2023-03-06', '23 DX', '0', 'RB', '12345', 'test', 'test', '3', '5000', 'Administrator', 'Y'),
-(2, 'LP20230305001', '2023-03-06', '23 DX', '0', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '2', '10000', 'Administrator', 'Y'),
-(3, 'LP20230305001', '2023-03-06', '23 DX', '0', 'DC', 'BH-01R', 'BUZZER 12-48V DC 110dB ', '', '2', '85000', 'Administrator', 'Y'),
-(4, 'LP20230306001', '2023-03-06', '55 XX', '0', 'RB', '12345', 'test', 'test', '5', '5000', 'Administrator', 'Y'),
-(5, 'LP20230306001', '2023-03-06', '55 XX', '0', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', '', '2', '10000', 'Administrator', 'Y'),
-(6, 'LP20230306001', '2023-03-06', '55 XX', '0', 'DC', 'BH-01R', 'BUZZER 12-48V DC 110dB ', 'test', '2', '85000', 'Administrator', 'Y'),
-(7, 'LP20230305002', '2023-03-06', '55 XX', '0', 'RB', '12345', 'test', '', '5', '5000', 'Administrator', 'Y'),
-(8, 'LP20230306002', '2023-03-06', '66XX', '0', 'RB', '12345', 'test', '', '2', '5000', 'Administrator', 'Y'),
-(9, 'LP20230306002', '2023-03-06', '66XX', '0', 'DC', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '3', '10000', 'Administrator', 'Y'),
-(10, 'LP20230306002', '2023-03-06', '66XX', '0', 'TE', 'BH-01R', 'BUZZER 12-48V DC 110dB ', '', '3', '85000', 'Administrator', 'Y'),
-(11, 'LP20230307001', '2023-03-07', '66XX', '0', 'RB', '12345', 'test', '', '5', '5000', 'Administrator', 'Y'),
-(12, 'LP20230307001', '2023-03-07', '66XX', '0', 'DC', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '5', '10000', 'Administrator', 'Y'),
-(13, 'LP20230307002', '2023-03-07', 'RG100/170', '0', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'TEST', '5', '10000', 'Administrator', 'Y'),
-(14, 'LP20230307002', '2023-03-07', 'RG100/170', '0', 'DC', 'BH-01R', 'BUZZER 12-48V DC 110dB ', 'TEST', '5', '85000', 'Administrator', 'Y'),
-(15, 'LP20230307002', '2023-03-07', 'RG100/170', '0', 'TE', '12345', 'test', 'TEST', '5', '5000', 'Administrator', 'Y'),
-(16, 'LP20230307002', '2023-03-07', 'RG100/170', '0', 'TE', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'TEST', '4', '10000', 'Administrator', 'Y'),
-(17, 'LP20230308001', '2023-03-08', '1234QWER', '0', 'DC', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '3', '10000', 'Administrator', 'Y'),
-(18, 'LP20230311001', '2023-03-11', 'RG100', '500000', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '5', '10000', 'Administrator', 'Y'),
-(20, 'LP20230311001', '2023-03-11', 'RG100', '0', 'RB', '12345', 'test', 'test', '4', '5000', 'Administrator', 'Y'),
-(21, 'LP20230311001', '2023-03-11', 'RG100', '0', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '3', '10000', 'Administrator', 'Y'),
-(23, 'LP20230311002', '2023-03-11', 'RG1001', '500000', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '4', '10000', 'Administrator', 'Y'),
-(24, 'SPK20230311003', '2023-03-11', 'RG100', '500000', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '6', '10000', 'Administrator', 'Y');
+(1, 'SPK20230311001', '2023-03-11', 'RG100/170', '500000', 'RB', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '5', '10000', 'Administrator', 'Y'),
+(2, 'SPK20230311001', '2023-03-11', 'RG100/170', '0', 'RB', '12345', 'test', 'test', '5', '5000', 'Administrator', 'Y'),
+(3, 'SPK20230311001', '2023-03-11', 'RG100/170', '50000', 'DC', 'BH-01R', 'BUZZER 12-48V DC 110dB ', 'test', '3', '85000', 'Administrator', 'Y'),
+(4, 'SPK20230311001', '2023-03-11', 'RG100/170', '100000', 'TE', 'ML1312-2144', 'STICKER REFLEKTOR-SCOUTLIGHT WARNA KUNING ', 'test', '5', '300000', 'Administrator', 'Y'),
+(5, 'SPK20230311002', '2023-03-11', 'RG100/171', '500000', 'DC', '12345', 'test', 'test', '4', '5000', 'Administrator', 'Y'),
+(6, 'SPK20230311002', '2023-03-11', 'RG100/171', '1000000', 'TE', 'ML1312-2148', 'PISAU ONLY UNTUK POTONG VINYL ', 'test', '5', '10000', 'Administrator', 'Y'),
+(7, 'SPK20230311002', '2023-03-11', 'RG100/171', '400000', 'TI', 'BH-01R', 'BUZZER 12-48V DC 110dB ', '', '4', '85000', 'Administrator', 'Y');
 
 -- --------------------------------------------------------
 
@@ -1175,25 +1134,18 @@ CREATE TABLE `tbl_br_laporan_bus` (
   `keterangan` varchar(150) NOT NULL,
   `status_body` enum('AKTIF','PASIF') NOT NULL,
   `user` varchar(35) NOT NULL,
-  `status` enum('N','Y') NOT NULL,
-  `estimasi` enum('N','Y') NOT NULL
+  `status` enum('N','Y','S') NOT NULL,
+  `estimasi` enum('N','Y') NOT NULL,
+  `no_bay` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_br_laporan_bus`
 --
 
-INSERT INTO `tbl_br_laporan_bus` (`id_lapor`, `tgl_masuk`, `jam_masuk`, `id_bast`, `no_body`, `no_pol`, `nip_sp`, `nama_sp`, `ket_lapor`, `kategori`, `keterangan`, `status_body`, `user`, `status`, `estimasi`) VALUES
-('LP20230305001', '2023-03-06', '', '', '23 DX', 'b 9999 zyx', 'P.21', 'SAYA', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230305002', '2023-03-06', '', 'BS20230305001', '55 XX', 'b 12345', '', 'saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230306001', '2023-03-06', '', 'BS20230306001', '55 XX', 'b1234 gg', '1234', 'Pengemudi saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230306002', '2023-03-06', '', 'BS20230306002', '66XX', '11234', '1234', 'saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230307001', '2023-03-07', '', 'BS20230307001', '66XX', 'b9999gg', '1234', 'saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230307002', '2023-03-07', '12:54', 'BS20230307002', 'RG100/170', 'B 21234Y', '123435', 'SAYA', '2', '3', 'TEST', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230308001', '2023-03-08', '', 'BS20230308001', '1234QWER', 'b12345', '12345', 'test', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230311001', '2023-03-11', '', 'BS20230309001', 'RG100', 'b1234', '1234', '12344', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('LP20230311002', '2023-03-11', '', 'SA20230309002', 'RG1001', 'b12345', '1234', 'saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y'),
-('SPK20230311003', '2023-03-11', '', 'SA20230311001', 'RG100', 'b 12345', '12345', 'saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y');
+INSERT INTO `tbl_br_laporan_bus` (`id_lapor`, `tgl_masuk`, `jam_masuk`, `id_bast`, `no_body`, `no_pol`, `nip_sp`, `nama_sp`, `ket_lapor`, `kategori`, `keterangan`, `status_body`, `user`, `status`, `estimasi`, `no_bay`) VALUES
+('SPK20230311001', '2023-03-11', '', 'SA20230311001', 'RG100/170', 'B7654YY', '1234', 'Saya', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y', '8'),
+('SPK20230311002', '2023-03-11', '', 'SA20230311002', 'RG100/171', 'B7653H', '1234', 'test', '2', '3', 'test', 'AKTIF', 'Administrator', 'Y', 'Y', '4');
 
 -- --------------------------------------------------------
 
@@ -1229,22 +1181,13 @@ CREATE TABLE `tbl_br_pk_aktif` (
 --
 
 INSERT INTO `tbl_br_pk_aktif` (`id_pk`, `id_lapor`, `no_body`, `jns_pk`, `ket_pk`, `tgl_mulai`, `jam_mulai`, `status`, `biaya_borong`, `pt_pemborong`, `pj_borong`, `jam_pause`, `jam_start`, `tgl_pause`, `tgl_start`, `ket_pause`, `tgl_selesai`, `jam_selesai`, `no_bay`, `lokasi`) VALUES
-('PK20230305001', 'LP20230305001', '23 DX', 'DC', 'DEMPUL CAT', '2023-03-06', '00:27', 'S', '0', 'saya', 'dia', '19:05', '19:06', '2023-03-06', '2023-03-06', 'test', '2023-03-06', '19:06', '', ''),
-('PK20230305002', 'LP20230305001', '23 DX', 'RB', 'Welding', '2023-03-06', '00:27', 'S', '0', 'saya', 'dia', '00:35', '00:35', '2023-03-07', '2023-03-07', 'test', '2023-03-07', '06:43', '', ''),
-('PK20230306001', 'LP20230306001', '55 XX', 'DC', 'DEMPUL CAT', '2023-03-06', '09:33', 'Y', '0', 'saya', 'dia', '03:15', '03:20', '2023-03-08', '2023-03-08', 'test', '0000-00-00', '', '', ''),
-('PK20230306002', 'LP20230306001', '55 XX', 'RB', 'Welding', '2023-03-06', '09:33', 'S', '0', 'saya', 'dia', '', '', '0000-00-00', '0000-00-00', '', '2023-03-06', '19:09', '', ''),
-('PK20230306003', 'LP20230305002', '55 XX', 'RB', 'Welding', '2023-03-06', '10:09', 'Y', '0', 'test', 'test', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230306004', 'LP20230306002', '66XX', 'DC', 'DEMPUL CAT', '2023-03-06', '10:12', 'S', '0', '', 'test', '', '', '0000-00-00', '0000-00-00', '', '2023-03-08', '03:20', '', ''),
-('PK20230306005', 'LP20230306002', '66XX', 'RB', 'Welding', '2023-03-06', '10:12', 'S', '0', '', 'test', '', '', '0000-00-00', '0000-00-00', '', '2023-03-08', '03:20', '', ''),
-('PK20230306006', 'LP20230306002', '66XX', 'TE', 'TRIMMING EKSTERIOR', '2023-03-06', '10:46', 'Y', '0', 'saya', 'dia', '06:41', '06:43', '2023-03-07', '2023-03-07', 'NYOBA', '0000-00-00', '', '', ''),
-('PK20230307001', 'LP20230307001', '66XX', 'DC', 'DEMPUL CAT', '2023-03-07', '08:43', 'Y', '0', 'Saya', 'Dia', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230307002', 'LP20230307001', '66XX', 'RB', 'Welding', '2023-03-07', '08:43', 'Y', '0', 'Saya', 'dia juga', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230307003', 'LP20230307002', 'RG100/170', 'DC', 'DEMPUL CAT', '2023-03-07', '13:27', 'Y', '0', '', 'SAYA', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230307004', 'LP20230307002', 'RG100/170', 'RB', 'Welding', '2023-03-07', '13:27', 'Y', '0', '', 'SAYA', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230307005', 'LP20230307002', 'RG100/170', 'TE', 'TRIMMING EKSTERIOR', '2023-03-07', '', 'Y', '0', '', 'WAHYUDI', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230308001', 'LP20230308001', '1234QWER', 'DC', 'DEMPUL CAT', '2023-03-08', '10:18', 'S', '0', 'saya', 'saya', '', '', '0000-00-00', '0000-00-00', '', '2023-03-08', '03:19', '', ''),
-('PK20230311001', 'LP20230311001', 'RG100', 'RB', 'Welding', '2023-03-11', '', 'Y', '0', '', 'test', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
-('PK20230311002', 'SPK20230311003', 'RG100', 'RB', 'Welding', '2023-03-11', '11:37', 'Y', '500000', 'saya', 'saya', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', '');
+('PK20230311001', 'SPK20230311001', 'RG100/170', 'DC', 'DEMPUL CAT', '2023-03-11', '23:10', 'S', '500000', 'pt.saya', 'saya', '', '', '0000-00-00', '0000-00-00', '', '2023-03-11', '18:55', '', ''),
+('PK20230311002', 'SPK20230311001', 'RG100/170', 'RB', 'Welding', '2023-03-11', '23:10', 'P', '100000', 'saya', 'sayaa', '08:52', '', '2023-03-12', '0000-00-00', 'test', '0000-00-00', '', '', ''),
+('PK20230311003', 'SPK20230311002', 'RG100/171', 'DC', 'DEMPUL CAT', '2023-03-11', '23:44', 'Y', '500000', '', 'saya', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
+('PK20230311004', 'SPK20230311001', 'RG100/170', 'TE', 'TRIMMING EKSTERIOR', '2023-03-11', '23:45', 'Y', '1000000', '', 'saya', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
+('PK20230311005', 'SPK20230311002', 'RG100/171', 'TE', 'TRIMMING EKSTERIOR', '2023-03-11', '23:50', 'Y', '1500000', '', 'sayaa', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
+('PK20230311006', 'SPK20230311001', 'RG100/170', 'RB', 'Welding', '2023-03-11', '23:50', 'Y', '500000', '', 'saya lagi', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', ''),
+('PK20230311007', 'SPK20230311002', 'RG100/171', 'TI', 'TRIMMING INTERIOR', '2023-03-11', '', 'Y', '100000', '', 'saya', '', '', '0000-00-00', '0000-00-00', '', '0000-00-00', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1790,10 +1733,9 @@ INSERT INTO `tbl_submenu` (`id_submenu`, `nama_submenu`, `link`, `icon`, `id_men
 (18, 'Satuan', 'satuan', 'far fa-circle', 32, 'Y', 0),
 (19, 'Pembelian', 'pembelian', 'far fa-circle', 41, 'Y', 0),
 (20, 'Penjualan', 'penjualan', 'far fa-circle', 41, 'Y', 0),
-(23, 'Bus Masuk', 'BusMasuk', 'fa fa-shuttle-van', 52, 'Y', 3),
-(24, 'Proses PK', 'ProsesPk', 'fa fa-retweet', 52, 'Y', 4),
-(27, 'Bay Aktif', 'BayAktif', 'fa fa-list-ul', 52, 'Y', 7),
-(28, 'Daftar Bay', 'DaftarBay', 'fa fa-list-ol', 52, 'Y', 8),
+(23, 'Bus Masuk', 'BusMasuk', 'fa fa-shuttle-van', 52, 'Y', 4),
+(24, 'Proses PK', 'ProsesPk', 'fa fa-retweet', 52, 'Y', 6),
+(28, 'Daftar Bay', 'DaftarBay', 'fa fa-list-ol', 52, 'Y', 7),
 (33, 'Laporan Repair Perbody', '#', 'ion ion-calendar', 59, 'Y', 11),
 (34, 'Tutup PK Pertanggal', 'TutupPK', 'fa fa-calendar', 59, 'Y', 12),
 (36, 'Laporan Mekanik', 'ReportMekanik', 'ion ion-man', 59, 'Y', 13),
@@ -1819,15 +1761,16 @@ INSERT INTO `tbl_submenu` (`id_submenu`, `nama_submenu`, `link`, `icon`, `id_men
 (69, 'Mesin Absen', 'Mesin_absen', 'fa fa-cog', 56, 'Y', 4),
 (70, 'Purchase Order', 'PurchaseOrder', 'fa fa-coins', 57, 'Y', 3),
 (71, 'Part Keluar', 'Part_keluar', 'fa fa-file-upload', 57, 'Y', 4),
-(72, 'Daftar Bus', 'Body', 'fa fa-bus', 52, 'Y', 1),
-(73, 'BAST', 'Bast', 'fa fa-bus-alt', 52, 'Y', 2),
+(72, 'Daftar Bus', 'Body', 'fa fa-bus', 52, 'Y', 2),
+(73, 'BAST', 'Bast', 'fa fa-bus-alt', 52, 'Y', 3),
 (74, 'Panel Seting', 'Settingbr', 'fa fa-cogs', 52, 'Y', 8),
 (75, 'Display Bay', 'Display', 'fa fa-chalkboard-teacher', 52, 'Y', 1),
 (76, 'Report Per Body', 'Report per Body', 'fa fa-bus-alt', 61, 'Y', 1),
 (77, 'Report Perbarang', 'ReportBarang', 'fa fa-luggage-cart', 61, 'Y', 2),
 (78, 'Report Per Kategori', 'ReporPerkategori', 'fa fa-layer-group', 61, 'Y', 3),
 (79, 'Penerimaan Barang', 'Penerimaan', 'fa fa-dolly-flatbed', 61, 'Y', 4),
-(80, 'Pengeluaran Barang', 'Pengeluaran', 'fa fa-dolly', 61, 'Y', 5);
+(80, 'Pengeluaran Barang', 'Pengeluaran', 'fa fa-dolly', 61, 'Y', 5),
+(81, 'Bus Dengan PK', 'BusPk', 'fa fa-bezier-curve', 52, 'Y', 5);
 
 -- --------------------------------------------------------
 
@@ -23966,12 +23909,6 @@ ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kat`);
 
 --
--- Indexes for table `list_bay`
---
-ALTER TABLE `list_bay`
-  ADD PRIMARY KEY (`id_bay`);
-
---
 -- Indexes for table `list_mekanik`
 --
 ALTER TABLE `list_mekanik`
@@ -24000,6 +23937,12 @@ ALTER TABLE `tbl_akses_submenu`
 --
 ALTER TABLE `tbl_br_bast`
   ADD PRIMARY KEY (`id_bast`);
+
+--
+-- Indexes for table `tbl_br_bay`
+--
+ALTER TABLE `tbl_br_bay`
+  ADD PRIMARY KEY (`id_bay`);
 
 --
 -- Indexes for table `tbl_br_detail_estimasi`
@@ -24270,12 +24213,6 @@ ALTER TABLE `kategori`
   MODIFY `id_kat` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `list_bay`
---
-ALTER TABLE `list_bay`
-  MODIFY `id_bay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
 -- AUTO_INCREMENT for table `list_mekanik`
 --
 ALTER TABLE `list_mekanik`
@@ -24291,13 +24228,19 @@ ALTER TABLE `tbl_akses_menu`
 -- AUTO_INCREMENT for table `tbl_akses_submenu`
 --
 ALTER TABLE `tbl_akses_submenu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=395;
+
+--
+-- AUTO_INCREMENT for table `tbl_br_bay`
+--
+ALTER TABLE `tbl_br_bay`
+  MODIFY `id_bay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `tbl_br_detail_estimasi`
 --
 ALTER TABLE `tbl_br_detail_estimasi`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_br_detail_pk`
@@ -24381,7 +24324,7 @@ ALTER TABLE `tbl_menu`
 -- AUTO_INCREMENT for table `tbl_submenu`
 --
 ALTER TABLE `tbl_submenu`
-  MODIFY `id_submenu` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_submenu` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

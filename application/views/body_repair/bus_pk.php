@@ -97,7 +97,6 @@ show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', '
             refresh();
         });
     }
-
     $(document).on("click", ".cetak-pk", function () {
         var id = $(this).attr("data-id");
            $ .ajax({
@@ -208,5 +207,57 @@ $(document).on("click", ".selesai-pk-aktif", function () {
         }
     })
 })
+$(document).on("click", ".input-bay", function () {
+        var id = $(this).attr("data-pk");
 
+        $
+            .ajax({
+                method: "POST",
+                url: "<?php echo base_url('BusPk/inputBay'); ?>",
+                data: "id=" + id
+            })
+            .done(function (data) {
+                $('#modal-pk').html(data);
+                $('#input-bay').modal('show');
+            })
+    })
+    $(document).on("click", ".masuk-bay", function () {
+        var idLapor = $(this).attr("id-lapor");
+        var idBody = $(this).attr("id-body");
+        var idBay = $(this).attr("id-bay");
+        $.ajax({
+                method: "POST",
+                url: "<?php echo base_url('BusPk/masukBay'); ?>",
+                data: "idLapor=" + idLapor+"&idBody=" + idBody+"&idBay=" + idBay
+            })
+            .done(function(data) {
+        var out = jQuery.parseJSON(data);
+		showPk();
+        $('.msg').html(out.msg);
+        $('#input-bay').modal('hide');
+        if (out.status != 'form') {
+            Swal.fire({
+                position: 'center',
+										icon: 'success',
+										title: out.msg,
+										showConfirmButton: false,
+										timer: 1000
+            })
+        }
+    })
+})
+$(document).on("click", ".tambah-pk", function () {
+        var id = $(this).attr("data-pk");
+
+        $
+            .ajax({
+                method: "POST",
+                url: "<?php echo base_url('BusPk/revPk'); ?>",
+                data: "id=" + id
+            })
+            .done(function (data) {
+                $('#modal-pk').html(data);
+                $('#input-bay').modal('show');
+            })
+    })
 </script>
