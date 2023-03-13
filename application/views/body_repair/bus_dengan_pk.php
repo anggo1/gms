@@ -20,7 +20,7 @@ foreach ($dataPk as $s) {
         if($s->status=='P'){ ?>
         <button class="btn btn-xs btn-outline-primary start-pk-aktif" data-toggle="modal" data-target="#startPk" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-play"></i> Start</button> 
         <?php } ?>
-        <button class="btn btn-xs btn-outline-danger selesai-pk-aktif" data-toggle="modal" data-target="#selesaiPk" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-check-double"></i>Tutup</button>    
+        <button class="btn btn-xs btn-outline-danger selesai-pk-aktif" data-toggle="modal" data-target="#selesaiPk" body-pk="<?php echo $s->no_body; ?>" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-check-double"></i>Tutup</button>    
         <a href="<?php echo base_url()?>TambahPk?data-pk=<?php echo $s->id_lapor; ?>"><button class="btn btn-xs btn-outline-primary" data-pk="<?php echo $s->id_lapor; ?>"><i class="fa fa-plus"></i> PK</button></a>
     </td>
     </tr>

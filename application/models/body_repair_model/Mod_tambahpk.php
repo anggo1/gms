@@ -12,7 +12,6 @@ class Mod_tambahpk extends CI_Model
 
 	public function select_pk()
 	{
-		
 		//$sql = "SELECT COUNT(tbl_br_pk_aktif.id_lapor) AS `jml_pk`,`tbl_br_bay`.`id_bay` AS `no_bay`,`tbl_br_laporan_bus`.* FROM `tbl_br_laporan_bus`
 		//LEFT JOIN `tbl_br_pk_aktif` ON `tbl_br_pk_aktif`.`id_lapor`=`tbl_br_laporan_bus`.`id_lapor`
 		//LEFT JOIN `tbl_br_bay` ON `tbl_br_laporan_bus`.`no_body`=`tbl_br_bay`.`keterangan`
@@ -108,7 +107,30 @@ class Mod_tambahpk extends CI_Model
         $datap = $ci->db->query($ketpk)->row_array();
         $pknye = $datap['ket_pk'];
 
-        $sqlpk = "INSERT INTO tbl_br_pk_aktif SET
+		$cicari = get_instance();
+        $qcari = "SELECT COUNT(jns_pk) as ketemu FROM tbl_br_pk_aktif WHERE id_lapor = '".$data['id_lapor']."' AND jns_pk = '".$data['jns_pk']."'";
+        $hasil_cari = $cicari->db->query($qcari)->row_array();
+        $adaPk = $hasil_cari['ketemu'];
+		if($adaPk > 0){
+			$sql = "INSERT INTO tbl_br_detail_estimasi SET
+            id_detail	='',
+            id_lapor	='".$data['id_lapor']."',
+            tgl_estimasi='".$tgl_estimasi."',
+            no_body		='".$data['body_pk']."',
+            biaya		='".$esBea."',
+            jns_pk		='".$data['jns_pk']."',
+            no_part     ='".$data['no_part']."',
+            nama_part   ='".$data['nama_part']."',
+            ket_part    ='".$data['ket_part']."',
+            jml_part  	='".$data['jml_part']."',
+            hrg_part  	='".$data['hrg_awal']."',
+            user        ='".$data['user']."',
+			status        ='Y'";
+            $this->db->query($sql);
+            return $this->db->affected_rows();
+
+		} else {
+			$sqlpk = "INSERT INTO tbl_br_pk_aktif SET
             id_pk	='".$kodeBaru."',
             id_lapor	='".$data['id_lapor']."',
             tgl_mulai   ='".$tgl_estimasi."',
@@ -119,9 +141,7 @@ class Mod_tambahpk extends CI_Model
             status     ='Y',
             pt_pemborong   ='".$data['pt_pemborong']."',
             pj_borong    ='".$data['pj_borong']."',
-            biaya_borong    ='$esBea'
-			";
-
+            biaya_borong    ='$esBea'";
             $this->db->query($sqlpk);
 
         $sql = "INSERT INTO tbl_br_detail_estimasi SET
@@ -138,11 +158,10 @@ class Mod_tambahpk extends CI_Model
             hrg_part  	='".$data['hrg_awal']."',
             user        ='".$data['user']."',
 			status        ='Y'";
-
             $this->db->query($sql);
-
             return $this->db->affected_rows();
     }
+}
 
 	function cetak_masuk($id)
     {

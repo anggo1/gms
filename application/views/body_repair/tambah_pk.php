@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <div class="card-body">
-                 <?php foreach ($dataPk as $s) { }?>
+                <?php foreach ($dataPk as $s) { }?>
                 <form id="formEstimasi" name="formEstimasi" method="POST">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Tanggal</label>
@@ -164,17 +164,19 @@
                     <input type="hidden" name="user" id="user" value="<?php echo $this->session->userdata['full_name']; ?>"
                         class="form-control">
                     <div class="modal-footer center-content-between">
+                        
                         <button class="btn btn-primary" type="submit">
                             <span class="fa fa-save"></span>
                             Simpan</button>
                     </form>
                 </div>
-            </div>
+                    <button class="btn btn-xl btn-outline-success cetak-pk" id="cetakPk" title="Cetak PK" data-id="<?php echo $s->id_lapor; ?>"><i class="fa fa-print"></i> Cetak</button>
+                    </div>
             <div class="modal-body form">
                 <div class="card card-first card-outline">
                     <div class="card-body">
-
-                        <div class="table-responsive">
+                    
+                    <div class="table-responsive">
                             <table class="table no-wrap table-hover nowrap" id="list-estimasi">
                                 <thead>
                                     <tr>
@@ -187,13 +189,13 @@
                                     </tr>
                                 </thead>
                                 <tbody id="data-estimasi">
-       
                                 </tbody>
                                 <tfoot></tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
+                                <div id="modal-pk"></div>
             </div>
             <div class="modal fade" id="modal_form" role="dialog">
     <div class="modal-dialog modal-xm">
@@ -229,6 +231,18 @@
     window.onload = function() {
         tampilEstimasi();
     }
+    function refresh() {
+        MyTable = $('#list-estimasi').dataTable();
+    }
+    var MyTable = $('#list-estimasi').dataTable({
+        "responsive": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "pageLength": 5
+    });
     $(document).ready(function () {
         table = $('#table-part').dataTable({
             "responsive": false,
@@ -296,19 +310,6 @@
         $('#modal_form').modal('hide');
     }
 
-  
-    function refresh() {
-        MyTable = $('#list-estimasi,#list-pk-mulai').dataTable();
-    }
-    var MyTable = $('#list-estimasi').dataTable({
-        "responsive": false,
-        "paging": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "pageLength": 5
-    });
     function tampilEstimasi() {
         var id_lapor = document.getElementById('id_lapor').value;
         $.ajax({
@@ -344,7 +345,6 @@
                     $('#jml_part').val('');
                     $('#biaya').val('0');
                     $('.msg').html(out.msg);
-                    table.ajax.reload();
                     tampilEstimasi();
                     Swal.fire(
                         {position: 'center', icon: 'success', title: out.msg, showConfirmButton: false, timer: 1500}
@@ -404,106 +404,14 @@
                 }
             })
     })
-    $(document).on("click", ".estimasi", function () {
-        var id_lapor = $(this).attr("id_lapor");
-        var no_body = $(this).attr("no_body");
 
-        $("a[href='#tab-proses-tab']").tab('show');
-        $("a[href='#tab-proses']").tab('show');
-        document.getElementById("tab-proses-tab").hidden = false;
-        document.getElementById('body_pk').value = no_body;
-        document.getElementById('id_lapor').value = id_lapor;
-        //$("#pekerjaan").attr('disabled', 'disabled');
-    })
-
-    function refresh() {
-        MyTable = $('#list-pk,#list-pk-mulai').dataTable();
-    }
-    var MyTable = $('#list-pk,#list-pk-mulai,#table-body').dataTable({
-        "responsive": false,
-        "paging": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "pageLength": 5
-    });
-    $(document).on("click", ".proses-pk", function () {
-        var id = $(this).attr("data-id");
-
-        $.ajax({
-            type: 'GET',
-            url: '<?php echo base_url('BusMasuk/tampilPk'); ?>?id' + id,
-            data: 'id=' + id,
-            success: function (hasil) {
-                $('#id_lapor').val(id);
-                MyTable.fnDestroy();
-                $('#data-proses-pk').html(hasil);
-                document.getElementById("tab-pk-tab").hidden = false;
-                $("a[href='#tab-pk']").tab('show');
-                //refresh();
-            }
-        });
-    })
-
-    $(document).on("click", ".cetak-estimasi", function () {
-        var id = $(this).attr("data-id");
-		
-        //var id = document.getElementById('next_proses').value=datakode;
-        $.ajax({
-                method: "POST",
-                url: "<?php echo base_url('BusMasuk/cetakEstimasi'); ?>",
-                data: "id="+id
-            })
-            .done(function (data) {
-                $('#modal-estimasi').html(data);
-                $('#cetak-estimasi').modal('show');
-            })
-    })
-	$(document).on("click", ".cetak-estimasi2", function () {
-		var id = document.getElementById('id_lapor').value;
-           $ .ajax({
-                method: "POST",
-                url: "<?php echo base_url('BusMasuk/cetakEstimasi2'); ?>",
-                data: "id="+id
-            })
-            .done(function (data) {
-                $('#modal-estimasi2').html(data);
-                $('#cetak-estimasi2').modal('show');
-            })
-    })
     //** proses PK */
-	function tampilPkawal(datakode) {
-        var id = document.getElementById('id_lapor').value = datakode;
-        $.ajax({
-            type: 'GET',
-            url: '<?php echo base_url('BusMasuk/tampilPk'); ?>?id=' + id,
-            data: 'id=' + id,
-            success: function (hasil) {
-                $('#id_lapor').val(id);
-                MyTable.fnDestroy();
-                $('#data-proses-pk').html(hasil);
-            }
-        });
-    }
 
-    function tampilPk(datakode) {
-        var id_lapor = document.getElementById('id_lapor').value = datakode;
-        $.ajax({
-            type: 'GET',
-            url: '<?php echo base_url('BusMasuk/tampilPkMulai'); ?>?id_lapor=' + id_lapor,
-            data: 'id_lapor=' + id_lapor,
-            success: function (hasil) {
-                MyTable.fnDestroy();
-                $('#data-pk-mulai').html(hasil);
-            }
-        });
-    }
     $(document).on("click", ".cetak-pk", function () {
-		var id = document.getElementById('id_lapor').value;
+        var id = $(this).attr("data-id");
            $ .ajax({
                 method: "POST",
-                url: "<?php echo base_url('BusMasuk/cetakPk'); ?>",
+                url: "<?php echo base_url('TambahPk/cetakUlangPk'); ?>",
                 data: "id="+id
             })
             .done(function (data) {

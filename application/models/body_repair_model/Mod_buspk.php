@@ -19,6 +19,7 @@ class Mod_buspk extends CI_Model
 		//GROUP BY `tbl_br_pk_aktif`.`id_lapor`";
 		$sql = "SELECT COUNT(tbl_br_pk_aktif.id_lapor) AS `jml_pk`,`tbl_br_laporan_bus`.* FROM `tbl_br_laporan_bus`
 		LEFT JOIN `tbl_br_pk_aktif` ON `tbl_br_pk_aktif`.`id_lapor`=`tbl_br_laporan_bus`.`id_lapor`
+		WHERE tbl_br_laporan_bus.status !='S'
 		GROUP BY `tbl_br_pk_aktif`.`id_lapor`";
 
 		$data = $this->db->query($sql);
@@ -38,8 +39,12 @@ class Mod_buspk extends CI_Model
 	{
         $date = date("Y-m-d");
         $jam = date("H:i:s");
-		$sql = "UPDATE tbl_br_pk_aktif SET status='P',ket_pause='" . $data['ket_pause'] . "',jam_pause='" .$jam. "',tgl_pause='" .$date. "'
-        WHERE id_pk='" . $data['id_pk'] . "'";
+		$sqldetail = "UPDATE tbl_br_pk_aktif SET status='P',ket_pause='" . $data['ket_pause'] . "',jam_pause='" .$jam. "',tgl_pause='" .$date. "'
+        WHERE id_lapor='" . $data['id_lapor'] . "'";
+		$this->db->query($sqldetail);
+
+		$sql = "UPDATE tbl_br_laporan_bus SET status='P',ket_status='" . $data['ket_pause'] . "'
+        WHERE id_lapor='" . $data['id_lapor'] . "'";
 
 		$this->db->query($sql);
 
@@ -49,21 +54,32 @@ class Mod_buspk extends CI_Model
 	{
 		$date = date("Y-m-d");
         $jam = date("H:i:s");
-		$sql = "UPDATE tbl_br_pk_aktif SET status='Y',jam_start='" .$jam. "',tgl_start='" .$date. "'
-        WHERE id_pk='" . $id . "'";
+		
+		$sqldetail = "UPDATE tbl_br_pk_aktif SET status='Y',jam_start='" .$jam. "',tgl_start='" .$date. "'
+        WHERE id_lapor='" . $id. "'";
+		$this->db->query($sqldetail);
+
+		$sql = "UPDATE tbl_br_laporan_bus SET status='Y' WHERE id_lapor='" . $id. "'";
 
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
 	}
-	function pkSelesai($id)
+	function pkSelesai($id,$no_body)
 	{
 		$date = date("Y-m-d");
         $jam = date("H:i:s");
-		$sql = "UPDATE tbl_br_pk_aktif SET status='S',jam_selesai='" .$jam. "',tgl_selesai='" .$date. "'
-        WHERE id_pk='" . $id . "'";
+		$sqlbay = "UPDATE tbl_br_bay SET keterangan='' WHERE keterangan='" . $no_body . "'";
+		$this->db->query($sqlbay);
+
+		$sqltutup = "UPDATE tbl_br_pk_aktif SET status='S',jam_selesai='" .$jam. "',tgl_selesai='" .$date. "'
+        WHERE id_lapor='" . $id . "'";
+		$this->db->query($sqltutup);
+
+		$sql = "UPDATE tbl_br_laporan_bus SET status='S' WHERE id_lapor='" . $id. "'";
 
 		$this->db->query($sql);
+
 
 		return $this->db->affected_rows();
 	}

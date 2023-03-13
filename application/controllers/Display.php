@@ -15,9 +15,10 @@ class Display extends CI_Controller {
     {
         
         $data['dataAntri'] = $this->Mod_display->select_antri();
-        $data['dataPk'] = $this->Mod_display->select_pk();
-        //$data['bay1'] = $this->Mod_display->select_bay1();
+        $data['listPk'] = $this->Mod_display->select_pk();
         $data['dataPkselesai'] = $this->Mod_display->select_pk_selesai();
+        $data['bay16'] = $this->Mod_display->select_bay16();
+        $data['bay15'] = $this->Mod_display->select_bay15();
         $this->load->view('display/index',$data);
             //$this->load->view('display/index',$aplikasi);
       

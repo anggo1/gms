@@ -57,18 +57,21 @@ class Mod_display extends CI_Model {
 
 		return $data->result();
 	}
-    public function select_bay1()
+    public function select_bay16()
 	{
-		$this->db->select('*');
-		$this->db->from('tbl_br_pk_aktif');
-		//$this->db->join('tbl_pendidikan as b','a.pendidikan=b.id_pendidikan');
-		//$this->db->join('tbl_supplier as c','a.supplier=c.id_supplier');
-		//$this->db->join('tbl_departement as d','a.departement=d.id_departement');
-		$this->db->where('status=','S');
-
-		$data = $this->db->get();
-
-		return $data->result();
+		$sql = "SELECT a.*,COUNT(b.id_lapor) AS jml_pk FROM `tbl_br_laporan_bus` as `a`
+		JOIN `tbl_br_pk_aktif` as `b` ON `a`.`id_lapor`=`b`.`id_lapor`
+		WHERE `a`.`no_bay` = '16'";
+        $data = $this->db->query($sql);
+        return $data->result();
+	}
+	public function select_bay15()
+	{
+		$sql = "SELECT a.*,COUNT(b.id_lapor) AS jml_pk FROM `tbl_br_laporan_bus` as `a`
+		JOIN `tbl_br_pk_aktif` as `b` ON `a`.`id_lapor`=`b`.`id_lapor`
+		WHERE `a`.`no_bay` = '15'";
+        $data = $this->db->query($sql);
+        return $data->result();
 	}
 
 

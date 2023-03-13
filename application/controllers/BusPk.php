@@ -33,9 +33,10 @@ class BusPk extends MY_Controller
     public function cetakPk()
 	{
 		$id 				= $_POST['id'];
-		$data['dataPk'] = $this->Mod_prosespk->cetak_pk($id);
+		$data['dataPk'] = $this->Mod_buspk->cetak_pk($id);
+		$data['detailPk'] = $this->Mod_buspk->cetak_estimasi($id);
 
-		echo show_my_print('body_repair/modals/modal_cetak_pk_tunggal', 'cetak-pk', $data, ' modal-xl');
+		echo show_my_print('body_repair/modals/modal_cetak_pk', 'cetak-pk', $data, ' modal-xl');
 	}
     /*Keterangan Laporan*/
     public function prosesTlaporan()
@@ -63,7 +64,7 @@ class BusPk extends MY_Controller
     public function Pause()
     {
         $id                 = trim($_POST['id']);
-		$data['dataPk'] = $this->Mod_prosespk->cetak_pk($id);
+		$data['dataPk'] = $this->Mod_buspk->cetak_pk($id);
 
         echo show_my_modal('body_repair/modals/modal_pk_pause', 'pause-pk', $data);
     }
@@ -71,11 +72,11 @@ class BusPk extends MY_Controller
     public function pausePk()
     {
 
-        $this->form_validation->set_rules('id_pk', 'ID PK', 'trim|required');
+        $this->form_validation->set_rules('id_lapor', 'ID SPK', 'trim|required');
 
         $data     = $this->input->post();
         if ($this->form_validation->run() == TRUE) {
-            $result = $this->Mod_prosespk->pausepk($data);
+            $result = $this->Mod_buspk->pausepk($data);
 
             if ($result > 0) {
                 $out['status'] = '';
@@ -94,7 +95,7 @@ class BusPk extends MY_Controller
     public function startPk()
     {
         $id = $_POST['id'];
-        $result = $this->Mod_prosespk->startPk($id);
+        $result = $this->Mod_buspk->startPk($id);
 
         if ($result > 0) {
             $out['status'] = '';
@@ -108,7 +109,8 @@ class BusPk extends MY_Controller
     public function tutupPk()
     {
         $id = $_POST['id'];
-        $result = $this->Mod_prosespk->pkSelesai($id);
+        $no_body = $_POST['body'];
+        $result = $this->Mod_buspk->pkSelesai($id,$no_body);
 
         if ($result > 0) {
             $out['status'] = '';

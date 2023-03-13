@@ -8,9 +8,7 @@
     }
     ?>
     <p></span>
-    <h4 style="display:block; text-align:center;">Pause <?php if (!empty($dataPk->keterangan)) {
-                                                        echo $dataPk->keterangan;
-                                                      } ?></h4>
+    <h4 style="display:block; text-align:center;">Pause PK Aktif</h4>
     </p>
   </div>
   <div class="modal-body">
@@ -25,6 +23,7 @@
 
 								</div>
 							</div>
+							<input type="hidden" name="id_lapor" id="id_lapor" value="<?php echo $dataPk->id_lapor; ?>" class="form-control">
 							<input type="hidden" name="id_pk" id="id_pk" value="<?php echo $dataPk->id_pk; ?>" class="form-control">
       <div class="modal-footer bg-whitesmoke br">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

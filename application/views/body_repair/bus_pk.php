@@ -54,7 +54,7 @@
 
 <?php
 show_my_confirm('startPk', 'start-pk', 'PK Dimulai', 'Ya, Mulai', 'Batal Mulai');
-show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', 'Batal');
+show_my_confirm('selesaiPk', 'selesai-pk', 'Seluruh PK Telah Selesai?', 'Ya, Selesai', 'Batal');
 ?>
 <script type="text/javascript">
     window.onload = function() {
@@ -104,7 +104,7 @@ show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', '
         var id = $(this).attr("data-id");
            $ .ajax({
                 method: "POST",
-                url: "<?php echo base_url('ProsesPk/cetakPk'); ?>",
+                url: "<?php echo base_url('BusPk/cetakPk'); ?>",
                 data: "id="+id
             })
             .done(function (data) {
@@ -118,7 +118,7 @@ show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', '
         $
             .ajax({
                 method: "POST",
-                url: "<?php echo base_url('ProsesPk/Pause'); ?>",
+                url: "<?php echo base_url('BusPk/Pause'); ?>",
                 data: "id=" + id
             })
             .done(function (data) {
@@ -131,7 +131,7 @@ show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', '
 
 						$.ajax({
 								method: 'POST',
-								url: '<?php echo base_url('ProsesPk/pausePk'); ?>',
+								url: '<?php echo base_url('BusPk/pausePk'); ?>',
 								data: data
 							})
 							.done(function(data) {
@@ -164,7 +164,7 @@ show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', '
         var id = id_pk;
         $.ajax({
                 method: "POST",
-                url: "<?php echo base_url('ProsesPk/startPk'); ?>",
+                url: "<?php echo base_url('BusPk/startPk'); ?>",
                 data: "id=" + id
             })
             .done(function(data) {
@@ -186,13 +186,15 @@ show_my_confirm('selesaiPk', 'selesai-pk', 'PK Telah Selesai?', 'Ya, Selesai', '
 
 $(document).on("click", ".selesai-pk-aktif", function () {
         id_pk = $(this).attr("data-pk");
+        body_pk = $(this).attr("body-pk");
     })
     $(document).on("click", ".selesai-pk", function () {
         var id = id_pk;
+        var body = body_pk;
         $.ajax({
                 method: "POST",
-                url: "<?php echo base_url('ProsesPk/tutupPk'); ?>",
-                data: "id=" + id
+                url: "<?php echo base_url('BusPk/tutupPk'); ?>",
+                data: "id=" + id+"&body=" + body
             })
             .done(function(data) {
         var out = jQuery.parseJSON(data);

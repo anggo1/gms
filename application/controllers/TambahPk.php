@@ -40,6 +40,14 @@ class TambahPk extends MY_Controller
 
 		echo show_my_print('body_repair/modals/modal_cetak_pk_tunggal', 'cetak-pk', $data, ' modal-xl');
 	}
+    public function cetakUlangPk()
+	{
+		$id 				= $_POST['id'];
+		$data['dataPk'] = $this->Mod_tambahpk->cetak_pk($id);
+		$data['detailPk'] = $this->Mod_tambahpk->cetak_estimasi($id);
+
+		echo show_my_print('body_repair/modals/modal_cetak_pk', 'cetak-pk', $data, ' modal-xl');
+	}
     /*Keterangan Laporan*/
     public function prosesEstimasi()
     {

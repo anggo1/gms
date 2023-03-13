@@ -6,6 +6,10 @@ background: -moz-linear-gradient(top, #fcf4c0 0%, #fdea59 50%, #ffe30b 51%, #fcf
 background: -webkit-linear-gradient(top, #fcf4c0 0%,#fdea59 50%,#ffe30b 51%,#fcf09a 100%);
 background: linear-gradient(to bottom, #fcf4c0 0%,#fdea59 50%,#ffe30b 51%,#fcf09a 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf4c0', endColorstr='#fcf09a',GradientType=0 );";
+$kini = new DateTime("now");
+
+foreach ($bay16 as $by16){}
+foreach ($bay15 as $by15){}
 ?>
 <script type="text/JavaScript">
     <!--
@@ -76,13 +80,19 @@ window.onload=beginrefresh
         <div class="kategoritengah">
         <div class="kategoriatas">
             <div class="jarak_kiri"></div>
-          <div class="bis2">
-              <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>16</strong>
-                    </div>
+        <div class="bis2">
+            <div class="isikategori2">
+                
+            <button class="tombolbus"
+                id-bay="16"
+                id-lapor="<?php echo $by16->id_lapor; ?>">
+                <div class="nomor">16</div>
+                <p><?php echo $by16->no_body; ?></p>
+                PK : <?php echo $by16->jml_pk; ?>
+                <p><?php $tgl1 = new DateTime($by16->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+            </button>
             </div>
-          </div>
+            </div>
             <div class="jarak_bus"></div>
             <div class="bis2">
                 <div class="isikategori2">
@@ -451,7 +461,7 @@ window.onload=beginrefresh
             <li>
                 <?php
               $noUrutberatbanget1=0;
-            foreach($dataPk as $pk){
+            foreach($listPk as $pk){
                 
             	$noUrutberatbanget1++;
 				echo "<li>

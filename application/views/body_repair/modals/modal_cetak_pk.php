@@ -62,6 +62,7 @@ p, td, th {
     font-weight: normal;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:14px;
+  
 }
 .under { text-decoration: underline; }
 #A4 {background-color:#FFFFFF;
@@ -123,19 +124,25 @@ font-family:Georgia, "Times New Roman", Times, serif;
        </tr>
      <?php
        $no=0;
+		$grand_total=0;
        foreach ($dataPk as $d){ 
+		   $grand_total += $d->biaya_borong;
 	     $no++;
 						?>
       <tr>
-          <th><?php echo $no ?></th>
-       <th><?php echo $d->id_pk ?></th>
-       <th><?php echo $d->jns_pk ?></th>
-       <th><?php echo $d->ket_pk ?></th>
-       <th><?php echo $d->pt_pemborong ?></th>
-       <th><?php echo $d->pj_borong ?></th>
-       <th><?php echo number_format($d->biaya_borong); ?></th>
-       </tr>
+        <th><?php echo $no ?></th>
+        <th><?php echo $d->id_pk ?></th>
+        <th><?php echo $d->jns_pk ?></th>
+        <th><?php echo $d->ket_pk ?></th>
+        <th><?php echo $d->pt_pemborong ?></th>
+        <th><?php echo $d->pj_borong ?></th>
+        <th style="text-align: right;font-weight: bold;"><?php echo number_format($d->biaya_borong); ?></th>
+      </tr>
      <?php  } ?>
+      <tr>
+          <th colspan="6" style="text-align: right;font: bold;">GRAND TOTAL</th>
+       <th style="text-align: right;font: bold;font-weight: bold;"><?php echo number_format($grand_total); ?></th>
+       </tr>
    </thead>
    <tbody>
 </table></div>
