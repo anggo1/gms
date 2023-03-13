@@ -181,25 +181,42 @@ p a:hover {
 
 .tombolbus {
     float: left;
-    min-height: 160px;
+    min-height: 139px;
     width: 100%;
     background-color: #fff;
     border: 0px solid #000000;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
 	padding-top: 0px;
     text-align: center;
     font-weight: bold;
 	font-size: 12px;
-	font-display: block;
     background: #f6f8f9;
-    margin-top: auto;
+    margin-top: 0px;
     margin-bottom: auto;
-    font-size-adjust: 80%;
     background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     background: -webkit-linear-gradient(top, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     background: linear-gradient(to bottom, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#f6f8f9', endColorstr='#f5f7f9', GradientType=0);
 }
+.tombolbus1:hover {
+        float: left;
+        min-height: 160px;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: auto;
+        font-size: xx-large;
+        text-align: center;
+        background: #f6f8f9;
+        margin-top: auto;
+        margin-bottom: auto;
+        font-size-adjust: 80%;
+        background: -moz-linear-gradient(top, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+        background: -webkit-linear-gradient(top, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+        background: linear-gradient(to bottom, #f6f8f9 0%, #e5ebee 50%, #d7dee3 51%, #f5f7f9 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr= '#f6f8f9', endColorstr='#f5f7f9', GradientType=0);
+    }
 
 
 

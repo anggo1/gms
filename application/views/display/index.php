@@ -82,11 +82,10 @@ window.onload=beginrefresh
             <div class="jarak_kiri"></div>
         <div class="bis2">
             <div class="isikategori2">
-                
+            <div class="nomor">16</div>
             <button class="tombolbus"
                 id-bay="16"
                 id-lapor="<?php echo $by16->id_lapor; ?>">
-                <div class="nomor">16</div>
                 <p><?php echo $by16->no_body; ?></p>
                 PK : <?php echo $by16->jml_pk; ?>
                 <p><?php $tgl1 = new DateTime($by16->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
