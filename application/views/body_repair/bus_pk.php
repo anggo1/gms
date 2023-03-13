@@ -19,6 +19,9 @@
                                 <div class="card-header card-blue card-outline">
                                     <h3 class="card-title"><i class="ion-ios-cog ion-lg text-blue"></i> &nbsp; Pekerjaan Yang Masih Aktif</h3>
                                 </div>
+                                <div class="modal-body form">
+    <div class="card card-first card-outline">
+        <div class="card-body">
                                 <div class="col-12 ">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover nowrap" id="list-pk">
