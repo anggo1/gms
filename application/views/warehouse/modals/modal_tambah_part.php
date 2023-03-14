@@ -213,8 +213,14 @@
                                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Keterangan</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-4">
                                                 <input type="text" name="ket" id="ket" value="<?php if (!empty($part->ket)) {
+                                                          echo $part->ket;
+                                                        } ?>" class="form-control">
+                                            </div>
+                                            <label class="col-sm-2 col-form-label">Std Pakai</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" name="std_pakai" id="std_pakai" value="<?php if (!empty($part->std_pakai)) {
                                                           echo $part->ket;
                                                         } ?>" class="form-control">
                                             </div>

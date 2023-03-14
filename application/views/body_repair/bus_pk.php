@@ -215,8 +215,7 @@ $(document).on("click", ".selesai-pk-aktif", function () {
 $(document).on("click", ".input-bay", function () {
         var id = $(this).attr("data-pk");
 
-        $
-            .ajax({
+        $.ajax({
                 method: "POST",
                 url: "<?php echo base_url('BusPk/inputBay'); ?>",
                 data: "id=" + id

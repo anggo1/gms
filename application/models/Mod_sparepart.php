@@ -180,7 +180,8 @@ class Mod_sparepart extends CI_Model
         lokasi      ='".$data['lokasi']."',
         kategori    ='".$data['kategori']."',
         supplier    ='".$data['supplier']."',
-        ket         ='".$data['ket']."'";
+        ket         ='".$data['ket']."',
+        std_pakai   ='".$data['std_pakai']."'";
 
 		$this->db->query($sql);
 
@@ -199,7 +200,8 @@ class Mod_sparepart extends CI_Model
         lokasi      ='".$data['lokasi']."',
         kategori    ='".$data['kategori']."',
         supplier    ='".$data['supplier']."',
-        ket         ='".$data['ket']."'
+        ket         ='".$data['ket']."',
+        std_pakai   ='".$data['std_pakai']."'
         WHERE id_barang='".$data['id_barang']."'";
 
 		$this->db->query($sql);
