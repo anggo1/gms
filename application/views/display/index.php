@@ -1,30 +1,40 @@
 <?php
-
-$warna_hijau = "background: #9dd53a;background: -moz-linear-gradient(top, #9dd53a 0%, #a1d54f 50%, #80c217 51%, #7cbc0a 100%);background: webkit-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%);background: linear-gradient(to bottom, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 );";
-$warna_kuning="background: #fcf4c0; /* Old browsers */
-background: -moz-linear-gradient(top, #fcf4c0 0%, #fdea59 50%, #ffe30b 51%, #fcf09a 100%); 
-background: -webkit-linear-gradient(top, #fcf4c0 0%,#fdea59 50%,#ffe30b 51%,#fcf09a 100%);
-background: linear-gradient(to bottom, #fcf4c0 0%,#fdea59 50%,#ffe30b 51%,#fcf09a 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf4c0', endColorstr='#fcf09a',GradientType=0 );";
 $kini = new DateTime("now");
 
-foreach ($bay16 as $by16){}
+foreach ($bay1 as $by1){}
+foreach ($bay2 as $by2){}
+foreach ($bay3 as $by3){}
+foreach ($bay4 as $by4){}
+foreach ($bay5 as $by5){}
+foreach ($bay6 as $by6){}
+foreach ($bay7 as $by7){}
+foreach ($bay8 as $by8){}
+foreach ($bay9 as $by9){}
+foreach ($bay10 as $by10){}
+foreach ($bay11 as $by11){}
+foreach ($bay12 as $by12){}
+foreach ($bay13 as $by13){}
+foreach ($bay14 as $by14){}
 foreach ($bay15 as $by15){}
+foreach ($bay16 as $by16){}
+foreach ($bay17 as $by17){}
+foreach ($bay18 as $by18){}
+foreach ($bay19 as $by19){}
+foreach ($bay20 as $by20){}
+foreach ($bay21 as $by21){}
+foreach ($bay22 as $by22){}
+foreach ($bay23 as $by23){}
+foreach ($bay24 as $by24){}
+foreach ($bay25 as $by25){}
+foreach ($bay26 as $by26){}
+foreach ($bay27 as $by27){}
+foreach ($bay28 as $by28){}
+foreach ($bay29 as $by29){}
+foreach ($bay30 as $by30){}
+foreach ($bay31 as $by31){}
 ?>
 <script type="text/JavaScript">
-    <!--
-    <!--setTimeout("location.href = 'index.php';",1000*120 );
--->
 
-    <!--
-
-/*
-Auto Refresh Page with Time script
-By JavaScript Kit (javascriptkit.com)
-Over 200+ free scripts here!
-*/
-
-//enter refresh time in "minutes:seconds" Minutes should range from 0 to inifinity. Seconds should range from 0 to 59
 var limit="0:30"
 
 if (document.images){
@@ -50,367 +60,713 @@ setTimeout("beginrefresh()",2000)
 }
 
 window.onload=beginrefresh
-    //-->
-</script><head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>MPU DISPLAY</title>
-       <link href="application/views/display/css/global.css" rel="stylesheet" type="text/css"/>
-        <script src="application/views/display/js/jquery.min.js"></script>
-        <link rel="stylesheet" href="application/views/display/css/style1.css" type="text/css">
-	<!-- <link href="css/global.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery.min.js"></script>
-        <link rel="stylesheet" href="css/style1.css" type="text/css">-->
-    </head>
-    <div class="header" align="center"><strong>DENAH LOKASI  BODY REPAIR</strong></div>
-    <div>
-        <strong> </strong>
+</script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>MPU DISPLAY</title>
+    <link
+        href="application/views/display/css/global.css"
+        rel="stylesheet"
+        type="text/css"/>
+    <script src="application/views/display/js/jquery.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="application/views/display/css/style1.css"
+        type="text/css">
+    <!-- <link href="css/global.css" rel="stylesheet" type="text/css"/> <script
+    src="js/jquery.min.js"></script> <link rel="stylesheet" href="css/style1.css"
+    type="text/css">-->
+</head>
+<div class="header" align="center">
+    <strong>DENAH LOKASI BODY REPAIR</strong>
+</div>
+<div>
+    <strong></strong>
     <div class="kategoritengah">
-            <div class="jarak_mobil"></div>
-          <div class="judul">
-                <strong>B O D Y</strong>
-          </div>
-            <div class="jarak_mobil4"></div>
-            <div class="jarak_mobil4"></div>
-          <div class="judul">
-              <strong>DEMPUL CAT</strong>
-          </div>
-      </div>
-        
-    <div class="denah">
-        <div class="kategoritengah">
-        <div class="kategoriatas">
-            <div class="jarak_kiri"></div>
-        <div class="bis2">
-            <div class="isikategori2">
-                
-            <button class="tombolbus"
-                id-bay="16"
-                id-lapor="<?php echo $by16->id_lapor; ?>">
-                <div class="nomor">16</div>
-                <p><?php echo $by16->no_body; ?></p>
-                PK : <?php echo $by16->jml_pk; ?>
-                <p><?php $tgl1 = new DateTime($by16->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
-            </button>
-            </div>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>15</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>14</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>13</strong>
-                    </div>
-                </div>
-
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>12</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>11</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>10</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>9</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>8</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>7</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>6</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>5</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>4</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>3</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>2</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>1</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
+        <div class="jarak_mobil"></div>
+        <div class="judul">
+            <strong>B O D Y</strong>
         </div>
+        <div class="jarak_mobil4"></div>
+        <div class="jarak_mobil4"></div>
+        <div class="judul">
+            <strong>DEMPUL CAT</strong>
         </div>
-			<div class="denah">
-        <div class="kategoritengah">
-            <div class="bis5">
-          <div class="jarak_mobil2"></div>
-              <div class="judul">
-                    <strong>T R I M I N G</strong>
-              </div>
-				
-          <div class="jarak_mobil3"></div>
-          <div class="jarak_mobil"></div>
-              <div class="judulAuto">
-                    <strong>ELEKTRIK</strong>
-              </div>
-          <div class="jarak_mobil3"></div>
-                <div class="judulAuto">
-                    <strong>Q/C</strong>
-                </div>
-          <div class="jarak_mobil3"></div>
-              <div class="judulAuto">
-                    <strong>JOK</strong>
-              </div>				
-          <div class="jarak_mobil2"></div>
-				<div class="judul">
-                    <strong>P.HARIAN</strong>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-    <div class="denah">
-        <div class="kategoriatas">
-          <div class="jarak_kiri2"></div>
-          <div class="bis2">
-              <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>18</strong>
-                    </div>
-            </div>
-                <strong></strong>
-          </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>19</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>20</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>21</strong></div>
-                </div>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>22</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_BUS"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>23</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>24</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>25</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>26</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>27</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>28</strong>
-                    </div>
-                </div>
-                <strong></strong>
-            </div>
-            <div class="jarak_mobil"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>29</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>30</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-            <div class="jarak_bus"></div>
-            <div class="bis2">
-                <div class="isikategori2">
-                    <div class="nomor">
-                        <strong>31</strong>
-                    </div>
-                    test</div>
-                <strong></strong>
-            </div>
-      </div>
-            
-	  </div>
-	  </div>
     </div>
-    <div class="bawah_01">
-                  <table width="50%" align="center" border="0">
-                      <tbody>
-                          <tr>
-                              <th width="5%" bgcolor="#37BF07">&nbsp;</th>
-                              <th width="23%" style="font-size:12px; text-align:left;">
-                                  : Bay Kosong</th>
-                              <th width="5%"  bgcolor="#E6F408" style="font-size:12px; text-align:left;">&nbsp;</th>
-                                <th width="22%" style="font-size:12px; text-align:left;"><span style="font-size:12px;text-align:left;">: Bay Pause</span></th>
-                                <th width="5%" bgcolor="#FFFFFF" style="font-size:12px; text-align:left;">&nbsp;</th>
-                                <th width="17%" style="font-size:12px; text-align:left;"><span style="font-size:12px;text-align:left;">: Bay Aktif</span></th>
-                                <th width="23%" style="font-size:12px; text-align:left;">BM<span style="font-size:12px;text-align:left;">: Bis Masuk</span></th>
-                          </tr>
-                      </tbody>
-                  </table>
+
+    <div class="denah">
+        <div class="kategoritengah">
+            <div class="kategoriatas">
+                <div class="jarak_kiri"></div>
+                <div class="bis2">
+                    <div class="isikategori2">
+                        <div class="nomor">16</div>
+                        <?php if(!empty($by16->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="16" id-lapor="<?php echo $by16->id_lapor; ?>">
+                            <p><?php echo $by16->no_body; ?></p>
+                            PK :
+                            <?php echo $by16->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by16->aktif; ?><br>
+                            PK P:
+                            <?php echo $by16->pause; ?><br>
+                            PK S:
+                            <?php echo $by16->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by16->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                    <div class="isikategori2">
+                        <div class="nomor">15</div>
+                        <?php if(!empty($by15->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="15" id-lapor="<?php echo $by15->id_lapor; ?>">
+                            <p><?php echo $by15->no_body; ?></p>
+                            PK :
+                            <?php echo $by15->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by15->aktif; ?><br>
+                            PK P:
+                            <?php echo $by15->pause; ?><br>
+                            PK S:
+                            <?php echo $by15->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by15->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                    <div class="isikategori2">
+                        <div class="nomor">14</div>
+                        <?php if(!empty($by14->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="14" id-lapor="<?php echo $by14->id_lapor; ?>">
+                            <p><?php echo $by14->no_body; ?></p>
+                            PK :
+                            <?php echo $by14->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by14->aktif; ?><br>
+                            PK P:
+                            <?php echo $by14->pause; ?><br>
+                            PK S:
+                            <?php echo $by14->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by14->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">13</div>
+                        <?php if(!empty($by13->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="13" id-lapor="<?php echo $by13->id_lapor; ?>">
+                            <p><?php echo $by13->no_body; ?></p>
+                            PK :
+                            <?php echo $by13->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by13->aktif; ?><br>
+                            PK P:
+                            <?php echo $by13->pause; ?><br>
+                            PK S:
+                            <?php echo $by13->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by13->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
 
                 </div>
-    <div id="page1">
+                <div class="jarak_mobil"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">12</div>
+                        <?php if(!empty($by12->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="12" id-lapor="<?php echo $by12->id_lapor; ?>">
+                            <p><?php echo $by12->no_body; ?></p>
+                            PK :
+                            <?php echo $by12->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by12->aktif; ?><br>
+                            PK P:
+                            <?php echo $by12->pause; ?><br>
+                            PK S:
+                            <?php echo $by12->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by12->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">11</div>
+                        <?php if(!empty($by11->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="11" id-lapor="<?php echo $by11->id_lapor; ?>">
+                            <p><?php echo $by11->no_body; ?></p>
+                            PK :
+                            <?php echo $by11->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by11->aktif; ?><br>
+                            PK P:
+                            <?php echo $by11->pause; ?><br>
+                            PK S:
+                            <?php echo $by11->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by11->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                    <strong></strong>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">10</div>
+                        <?php if(!empty($by10->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="10" id-lapor="<?php echo $by10->id_lapor; ?>">
+                            <p><?php echo $by10->no_body; ?></p>
+                            PK :
+                            <?php echo $by10->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by10->aktif; ?><br>
+                            PK P:
+                            <?php echo $by10->pause; ?><br>
+                            PK S:
+                            <?php echo $by10->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by10->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                    <strong></strong>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">9</div>
+                        <?php if(!empty($by9->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="9" id-lapor="<?php echo $by9->id_lapor; ?>">
+                            <p><?php echo $by9->no_body; ?></p>
+                            PK :
+                            <?php echo $by9->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by9->aktif; ?><br>
+                            PK P:
+                            <?php echo $by9->pause; ?><br>
+                            PK S:
+                            <?php echo $by9->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by9->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">8</div>
+                        <?php if(!empty($by8->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="8" id-lapor="<?php echo $by8->id_lapor; ?>">
+                            <p><?php echo $by8->no_body; ?></p>
+                            PK :
+                            <?php echo $by8->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by8->aktif; ?><br>
+                            PK P:
+                            <?php echo $by8->pause; ?><br>
+                            PK S:
+                            <?php echo $by8->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by8->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">7</div>
+                        <?php if(!empty($by7->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="7" id-lapor="<?php echo $by7->id_lapor; ?>">
+                            <p><?php echo $by7->no_body; ?></p>
+                            PK :
+                            <?php echo $by7->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by7->aktif; ?><br>
+                            PK P:
+                            <?php echo $by7->pause; ?><br>
+                            PK S:
+                            <?php echo $by7->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by7->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">6</div>
+                        <?php if(!empty($by6->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="6" id-lapor="<?php echo $by6->id_lapor; ?>">
+                            <p><?php echo $by6->no_body; ?></p>
+                            PK :
+                            <?php echo $by6->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by6->aktif; ?><br>
+                            PK P:
+                            <?php echo $by6->pause; ?><br>
+                            PK S:
+                            <?php echo $by6->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by6->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">5</div>
+                        <?php if(!empty($by5->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="5" id-lapor="<?php echo $by5->id_lapor; ?>">
+                            <p><?php echo $by5->no_body; ?></p>
+                            PK :
+                            <?php echo $by5->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by5->aktif; ?><br>
+                            PK P:
+                            <?php echo $by5->pause; ?><br>
+                            PK S:
+                            <?php echo $by5->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by5->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">4</div>
+                        <?php if(!empty($by4->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="4" id-lapor="<?php echo $by4->id_lapor; ?>">
+                            <p><?php echo $by4->no_body; ?></p>
+                            PK :
+                            <?php echo $by4->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by4->aktif; ?><br>
+                            PK P:
+                            <?php echo $by4->pause; ?><br>
+                            PK S:
+                            <?php echo $by4->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by4->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">3</div>
+                        <?php if(!empty($by3->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="3" id-lapor="<?php echo $by3->id_lapor; ?>">
+                            <p><?php echo $by3->no_body; ?></p>
+                            PK :
+                            <?php echo $by3->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by3->aktif; ?><br>
+                            PK P:
+                            <?php echo $by3->pause; ?><br>
+                            PK S:
+                            <?php echo $by3->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by3->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">2</div>
+                        <?php if(!empty($by2->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="2" id-lapor="<?php echo $by2->id_lapor; ?>">
+                            <p><?php echo $by2->no_body; ?></p>
+                            PK :
+                            <?php echo $by2->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by2->aktif; ?><br>
+                            PK P:
+                            <?php echo $by2->pause; ?><br>
+                            PK S:
+                            <?php echo $by2->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by2->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">1</div>
+                        <?php if(!empty($by1->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="1" id-lapor="<?php echo $by1->id_lapor; ?>">
+                            <p><?php echo $by1->no_body; ?></p>
+                            PK :
+                            <?php echo $by1->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by1->aktif; ?><br>
+                            PK P:
+                            <?php echo $by1->pause; ?><br>
+                            PK S:
+                            <?php echo $by1->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by1->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="denah">
+            <div class="kategoritengah">
+                <div class="bis5">
+                    <div class="jarak_mobil2"></div>
+                    <div class="judul">
+                        <strong>T R I M I N G</strong>
+                    </div>
+
+                    <div class="jarak_mobil3"></div>
+                    <div class="jarak_mobil"></div>
+                    <div class="judulAuto">
+                        <strong>ELEKTRIK</strong>
+                    </div>
+                    <div class="jarak_mobil3"></div>
+                    <div class="judulAuto">
+                        <strong>Q/C</strong>
+                    </div>
+                    <div class="jarak_mobil3"></div>
+                    <div class="judulAuto">
+                        <strong>JOK</strong>
+                    </div>
+                    <div class="jarak_mobil2"></div>
+                    <div class="judul">
+                        <strong>P.HARIAN</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="denah">
+            <div class="kategoriatas">
+                <div class="jarak_kiri2"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">18</div>
+                        <?php if(!empty($by18->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="18" id-lapor="<?php echo $by18->id_lapor; ?>">
+                            <p><?php echo $by18->no_body; ?></p>
+                            PK :
+                            <?php echo $by18->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by18->aktif; ?><br>
+                            PK P:
+                            <?php echo $by18->pause; ?><br>
+                            PK S:
+                            <?php echo $by18->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by18->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">19</div>
+                        <?php if(!empty($by19->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="19" id-lapor="<?php echo $by19->id_lapor; ?>">
+                            <p><?php echo $by19->no_body; ?></p>
+                            PK :
+                            <?php echo $by19->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by19->aktif; ?><br>
+                            PK P:
+                            <?php echo $by19->pause; ?><br>
+                            PK S:
+                            <?php echo $by19->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by19->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">20</div>
+                        <?php if(!empty($by20->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="20" id-lapor="<?php echo $by20->id_lapor; ?>">
+                            <p><?php echo $by20->no_body; ?></p>
+                            PK :
+                            <?php echo $by20->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by20->aktif; ?><br>
+                            PK P:
+                            <?php echo $by20->pause; ?><br>
+                            PK S:
+                            <?php echo $by20->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by20->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">21</div>
+                        <?php if(!empty($by21->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="21" id-lapor="<?php echo $by21->id_lapor; ?>">
+                            <p><?php echo $by21->no_body; ?></p>
+                            PK :
+                            <?php echo $by21->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by21->aktif; ?><br>
+                            PK P:
+                            <?php echo $by21->pause; ?><br>
+                            PK S:
+                            <?php echo $by21->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by21->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_mobil"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">22</div>
+                        <?php if(!empty($by22->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="2" id-lapor="<?php echo $by22->id_lapor; ?>">
+                            <p><?php echo $by2->no_body; ?></p>
+                            PK :
+                            <?php echo $by22->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by22->aktif; ?><br>
+                            PK P:
+                            <?php echo $by22->pause; ?><br>
+                            PK S:
+                            <?php echo $by22->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by22->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_BUS"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">23</div>
+                        <?php if(!empty($by23->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="23" id-lapor="<?php echo $by23->id_lapor; ?>">
+                            <p><?php echo $by23->no_body; ?></p>
+                            PK :
+                            <?php echo $by23->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by23->aktif; ?><br>
+                            PK P:
+                            <?php echo $by23->pause; ?><br>
+                            PK S:
+                            <?php echo $by23->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by23->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">24</div>
+                        <?php if(!empty($by24->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="24" id-lapor="<?php echo $by24->id_lapor; ?>">
+                            <p><?php echo $by24->no_body; ?></p>
+                            PK :
+                            <?php echo $by24->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by24->aktif; ?><br>
+                            PK P:
+                            <?php echo $by24->pause; ?><br>
+                            PK S:
+                            <?php echo $by24->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by24->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_mobil"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">25</div>
+                        <?php if(!empty($by25->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="25" id-lapor="<?php echo $by25->id_lapor; ?>">
+                            <p><?php echo $by25->no_body; ?></p>
+                            PK :
+                            <?php echo $by25->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by25->aktif; ?><br>
+                            PK P:
+                            <?php echo $by25->pause; ?><br>
+                            PK S:
+                            <?php echo $by25->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by25->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">26</div>
+                        <?php if(!empty($by26->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="26" id-lapor="<?php echo $by26->id_lapor; ?>">
+                            <p><?php echo $by26->no_body; ?></p>
+                            PK :
+                            <?php echo $by26->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by26->aktif; ?><br>
+                            PK P:
+                            <?php echo $by26->pause; ?><br>
+                            PK S:
+                            <?php echo $by26->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by26->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                    <strong></strong>
+                </div>
+                <div class="jarak_mobil"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">27</div>
+                        <?php if(!empty($by27->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="27" id-lapor="<?php echo $by27->id_lapor; ?>">
+                            <p><?php echo $by27->no_body; ?></p>
+                            PK :
+                            <?php echo $by27->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by27->aktif; ?><br>
+                            PK P:
+                            <?php echo $by27->pause; ?><br>
+                            PK S:
+                            <?php echo $by27->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by27->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">28</div>
+                        <?php if(!empty($by28->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="28" id-lapor="<?php echo $by28->id_lapor; ?>">
+                            <p><?php echo $by28->no_body; ?></p>
+                            PK :
+                            <?php echo $by28->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by28->aktif; ?><br>
+                            PK P:
+                            <?php echo $by28->pause; ?><br>
+                            PK S:
+                            <?php echo $by28->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by28->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_mobil"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">29</div>
+                        <?php if(!empty($by29->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="29" id-lapor="<?php echo $by29->id_lapor; ?>">
+                            <p><?php echo $by29->no_body; ?></p>
+                            PK :
+                            <?php echo $by29->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by29->aktif; ?><br>
+                            PK P:
+                            <?php echo $by29->pause; ?><br>
+                            PK S:
+                            <?php echo $by29->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by29->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">30</div>
+                        <?php if(!empty($by30->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="30" id-lapor="<?php echo $by30->id_lapor; ?>">
+                            <p><?php echo $by30->no_body; ?></p>
+                            PK :
+                            <?php echo $by30->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by30->aktif; ?><br>
+                            PK P:
+                            <?php echo $by30->pause; ?><br>
+                            PK S:
+                            <?php echo $by30->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by30->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+                <div class="jarak_bus"></div>
+                <div class="bis2">
+                <div class="isikategori2">
+                        <div class="nomor">31</div>
+                        <?php if(!empty($by31->id_lapor)){ ?>
+                        <button class="tombolbus check" id-bay="31" id-lapor="<?php echo $by31->id_lapor; ?>">
+                            <p><?php echo $by31->no_body; ?></p>
+                            PK :
+                            <?php echo $by31->jml_pk; ?><br>
+                            PK A :
+                            <?php echo $by31->aktif; ?><br>
+                            PK P:
+                            <?php echo $by31->pause; ?><br>
+                            PK S:
+                            <?php echo $by31->selesai; ?>
+                            <p><?php $tgl1 = new DateTime($by31->tgl_masuk);$jarak = $kini->diff($tgl1);echo 'BM : '. $jarak->d. ' Hari'?></p>
+                        </button>
+                    <?php } else { echo '<div class="empty">EMPTY</div>';} ?>
+                    </div>
+                </div>
+            </div>
+
+            <div id="data-bay"></div>
+        </div>
+    </div>
+</div>
+<div class="bawah_01">
+    <table width="50%" align="center" border="0">
+        <tbody>
+            <tr>
+                <th width="5%" bgcolor="#37BF07">&nbsp;</th>
+                <th width="23%" style="font-size:12px; text-align:left;">
+                    : Bay Kosong</th>
+                <th width="5%" bgcolor="#E6F408" style="font-size:12px; text-align:left;">&nbsp;</th>
+                <th width="22%" style="font-size:12px; text-align:left;">
+                    <span style="font-size:12px;text-align:left;">: Bay Pause</span></th>
+                <th width="5%" bgcolor="#FFFFFF" style="font-size:12px; text-align:left;">&nbsp;</th>
+                <th width="17%" style="font-size:12px; text-align:left;">
+                    <span style="font-size:12px;text-align:left;">: Bay Aktif</span></th>
+                <th width="23%" style="font-size:12px; text-align:left;">BM<span style="font-size:12px;text-align:left;">: Bis Masuk</span></th>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div id="page1">
     <ul id="ticker_02" class="ticker">
         <div align="center">
             <table width="100%">
-                  <td width="100%" class="keterangan_lanjutan"><strong>DAFTAR ANTRIAN BUS</strong></td>
+                <td width="100%" class="keterangan_lanjutan">
+                    <strong>DAFTAR ANTRIAN BUS</strong>
+                </td>
             </table>
         </div>
         <div align="left">
@@ -437,29 +793,29 @@ window.onload=beginrefresh
 				<td width=20% class=isi_slider ><div align=center> ".$antri->keterangan."</div></td></font></table></li>";
              }
             ?>
-      </ul>
-    </div>
-    <div id="page2">
-        <ul id="ticker_03" class="ticker">
-            <div align="center">
-                <table width="100%">
-                      <td width="100%" class="keterangan_lanjutan">
-                        <strong>WIP (WORK IN PROCESS)</strong>
-                    </td>
-                </table>
-            </div>
-            <div align="left">
-                <table width="100%">
+    </ul>
+</div>
+<div id="page2">
+    <ul id="ticker_03" class="ticker">
+        <div align="center">
+            <table width="100%">
+                <td width="100%" class="keterangan_lanjutan">
+                    <strong>WIP (WORK IN PROCESS)</strong>
+                </td>
+            </table>
+        </div>
+        <div align="left">
+            <table width="100%">
                 <td width="3%" class="keterangan_judul">No.</td>
                 <td width="15%%" class="keterangan_judul">TglMulai</td>
                 <td width="20%%" class="keterangan_judul">IdPK</td>
                 <td width="20%" class="keterangan_judul">No Body</td>
                 <td width="20%%" class="keterangan_judul">PK</td>
                 <td width="20%%" class="keterangan_judul">Pemborong</td>
-                </table>
-            </div>
-            <li>
-                <?php
+            </table>
+        </div>
+        <li>
+            <?php
               $noUrutberatbanget1=0;
             foreach($listPk as $pk){
                 
@@ -474,7 +830,7 @@ window.onload=beginrefresh
 				<td width=20% class=isi_slider ><div align=center> ".$pk->pj_borong."</div></td></font></table></li>";
              }
             ?>
-                <?php
+            <?php
 						 function selisih($jam_a,$jam_b){
 						list ($h,$m,$s)= explode (":",$jam_a);
 						$dtAwal= mktime($h,$m,$s,"1","1","1");
@@ -487,29 +843,28 @@ window.onload=beginrefresh
 						$sisamenit2=$sisamenit*60;
 						return "$jam[0] ";//jam $sisamenit2 menit
 						} ?>
-        </ul>
-    </div>
-    <div id="page3">
-        <ul id="ticker_04" class="ticker">
-            <div align="center">
-                <table width="100%">
-                      <td width="100%" class="keterangan_lanjutan">
-                        <strong>DAFTAR KENDARAAN SIAP KELUAR</strong>
-                    </td>
-                </table>
-            </div>
-            <div align="left">
-                <table width="100%">
+    </ul>
+</div>
+<div id="page3">
+    <ul id="ticker_04" class="ticker">
+        <div align="center">
+            <table width="100%">
+                <td width="100%" class="keterangan_lanjutan">
+                    <strong>DAFTAR KENDARAAN SIAP KELUAR</strong>
+                </td>
+            </table>
+        </div>
+        <div align="left">
+            <table width="100%">
                 <td width="3%" class="keterangan_judul">No.</td>
-                <td width="15%%" class="keterangan_judul">TglMulai</td>
-                <td width="20%%" class="keterangan_judul">IdPK</td>
+                <td width="15%%" class="keterangan_judul">TglMasuk</td>
+                <td width="20%%" class="keterangan_judul">SPK</td>
                 <td width="20%" class="keterangan_judul">No Body</td>
-                <td width="20%%" class="keterangan_judul">PK</td>
-                <td width="20%%" class="keterangan_judul">Pemborong</td>
-                </table>
-            </div>
-            <li>
-                <?php
+                <td width="20%%" class="keterangan_judul">Katergori</td>
+            </table>
+        </div>
+        <li>
+            <?php
              $noUrutberatbanget2=0;
             foreach($dataPkselesai as $pk){
                 
@@ -517,113 +872,93 @@ window.onload=beginrefresh
 				echo "<li>
 				<table width=100%>	
 				<td width=3% class=isi_slider ><font> $noUrutberatbanget2</font></td>	
-				<td width=15%% class=isi_slider ><div align=center> ".tglIndoPendek($pk->tgl_mulai)."</div> </td>
-				<td width=20% class=isi_slider ><div align=center> ".$pk->id_pk."</div></td>
+				<td width=15%% class=isi_slider ><div align=center> ".tglIndoPendek($pk->tgl_masuk)."</div> </td>
+				<td width=20% class=isi_slider ><div align=center> ".$pk->id_lapor."</div></td>
 				<td width=20% class=isi_slider ><div align=center> ".$pk->no_body."</div></td>
-				<td width=20% class=isi_slider ><div align=center> ".$pk->jns_pk."</div></td>
-				<td width=20% class=isi_slider ><div align=center> ".$pk->pj_borong."</div></td></font></table></li>";
+				<td width=20% class=isi_slider ><div align=center> ".$pk->kategori."</div></td></font></table></li>";
              }
             ?>
-        </ul>
-    </div>
-    <script>
+    </ul>
+</div>
+<script type="text/javascript">
 
-        function tick() {
-            $('#ticker_01 li:first').slideUp(function () {
-                $(this)
-                    .appendTo($('#ticker_01'))
-                    .slideDown();
-            });
-        }
-        setInterval(function () {
-            tick()
-        }, 5000);
 
-        function tick2() {
-            $('#ticker_02 li:first').slideUp(function () {
-                $(this)
-                    .appendTo($('#ticker_02'))
-                    .slideDown();
-            });
-        }
-        setInterval(function () {
-            tick2()
-        }, 2900);
+    function tick() {
+        $('#ticker_01 li:first').slideUp(function () {
+            $(this)
+                .appendTo($('#ticker_01'))
+                .slideDown();
+        });
+    }
+    setInterval(function () {
+        tick()
+    }, 5000);
 
-        function tick3() {
-            $('#ticker_03 li:first').slideUp(function () {
-                $(this)
-                    .appendTo($('#ticker_03'))
-                    .slideDown();
-            });
-        }
-        setInterval(function () {
-            tick3()
-        }, 3000);
+    function tick2() {
+        $('#ticker_02 li:first').slideUp(function () {
+            $(this)
+                .appendTo($('#ticker_02'))
+                .slideDown();
+        });
+    }
+    setInterval(function () {
+        tick2()
+    }, 2900);
 
-        function tick4() {
-            $('#ticker_04 li:first').slideUp(function () {
-                $(this)
-                    .appendTo($('#ticker_04'))
-                    .slideDown();
-            });
-        }
-        setInterval(function () {
-            tick4()
-        }, 2800);
-        function tick5() {
-            $('#ticker_05 li:first').slideUp(function () {
-                $(this)
-                    .appendTo($('#ticker_05'))
-                    .slideDown();
-            });
-        }
-        setInterval(function () {
-            tick5()
-        }, 3000);
-        function tick6() {
-            $('#ticker_06 li:first').slideUp(function () {
-                $(this)
-                    .appendTo($('#ticker_06'))
-                    .slideDown();
-            });
-        }
-        setInterval(function () {
-            tick6()
-        }, 3000);
+    function tick3() {
+        $('#ticker_03 li:first').slideUp(function () {
+            $(this)
+                .appendTo($('#ticker_03'))
+                .slideDown();
+        });
+    }
+    setInterval(function () {
+        tick3()
+    }, 3000);
 
-        /**
-	 * USE TWITTER DATA
-	 */
+    function tick4() {
+        $('#ticker_04 li:first').slideUp(function () {
+            $(this)
+                .appendTo($('#ticker_04'))
+                .slideDown();
+        });
+    }
+    setInterval(function () {
+        tick4()
+    }, 2800);
+    function tick5() {
+        $('#ticker_05 li:first').slideUp(function () {
+            $(this)
+                .appendTo($('#ticker_05'))
+                .slideDown();
+        });
+    }
+    setInterval(function () {
+        tick5()
+    }, 3000);
+    function tick6() {
+        $('#ticker_06 li:first').slideUp(function () {
+            $(this)
+                .appendTo($('#ticker_06'))
+                .slideDown();
+        });
+    }
+    setInterval(function () {
+        tick6()
+    }, 3000);
+
+    $(document).on("click", ".check", function () {
+        var id = $(this).attr("id-lapor");
 
         $.ajax({
-            url: 'http://search.twitter.com/search.json',
-            data: 'q=%23javascript',
-            dataType: 'jsonp',
-            timeout: 10000,
-            success: function (data) {
-                if (!data.results) {
-                    return false;
-                }
+                method: "POST",
+                url: "<?php echo base_url('Display/detail'); ?>",
+                data: "id=" + id
+            })
+            .done(function (data) {
+                $('#modal-pk').html(data);
+                $('#data-bay').modal('show');
+            })
+    })
 
-                for (var i in data.results) {
-                    var result = data.results[i];
-                    var $res = $("<li />");
-                    $res.append('<img src="' + result.profile_image_url + '" />');
-                    $res.append(result.text);
-
-                    console.log(data.results[i]);
-                    $res.appendTo($('#ticker_04'));
-                }
-                setInterval(function () {
-                    tick4()
-                }, 4000);
-
-                $('#example_4').show();
-
-            }
-        });
-    </script>
-
-</body>
-</html>
+</script>

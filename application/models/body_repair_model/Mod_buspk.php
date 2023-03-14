@@ -19,7 +19,7 @@ class Mod_buspk extends CI_Model
 		//GROUP BY `tbl_br_pk_aktif`.`id_lapor`";
 		$sql = "SELECT COUNT(tbl_br_pk_aktif.id_lapor) AS `jml_pk`,`tbl_br_laporan_bus`.* FROM `tbl_br_laporan_bus`
 		LEFT JOIN `tbl_br_pk_aktif` ON `tbl_br_pk_aktif`.`id_lapor`=`tbl_br_laporan_bus`.`id_lapor`
-		WHERE tbl_br_laporan_bus.status !='S'
+		WHERE tbl_br_laporan_bus.status !='N' AND tbl_br_laporan_bus.status !='S'
 		GROUP BY `tbl_br_pk_aktif`.`id_lapor`";
 
 		$data = $this->db->query($sql);

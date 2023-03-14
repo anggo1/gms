@@ -5,7 +5,7 @@
                                     <tr>
 
                                         <td><?php echo $no; ?></td>
-                                        <td><?php echo $s->id_lapor; ?></td>
+                                        <td><?php echo $s->id_pk; ?></td>
                                         <td><?php echo $s->jns_pk; ?></td>
                                         <td><?php echo $s->ket_pk; ?></td>
                                         <td><?php if($s->status=='Y') {echo 'Aktif';}if($s->status=='P') {echo 'Pending';}if($s->status=='S') {echo 'Selesai';} ?></td>
