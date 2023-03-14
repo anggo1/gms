@@ -58,7 +58,8 @@ class Display extends CI_Controller {
 		$data['dataPk'] = $this->Mod_display->cetak_pk($id);
 		$data['detailPk'] = $this->Mod_display->cetak_estimasi($id);
 
-		echo show_my_print('display/modal_cetak_pk', 'data-bay', $data, ' modal-xl');
+		//echo show_my_display('display/modal_cetak_pk', 'modal-pk', $data, ' modal-sm');
+        //$data['modalbay'] = show_my_modal('display/modal_cetak_pk', $data, ' modal-xl');
 	}
 
 }

@@ -115,6 +115,15 @@ if(!function_exists('hash_verified'))
 					</div>';
 		}
 	}
+	function show_my_display($content='', $id='', $data='', $size='') {
+		$_ci = &get_instance();
+
+		if ($content != '') {
+			$view_content = $_ci->load->view($content, $data, TRUE);
+
+			return $view_content ;
+		}
+	}
 
 	function show_my_confirm($id='', $class='', $title='Konfirmasi', $yes = 'Ya', $no = 'Tidak') {
 		$_ci = &get_instance();
